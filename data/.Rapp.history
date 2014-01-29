@@ -1,0 +1,8 @@
+load("/Users/anders/Documents/PhD/Part1/GMCM/data/u133VsExon2.RData")
+u133VsExon.RData
+u133VsExon
+str
+str(u133VsExon)
+(u133VsExon2)
+load("/Users/anders/Documents/PhD/Part1/GMCM/data/u133VsExon.RData")
+str(u133VsExon)
