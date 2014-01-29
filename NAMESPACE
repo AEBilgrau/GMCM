@@ -1,5 +1,4 @@
 useDynLib(GMCM)
-#exportPattern("^[[:alpha:]]+")
 export("SimulateGMCMData")
 export("SimulateGMMData")
 export("get.IDR")
