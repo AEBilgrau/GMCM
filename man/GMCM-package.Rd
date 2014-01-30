@@ -43,6 +43,9 @@ Package by Li et. al. (2011): \code{\link[idr:idr-package]{idr}}.
 # Loading data
 data(u133VsExon)
 
+# Subsetting data to reduce computation time
+u133VsExon <- u133VsExon[1:5000, ]
+
 # Ranking and scaling,
 # Remember large values should be critical to the null!
 uhat <- Uhat(1 - u133VsExon)
