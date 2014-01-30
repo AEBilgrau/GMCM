@@ -71,44 +71,38 @@ See \code{\link{optim}} for further details.
 \code{\link{optim}}, \code{\link{get.prob}}
 }
 \examples{
-set.seed(10)
-sim <- SimulateGMCMData(n = 1000)
+
+set.seed(17)
+sim <- SimulateGMCMData(n = 1000, m = 3, d = 2)
 
 # Plotting simulated data
 par(mfrow = c(1,2))
-plot(sim$z, col = rainbow(3)[sim$K], main = "Latent process\nTrue parameters")
-plot(sim$u, col = rainbow(3)[sim$K], main = "GMCM process\nTrue parameters")
+plot(sim$z, col = rainbow(3)[sim$K], main = "Latent process")
+plot(sim$u, col = rainbow(3)[sim$K], main = "GMCM process")
 
-uhat <- Uhat(sim$u) # Observed ranks
+# Observed data
+uhat <- Uhat(sim$u) 
 
-# We fit the model 5 times using different starting estimates
-res <- NULL
-best.ll <- -Inf
-for (i in 1:5) {
-  start.theta <- rtheta()  # Random starting estimate
-  tmp <- fit.full.GMCM(u = uhat, 
-                       theta = start.theta, 
-                       method = "NM",
-                       max.ite = 3000,
-                       reltol = 1e-4, 
-                       trace = FALSE)
-  new.ll <- GMCM:::dgmcm.loglik(theta = tmp, u = uhat)
-  if (best.ll <= new.ll) {
-    res <- tmp
-    best.ll <- new.ll
-  }
-  cat("Fit", i, "finished\n")
-}
+# The model should be fitted multiple times using different starting estimates
+start.theta <- choose.theta(uhat, m = 3)  # Random starting estimate
+res <- fit.full.GMCM(u = uhat, theta = start.theta, 
+                     method = "NM", max.ite = 3000,
+                     reltol = 1e-3, trace = TRUE)
 
 # Confusion matrix
 Khat <- apply(get.prob(uhat, theta = res), 1, which.max)
 table("Khat" = Khat, "K" = sim$K)  # Note, some components have been swapped
 
+# Simulation from GMCM with the fitted parameters
 simfit <- SimulateGMCMData(n = 1000, theta = res)
+
+# As seen, the underlying latent process is hard to estimate.
+# The clustering, however, is very good.
 par(mfrow = c(2,2))
-plot(simfit$u, col = simfit$K, main = "Model check 1\nMLE")
-plot(simfit$z, col = simfit$K, main = "Model check 2\nMLE")
+plot(simfit$z, col = simfit$K, main = "Model check 1\nSimulated GMM")
+plot(simfit$u, col = simfit$K, main = "Model check 2\nSimulated GMCM")
 plot(sim$u, col = Khat, main = "MAP clustering")
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
