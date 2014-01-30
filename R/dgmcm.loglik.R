@@ -25,9 +25,9 @@ dgmcm.loglik <- function (theta, u, marginal.loglik = FALSE, ...) {
 #       dim(u) <- c(1, length(u))
 #     return(u)
 #   }
-#   z      <- am(GMCM:::qgmm.marginal(am(u), theta, ...))
-#   tmp    <- am(GMCM:::dgmm.loglik.marginal(theta, z))
-#   loglik <- GMCM:::dgmm.loglik(theta, z, marginal.loglik = TRUE) - rowSums(tmp)
+#   z      <- am(qgmm.marginal(am(u), theta, ...))
+#   tmp    <- am(dgmm.loglik.marginal(theta, z))
+#   loglik <- dgmm.loglik(theta, z, marginal.loglik = TRUE) - rowSums(tmp)
 #   if (!marginal.loglik)
 #     loglik <- sum(loglik)
 #   return(loglik)
