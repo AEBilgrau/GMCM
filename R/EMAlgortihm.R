@@ -3,9 +3,9 @@ EMAlgorithm <- function (x, theta, eps = 10^-6, max.ite = 10^5,
   loglik.tr <- c(dgmm.loglik(theta, x))
   theta.tr  <- vector("list", 1); theta.tr[[1]] <- theta
   for (k in 2:max.ite) {
-    kappa <- GMCM:::EStep(x = x, theta = theta)
-    theta <- GMCM:::MStep(x = x, kappa = kappa)
-    loglik.tr[k] <- GMCM:::dgmm.loglik(theta, x)
+    kappa <- EStep(x = x, theta = theta)
+    theta <- MStep(x = x, kappa = kappa)
+    loglik.tr[k] <- dgmm.loglik(theta, x)
     theta.tr[[k]] <- theta
     delta <- loglik.tr[k] - loglik.tr[k-1]
     if (verbose) {
