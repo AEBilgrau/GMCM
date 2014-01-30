@@ -2,10 +2,11 @@ Package: GMCM
 Type: Package
 Title: Fast estimation of Gaussian Mixture Copula Models
 Version: 1.0
-Date: 2014-01-21
+Date: 2014-01-30
 Author: Anders Ellern Bilgrau, Martin Boegsted, Poul Svante Eriksen
 Maintainer: Anders Ellern Bilgrau <abilgrau@math.aau.dk>
 Description: Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models.
 License: GPL (>=2)
-Depends: Rcpp (>= 0.10.2), RcppArmadillo (>= 0.3.6.1), mvtnorm
-LinkingTo: Rcpp, RcppArmadillo, mvtnorm
+Depends: Rcpp (>= 0.10.6), RcppArmadillo (>= 0.4.000), mvtnorm
+LinkingTo: Rcpp, RcppArmadillo
+URL: https://github.com/AEBilgrau/GMCM, http://people.math.aau.dk/~abilgrau
