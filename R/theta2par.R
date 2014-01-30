@@ -31,7 +31,7 @@ theta2par <- function(theta) {
   par <- unlist(theta)[-(1:2)] # Unlisting and removing m and d
   
   # Logit transforming mixture proportions
-  par[1:theta$m] <- GMCM:::logit(par[1:theta$m])
+  par[1:theta$m] <- logit(par[1:theta$m])
   
   return(par) # Returning parameter vector
 }
