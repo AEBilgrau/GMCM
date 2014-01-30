@@ -82,6 +82,8 @@ init.par <- c(0.5, 1, 0.5, 0.9)  # Initial parameters
 # Optimization with Nelder-Mead
 nm.par   <- fit.meta.GMCM(uhat, init.par = init.par, method = "NM") 
 
+\dontrun{
+# Comparison with other optimization methods
 # Optimization with simulated annealing
 sann.par <- fit.meta.GMCM(uhat, init.par = init.par, method = "SANN",
                           max.ite = 3000, temp = 1) 
@@ -91,6 +93,7 @@ pem.par  <- fit.meta.GMCM(uhat, init.par = init.par, method = "PEM")
 # The estimates agree nicely
 rbind("True" = true.par, "Start" = init.par,
       "NM" = nm.par, "SANN" = sann.par, "PEM" = pem.par)
+}
 
 # Get estimated cluster
 Khat <- get.IDR(x = uhat, par = nm.par)$Khat
