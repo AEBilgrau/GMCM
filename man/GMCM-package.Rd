@@ -40,38 +40,38 @@ Core user functions: \code{\link{fit.meta.GMCM}}, \code{\link{fit.full.GMCM}}, \
 Package by Li et. al. (2011): \code{\link[idr:idr-package]{idr}}.
 }
 \examples{
-# Loading ranked data
+# Loading data
 data(u133VsExon)
 
 # Ranking and scaling,
 # Remember large values should be critical to the null!
 uhat <- Uhat(1 - u133VsExon)
 
-# Visualizing P-values
+# Visualizing P-values and the ranked and scaled P-values
+\dontrun{
+par(mfrow = c(1,2))
 plot(u133VsExon, cex = 0.5, pch = 4, col = "tomato", main = "P-values",
      xlab = "P   (U133)", ylab = "P   (Exon)")
-
-# Visualizing Ranked and scaled P-values
 plot(uhat, cex = 0.5, pch = 4, col = "tomato", main = "Ranked P-values",
      xlab = "rank(1-P)   (U133)", ylab = "rank(1-P)   (Exon)")
+}
 
 # Fitting using BFGS
-fit1 <- fit.meta.GMCM(uhat, init.par = c(0.5, 1, 1, 0.5), pgtol = 1e-3,
-                      method = "L-BFGS", positive.rho = TRUE, verbose = TRUE)
-
-# Fitting using Nelder-Mead
-# and a different reparametrization of rho: (rho can be negative)
-fit2 <- fit.meta.GMCM(uhat, init.par = c(0.2, 2, 2, 0), reltol = 1e-3,
-                      method = "NM", positive.rho = FALSE, verbose = TRUE)
-
-# Both fits agree quite well
-rbind(fit1, fit2)  
+fit <- fit.meta.GMCM(uhat, init.par = c(0.5, 1, 1, 0.5), pgtol = 1e-2,
+                     method = "L-BFGS", positive.rho = TRUE, verbose = TRUE)
 
 # Compute IDR values and classify
-idr <- get.IDR(uhat, par = fit1)
-
+idr <- get.IDR(uhat, par = fit)
 table(idr$K) # 1 = irreproducible, 2 = reproducible
+
+\dontrun{
+# See clustering results
+par(mfrow = c(1,2))
+plot(u133VsExon, cex = 0.5, pch = 4, main = "Classified genes",
+     col = c("tomato", "steelblue")[idr$K],
+     xlab = "P   (U133)", ylab = "P   (Exon)")
 plot(uhat, cex = 0.5, pch = 4, main = "Classified genes",
      col = c("tomato", "steelblue")[idr$K],
      xlab = "rank(1-P)   (U133)", ylab = "rank(1-P)   (Exon)")
+}
 }
