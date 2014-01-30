@@ -1,6 +1,6 @@
 par2theta <- function(par, d, m) { 
   # Extracting pie
-  pie <- GMCM:::inv.logit(par[1:m])
+  pie <- inv.logit(par[1:m])
   names(pie) <- paste("pie", 1:m, sep = "")
   par <- par[-(1:m)]  # Removing the pies from par
   
