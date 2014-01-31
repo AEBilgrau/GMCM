@@ -5,7 +5,7 @@ The [GMCM package](http://cran.r-project.org/package=GMCM) offers R functions th
 
 The package utilizes [Rcpp](https://github.com/RcppCore/Rcpp) and [RcppArmadillo](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly.
 
-Additional information and documentation will follow very soon. For now, see `help(“GMCM")` for some help and examples.
+Additional information and documentation will follow very soon. For now, see `help("GMCM")` for some help and examples.
 
 ## Installation
 
