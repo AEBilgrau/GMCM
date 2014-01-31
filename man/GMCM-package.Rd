@@ -6,20 +6,20 @@
 Fast evaluation of Gaussian Mixture Copula Models
 }
 \description{
-Gaussian mixture copula models (GMCM) can be used for unsupervised clustering and meta analysis. In meta analysis, GMCMs are used to identify features which have been reproduced across multiple experiments. This package provides a fast and general implementation of GMCM cluster analysis and extension of the features available in the \code{idr} package.
+Gaussian mixture copula models (GMCM) can be used for unsupervised clustering and meta analysis. In meta analysis, GMCMs are used to identify features which have been reproduced across multiple experiments. This package provides a fast and general implementation of GMCM cluster analysis and serves as an extension of the features available in the \code{idr} package.
 }
 \details{
 \tabular{ll}{
 Package: \tab GMCM\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.0-1\cr
 Date: \tab 2013-12-16\cr
 License: \tab GPL (>=2)\cr
 }
 
-If the meta analysis of Li et al. (2011) is to be performed, the function \code{\link{fit.meta.GMCM}} is used to identify the maximum likelihood estimate of the special Gaussian mixture copula model (GMCM). The function \code{\link{get.IDR}} computes the local and adjusted Irreprodcible Discovery Rates defined by Li et al. (2011) to determine the level of reproduciblity.
+If the meta analysis of Li et al. (2011) is to be performed, the function \code{\link{fit.meta.GMCM}} is used to identify the maximum likelihood estimate of the special Gaussian mixture copula model (GMCM) defined by Li et al. (2011). The function \code{\link{get.IDR}} computes the local and adjusted Irreprodcible Discovery Rates defined by Li et al. (2011) to determine the level of reproduciblity.
 
-If general unsupervised clustering is needed, like above, the function \code{\link{fit.full.GMCM}} computes the maximum likelihood estimate of the general GMCM. The function \code{\link{get.prob}} is used to estimate the class membership probabilities of each observation.
+Tewari et. al. (2011) proposed using GMCMs as an general unsupervised clustering tool. If such a general unsupervised clustering is needed, like above, the function \code{\link{fit.full.GMCM}} computes the maximum likelihood estimate of the general GMCM. The function \code{\link{get.prob}} is used to estimate the class membership probabilities of each observation.
 
 \code{\link{SimulateGMCMData}} provide easy simulation from the GMCMs.
 }
@@ -30,6 +30,8 @@ Maintainer: Anders Ellern Bilgrau <abilgrau@math.aau.dk>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011). Measuring reproducibility of high-throughput experiments. The Annals of Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+
+Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric Characterization of Multimodal Distributions with Non-gaussian Modes. 2011 IEEE 11th International Conference on Data Mining Workshops, 286-292. doi:10.1109/ICDMW.2011.135
 }
 %~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
 %~~ documentation directory ~~
