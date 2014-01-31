@@ -13,14 +13,14 @@ The released and tested version of GMCM is available at
 [CRAN](http://cran.r-project.org) (Comprehensive R Archive Network). It can be easily be installed from within R by running 
 
 ```R
-install.packages(“GMCM”)
+install.packages("GMCM")
 ```
 
 If you wish to install the latest GMCM version directly from the master branch at GitHub, run 
 
 ```R
 install.packages("devtools")
-devtools::install_github(“AEBilgrau/GMCM”)
+devtools::install_github("AEBilgrau/GMCM")
 ```
 
 If you install from the source, you need to have the 
