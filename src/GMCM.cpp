@@ -123,7 +123,7 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
   const double a3 =  0.7478556;
   const double p  =  0.47047; 
   const double sqrt2 = 1.4142136;
-  double t, zi, erfzi, sign;
+  double t, zi;
   
   NumericVector ans = no_init(n);
   for (int i=0; i<n; i++) {
