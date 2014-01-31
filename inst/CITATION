@@ -1,8 +1,7 @@
 citHeader("Please cite the GMCM package if you use it!")
 citEntry(entry="article",
          title = "Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models",
-         author = personList(person(family="Bilgrau", given="Anders", middle="Ellern", 
-                                    email="abilgrau@math.aau.dk"),
+         author = personList(person(family="Bilgrau", given="Anders", middle="Ellern", email="abilgrau@math.aau.dk"),
                              person(family="Boegsted", given="Martin"),
                              person(family="Eriksen", given="Poul", middle="Svante"),
                              person(family="Rasmussen", given="Jakob", middle="Gulddahl")
@@ -12,7 +11,7 @@ citEntry(entry="article",
          pages = "ZZZ",
          volume = "XX(YY)",
          textVersion = paste("Bilgrau, Anders Ellern; Eriksen, Poul Svante; Boegsted, Martin; Rasmussen, Jakob Gulddahl", 
-                             "Gaussian mixture copula models for unsupervised clustering", 
+                             "Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models", 
                              "'Journal of Statistical Software' XX(YY), ZZZ, 2014."))
 
 citFooter("We have invested a lot of time and effort this package,",
