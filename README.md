@@ -23,7 +23,7 @@ install.packages("devtools")
 devtools::install_github("AEBilgrau/GMCM")
 ```
 
-If you install from the source, you need to have the 
-[package development prerequisites](http://www.rstudio.com/ide/docs/packages/prerequisites).
+Be sure that you have the 
+[package development prerequisites](http://www.rstudio.com/ide/docs/packages/prerequisites) if you install from the source.
 
 ---
