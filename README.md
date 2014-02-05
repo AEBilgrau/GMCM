@@ -10,7 +10,7 @@ Additional information and documentation will follow very soon. For now, see `he
 ## Installation
 
 The released and tested version of GMCM is available at
-[CRAN](http://cran.r-project.org) (Comprehensive R Archive Network). It can be easily be installed from within R by running 
+[CRAN](http://cran.r-project.org/package=GMCM) (Comprehensive R Archive Network). It can be easily be installed from within R by running 
 
 ```R
 install.packages("GMCM")
