@@ -16,14 +16,14 @@ The released and tested version of GMCM is available at
 install.packages("GMCM")
 ```
 
-If you wish to install the latest GMCM version directly from the master branch at GitHub, run 
+If you wish to install the latest version of GMCM directly from the master branch at GitHub, run 
 
 ```R
 install.packages("devtools")
 devtools::install_github("AEBilgrau/GMCM")
 ```
 
-Be sure that you have the 
+Note, that this version is in development and different from the CRAN version and may be unstable. Be sure that you have the 
 [package development prerequisites](http://www.rstudio.com/ide/docs/packages/prerequisites) if you install from the source.
 
 ---
