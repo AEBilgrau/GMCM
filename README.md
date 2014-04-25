@@ -25,7 +25,7 @@ install.packages("devtools")
 devtools::install_github("AEBilgrau/GMCM")
 ```
 
-Note, that this version is in development and different from the CRAN version and may be unstable. Be sure that you have the 
+Note, that this version is in development and different from the CRAN version. As such, it may be unstable. Be sure that you have the 
 [package development prerequisites](http://www.rstudio.com/ide/docs/packages/prerequisites) if you wish to install the package from the source.
 
 ---
