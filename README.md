@@ -5,7 +5,7 @@ The [GMCM package](http://cran.r-project.org/package=GMCM) offers R functions th
 
 Gaussian copula mixture models (GMCMs) are a very flexible alternative to gaussian mixture models in unsupervised cluster analysis for continuous data where non-normally distributed clusters are present. GMCMs model the ranks of the observed data and are thus invariant to monotone increasing transformations of the data, i.e. the only the ordering of the data is important. Alternatively, a special-case of the GMCMs can be used for a novel meta-analysis approach in high-dimensional settings. In this context, the model tries to cluster results which agree and don't agree on statistical evidence into a reproducible and irreproducible group.
 
-The optimization of the likelihood is difficult, however. The GMCM package utilizes [Rcpp](https://github.com/RcppCore/Rcpp) and [RcppArmadillo](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly.
+The optimization of the complicated likelihood function is difficult, however. The GMCM package utilizes [Rcpp](https://github.com/RcppCore/Rcpp) and [RcppArmadillo](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly.
 
 Additional information and documentation will follow very soon. For now, run `help("GMCM")` in R for some help and examples.
 
