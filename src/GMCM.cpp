@@ -182,9 +182,9 @@ arma::mat pgmm_marginal(arma::mat& z,
                         Rcpp::List mus, 
                         Rcpp::List sigmas, 
                         NumericVector pie) {
-  int d = mus.size(); // Nbr of components in mixture (not dimension!)
-  int n = z.n_rows;   // Nbr of observations
-  int m = z.n_cols;   // Dimension (!)
+  const int d = mus.size(); // Nbr of components in mixture (not dimension!)
+  const arma::uword n = z.n_rows;   // Nbr of observations
+  const arma::uword m = z.n_cols;   // Dimension (!)
   
   NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(wrap(z));
   NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
@@ -193,7 +193,7 @@ arma::mat pgmm_marginal(arma::mat& z,
   NumericVector tmp_mus(m); 
   NumericMatrix tmp_sigmas(m, m);
 
-  double mu, sd;
+  //double mu, sd;
   NumericVector xx = no_init(n);
   
   for (int k=0; k<d; k++) {
@@ -202,8 +202,8 @@ arma::mat pgmm_marginal(arma::mat& z,
     
     for (int j=0; j<m; j++) { 
       xx = x(_, j);
-      mu = tmp_mus(j);
-      sd = sqrt(tmp_sigmas(j,j));
+      const double mu = tmp_mus(j);
+      const double sd = sqrt(tmp_sigmas(j,j));
       tmp_ans(_, j) = tmp_ans(_, j) + pie[k] * approx_pnorm(xx, mu, sd);
     }
   }
