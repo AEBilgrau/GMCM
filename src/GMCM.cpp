@@ -188,7 +188,7 @@ arma::mat pgmm_marginal(arma::mat& z,
   int m = z.n_cols;   // Dimension (!)
   
   NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(wrap(z));
-  NumericMatrix tmp(n, m); // Matrix of n rows and m columns (filled with 0)
+  NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
 
   // Holders for the k'th mu and variance for the j'th marginal
   NumericVector tmp_mus(m); 
@@ -205,10 +205,10 @@ arma::mat pgmm_marginal(arma::mat& z,
       xx = x(_, j);
       mu = tmp_mus(j);
       sd = sqrt(tmp_sigmas(j,j));
-      tmp(_, j) = tmp(_, j) + pie[k] * approx_pnorm(xx, mu, sd);
+      tmp_ans(_, j) = tmp_ans(_, j) + pie[k] * approx_pnorm(xx, mu, sd);
     }
   }
-  arma::mat ans(tmp.begin(), n, m, false); 
+  arma::mat ans(tmp_ans.begin(), n, m, false); 
 
   return ans;
 }
