@@ -63,7 +63,7 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
   if (!marginal_loglik) {
     ans = arma::sum(ans);
   }
-  return(ans);
+  return ans;
 }
 
 
@@ -117,24 +117,23 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
 Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z, 
                                  const double mu, 
                                  const double sd) {
-  int n = z.size();
+  const int n = z.size();
   const double a1 =  0.3480242;
   const double a2 = -0.0958798;
   const double a3 =  0.7478556;
   const double p  =  0.47047; 
   const double sqrt2 = 1.4142136;
-  double t, zi;
   
   NumericVector ans = no_init(n);
-  for (int i=0; i<n; i++) {
-    zi = (z(i) - mu)/(sd*sqrt2);
+  for (int i = 0; i < n; ++i) {
+    double zi = (z(i) - mu)/(sd*sqrt2);
     if (zi < 0.0) {
-      zi = -1.0f*zi; 
-      t = 1.0f/(1.0f + p*zi);
-      ans(i) = 0.5f*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
+      zi = -1.0*zi; 
+      const double t = 1.0/(1.0 + p*zi);
+      ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     } else {
-      t = 1.0f/(1.0f + p*zi);
-      ans(i) = 1.0f-0.5f*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
+      const double t = 1.0/(1.0 + p*zi);
+      ans(i) = 1.0-0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     }
   }
   return ans;
