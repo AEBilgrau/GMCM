@@ -23,7 +23,7 @@ arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
   arma::mat y(x.n_rows, m, arma::fill::none);
   
   // Computing mahalanobis distance
-  for (int j=0; j<m; j++) {
+  for (int j=0; j<m; ++j) {
     y(arma::span::all, j) = x.col(j) - mu(j);
   }
   arma::vec dist = sum(((y * invsig) % y), 1);
@@ -52,7 +52,7 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
   arma::colvec ans(n, arma::fill::zeros);
   arma::rowvec tmp_mu(m, arma::fill::none);
   arma::mat tmp_sigma(m, m, arma::fill::none);
-  for (int k=0; k<d; k++) {
+  for (int k=0; k<d; ++k) {
     tmp_mu = as<arma::rowvec>(Rcpp::wrap(mus[k]));
     tmp_sigma = as<arma::mat>(Rcpp::wrap(sigmas[k]));
 
@@ -87,13 +87,13 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
   arma::rowvec tmp_mu(1, arma::fill::none);
   arma::mat tmp_sigma(1, 1, arma::fill::none);
   
-  for (int j=0; j<m; j++) {    
+  for (int j=0; j<m; ++j) {    
     marginal_eval(arma::span::all) = arma::zeros<arma::colvec>(n);
    
     // Get j'th column
     z_tmp = z(arma::span::all, j);
     
-    for (int k=0; k<d; ++k {
+    for (int k=0; k<d; ++k) {
  
       tmp_mu(0) = as<arma::rowvec>(Rcpp::wrap(mus[k]))(j);
       tmp_sigma(0,0) = as<arma::mat>(Rcpp::wrap(sigmas[k]))(j,j);
@@ -151,7 +151,7 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
 //  double zi;
 //  
 //  NumericVector ans = no_init(n);
-//  for (int i=0; i<n; i++) {
+//  for (int i=0; i<n; ++i) {
 //    zi = (z(i) - mu)/sd;
 //    exp_y = exp(a1*zi + a2*pow(zi, 3));
 //    ans(i) = 1 - pow(1 + exp_y, -1);
@@ -196,7 +196,7 @@ arma::mat pgmm_marginal(arma::mat& z,
   //double mu, sd;
   NumericVector xx = no_init(n);
   
-  for (int k=0; k<d; k++) {
+  for (int k=0; k<d; ++k) {
     tmp_mus = as<NumericVector>(wrap(mus[k]));
     tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
     
