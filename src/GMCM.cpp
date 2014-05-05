@@ -93,7 +93,7 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
     // Get j'th column
     z_tmp = z(arma::span::all, j);
     
-    for (int k=0; k<d; k++) {
+    for (int k=0; k<d; ++k {
  
       tmp_mu(0) = as<arma::rowvec>(Rcpp::wrap(mus[k]))(j);
       tmp_sigma(0,0) = as<arma::mat>(Rcpp::wrap(sigmas[k]))(j,j);
@@ -200,7 +200,7 @@ arma::mat pgmm_marginal(arma::mat& z,
     tmp_mus = as<NumericVector>(wrap(mus[k]));
     tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
     
-    for (int j=0; j<m; j++) { 
+    for (int j=0; j<m; ++j) { 
       xx = x(_, j);
       const double mu = tmp_mus(j);
       const double sd = sqrt(tmp_sigmas(j,j));
