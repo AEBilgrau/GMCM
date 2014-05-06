@@ -189,16 +189,16 @@ arma::mat pgmm_marginal(arma::mat& z,
   NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(wrap(z));
   NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
 
-  // Holders for the k'th mu and variance for the j'th marginal
-  NumericVector tmp_mus(m); 
-  NumericMatrix tmp_sigmas(m, m);
+//  // Holders for the k'th mu and variance for the j'th marginal
+//  NumericVector tmp_mus(m); 
+//  NumericMatrix tmp_sigmas(m, m);
 
   //double mu, sd;
   NumericVector xx = no_init(n);
   
   for (int k=0; k<d; ++k) {
-    tmp_mus = as<NumericVector>(wrap(mus[k]));
-    tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
+    NumericVector tmp_mus = as<NumericVector>(wrap(mus[k]));
+    NumericMatrix tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
     
     for (int j=0; j<m; ++j) { 
       xx = x(_, j);
