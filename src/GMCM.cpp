@@ -200,7 +200,7 @@ arma::mat pgmm_marginal(arma::mat& z,
     NumericVector tmp_mus = as<NumericVector>(wrap(mus[k]));
     NumericMatrix tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
     
-    for (int j=0; j<m; ++j) { 
+    for (arma::uword j=0; j<m; ++j) { 
       xx = x(_, j);
       const double mu = tmp_mus(j);
       const double sd = sqrt(tmp_sigmas(j,j));
