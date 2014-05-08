@@ -68,7 +68,6 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
 }
 
 
-
 // [[Rcpp::export]]
 arma::mat dgmm_loglik_marginal(Rcpp::List mus, 
                                Rcpp::List sigmas, 
@@ -130,10 +129,10 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
     double zi = (z(i) - mu)/(sd*sqrt2);
     if (zi < 0.0) {
       zi = -1.0*zi; 
-      double t = 1.0/(1.0 + p*zi);
+      const double t = 1.0/(1.0 + p*zi);
       ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     } else {
-      double t = 1.0/(1.0 + p*zi);
+      const double t = 1.0/(1.0 + p*zi);
       ans(i) = 1.0-0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     }
   }
@@ -210,6 +209,7 @@ arma::mat pgmm_marginal(arma::mat& z,
 
 
 /*** R
+# For debugging
 library(GMCM)
 data <- SimulateGMCMData(n = 1000, d = 4, theta = rtheta(d = 4, m = 3))
 theta <- rtheta(d = 4, m = 3)
