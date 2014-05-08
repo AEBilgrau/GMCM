@@ -1,9 +1,10 @@
 #include <RcppArmadillo.h>
 
 using namespace Rcpp;
-// [[Rcpp::depends(RcppArmadillo)]]
 
-// Auxiliary functions as pow(x, n) is slow 
+// Auxiliary functions as pow(x, n) is somewhat slow 
+// We make the radical assumption that a*b equals b*a, which does 
+// not hold in floating point arithmetic
 
 inline double square(double x) {
   return x*x;
@@ -129,10 +130,10 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
     double zi = (z(i) - mu)/(sd*sqrt2);
     if (zi < 0.0) {
       zi = -1.0*zi; 
-      const double t = 1.0/(1.0 + p*zi);
+      double t = 1.0/(1.0 + p*zi);
       ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     } else {
-      const double t = 1.0/(1.0 + p*zi);
+      double t = 1.0/(1.0 + p*zi);
       ans(i) = 1.0-0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     }
   }
@@ -189,18 +190,13 @@ arma::mat pgmm_marginal(arma::mat& z,
   NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(wrap(z));
   NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
 
-//  // Holders for the k'th mu and variance for the j'th marginal
-//  NumericVector tmp_mus(m); 
-//  NumericMatrix tmp_sigmas(m, m);
-
-  //double mu, sd;
-  NumericVector xx = no_init(n);
-  
   for (int k=0; k<d; ++k) {
+    // Holders for the k'th mu and variance for the j'th marginal
     NumericVector tmp_mus = as<NumericVector>(wrap(mus[k]));
     NumericMatrix tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
     
     for (arma::uword j=0; j<m; ++j) { 
+      NumericVector xx = no_init(n);
       xx = x(_, j);
       const double mu = tmp_mus(j);
       const double sd = sqrt(tmp_sigmas(j,j));
