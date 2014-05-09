@@ -40,6 +40,27 @@ arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
 
 
 // [[Rcpp::export]]
+arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
+  Rcpp::RNGScope();
+  const int d = mu.size();
+  
+  // Create matrix of standard normal random values
+  arma::mat ans(n, d, arma::fill::none);
+  for (int j = 0; j < d; ++j) {
+    ans.col(j) = Rcpp::as<arma::colvec>(Rcpp::rnorm(n));
+  }
+
+  const arma::mat csigma = arma::chol(sigma);
+  
+  // Do the transformation
+  ans = ans * csigma;
+  ans.each_row() += mu; // Add mu to each row in transformed ans
+
+  return ans;  
+}
+
+
+// [[Rcpp::export]]
 arma::colvec dgmm_loglik(Rcpp::List mus, 
                          Rcpp::List sigmas, 
                          Rcpp::NumericVector pie, 
