@@ -1,20 +1,25 @@
 \name{dmvnormal}
 \alias{dmvnormal}
+\alias{rmvnormal}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Multivariate Gaussian probability density function
 }
 \description{
-Fast evalutation of multivariate Gaussian probability density functions.
+Fast simulation and evalutation of multivariate Gaussian probability densities.
 }
 \usage{
+rmvnormal(n, mu, sigma)
 dmvnormal(x, mu, sigma)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
- A n times k matrix of quantiles. Each rows correspond to a realization from the density and each column corresponds to a dimension.
+ A p times k matrix of quantiles. Each rows correspond to a realization from the density and each column corresponds to a dimension.
 }
+  \item{n}{
+  The number of observations to be simulated.
+  }
   \item{mu}{
  The mean vector of dimension k. 
 }
@@ -26,7 +31,9 @@ dmvnormal(x, mu, sigma)
 \code{dmvnormal} functions similarly to \code{dmvnorm} from the \code{mvtnorm}-package.
 }
 \value{
-A 1 by n matrix of the probability densities corresponding to each row of x.
+\code{dmvnorm} returns a 1 by p matrix of the probability densities corresponding to each row of x.
+
+\code{rmvnorm} returns a p by k matrix of observations from at multivariate normal distribution with the given mean \code{mu} and covariance \code{sigma}. Each row corresponds to an observation.
 }
 %\references{
 %% ~put references to the literature/web site here ~
@@ -41,7 +48,7 @@ Anders Ellern Bilgrau
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{dmvnorm} in the \code{mvtnorm}-package.
+\code{dmvnorm} and \code{rmvnorm} in the \code{mvtnorm}-package.
 }
 \examples{
 GMCM:::dmvnormal(x = matrix(rnorm(300), 100, 3),
