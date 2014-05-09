@@ -11,7 +11,9 @@ SimulateGMMData <- function(n = 1000, theta = rtheta(...), ...) {
 
   SampFunc <- function (i) {
     comp.k <- as.numeric(names(tab[i]))
-    mvtnorm::rmvnorm(tab[i], theta$mu[[comp.k]], theta$sigma[[comp.k]])
+    rmvnormal(tab[i], mu = theta$mu[[comp.k]], sigma = theta$sigma[[comp.k]])
+    # Not using mvtnorm anymore.
+    #mvtnorm::rmvnorm(tab[i], theta$mu[[comp.k]], theta$sigma[[comp.k]])
   }
   
   z <- do.call(rbind, lapply(1:length(tab), FUN = SampFunc))[order(order(K)), ]
