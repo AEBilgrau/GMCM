@@ -23,6 +23,23 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// rmvnormal
+arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma);
+RcppExport SEXP GMCM_rmvnormal(SEXP nSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< const int >::type n(nSEXP );
+        Rcpp::traits::input_parameter< arma::rowvec >::type mu(muSEXP );
+        Rcpp::traits::input_parameter< arma::mat >::type sigma(sigmaSEXP );
+        arma::mat __result = rmvnormal(n, mu, sigma);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // dgmm_loglik
 arma::colvec dgmm_loglik(Rcpp::List mus, Rcpp::List sigmas, Rcpp::NumericVector pie, arma::mat& z, bool marginal_loglik);
 RcppExport SEXP GMCM_dgmm_loglik(SEXP musSEXP, SEXP sigmasSEXP, SEXP pieSEXP, SEXP zSEXP, SEXP marginal_loglikSEXP) {
