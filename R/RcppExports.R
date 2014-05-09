@@ -5,6 +5,10 @@ dmvnormal <- function(x, mu, sigma) {
     .Call('GMCM_dmvnormal', PACKAGE = 'GMCM', x, mu, sigma)
 }
 
+rmvnormal <- function(n, mu, sigma) {
+    .Call('GMCM_rmvnormal', PACKAGE = 'GMCM', n, mu, sigma)
+}
+
 dgmm_loglik <- function(mus, sigmas, pie, z, marginal_loglik) {
     .Call('GMCM_dgmm_loglik', PACKAGE = 'GMCM', mus, sigmas, pie, z, marginal_loglik)
 }
