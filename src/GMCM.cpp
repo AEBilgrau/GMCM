@@ -46,14 +46,15 @@ arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
   
   // Create matrix of standard normal random values
   arma::mat ans(n, d, arma::fill::none);
-  for (int j = 0; j < d; ++j) {
+  for (int j = 0; j < d; ++j) {  // Fill ans with random values
     ans.col(j) = Rcpp::as<arma::colvec>(Rcpp::rnorm(n));
   }
 
+  // Do the Cholesky decomposition
   const arma::mat csigma = arma::chol(sigma);
   
   // Do the transformation
-  ans = ans * csigma;
+  ans = ans*csigma;
   ans.each_row() += mu; // Add mu to each row in transformed ans
 
   return ans;  
