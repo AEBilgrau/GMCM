@@ -17,5 +17,7 @@ export("meta2full")
 # internal Rcpp code is properly loaded. In an ideal world, 
 # we would just need to use the LinkingTo but this is not
 # enough.”
-importFrom(Rcpp, sourceCpp)
-importFrom(RcppArmadillo, fastLm)
+import(RcppArmadillo)
+importFrom(Rcpp, evalCpp)
+#importFrom(Rcpp, sourceCpp)
+#importFrom(RcppArmadillo, fastLm)
