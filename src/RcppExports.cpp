@@ -60,7 +60,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // dgmm_loglik_marginal
-arma::mat dgmm_loglik_marginal(Rcpp::List mus, Rcpp::List sigmas, NumericVector pie, arma::mat& z, bool marginal_loglik);
+arma::mat dgmm_loglik_marginal(Rcpp::List mus, Rcpp::List sigmas, Rcpp::NumericVector pie, arma::mat& z, bool marginal_loglik);
 RcppExport SEXP GMCM_dgmm_loglik_marginal(SEXP musSEXP, SEXP sigmasSEXP, SEXP pieSEXP, SEXP zSEXP, SEXP marginal_loglikSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
@@ -68,7 +68,7 @@ BEGIN_RCPP
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< Rcpp::List >::type mus(musSEXP );
         Rcpp::traits::input_parameter< Rcpp::List >::type sigmas(sigmasSEXP );
-        Rcpp::traits::input_parameter< NumericVector >::type pie(pieSEXP );
+        Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pie(pieSEXP );
         Rcpp::traits::input_parameter< arma::mat& >::type z(zSEXP );
         Rcpp::traits::input_parameter< bool >::type marginal_loglik(marginal_loglikSEXP );
         arma::mat __result = dgmm_loglik_marginal(mus, sigmas, pie, z, marginal_loglik);
@@ -96,7 +96,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // pgmm_marginal
-arma::mat pgmm_marginal(arma::mat& z, Rcpp::List mus, Rcpp::List sigmas, NumericVector pie);
+arma::mat pgmm_marginal(arma::mat& z, Rcpp::List mus, Rcpp::List sigmas, Rcpp::NumericVector pie);
 RcppExport SEXP GMCM_pgmm_marginal(SEXP zSEXP, SEXP musSEXP, SEXP sigmasSEXP, SEXP pieSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
@@ -105,7 +105,7 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< arma::mat& >::type z(zSEXP );
         Rcpp::traits::input_parameter< Rcpp::List >::type mus(musSEXP );
         Rcpp::traits::input_parameter< Rcpp::List >::type sigmas(sigmasSEXP );
-        Rcpp::traits::input_parameter< NumericVector >::type pie(pieSEXP );
+        Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pie(pieSEXP );
         arma::mat __result = pgmm_marginal(z, mus, sigmas, pie);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
