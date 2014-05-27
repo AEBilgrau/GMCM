@@ -1,10 +1,13 @@
+// We only include RcppArmadillo.h which pulls Rcpp.h in for us
 #include <RcppArmadillo.h>
 
-using namespace Rcpp;
+//using namespace Rcpp;
+//using namespace RcppArmadillo;
+//// [[Rcpp::depends(RcppArmadillo)]]
 
 // Auxiliary functions as pow(x, n) is somewhat slow 
 // We make the radical assumption that a*b equals b*a, which does 
-// not hold in floating point arithmetic
+// not hold in general for floating point arithmetic.
 
 inline double square(double x) {
   return x*x;
@@ -76,8 +79,8 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
   arma::rowvec tmp_mu(m, arma::fill::none);
   arma::mat tmp_sigma(m, m, arma::fill::none);
   for (int k=0; k<d; ++k) {
-    tmp_mu = as<arma::rowvec>(Rcpp::wrap(mus[k]));
-    tmp_sigma = as<arma::mat>(Rcpp::wrap(sigmas[k]));
+    tmp_mu = Rcpp::as<arma::rowvec>(Rcpp::wrap(mus[k]));
+    tmp_sigma = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]));
 
     ans = ans + pie[k]*dmvnormal(z, tmp_mu, tmp_sigma);
   }
@@ -93,7 +96,7 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
 // [[Rcpp::export]]
 arma::mat dgmm_loglik_marginal(Rcpp::List mus, 
                                Rcpp::List sigmas, 
-                               NumericVector pie, 
+                               Rcpp::NumericVector pie, 
                                arma::mat& z, 
                                bool marginal_loglik) {
   int d = mus.size();
@@ -117,8 +120,8 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
     
     for (int k=0; k<d; ++k) {
  
-      tmp_mu(0) = as<arma::rowvec>(Rcpp::wrap(mus[k]))(j);
-      tmp_sigma(0,0) = as<arma::mat>(Rcpp::wrap(sigmas[k]))(j,j);
+      tmp_mu(0) = Rcpp::as<arma::rowvec>(Rcpp::wrap(mus[k]))(j);
+      tmp_sigma(0,0) = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]))(j,j);
 
       // Evalutate the marginal k'th component for the j'th marginal
       marginal_eval += pie[k]*dmvnormal(z_tmp, tmp_mu, tmp_sigma);
@@ -146,7 +149,7 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
   const double p  =  0.47047; 
   const double sqrt2 = 1.4142136;
   
-  NumericVector ans = no_init(n);
+  Rcpp::NumericVector ans = Rcpp::no_init(n);
   for (int i = 0; i < n; ++i) {
     double zi = (z(i) - mu)/(sd*sqrt2);
     if (zi < 0.0) {
@@ -181,6 +184,7 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
 //  return ans;
 //}
 
+// Approximate normal CDF
 //Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z, 
 //                                 double mu, 
 //                                 double sd) {
@@ -203,25 +207,25 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
 arma::mat pgmm_marginal(arma::mat& z,
                         Rcpp::List mus, 
                         Rcpp::List sigmas, 
-                        NumericVector pie) {
+                        Rcpp::NumericVector pie) {
   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
   const arma::uword n = z.n_rows;   // Nbr of observations
   const arma::uword m = z.n_cols;   // Dimension (!)
   
-  NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(wrap(z));
-  NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
+  Rcpp::NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(z));
+  Rcpp::NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
 
   for (int k=0; k<d; ++k) {
     // Holders for the k'th mu and variance for the j'th marginal
-    NumericVector tmp_mus = as<NumericVector>(wrap(mus[k]));
-    NumericMatrix tmp_sigmas = as<NumericMatrix>(wrap(sigmas[k]));
+    Rcpp::NumericVector tmp_mus = Rcpp::as<Rcpp::NumericVector>(Rcpp::wrap(mus[k]));
+    Rcpp::NumericMatrix tmp_sigmas = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(sigmas[k]));
     
     for (arma::uword j=0; j<m; ++j) { 
-      NumericVector xx = no_init(n);
-      xx = x(_, j);
+      Rcpp::NumericVector xx = Rcpp::no_init(n);
+      xx = x(Rcpp::_, j);
       const double mu = tmp_mus(j);
       const double sd = sqrt(tmp_sigmas(j,j));
-      tmp_ans(_, j) = tmp_ans(_, j) + pie[k] * approx_pnorm(xx, mu, sd);
+      tmp_ans(Rcpp::_, j) = tmp_ans(Rcpp::_, j) + pie[k] * approx_pnorm(xx, mu, sd);
     }
   }
   arma::mat ans(tmp_ans.begin(), n, m, false); 
