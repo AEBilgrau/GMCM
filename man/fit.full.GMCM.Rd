@@ -87,7 +87,7 @@ uhat <- Uhat(sim$u)
 start.theta <- choose.theta(uhat, m = 3)  # Random starting estimate
 res <- fit.full.GMCM(u = uhat, theta = start.theta, 
                      method = "NM", max.ite = 3000,
-                     reltol = 1e-3, trace = TRUE)
+                     reltol = 1e-2, trace = TRUE)  # Note, 1e-2 is too big
 
 # Confusion matrix
 Khat <- apply(get.prob(uhat, theta = res), 1, which.max)
