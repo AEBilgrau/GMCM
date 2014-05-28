@@ -7,6 +7,6 @@ Author: Anders Ellern Bilgrau, Martin Boegsted, Poul Svante Eriksen
 Maintainer: Anders Ellern Bilgrau <abilgrau@math.aau.dk>
 Description: Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models.
 License: GPL (>=2)
-Imports: mvtnorm, Rcpp (>= 0.10.6), RcppArmadillo
+Imports: mvtnorm, Rcpp (>= 0.10.6)
 LinkingTo: Rcpp, RcppArmadillo
 URL: https://github.com/AEBilgrau/GMCM, http://people.math.aau.dk/~abilgrau
