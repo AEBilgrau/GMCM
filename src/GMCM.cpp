@@ -137,11 +137,10 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
 }
 
 
-// Abramowitz, Stegun p. 299 (7.1.25) (using error function) improved
+// Approximate univariate Gaussian CDF, applid marginally 
+// Abramowitz, Stegun p. 299 (7.1.25) (using error function) improved.
 // [[Rcpp::export]]
-Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z, 
-                                 const double mu, 
-                                 const double sd) {
+arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
   const int n = z.size();
   const double a1 =  0.3480242;
   const double a2 = -0.0958798;
@@ -149,7 +148,8 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
   const double p  =  0.47047; 
   const double sqrt2 = 1.4142136;
   
-  Rcpp::NumericVector ans = Rcpp::no_init(n);
+  arma::colvec ans(n, arma::fill::none);
+
   for (int i = 0; i < n; ++i) {
     double zi = (z(i) - mu)/(sd*sqrt2);
     if (zi < 0.0) {
@@ -161,12 +161,40 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
       ans(i) = 1.0-0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     }
   }
+
   return ans;
 }
 
-// Approximate univariate Gaussian CDF
+// Approximate univariate Gaussian CDF, applied marginally 
+// // [[Rcpp::export]]
+// Rcpp::NumericVector approx_pnorm2(Rcpp::NumericVector& z, 
+//                                  const double mu, 
+//                                  const double sd) {
+//   const int n = z.size();
+//   const double a1 =  0.3480242;
+//   const double a2 = -0.0958798;
+//   const double a3 =  0.7478556;
+//   const double p  =  0.47047; 
+//   const double sqrt2 = 1.4142136;
+  
+//   Rcpp::NumericVector ans = Rcpp::no_init(n);
+//   for (int i = 0; i < n; ++i) {
+//     double zi = (z(i) - mu)/(sd*sqrt2);
+//     if (zi < 0.0) {
+//       zi = -1.0*zi; 
+//       const double t = 1.0/(1.0 + p*zi);
+//       ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
+//     } else {
+//       const double t = 1.0/(1.0 + p*zi);
+//       ans(i) = 1.0-0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
+//     }
+//   }
+//   return ans;
+// }
+
+// Approximate univariate Gaussian CDF, applied marginally 
 //// [[Rcpp::export]]
-//Rcpp::NumericVector approx_pnorm2(Rcpp::NumericVector& z, 
+//Rcpp::NumericVector approx_pnorm3(Rcpp::NumericVector& z, 
 //                                 double mu, 
 //                                 double sd) {
 //  int n = z.size();
@@ -184,8 +212,8 @@ Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z,
 //  return ans;
 //}
 
-// Approximate normal CDF
-//Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z, 
+// Approximate univariate Gaussian CDF, applied marginally 
+//Rcpp::NumericVector approx_pnorm4(Rcpp::NumericVector& z, 
 //                                 double mu, 
 //                                 double sd) {
 //  int n = z.size();
@@ -208,64 +236,77 @@ arma::mat pgmm_marginal(arma::mat& z,
                         Rcpp::List mus, 
                         Rcpp::List sigmas, 
                         Rcpp::NumericVector pie) {
+
   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
   const arma::uword n = z.n_rows;   // Nbr of observations
   const arma::uword m = z.n_cols;   // Dimension (!)
   
-  Rcpp::NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(z));
-  Rcpp::NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
+  arma::mat ans(n, m, arma::fill::zeros); // Matrix of n rows and m columns (filled with 0)
 
   for (int k=0; k<d; ++k) {
     // Holders for the k'th mu and variance for the j'th marginal
-    Rcpp::NumericVector tmp_mus = Rcpp::as<Rcpp::NumericVector>(Rcpp::wrap(mus[k]));
-    Rcpp::NumericMatrix tmp_sigmas = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(sigmas[k]));
+    arma::colvec tmp_mus = Rcpp::as<arma::colvec>(Rcpp::wrap(mus[k]));
+    arma::mat tmp_sigmas = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]));
     
     for (arma::uword j=0; j<m; ++j) { 
-      Rcpp::NumericVector xx = Rcpp::no_init(n);
-      xx = x(Rcpp::_, j);
+
       const double mu = tmp_mus(j);
       const double sd = sqrt(tmp_sigmas(j,j));
-      tmp_ans(Rcpp::_, j) = tmp_ans(Rcpp::_, j) + pie[k] * approx_pnorm(xx, mu, sd);
+      arma::colvec z_col_j = z(arma::span::all, j);
+      arma::colvec approx_pn = approx_pnorm(z_col_j, mu, sd);
+      ans.col(j) = ans.col(j) + pie[k] * approx_pn;
+
     }
   }
-  arma::mat ans(tmp_ans.begin(), n, m, false); 
 
   return ans;
 }
 
+// Alternative implementation
+// // [[Rcpp::export]]
+// arma::mat pgmm_marginal2(arma::mat& z,
+//                         Rcpp::List mus, 
+//                         Rcpp::List sigmas, 
+//                         Rcpp::NumericVector pie) {
+
+//   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
+//   const arma::uword n = z.n_rows;   // Nbr of observations
+//   const arma::uword m = z.n_cols;   // Dimension (!)
+  
+//   Rcpp::NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(z));
+//   Rcpp::NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
+
+//   for (int k=0; k<d; ++k) {
+//     // Holders for the k'th mu and variance for the j'th marginal
+//     Rcpp::NumericVector tmp_mus = Rcpp::as<Rcpp::NumericVector>(Rcpp::wrap(mus[k]));
+//     Rcpp::NumericMatrix tmp_sigmas = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(sigmas[k]));
+    
+//     for (arma::uword j=0; j<m; ++j) { 
+//       Rcpp::NumericVector xx = Rcpp::no_init(n);
+//       xx = x(Rcpp::_, j);
+//       const double mu = tmp_mus(j);
+//       const double sd = sqrt(tmp_sigmas(j,j));
+//       tmp_ans(Rcpp::_, j) = tmp_ans(Rcpp::_, j) + pie[k] * approx_pnorm2(xx, mu, sd);
+//     }
+//   }
+//   arma::mat ans(tmp_ans.begin(), n, m, false); 
+
+//   return ans;
+// }
 
 /*** R
 # For debugging
 library(GMCM)
-data <- SimulateGMCMData(n = 1000, d = 4, theta = rtheta(d = 4, m = 3))
-theta <- rtheta(d = 4, m = 3)
+data <- matrix(runif(200), 100, 2)
+theta <- rtheta(d = 2, m = 2)
+aa <- pgmm_marginal(data, theta$mu, theta$sigma, theta$pie)
+#bb <- pgmm_marginal2(data, theta$mu, theta$sigma, theta$pie)
+#identical(aa, bb)
+#max(aa - bb)
 
-aa <- pgmm_marginal(data$z, theta$mu, 
-              theta$sigma, theta$pie)
+for (i in 1:50000)
+  aa <- pgmm_marginal(data, theta$mu, theta$sigma, theta$pie)
 
-set.seed(1)
- 
- # Choosing the true parameters and simulating data
- true.par <- c(0.8, 3, 1.5, 0.4)
- data <- SimulateGMCMData(n = 1000, par = true.par, d = 2)
- uhat <- Uhat(data$u)  # Observed ranks
- 
- # Plot of latent and observed data colour coded by the true component
- par(mfrow = c(1,2))
- plot(data$z, main = "Latent data", cex = 0.6,
-      xlab = "z (Experiment 1)", ylab = "z (Experiment 2)", 
-      col = c("red","blue")[data$K])
- plot(uhat, main = "Observed data", cex = 0.6,
-      xlab = "u (Experiment 1)", ylab = "u (Experiment 2)", 
-      col = c("red","blue")[data$K])
- 
- # Fit the model using the Pseudo EM algorithm
- init.par <- c(0.5, 1, 1, 0.5)
- res <- GMCM:::PseudoEMAlgorithm(uhat, meta2full(init.par, d = 2), 
-                                 verbose = TRUE,
-                                 convergence.criterion = "absGMCM", 
-                                 eps = 1e-4,
-                                 trace.theta = FALSE, 
-                                 meta.special.case = TRUE)
+
 */
 
