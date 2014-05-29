@@ -70,7 +70,7 @@ The algorithm is highly sensitive to the starting parameters which therefore sho
 \code{\link{rtheta}}, \code{\link{EMAlgorithm}}
 }
 \examples{
-set.seed(2)
+set.seed(1)
 
 # Choosing the true parameters and simulating data
 true.par <- c(0.8, 3, 1.5, 0.4)
