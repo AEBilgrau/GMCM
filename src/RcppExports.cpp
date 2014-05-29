@@ -79,16 +79,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // approx_pnorm
-Rcpp::NumericVector approx_pnorm(Rcpp::NumericVector& z, const double mu, const double sd);
+arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd);
 RcppExport SEXP GMCM_approx_pnorm(SEXP zSEXP, SEXP muSEXP, SEXP sdSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< Rcpp::NumericVector& >::type z(zSEXP );
+        Rcpp::traits::input_parameter< arma::colvec& >::type z(zSEXP );
         Rcpp::traits::input_parameter< const double >::type mu(muSEXP );
         Rcpp::traits::input_parameter< const double >::type sd(sdSEXP );
-        Rcpp::NumericVector __result = approx_pnorm(z, mu, sd);
+        arma::colvec __result = approx_pnorm(z, mu, sd);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
