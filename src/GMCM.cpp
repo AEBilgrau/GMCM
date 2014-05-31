@@ -57,7 +57,7 @@ arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
   const arma::mat csigma = arma::chol(sigma);
   
   // Do the transformation
-  ans = ans*csigma;
+  ans = ans * csigma;
   ans.each_row() += mu; // Add mu to each row in transformed ans
 
   return ans;  
@@ -262,7 +262,7 @@ arma::mat pgmm_marginal(arma::mat& z,
   return ans;
 }
 
-// Alternative implementation
+// Alternative (original) implementation
 // // [[Rcpp::export]]
 // arma::mat pgmm_marginal2(arma::mat& z,
 //                         Rcpp::List mus, 
