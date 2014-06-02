@@ -1,7 +1,7 @@
 \name{full2meta}
 \alias{meta2full}
 \alias{full2meta}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 Convert between parameter formats
 }
@@ -29,7 +29,7 @@ If a \code{theta} is supplied which is not on the form of Li et. al. (2011) the 
 \value{
 \code{full2meta} returns a numeric vector of length 4 formatted as \code{par}.
 
-\code{meta2full} returns a formatted list of parameters as \code{\link{rtheta}}.
+\code{meta2full} returns a formatted list of parameters as described by \code{\link{rtheta}}.
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011). Measuring reproducibility of high-throughput experiments. The Annals of Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
