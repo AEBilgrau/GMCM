@@ -265,9 +265,9 @@ arma::mat pgmm_marginal(arma::mat& z,
 // Alternative (original) implementation
 // // [[Rcpp::export]]
 // arma::mat pgmm_marginal2(arma::mat& z,
-//                         Rcpp::List mus, 
-//                         Rcpp::List sigmas, 
-//                         Rcpp::NumericVector pie) {
+//                          Rcpp::List mus, 
+//                          Rcpp::List sigmas, 
+//                          Rcpp::NumericVector pie) {
 
 //   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
 //   const arma::uword n = z.n_rows;   // Nbr of observations
@@ -293,6 +293,16 @@ arma::mat pgmm_marginal(arma::mat& z,
 
 //   return ans;
 // }
+
+// arma::mat EStepRcpp (arma::mat& z
+//                      Rcpp::List mus, 
+//                      Rcpp::List sigmas, 
+//                      Rcpp::NumericVector pie) {
+//   WRITE EStep in Rcpp
+// }
+
+
+
 
 /*** R
 # For debugging
