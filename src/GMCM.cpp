@@ -301,6 +301,11 @@ arma::mat pgmm_marginal(arma::mat& z,
 //   WRITE EStep in Rcpp
 // }
 
+// Rcpp::List MStepRcpp (arma::mat& z
+//                      arma::mat& kappa, 
+//                      bool meta_special_case) {
+//   WRITE MStep in Rcpp
+// }
 
 
 
