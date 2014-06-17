@@ -23,7 +23,7 @@ install.packages("GMCM")
 If you wish to install the latest version of GMCM directly from the master branch at GitHub, run 
 
 ```R
-install.packages("devtools")
+#install.packages("devtools")
 devtools::install_github("AEBilgrau/GMCM")
 ```
 
