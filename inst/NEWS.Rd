@@ -4,8 +4,15 @@
 
 \section{Changes in version 1.1}{
   \itemize{
-    \item \cpkg{GMCM} is no longer dependent on \cpkg{mvtnorm}.
+    \item \cpkg{GMCM} is no longer dependent on \cpkg{mvtnorm}. \cpkg{GMCM} now features faster simulation of data.
     \item A NEWS.Rd file have been added!
+  }
+}
+
+\section{Changes in version 1.0.1}{
+  \itemize{
+    \item \code{pgmm_marginal} and other functions in \code{src/GMCM.cpp} have been
+    rewritten and \cpkg{GMCM} should now be more stable and faster.
   }
 }
 
