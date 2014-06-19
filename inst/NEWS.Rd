@@ -14,7 +14,7 @@
 \section{Changes in version 1.0.1}{
   \itemize{
     \item \code{pgmm_marginal} and other functions in \code{src/GMCM.cpp} have been
-    rewritten and \cpkg{GMCM} should now be more stable and faster.
+    rewritten to address memory issues. \cpkg{GMCM} should now be more stable and faster.
   }
 }
 
