@@ -12,6 +12,7 @@ export("Uhat")
 export("full2meta")
 export("meta2full")
 export("rmvnormal")
+export("dmvnormal")
 
 # http://adv-r.had.co.nz/Rcpp.html#adding-rcpp-to-an-existing-package-rcpp-0.10.7
 # “We need to import something (anything) from Rcpp so that 
