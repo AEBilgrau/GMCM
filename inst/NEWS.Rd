@@ -4,7 +4,7 @@
 
 \section{Changes in version 1.1}{
   \itemize{
-    \item Functions \code{rmvnormal} and \code{dmvnormal} are now exported an
+    \item Functions \code{rmvnormal} and \code{dmvnormal} are now exported and
       visible to the user. These are faster versions of \code{rmvnorm} and  \code{dmvnorm} from \pkg{mvtnorm}.
     \item \cpkg{GMCM} is no longer dependent on \cpkg{mvtnorm}. \cpkg{GMCM} now features faster simulation of data.
     \item A NEWS.Rd file have been added!
