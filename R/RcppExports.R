@@ -25,3 +25,7 @@ pgmm_marginal <- function(z, mus, sigmas, pie) {
     .Call('GMCM_pgmm_marginal', PACKAGE = 'GMCM', z, mus, sigmas, pie)
 }
 
+EStepRcpp <- function(z, mus, sigmas, pie) {
+    .Call('GMCM_EStepRcpp', PACKAGE = 'GMCM', z, mus, sigmas, pie)
+}
+

@@ -113,3 +113,21 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// EStepRcpp
+arma::mat EStepRcpp(arma::mat& z, Rcpp::List mus, Rcpp::List sigmas, Rcpp::NumericVector pie);
+RcppExport SEXP GMCM_EStepRcpp(SEXP zSEXP, SEXP musSEXP, SEXP sigmasSEXP, SEXP pieSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< arma::mat& >::type z(zSEXP );
+        Rcpp::traits::input_parameter< Rcpp::List >::type mus(musSEXP );
+        Rcpp::traits::input_parameter< Rcpp::List >::type sigmas(sigmasSEXP );
+        Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pie(pieSEXP );
+        arma::mat __result = EStepRcpp(z, mus, sigmas, pie);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}

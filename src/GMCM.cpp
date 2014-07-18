@@ -1,9 +1,11 @@
 // We only include RcppArmadillo.h which pulls Rcpp.h in for us
 #include <RcppArmadillo.h>
 
+// These are not needed:
 //using namespace Rcpp;
 //using namespace RcppArmadillo;
 //// [[Rcpp::depends(RcppArmadillo)]]
+
 
 // Auxiliary functions as pow(x, n) is somewhat slow 
 // We make the radical assumption that a*b equals b*a, which does 
@@ -263,43 +265,67 @@ arma::mat pgmm_marginal(arma::mat& z,
 }
 
 // Alternative (original) implementation
-// // [[Rcpp::export]]
-// arma::mat pgmm_marginal2(arma::mat& z,
-//                          Rcpp::List mus, 
-//                          Rcpp::List sigmas, 
-//                          Rcpp::NumericVector pie) {
+//// [[Rcpp::export]]
+//arma::mat pgmm_marginal2(arma::mat& z,
+//                         Rcpp::List mus, 
+//                         Rcpp::List sigmas, 
+//                         Rcpp::NumericVector pie) {
+//  const int d = mus.size(); // Nbr of components in mixture (not dimension!)
+//  const arma::uword n = z.n_rows;   // Nbr of observations
+//  const arma::uword m = z.n_cols;   // Dimension (!)
+//  
+//  Rcpp::NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(z));
+//  Rcpp::NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
+//
+//  for (int k=0; k<d; ++k) {
+//    // Holders for the k'th mu and variance for the j'th marginal
+//    Rcpp::NumericVector tmp_mus = Rcpp::as<Rcpp::NumericVector>(Rcpp::wrap(mus[k]));
+//    Rcpp::NumericMatrix tmp_sigmas = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(sigmas[k]));
+//
+//    for (arma::uword j=0; j<m; ++j) { 
+//      Rcpp::NumericVector xx = Rcpp::no_init(n);
+//      xx = x(Rcpp::_, j);
+//      const double mu = tmp_mus(j);
+//      const double sd = sqrt(tmp_sigmas(j,j));
+//      tmp_ans(Rcpp::_, j) = tmp_ans(Rcpp::_, j) + pie[k] * approx_pnorm2(xx, mu, sd);
+//    }
+//  }
+//  arma::mat ans(tmp_ans.begin(), n, m, false);
+//  
+//  return ans;
+//}
 
-//   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
-//   const arma::uword n = z.n_rows;   // Nbr of observations
-//   const arma::uword m = z.n_cols;   // Dimension (!)
+// [[Rcpp::export]]
+arma::mat EStepRcpp(arma::mat& z,
+                    Rcpp::List mus, 
+                    Rcpp::List sigmas, 
+                    Rcpp::NumericVector pie) {
   
-//   Rcpp::NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(z));
-//   Rcpp::NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
+  const int d = mus.size(); // Nbr of components in mixture (not dimension!)
+  const int n = z.n_rows;   // Nbr of observations
+  //const arma::uword m = z.n_cols;   // Dimension of obs. (nbr of studies)
+  
+  arma::mat kappa = arma::mat(n, d, arma::fill::none);
+  
+  for (int k=0; k<d; ++k) {
+    // Holders for the mixture prop., mean, and covariance of component k
+    arma::rowvec tmp_mu = Rcpp::as<arma::rowvec>(Rcpp::wrap(mus[k]));
+    arma::mat tmp_sigma = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]));
+    double tmp_pie = pie[k];
+        
+    kappa(arma::span::all, k) = tmp_pie * dmvnormal(z, tmp_mu, tmp_sigma);
+  }
+  
+  const arma::colvec rowsums = arma::sum(kappa, 1);
+  kappa.each_col() /= rowsums;
+  
+  // Handle NaN/Infs
+  // Change non-finite elements to zero
+  kappa.elem(find_nonfinite(kappa)).zeros();
 
-//   for (int k=0; k<d; ++k) {
-//     // Holders for the k'th mu and variance for the j'th marginal
-//     Rcpp::NumericVector tmp_mus = Rcpp::as<Rcpp::NumericVector>(Rcpp::wrap(mus[k]));
-//     Rcpp::NumericMatrix tmp_sigmas = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(sigmas[k]));
-    
-//     for (arma::uword j=0; j<m; ++j) { 
-//       Rcpp::NumericVector xx = Rcpp::no_init(n);
-//       xx = x(Rcpp::_, j);
-//       const double mu = tmp_mus(j);
-//       const double sd = sqrt(tmp_sigmas(j,j));
-//       tmp_ans(Rcpp::_, j) = tmp_ans(Rcpp::_, j) + pie[k] * approx_pnorm2(xx, mu, sd);
-//     }
-//   }
-//   arma::mat ans(tmp_ans.begin(), n, m, false); 
-
-//   return ans;
-// }
-
-// arma::mat EStepRcpp (arma::mat& z
-//                      Rcpp::List mus, 
-//                      Rcpp::List sigmas, 
-//                      Rcpp::NumericVector pie) {
-//   WRITE EStep in Rcpp
-// }
+  return kappa;
+  
+}
 
 // Rcpp::List MStepRcpp (arma::mat& z
 //                      arma::mat& kappa, 
@@ -313,15 +339,7 @@ arma::mat pgmm_marginal(arma::mat& z,
 # For debugging
 library(GMCM)
 data <- matrix(runif(200), 100, 2)
-theta <- rtheta(d = 2, m = 2)
-aa <- pgmm_marginal(data, theta$mu, theta$sigma, theta$pie)
-#bb <- pgmm_marginal2(data, theta$mu, theta$sigma, theta$pie)
-#identical(aa, bb)
-#max(aa - bb)
-
-for (i in 1:50000)
-  aa <- pgmm_marginal(data, theta$mu, theta$sigma, theta$pie)
-
+theta <- rtheta(d = 2, m = 3)
 
 */
 
