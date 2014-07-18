@@ -4,6 +4,6 @@ EStep <- function (x, theta) {
   }
   f <- sapply(1:theta$m, g)
   kappa <- f/rowSums(f)
-  kappa[is.nan(kappa[,1]) | is.nan(kappa[,2]), ] <- 0
+  kappa[is.nan(kappa[,1]) | is.nan(kappa[,2]), ] <- 0  # What if kappa has more than 3 cols, fix!
   return(kappa)
 }
