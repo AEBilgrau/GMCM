@@ -7,9 +7,9 @@
 //// [[Rcpp::depends(RcppArmadillo)]]
 
 
-// Auxiliary functions as pow(x, n) is somewhat slow 
-// We make the radical assumption that a*b equals b*a, which does 
-// not hold in general for floating point arithmetic.
+// Auxiliary functions as pow(x, n) is somewhat slow. We make the radical
+// assumption that a*b equals b*a, which does not hold in general for
+// floating point arithmetic.
 
 inline double square(double x) {
   return x*x;
@@ -23,22 +23,22 @@ inline double cube(double x) {
 // [[Rcpp::export]]
 arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
   int m = x.n_cols;
-  
+
   // sympd tells inv that sigma is symmetric and postive definte
-  arma::mat invsig = arma::inv_sympd(sigma); 
+  arma::mat invsig = arma::inv_sympd(sigma);
   arma::mat y(x.n_rows, m, arma::fill::none);
-  
+
   // Computing mahalanobis distance
   for (int j=0; j<m; ++j) {
     y(arma::span::all, j) = x.col(j) - mu(j);
   }
   arma::vec dist = sum(((y * invsig) % y), 1);
-  
+
   // Computing log of the determinant
   double sign = 1.0f;
   double logdet = 1.0f;
   log_det(logdet, sign, sigma);
-  
+
   // Computing log normal density
   return exp(-(m*log(2.0f*arma::datum::pi) + logdet + dist)/2.0f);
 }
@@ -48,7 +48,7 @@ arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
 arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
   Rcpp::RNGScope();
   const int d = mu.size();
-  
+
   // Create matrix of standard normal random values
   arma::mat ans(n, d, arma::fill::none);
   for (int j = 0; j < d; ++j) {  // Fill ans with random values
@@ -57,20 +57,20 @@ arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
 
   // Do the Cholesky decomposition
   const arma::mat csigma = arma::chol(sigma);
-  
+
   // Do the transformation
   ans = ans * csigma;
   ans.each_row() += mu; // Add mu to each row in transformed ans
 
-  return ans;  
+  return ans;
 }
 
 
 // [[Rcpp::export]]
-arma::colvec dgmm_loglik(Rcpp::List mus, 
-                         Rcpp::List sigmas, 
-                         Rcpp::NumericVector pie, 
-                         arma::mat& z, 
+arma::colvec dgmm_loglik(Rcpp::List mus,
+                         Rcpp::List sigmas,
+                         Rcpp::NumericVector pie,
+                         arma::mat& z,
                          bool marginal_loglik) {
 
   int d = mus.size();
@@ -87,7 +87,7 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
     ans = ans + pie[k]*dmvnormal(z, tmp_mu, tmp_sigma);
   }
   ans = arma::log(ans);
-  
+
   if (!marginal_loglik) {
     ans = arma::sum(ans);
   }
@@ -96,10 +96,10 @@ arma::colvec dgmm_loglik(Rcpp::List mus,
 
 
 // [[Rcpp::export]]
-arma::mat dgmm_loglik_marginal(Rcpp::List mus, 
-                               Rcpp::List sigmas, 
-                               Rcpp::NumericVector pie, 
-                               arma::mat& z, 
+arma::mat dgmm_loglik_marginal(Rcpp::List mus,
+                               Rcpp::List sigmas,
+                               Rcpp::NumericVector pie,
+                               arma::mat& z,
                                bool marginal_loglik) {
   int d = mus.size();
   int n = z.n_rows;
@@ -107,21 +107,21 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
 
   arma::mat ans(n, m, arma::fill::none);
   arma::colvec marginal_eval(n, arma::fill::zeros);
-  
+
   arma::mat z_tmp(n, 1, arma::fill::none);
-  
+
   // Get k'th mu and variance for the j'th marginal
   arma::rowvec tmp_mu(1, arma::fill::none);
   arma::mat tmp_sigma(1, 1, arma::fill::none);
-  
-  for (int j=0; j<m; ++j) {    
+
+  for (int j=0; j<m; ++j) {
     marginal_eval(arma::span::all) = arma::zeros<arma::colvec>(n);
-   
+
     // Get j'th column
     z_tmp = z(arma::span::all, j);
-    
+
     for (int k=0; k<d; ++k) {
- 
+
       tmp_mu(0) = Rcpp::as<arma::rowvec>(Rcpp::wrap(mus[k]))(j);
       tmp_sigma(0,0) = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]))(j,j);
 
@@ -139,7 +139,7 @@ arma::mat dgmm_loglik_marginal(Rcpp::List mus,
 }
 
 
-// Approximate univariate Gaussian CDF, applid marginally 
+// Approximate univariate Gaussian CDF, applid marginally
 // Abramowitz, Stegun p. 299 (7.1.25) (using error function) improved.
 // [[Rcpp::export]]
 arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
@@ -147,15 +147,15 @@ arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
   const double a1 =  0.3480242;
   const double a2 = -0.0958798;
   const double a3 =  0.7478556;
-  const double p  =  0.47047; 
+  const double p  =  0.47047;
   const double sqrt2 = 1.4142136;
-  
+
   arma::colvec ans(n, arma::fill::none);
 
   for (int i = 0; i < n; ++i) {
     double zi = (z(i) - mu)/(sd*sqrt2);
     if (zi < 0.0) {
-      zi = -1.0*zi; 
+      zi = -1.0*zi;
       const double t = 1.0/(1.0 + p*zi);
       ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
     } else {
@@ -167,23 +167,23 @@ arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
   return ans;
 }
 
-// Approximate univariate Gaussian CDF, applied marginally 
+// Approximate univariate Gaussian CDF, applied marginally
 // // [[Rcpp::export]]
-// Rcpp::NumericVector approx_pnorm2(Rcpp::NumericVector& z, 
-//                                  const double mu, 
+// Rcpp::NumericVector approx_pnorm2(Rcpp::NumericVector& z,
+//                                  const double mu,
 //                                  const double sd) {
 //   const int n = z.size();
 //   const double a1 =  0.3480242;
 //   const double a2 = -0.0958798;
 //   const double a3 =  0.7478556;
-//   const double p  =  0.47047; 
+//   const double p  =  0.47047;
 //   const double sqrt2 = 1.4142136;
-  
+
 //   Rcpp::NumericVector ans = Rcpp::no_init(n);
 //   for (int i = 0; i < n; ++i) {
 //     double zi = (z(i) - mu)/(sd*sqrt2);
 //     if (zi < 0.0) {
-//       zi = -1.0*zi; 
+//       zi = -1.0*zi;
 //       const double t = 1.0/(1.0 + p*zi);
 //       ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
 //     } else {
@@ -194,17 +194,17 @@ arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
 //   return ans;
 // }
 
-// Approximate univariate Gaussian CDF, applied marginally 
+// Approximate univariate Gaussian CDF, applied marginally
 //// [[Rcpp::export]]
-//Rcpp::NumericVector approx_pnorm3(Rcpp::NumericVector& z, 
-//                                 double mu, 
+//Rcpp::NumericVector approx_pnorm3(Rcpp::NumericVector& z,
+//                                 double mu,
 //                                 double sd) {
 //  int n = z.size();
 //  double exp_y;
 //  double a1 = 1.5976;
 //  double a2 = 0.070565992;
 //  double zi;
-//  
+//
 //  NumericVector ans = no_init(n);
 //  for (int i=0; i<n; ++i) {
 //    zi = (z(i) - mu)/sd;
@@ -214,15 +214,15 @@ arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
 //  return ans;
 //}
 
-// Approximate univariate Gaussian CDF, applied marginally 
-//Rcpp::NumericVector approx_pnorm4(Rcpp::NumericVector& z, 
-//                                 double mu, 
+// Approximate univariate Gaussian CDF, applied marginally
+//Rcpp::NumericVector approx_pnorm4(Rcpp::NumericVector& z,
+//                                 double mu,
 //                                 double sd) {
 //  int n = z.size();
 //  double exp_minusy;
 //  double fac = 1.5976;
 //  double zi;
-//  
+//
 //  NumericVector ans = no_init(n);
 //  for (int i=0; i<n; i++) {
 //    zi = (z(i) - mu)/sd;
@@ -235,22 +235,23 @@ arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
 // Approximate marginals of Gaussian mixture model CDF
 // [[Rcpp::export]]
 arma::mat pgmm_marginal(arma::mat& z,
-                        Rcpp::List mus, 
-                        Rcpp::List sigmas, 
+                        Rcpp::List mus,
+                        Rcpp::List sigmas,
                         Rcpp::NumericVector pie) {
 
   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
   const arma::uword n = z.n_rows;   // Nbr of observations
   const arma::uword m = z.n_cols;   // Dimension (!)
-  
-  arma::mat ans(n, m, arma::fill::zeros); // Matrix of n rows and m columns (filled with 0)
+
+  // Matrix of n rows and m columns (filled with 0)
+  arma::mat ans(n, m, arma::fill::zeros);
 
   for (int k=0; k<d; ++k) {
     // Holders for the k'th mu and variance for the j'th marginal
     arma::colvec tmp_mus = Rcpp::as<arma::colvec>(Rcpp::wrap(mus[k]));
     arma::mat tmp_sigmas = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]));
-    
-    for (arma::uword j=0; j<m; ++j) { 
+
+    for (arma::uword j=0; j<m; ++j) {
 
       const double mu = tmp_mus(j);
       const double sd = sqrt(tmp_sigmas(j,j));
@@ -264,74 +265,87 @@ arma::mat pgmm_marginal(arma::mat& z,
   return ans;
 }
 
-// Alternative (original) implementation
-//// [[Rcpp::export]]
-//arma::mat pgmm_marginal2(arma::mat& z,
-//                         Rcpp::List mus, 
-//                         Rcpp::List sigmas, 
-//                         Rcpp::NumericVector pie) {
-//  const int d = mus.size(); // Nbr of components in mixture (not dimension!)
-//  const arma::uword n = z.n_rows;   // Nbr of observations
-//  const arma::uword m = z.n_cols;   // Dimension (!)
-//  
-//  Rcpp::NumericMatrix x = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(z));
-//  Rcpp::NumericMatrix tmp_ans(n, m); // Matrix of n rows and m columns (filled with 0)
-//
-//  for (int k=0; k<d; ++k) {
-//    // Holders for the k'th mu and variance for the j'th marginal
-//    Rcpp::NumericVector tmp_mus = Rcpp::as<Rcpp::NumericVector>(Rcpp::wrap(mus[k]));
-//    Rcpp::NumericMatrix tmp_sigmas = Rcpp::as<Rcpp::NumericMatrix>(Rcpp::wrap(sigmas[k]));
-//
-//    for (arma::uword j=0; j<m; ++j) { 
-//      Rcpp::NumericVector xx = Rcpp::no_init(n);
-//      xx = x(Rcpp::_, j);
-//      const double mu = tmp_mus(j);
-//      const double sd = sqrt(tmp_sigmas(j,j));
-//      tmp_ans(Rcpp::_, j) = tmp_ans(Rcpp::_, j) + pie[k] * approx_pnorm2(xx, mu, sd);
-//    }
-//  }
-//  arma::mat ans(tmp_ans.begin(), n, m, false);
-//  
-//  return ans;
-//}
-
 // [[Rcpp::export]]
 arma::mat EStepRcpp(arma::mat& z,
-                    Rcpp::List mus, 
-                    Rcpp::List sigmas, 
+                    Rcpp::List mus,
+                    Rcpp::List sigmas,
                     Rcpp::NumericVector pie) {
-  
+
   const int d = mus.size(); // Nbr of components in mixture (not dimension!)
   const int n = z.n_rows;   // Nbr of observations
   //const arma::uword m = z.n_cols;   // Dimension of obs. (nbr of studies)
-  
+
   arma::mat kappa = arma::mat(n, d, arma::fill::none);
-  
+
   for (int k=0; k<d; ++k) {
     // Holders for the mixture prop., mean, and covariance of component k
     arma::rowvec tmp_mu = Rcpp::as<arma::rowvec>(Rcpp::wrap(mus[k]));
     arma::mat tmp_sigma = Rcpp::as<arma::mat>(Rcpp::wrap(sigmas[k]));
     double tmp_pie = pie[k];
-        
+
     kappa(arma::span::all, k) = tmp_pie * dmvnormal(z, tmp_mu, tmp_sigma);
   }
-  
+
   const arma::colvec rowsums = arma::sum(kappa, 1);
   kappa.each_col() /= rowsums;
-  
+
   // Handle NaN/Infs
   // Change non-finite elements to zero
   kappa.elem(find_nonfinite(kappa)).zeros();
 
   return kappa;
-  
-}
 
-// Rcpp::List MStepRcpp (arma::mat& z
-//                      arma::mat& kappa, 
-//                      bool meta_special_case) {
-//   WRITE MStep in Rcpp
-// }
+}
+//
+//Rcpp::List MStepRcppFull(arma::mat& z
+//                         arma::mat& kappa,
+//                         bool meta_special_case) {
+//  int m = kappa.n_cols;
+//  int d = z.n_cols;
+//
+//  arma::colvec pie = sum(kappa, 0); // column means
+//  pie = pie/sum(pie);
+//  
+//  Rcpp::List mu(m);
+//  Rcpp::List sigma(m);
+//  for (int j=0; j<m; ++j) {
+//    arma::mat tmp_z = z.each_col() %= kappa.col(j);  // Element-wise product
+//    mu[j] = sum(tmp_z, 0)/sum(kappa.col(j));
+//    
+//    arma::colvec wt = kappa.col(j)/sum(kappa.col(j));
+//    
+//    sigma[j] = ; //??
+//  }
+//  
+//  return  Rcpp::List::create(Rcpp::Named("m")     = m,
+//                             Rcpp::Named("d")     = d,
+//                             Rcpp::Named("pie")   = pie,
+//                             Rcpp::Named("mu")    = mu,
+//                             Rcpp::Named("sigma") = sigma);
+//}
+
+//MStep <- function (x, kappa, meta.special.case = FALSE) {
+//  mus    <- lapply(1:ncol(kappa),
+//                   function(j) {colSums(x*kappa[,j])/sum(kappa[,j])})
+//  sigmas <- lapply(1:ncol(kappa),
+//                   function(j) {cov.wt(x, kappa[,j], method = "ML")$cov})
+//  names(mus)  <- names(sigmas) <- paste("comp", 1:ncol(kappa), sep = "")
+//  pie <- colMeans(kappa)
+//  pie <- pie/sum(pie)
+//
+//  if (meta.special.case) {
+//    m      <- ncol(kappa)
+//    d      <- ncol(x)
+//    pie1    <- colMeans(kappa)[1]; names(pie1) <- NULL
+//    mu2    <- mean(mus[[2]])
+//    sigma2 <- sqrt(mean(diag(sigmas[[2]])))
+//    rho2   <- (sum(sigmas[[2]])-d*sigma2^2)/(d*(d-1)*sigma2^2)
+//    par    <- c(pie1 = pie1, mu = mu2, sigma = sigma2, rho = rho2)
+//    return(meta2full(par, d = d))
+//  }
+//  return(list(m = ncol(kappa), d = ncol(x), pie = pie,
+//              mu = mus, sigma = sigmas))
+//}
 
 
 
