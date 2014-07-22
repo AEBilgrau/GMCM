@@ -1,3 +1,4 @@
+#' @rdname dgmcm.loglik
 qgmm.marginal <- function (u, theta, res = 1000, spread = 5) {
   d <- theta$d
   m <- theta$m

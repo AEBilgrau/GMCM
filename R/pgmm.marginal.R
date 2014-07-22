@@ -1,4 +1,4 @@
-
+#' @rdname dgmcm.loglik
 pgmm.marginal <- function (z, theta) {
   if (!is.theta(theta))
     stop("theta is formatted correctly")

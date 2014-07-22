@@ -1,3 +1,4 @@
+#' @rdname dgmcm.loglik
 dgmm.loglik <- function (theta, z, marginal.loglik = FALSE) {  
   if (!is.theta(theta))
     stop("theta is not formatted correctly")

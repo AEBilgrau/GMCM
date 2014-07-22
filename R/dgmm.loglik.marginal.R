@@ -1,3 +1,4 @@
+#' @rdname dgmcm.loglik
 dgmm.loglik.marginal <- function (theta, x, marginal.loglik = TRUE) {
   if (!is.theta(theta))
     stop("theta is formatted correctly")
@@ -13,6 +14,7 @@ dgmm.loglik.marginal <- function (theta, x, marginal.loglik = TRUE) {
                        marginal_loglik = marginal.loglik)
 }
 
+#
 # dgmm.loglik.marginal2 <- function (theta, x, marginal.loglik = TRUE) {
 #   TempFuncMarginal <- function (k, j) {
 #     theta$pie[k]*dnorm(cbind(x)[, j], mean = theta$mu[[k]][j],
@@ -26,8 +28,7 @@ dgmm.loglik.marginal <- function (theta, x, marginal.loglik = TRUE) {
 #     loglik <- colSums(loglik)
 #   return(loglik)
 # }
-
-
+#
 # dgmm.loglik.marginal3 <- function(theta, x, marginal.loglik = TRUE) {
 #   loglik <- NULL
 #   for (j in 1:ncol(cbind(x))) {

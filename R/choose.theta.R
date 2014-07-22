@@ -1,3 +1,49 @@
+#' Heuristically chosen starting value of theta
+#' 
+#' This function uses a \code{k}-means algorithm to heuristically select
+#' suitable starting values for the general model.
+#' 
+#' The function selects the centers from the k-means algorithm as an initial
+#' estimate of the means. The proportional sizes of the clusters are selected
+#' as the initial values of the mixture proportions. The within cluster
+#' standard deviations are used as the variance of the clusters. The
+#' correlations between each dimension are taken to be zero.
+#' 
+#' @param u A matrix of (estimates of) realizations from the GMCM.
+#' @param m The number of components to be fitted.
+#' @param fac Numeric. A factor applied to the standard deviation estimates of
+#' each component and each dimension.
+#' @param \dots Arguments passed to \code{\link{kmeans}}.
+#' @return A list of parameters for the GMCM model on the form described in
+#' \code{\link{rtheta}}.
+#' @note The function uses the \code{kmeans} function from the
+#' \code{stats}-package.
+#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @keywords ~kwd1 ~kwd2
+#' @examples
+#' 
+#' set.seed(2)
+#' 
+#' # Simulating data
+#' data1 <- SimulateGMCMData(n = 10000, m = 3, d = 2)
+#' obs.data <- Uhat(data1$u)  # The ranked observed data
+#' 
+#' # Using choose.theta to get starting estimates
+#' theta <- choose.theta(u = obs.data, m = 3)
+#' print(theta)
+#' 
+#' # To illustrate theta, we simulate from the model 
+#' data2 <- SimulateGMMData(n = 10000, theta = theta)
+#' 
+#' cols <- apply(get.prob(obs.data,theta),1,which.max)
+#' 
+#' # Plotting
+#' par(mfrow = c(1,3))
+#' plot(data1$z, main = "True latent GMM")
+#' plot(Uhat(data1$u), col = cols, 
+#'      main = "Observed GMCM\nColoured by k-means clustering")
+#' plot(data2$z, main = "initial GMM")
+#' 
 choose.theta <- function(u, m, fac = 2, ...) {
 
   km <- kmeans(u, centers = m, ...)

@@ -1,3 +1,33 @@
+#' Check if parameters are valid
+#' 
+#' Function to check whether the argument is coherent and in the correct
+#' format.
+#' 
+#' 
+#' @param theta A list on the \code{theta}-form described in
+#' \code{\link{rtheta}}
+#' @return \code{logical}. Return \code{TRUE} if \code{theta} is coherent and
+#' in the correct format. Otherwise, returns \code{FALSE} with warning message.
+#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @seealso \code{\link{rtheta}}
+#' @keywords ~kwd1 ~kwd2
+#' @examples
+#' 
+#'   theta1 <- rtheta()
+#'   GMCM:::is.theta(theta1)
+#'   
+#'   theta2 <- rtheta(d=3,m=5)
+#'   theta2$m <- 6  # m is now incoherent with the number of components
+#'   GMCM:::is.theta(theta2)
+#'   
+#'   theta3 <- rtheta(d=4,m=2)
+#'   theta3$sigma$comp1[1,2] <- 0 
+#'   GMCM:::is.theta(theta3)
+#'   
+#'   theta4 <- rtheta(d=10,m=10)
+#'   theta4$sigma$comp1[1,1] <- 0 
+#'   GMCM:::is.theta(theta4)
+#' 
 is.theta <- function(theta) {
   # Testing structure of theta
   if (!is.list(theta) | length(theta) != 5) {

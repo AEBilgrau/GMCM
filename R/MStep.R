@@ -1,3 +1,6 @@
+#' @rdname EStep
+#' @return \code{MStep} returns a list of parameters formatted as described in
+#'   \code{\link{rtheta}}.
 MStep <- function (x, kappa, meta.special.case = FALSE) {
   mus    <- lapply(1:ncol(kappa),
                    function(j) {colSums(x*kappa[,j])/sum(kappa[,j])})                 
