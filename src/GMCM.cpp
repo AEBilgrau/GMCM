@@ -20,34 +20,29 @@ inline double cube(double x) {
 }
 
 
-//' Multivariate Gaussian probability density function
+//' Multivariate Gaussian probability density function and simulation
 //' 
 //' Fast simulation and evalutation of multivariate Gaussian probability
 //' densities.
 //' 
 //' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
-//' \code{mvtnorm}-package.
+//' \code{mvtnorm}-package and like-wise for \code{rmvnormal} and 
+//' \code{rmvnorm}.
 //' 
 //' @aliases dmvnormal rmvnormal
 //' @param x A p times k matrix of quantiles. Each rows correspond to a
 //' realization from the density and each column corresponds to a dimension.
-//' @param n The number of observations to be simulated.
 //' @param mu The mean vector of dimension k.
 //' @param sigma The variance-covariance matrix of dimension k times k.
-//' @return \code{dmvnorm} returns a 1 by p matrix of the probability densities
-//' corresponding to each row of x.
-//' 
-//' \code{rmvnorm} returns a p by k matrix of observations from at multivariate
-//' normal distribution with the given mean \code{mu} and covariance
+//' @return \code{dmvnormal} returns a 1 by p matrix of the probability 
+//'   densities corresponding to each row of x.
 //' \code{sigma}. Each row corresponds to an observation.
 //' @author Anders Ellern Bilgrau
 //' @seealso \code{dmvnorm} and \code{rmvnorm} in the \code{mvtnorm}-package.
-//' @keywords ~kwd1 ~kwd2
 //' @examples
-//' 
-//' GMCM:::dmvnormal(x = matrix(rnorm(300), 100, 3),
-//'                  mu = 1:3,
-//'                  sigma = diag(3))
+//' dmvnormal(x = matrix(rnorm(300), 100, 3),
+//'           mu = 1:3,
+//'           sigma = diag(3))
 //' 
 // [[Rcpp::export]]
 arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
@@ -72,7 +67,13 @@ arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
   return exp(-(m*log(2.0f*arma::datum::pi) + logdet + dist)/2.0f);
 }
 
-
+//' @rdname dmvnormal
+//' @param n The number of observations to be simulated.
+//' @return \code{rmvnormal} returns a p by k matrix of observations from at 
+//'   multivariate normal distribution with the given mean \code{mu} and 
+//'   covariance
+//' @examples
+//' rmvnormal(n = 10, mu = 1:4, sigma = diag(4))
 // [[Rcpp::export]]
 arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
   Rcpp::RNGScope();

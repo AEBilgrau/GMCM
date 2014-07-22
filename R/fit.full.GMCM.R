@@ -10,48 +10,46 @@
 #' unidentifiable.
 #' 
 #' @param u An n by d matrix of ranked and scaled test statistics. Rows
-#' correspond to observations and columns to the dimensions of the variables.
+#'   correspond to observations and columns to the dimensions of the variables.
 #' @param m The number of components to be fitted.
 #' @param theta A list of parameters as defined in \code{\link{rtheta}}. If
-#' \code{theta} is not provided, then heuristic starting values are chosen
-#' using the k-means algorithm.
+#'   \code{theta} is not provided, then heuristic starting values are chosen
+#'   using the k-means algorithm.
 #' @param method A character vector of length \eqn{1}{1}. The optimization
-#' method used. Should be either \code{"NM"}, \code{"SANN"}, \code{"L-BFGS"},
-#' \code{"L-BFGS-B"}, or \code{"PEM"} which are the Nelder-Mead, Simulated
-#' Annealing, limited-memory quasi-Newton method, limited-memory quasi-Newton
-#' method with box constraints, and the pseudo EM algorithm, respectively.
-#' Default is \code{"NM"}. See \code{\link{optim}} for further details.
+#'   method used. Should be either \code{"NM"}, \code{"SANN"}, \code{"L-BFGS"},
+#'   \code{"L-BFGS-B"}, or \code{"PEM"} which are the Nelder-Mead, Simulated
+#'   Annealing, limited-memory quasi-Newton method, limited-memory quasi-Newton
+#'   method with box constraints, and the pseudo EM algorithm, respectively.
+#'   Default is \code{"NM"}. See \code{\link{optim}} for further details.
 #' @param max.ite The maximum number of iterations. If the \code{method} is
-#' \code{"SANN"} this is the number of interations as there is no other
-#' stopping criterion. (See \code{\link{optim}})
+#'   \code{"SANN"} this is the number of interations as there is no other
+#'   stopping criterion. (See \code{\link{optim}})
 #' @param verbose Logical. If \code{TRUE}, a trace of the parameter estimates
-#' is made.
+#'   is made.
 #' @param \dots Arguments passed to the \code{control}-list in
-#' \code{\link{optim}} or \code{\link{PseudoEMAlgorithm}} if the \code{method}
-#' is \code{"PEM"}.
+#'   \code{\link{optim}} or \code{\link{PseudoEMAlgorithm}} if the \code{method}
+#'   is \code{"PEM"}.
 #' @return A list of parameters formatted as described in \code{\link{rtheta}}.
 #' @note All the optimization procedures are stongly dependent on the initial
-#' values and the cooling scheme. Therefore it is advisable to apply multiple
-#' different initial parameters and select the best fit.
+#'   values and the cooling scheme. Therefore it is advisable to apply multiple
+#'   different initial parameters and select the best fit.
 #' 
-#' The \code{\link{choose.theta}} itself chooses random initializations. Hence,
-#' the output when \code{theta} is not directly supplied can vary.
+#'   The \code{\link{choose.theta}} itself chooses random initializations. 
+#'   Hence, the output when \code{theta} is not directly supplied can vary.
 #' 
-#' See \code{\link{optim}} for further details.
+#'   See \code{\link{optim}} for further details.
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso \code{\link{optim}}, \code{\link{get.prob}}
-#' @references Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-#' Measuring reproducibility of high-throughput experiments. The Annals of
-#' Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+#' @references 
+#'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
+#'   Measuring reproducibility of high-throughput experiments. The Annals of
+#'   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 #' 
-#' Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
-#' Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
-#' IEEE 11th International Conference on Data Mining Workshops, 286-292.
+#'   Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
+#'   Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
+#'   IEEE 11th International Conference on Data Mining Workshops, 286-292.
 #' doi:10.1109/ICDMW.2011.135
-#' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' 
 #' set.seed(17)
 #' sim <- SimulateGMCMData(n = 1000, m = 3, d = 2)
 #' 
@@ -82,8 +80,6 @@
 #' plot(simfit$z, col = simfit$K, main = "Model check 1\nSimulated GMM")
 #' plot(simfit$u, col = simfit$K, main = "Model check 2\nSimulated GMCM")
 #' plot(sim$u, col = Khat, main = "MAP clustering")
-#' 
-#' 
 fit.full.GMCM <- function (u, 
                            m,
                            theta = choose.theta(u, m),

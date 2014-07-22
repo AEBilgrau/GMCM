@@ -1,3 +1,9 @@
+#' @rdname SimulateGMCMData
+#' @return \code{SimulateGMMData} returns a list of length 3 with elements: 
+#'   \item{z}{A matrix of GMM realizations.} 
+#'   \item{K}{An integer vector denoting the component from which the 
+#'     realization comes.}
+#'   \item{theta}{As above and in \code{\link{rtheta}}.}
 SimulateGMMData <- function(n = 1000, theta = rtheta(...), ...) {
   
   K <- sample(1:theta$m, size = n, replace = TRUE, prob = theta$pie)

@@ -76,7 +76,7 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-Measuring reproducibility of high-throughput experiments. The Annals of
-Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+  Measuring reproducibility of high-throughput experiments. The Annals of
+  Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 }
 

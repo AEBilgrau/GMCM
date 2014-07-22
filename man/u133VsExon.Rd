@@ -4,12 +4,11 @@
 \alias{u133VsExon}
 \title{Reproduciblity between Affymetrix HG-U133 plus 2.0 and Human Exon 1.0 ST
 microarrays}
-\format{The format of the data is:\cr
-  \code{
-  'data.frame':  19577 obs. of  2 variables:\cr
-  $ u133: num  0.17561 0.00178 0.005371 0.000669 0.655261 ...\cr
-  $ exon: num  1.07e-01 6.74e-10 1.51e-03 6.76e-05 3.36e-01 ...\cr
-  }}
+\format{The format of the data is:
+
+  \code{'data.frame':  19577 obs. of  2 variables:}\cr
+  \code{$ u133: num  0.17561 0.00178 0.005371 0.000669 0.655261 ...}\cr
+  \code{$ exon: num  1.07e-01 6.74e-10 1.51e-03 6.76e-05 3.36e-01 ...}\cr}
 \description{
 This dataset contains two paired lists (columns) of unadjusted P-values for
 differential expression between germinal center cells and other B-cells

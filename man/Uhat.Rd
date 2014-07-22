@@ -28,6 +28,4 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{SimulateGMMData}}, \code{\link{SimulateGMCMData}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

@@ -6,27 +6,20 @@
 #' \eqn{(0, 1)}{(0, 1)} followed by a logit transformation to the whole real
 #' line.
 #' 
-#' 
 #' @aliases rho.transform inv.rho.transform
 #' @param rho A correlation coefficient between \code{-1/(d-1)} and \code{1}.
 #' @param d The dimension of the space.
-#' @param a A real number.
-#' @return A vector of the transformed values with the same length as
-#' \code{rho} or \code{a}.
+#' @return \code{rho.transform} returns a vector of the transformed values with 
+#'   the same length as \code{rho} or \code{a}.
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso Used in \code{\link{tt}} and \code{\link{inv.tt}}.
-#' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
 #' d <- 4
 #' rho <- runif(100, -1/(d-1), 1)
 #' a <- GMCM:::rho.transform(rho, d)
 #' rho - GMCM:::inv.rho.transform(a, d)
-#' 
 rho.transform <- function (rho, d) { # transformation of rho
   #if (any(rho > 1 | rho < -1/(d-1)))
   #  stop("rho is not in the interval -1/(d-1) to 1")
-  #t <- 2*rho*(d-1)/d - (d-2)/d
-  #return(tan(t*pi/2))
   return(logit((rho*(d - 1) + 1)/d))
 }

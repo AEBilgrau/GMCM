@@ -5,14 +5,16 @@
 \title{Simulation from the Gaussian mixture (copula) model}
 \usage{
 SimulateGMCMData(n = 1000, par, d = 2, theta, ...)
+
+SimulateGMMData(n = 1000, theta = rtheta(...), ...)
 }
 \arguments{
 \item{n}{Integer. The number of realizations drawn from the model. Default
 is 1000.}
 
 \item{par}{A vector of parameters of length 4 where \code{par[1]} is the
-mixture proportion, \code{par[2]} is the mean, \code{par[3]} is the standard
-deviation, and \code{par[4]} is the correlation.}
+mixture proportion, \code{par[2]} is the mean, \code{par[3]} is the
+standard deviation, and \code{par[4]} is the correlation.}
 
 \item{d}{The number of dimensions (or, equivalently, experiments) in the
 mixture distribution.}
@@ -26,14 +28,18 @@ to \code{\link{rtheta}}.}
 }
 \value{
 \code{SimulateGMCMData} returns a list of length 4 with elements:
-\item{u }{A matrix of the realized values of the GMCM.} \item{z }{A matrix
-of the latent GMM realizations.} \item{K }{An integer vector denoting the
-component from which the realization comes.} \item{theta }{A list containing
-the used parameters for the simulations with the format described in
-\code{\link{rtheta}}.} \code{SimulateGMMData} returns a list of length 3
-with elements: \item{z}{A matrix of GMM realizations.} \item{K}{An integer
-vector denoting the component from which the realization comes.}
-\item{theta}{As above and in \code{\link{rtheta}}.}
+  \item{u}{A matrix of the realized values of the GMCM.}
+  \item{z}{A matrix of the latent GMM realizations.}
+  \item{K}{An integer vector denoting the component from which the
+    realization comes.}
+  \item{theta}{A list containing the used parameters for the simulations
+    with the format described in \code{\link{rtheta}}.}
+
+\code{SimulateGMMData} returns a list of length 3 with elements:
+  \item{z}{A matrix of GMM realizations.}
+  \item{K}{An integer vector denoting the component from which the
+    realization comes.}
+  \item{theta}{As above and in \code{\link{rtheta}}.}
 }
 \description{
 Functions to simulate data from the Gaussian mixture model (GMM) and the
@@ -80,6 +86,4 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{rtheta}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

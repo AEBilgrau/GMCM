@@ -2,27 +2,30 @@
 \name{dmvnormal}
 \alias{dmvnormal}
 \alias{rmvnormal}
-\title{Multivariate Gaussian probability density function}
+\title{Multivariate Gaussian probability density function and simulation}
 \usage{
 dmvnormal(x, mu, sigma)
+
+rmvnormal(n, mu, sigma)
 }
 \arguments{
 \item{x}{A p times k matrix of quantiles. Each rows correspond to a
 realization from the density and each column corresponds to a dimension.}
 
-\item{n}{The number of observations to be simulated.}
-
 \item{mu}{The mean vector of dimension k.}
 
 \item{sigma}{The variance-covariance matrix of dimension k times k.}
+
+\item{n}{The number of observations to be simulated.}
 }
 \value{
-\code{dmvnorm} returns a 1 by p matrix of the probability densities
-corresponding to each row of x.
-
-\code{rmvnorm} returns a p by k matrix of observations from at multivariate
-normal distribution with the given mean \code{mu} and covariance
+\code{dmvnormal} returns a 1 by p matrix of the probability
+  densities corresponding to each row of x.
 \code{sigma}. Each row corresponds to an observation.
+
+\code{rmvnormal} returns a p by k matrix of observations from at
+  multivariate normal distribution with the given mean \code{mu} and
+  covariance
 }
 \description{
 Fast simulation and evalutation of multivariate Gaussian probability
@@ -30,12 +33,14 @@ densities.
 }
 \details{
 \code{dmvnormal} functions similarly to \code{dmvnorm} from the
-\code{mvtnorm}-package.
+\code{mvtnorm}-package and like-wise for \code{rmvnormal} and
+\code{rmvnorm}.
 }
 \examples{
-GMCM:::dmvnormal(x = matrix(rnorm(300), 100, 3),
-                 mu = 1:3,
-                 sigma = diag(3))
+dmvnormal(x = matrix(rnorm(300), 100, 3),
+          mu = 1:3,
+          sigma = diag(3))
+rmvnormal(n = 10, mu = 1:4, sigma = diag(4))
 }
 \author{
 Anders Ellern Bilgrau
@@ -43,6 +48,4 @@ Anders Ellern Bilgrau
 \seealso{
 \code{dmvnorm} and \code{rmvnorm} in the \code{mvtnorm}-package.
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

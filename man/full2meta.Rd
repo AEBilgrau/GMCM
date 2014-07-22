@@ -5,6 +5,8 @@
 \title{Convert between parameter formats}
 \usage{
 full2meta(theta)
+
+meta2full(par, d)
 }
 \arguments{
 \item{theta}{A list of parameters for the full model. Formatted as described
@@ -19,10 +21,10 @@ correlation of the reproducible component.}
 }
 \value{
 \code{full2meta} returns a numeric vector of length 4 formatted as
-\code{par}.
+  \code{par}.
 
-\code{meta2full} returns a formatted list of parameters as described by
-\code{\link{rtheta}}.
+meta2full returns a formatted list of parameters as described by
+  \code{\link{rtheta}}.
 }
 \description{
 These functions converts the parameters between the unconstrained Gaussian
@@ -46,17 +48,15 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-Measuring reproducibility of high-throughput experiments. The Annals of
-Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+  Measuring reproducibility of high-throughput experiments. The Annals of
+  Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 
-Tewari, A., Giering, M., & Raghunathan, A. (2011). Parametric
-Characterization of Multimodal Distributions with Non-gaussian Modes. IEEE
-11th International Conference on Data Mining Workshops, 2011, 286-292.
-doi:10.1109/ICDMW.2011.135
+  Tewari, A., Giering, M., & Raghunathan, A. (2011). Parametric
+  Characterization of Multimodal Distributions with Non-gaussian Modes. IEEE
+  11th International Conference on Data Mining Workshops, 2011, 286-292.
+  doi:10.1109/ICDMW.2011.135
 }
 \seealso{
 \code{\link{rtheta}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

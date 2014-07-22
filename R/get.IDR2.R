@@ -3,14 +3,13 @@
 #' Functions for computing posterior cluster probabilities and local and
 #' adjusted irreproducibility discovery rates as defined by Li et. al. (2011).
 #' 
-#' 
 #' @aliases get.IDR get.idr get.prob
 #' @param x A matrix of observations where rows corresponds to features and
-#' colums to studies.
+#'   colums to studies.
 #' @param par A vector of length 4 where \code{par[1]} is mixture proportion of
-#' the irreproducible component, \code{par[2]} is the mean value, \code{par[3]}
-#' is the standard deviation, and \code{par[4]} is the correlation of the
-#' reproducible component.
+#'   the irreproducible component, \code{par[2]} is the mean value, \code{par[3]}
+#'   is the standard deviation, and \code{par[4]} is the correlation of the
+#'   reproducible component.
 #' @param threshold The thresholding level of the IDR rate.
 #' @param theta A list of parameters for the full model as described in
 #' \code{\link{rtheta}}.
@@ -27,11 +26,11 @@
 #'   \item{Khat}{A vector signifying whether the corresponding feature is 
 #'     reproducible or not.}
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
-#' @references Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-#' Measuring reproducibility of high-throughput experiments. The Annals of
-#' Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+#' @references 
+#'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
+#'   Measuring reproducibility of high-throughput experiments. The Annals of
+#'   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 #' @examples
-#' 
 #' set.seed(1123)
 #' 
 #' # True parameters

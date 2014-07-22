@@ -1,3 +1,8 @@
+#' @rdname tt
+#' @param par A vector of length 4 where \code{par[1]} is the mixture
+#'   proportion, \code{tpar[2]} the mean, \code{tpar[3]} the standard deviation,
+#'   and \code{tpar[4]} the correlation.
+#' @return  \code{inv.tt} returns \code{tpar} as described above.
 inv.tt <- function(par, d, positive.rho) {
   if (par[3] < 0)
     stop("The standard deviation par[3] must be greater than zero.")

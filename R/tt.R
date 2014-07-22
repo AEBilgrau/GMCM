@@ -16,38 +16,32 @@
 #' 
 #' @aliases tt inv.tt
 #' @param tpar A vector of length 4 of the transformed parameter values where
-#' \code{tpar[1]} corresponds to the mixture proportion, \code{tpar[2]} the
-#' mean, \code{tpar[3]} the standard deviation, and \code{tpar[4]} the
-#' correlation.
-#' @param par A vector of length 4 where \code{par[1]} is the mixture
-#' proportion, \code{tpar[2]} the mean, \code{tpar[3]} the standard deviation,
-#' and \code{tpar[4]} the correlation.
+#'   \code{tpar[1]} corresponds to the mixture proportion, \code{tpar[2]} the
+#'   mean, \code{tpar[3]} the standard deviation, and \code{tpar[4]} the
+#'   correlation.
 #' @param d The dimension of the space.
-#' @param positive.rho Logical. If \code{TRUE}, the correlation is transformed
-#' by a simple \code{\link{logit}} transformation. If \code{FALSE} the
+#' @param positive.rho is logical. If \code{TRUE}, the correlation is 
+#'   transformed by a simple \code{\link{logit}} transformation. If 
+#'   \code{FALSE} the
 #' \code{\link{rho.transform}} is used.
 #' @return A vector of the transformed or inversely transformed values of
-#' length 4.
+#'   length 4.
 #' 
-#' \code{tt} returns \code{par} as described above.
-#' 
-#' \code{inv.tt} returns \code{tpar} as described above.
+#'   \code{tt} returns \code{par} as described above.
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
-#' @references Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-#' Measuring reproducibility of high-throughput experiments. The Annals of
-#' Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+#' @references 
+#'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
+#'   Measuring reproducibility of high-throughput experiments. The Annals of
+#'   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 #' 
-#' Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
-#' Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
-#' IEEE 11th International Conference on Data Mining Workshops, 286-292.
-#' doi:10.1109/ICDMW.2011.135
-#' @keywords ~kwd1 ~kwd2
+#'   Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
+#'   Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
+#'   IEEE 11th International Conference on Data Mining Workshops, 286-292.
+#'   doi:10.1109/ICDMW.2011.135
 #' @examples
-#' 
 #' par <- c(pie1 = 0.3, mu = 2, sigma = 0.5, rho = 0.8)
 #' tpar <- GMCM:::inv.tt(par, d = 3, positive.rho = FALSE)
 #' GMCM:::tt(tpar, d = 3, positive.rho = FALSE)
-#' 
 tt <- function(tpar, d, positive.rho) {
   par      <- NA
   par[1]   <- inv.logit(tpar[1])

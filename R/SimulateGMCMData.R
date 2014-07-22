@@ -10,31 +10,27 @@
 #' 
 #' @aliases SimulateGMCMData SimulateGMMData
 #' @param n Integer. The number of realizations drawn from the model. Default
-#' is 1000.
+#'   is 1000.
 #' @param par A vector of parameters of length 4 where \code{par[1]} is the
-#' mixture proportion, \code{par[2]} is the mean, \code{par[3]} is the standard
-#' deviation, and \code{par[4]} is the correlation.
+#'   mixture proportion, \code{par[2]} is the mean, \code{par[3]} is the
+#'   standard deviation, and \code{par[4]} is the correlation.
 #' @param d The number of dimensions (or, equivalently, experiments) in the
-#' mixture distribution.
+#'   mixture distribution.
 #' @param theta A list of parameters for the model as described in
-#' \code{\link{rtheta}}.
+#'   \code{\link{rtheta}}.
 #' @param \dots In \code{SimulateGMCMData} the arguments are passed to
-#' \code{SimulateGMMData}.  In \code{SimulateGMMData} the arguments are passed
-#' to \code{\link{rtheta}}.
+#'   \code{SimulateGMMData}.  In \code{SimulateGMMData} the arguments are passed
+#'   to \code{\link{rtheta}}.
 #' @return \code{SimulateGMCMData} returns a list of length 4 with elements:
-#' \item{u }{A matrix of the realized values of the GMCM.} \item{z }{A matrix
-#' of the latent GMM realizations.} \item{K }{An integer vector denoting the
-#' component from which the realization comes.} \item{theta }{A list containing
-#' the used parameters for the simulations with the format described in
-#' \code{\link{rtheta}}.} \code{SimulateGMMData} returns a list of length 3
-#' with elements: \item{z}{A matrix of GMM realizations.} \item{K}{An integer
-#' vector denoting the component from which the realization comes.}
-#' \item{theta}{As above and in \code{\link{rtheta}}.}
+#'   \item{u}{A matrix of the realized values of the GMCM.} 
+#'   \item{z}{A matrix of the latent GMM realizations.} 
+#'   \item{K}{An integer vector denoting the component from which the 
+#'     realization comes.} 
+#'   \item{theta}{A list containing the used parameters for the simulations 
+#'     with the format described in \code{\link{rtheta}}.} 
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso \code{\link{rtheta}}
-#' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
 #' set.seed(2)
 #' 
 #' # Simulation from the GMM
@@ -62,8 +58,6 @@
 #' par(mfrow=c(1,2))
 #' plot(gmcm.data2$z, col = gmcm.data2$K)
 #' plot(gmcm.data2$u, col = gmcm.data2$K)
-#' 
-#' 
 SimulateGMCMData <- function (n = 1000, par, d = 2, theta, ...) {
   if (missing(theta) & missing(par)) {
     theta <- rtheta(d = d, ...)

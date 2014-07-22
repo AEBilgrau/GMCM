@@ -50,13 +50,13 @@ unidentifiable.
 }
 \note{
 All the optimization procedures are stongly dependent on the initial
-values and the cooling scheme. Therefore it is advisable to apply multiple
-different initial parameters and select the best fit.
+  values and the cooling scheme. Therefore it is advisable to apply multiple
+  different initial parameters and select the best fit.
 
-The \code{\link{choose.theta}} itself chooses random initializations. Hence,
-the output when \code{theta} is not directly supplied can vary.
+  The \code{\link{choose.theta}} itself chooses random initializations.
+  Hence, the output when \code{theta} is not directly supplied can vary.
 
-See \code{\link{optim}} for further details.
+  See \code{\link{optim}} for further details.
 }
 \examples{
 set.seed(17)
@@ -95,17 +95,15 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-Measuring reproducibility of high-throughput experiments. The Annals of
-Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+  Measuring reproducibility of high-throughput experiments. The Annals of
+  Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 
-Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
-Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
-IEEE 11th International Conference on Data Mining Workshops, 286-292.
+  Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
+  Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
+  IEEE 11th International Conference on Data Mining Workshops, 286-292.
 doi:10.1109/ICDMW.2011.135
 }
 \seealso{
 \code{\link{optim}}, \code{\link{get.prob}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

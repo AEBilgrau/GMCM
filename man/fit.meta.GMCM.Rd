@@ -38,9 +38,9 @@ restricted to be positive.}
 \item{trace.theta}{Logical. Extra convergence information is appended as a
 list to the output returned if \code{TRUE}. The exact behavior is dependent
 on the value of \code{method}. If \code{method} equals \code{"PEM"}, the
-argument is passed to \code{trace.theta} in \code{\link{PseudoEMAlgorithm}}.
-Otherwise it is passed to the control argument \code{trace} in
-\code{\link{optim}}.}
+argument is passed to \code{trace.theta} in
+\code{\link{PseudoEMAlgorithm}}. Otherwise it is passed to the control
+argument \code{trace} in \code{\link{optim}}.}
 
 \item{\dots}{Arguments passed to the \code{control}-list in
 \code{\link{optim}} or \code{\link{PseudoEMAlgorithm}} if \code{method} is
@@ -48,9 +48,9 @@ Otherwise it is passed to the control argument \code{trace} in
 }
 \value{
 A vector \code{par} of length 4 of the fitted parameters where
-\code{par[1]} is the probability of being from the first (or null)
-component, \code{par[2]} is the mean, \code{par[3]} is the standard
-deviation, and \code{par[4]} is the correlation.
+  \code{par[1]} is the probability of being from the first (or null)
+  component, \code{par[2]} is the mean, \code{par[3]} is the standard
+  deviation, and \code{par[4]} is the correlation.
 }
 \description{
 Various optimization routines to find the maximum likelihood estimate of the
@@ -62,9 +62,9 @@ parameters.
 }
 \note{
 Simulated annealing is strongly dependent on the initial values and
-the cooling scheme.
+  the cooling scheme.
 
-See \code{\link{optim}} for further details.
+  See \code{\link{optim}} for further details.
 }
 \examples{
 set.seed(1)
@@ -102,12 +102,10 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
-Measuring reproducibility of high-throughput experiments. The Annals of
-Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+  Measuring reproducibility of high-throughput experiments. The Annals of
+  Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
 }
 \seealso{
 \code{\link{optim}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

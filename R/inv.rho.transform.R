@@ -1,6 +1,7 @@
-inv.rho.transform <- function (a, d) { 
-  # inverse transformation of rho
-  #tmp <- 2*atan(a)/pi
-  #return((tmp+(d-2)/d)/(2*(d-1)/d))
+#' @rdname rho.transform
+#' @param a A real number.
+#' @return \code{inv.rho.transform} returns a vector of the inversely 
+#'   transformed values with the same length as \code{a}.
+inv.rho.transform <- function (a, d) {  # inverse transformation of rho
   return((d*inv.logit(a)-1)/(d-1))
 }

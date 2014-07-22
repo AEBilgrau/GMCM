@@ -4,6 +4,7 @@
 
 \section{Changes to version 1.1}{
   \itemize{
+    \item The \cpkg{GMCM}-package is now documented using Roxygen2.
     \item The \code{EStep} has been implemented in 
       \code{Rcpp} and thus GMCM now features a faster pseudo EM algorithm.
     \item Functions \code{rmvnormal} and \code{dmvnormal} are now exported and
