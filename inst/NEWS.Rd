@@ -9,7 +9,8 @@
     \item The \code{EStep} has been implemented in 
       \code{Rcpp} and thus GMCM now features a faster pseudo EM algorithm.
     \item Functions \code{rmvnormal} and \code{dmvnormal} are now exported and
-      visible to the user. These are faster versions of \code{rmvnorm} and 
+      visible to the user. These are now both implemented in Rcpp 
+      and are faster versions of \code{rmvnorm} and 
       \code{dmvnorm} from \cpkg{mvtnorm}.
     \item \cpkg{GMCM} is no longer dependent on the \cpkg{mvtnorm} package. 
       \cpkg{GMCM} now features faster simulation of data.
