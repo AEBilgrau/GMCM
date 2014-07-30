@@ -5,7 +5,7 @@
 \section{Changes to version 1.1}{
   \itemize{
     \item A NEWS.Rd file have been added!
-    \item The \cpkg{GMCM}-package is now documented using Roxygen2.
+    \item The \cpkg{GMCM}-package is now using the in-source documentation system \cpkg{roxygen2}.
     \item The \code{EStep} has been implemented in 
       \code{Rcpp} and thus GMCM now features a faster pseudo EM algorithm.
     \item Functions \code{rmvnormal} and \code{dmvnormal} are now exported and
