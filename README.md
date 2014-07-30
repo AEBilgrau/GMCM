@@ -1,5 +1,7 @@
-GMCM: Fast estimation of Gaussian Mixture Copula Models
--------------------------------------------------------
+GMCM
+----
+### Fast estimation of Gaussian Mixture Copula Models
+
 [![Build Status](https://api.travis-ci.org/AEBilgrau/GMCM.svg?branch=master)](https://travis-ci.org/AEBilgrau/GMCM)
 
 
