@@ -43,8 +43,8 @@ reproducible component.}
   posterior probability that observation i is irreproducible.
 
 \code{get.prob} returns a matrix where entry \code{(i,j)} is the
-posterior probability that the observation \code{x[i, ]} belongs to cluster
-\code{j}.
+  posterior probability that the observation \code{x[i, ]} belongs to cluster
+  \code{j}.
 }
 \description{
 Functions for computing posterior cluster probabilities and local and

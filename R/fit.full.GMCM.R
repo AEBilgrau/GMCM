@@ -1,14 +1,14 @@
 #' Maximum likelihood estimate of the GMCM of Tewari et. al. (2011).
-#' 
+#'
 #' Various optimization procedures to find the maximum likelihood estimate of a
 #' Gaussian mixture copula model [Tewari et al. (2011)].
-#' 
+#'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
 #' parameters and uses box-contraints as implemented in \code{optim}.
-#' 
+#'
 #' Note that the many parameter configurations are poorly estimable or directly
 #' unidentifiable.
-#' 
+#'
 #' @param u An n by d matrix of ranked and scaled test statistics. Rows
 #'   correspond to observations and columns to the dimensions of the variables.
 #' @param m The number of components to be fitted.
@@ -33,18 +33,18 @@
 #' @note All the optimization procedures are stongly dependent on the initial
 #'   values and the cooling scheme. Therefore it is advisable to apply multiple
 #'   different initial parameters and select the best fit.
-#' 
-#'   The \code{\link{choose.theta}} itself chooses random initializations. 
+#'
+#'   The \code{\link{choose.theta}} itself chooses random initializations.
 #'   Hence, the output when \code{theta} is not directly supplied can vary.
-#' 
+#'
 #'   See \code{\link{optim}} for further details.
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso \code{\link{optim}}, \code{\link{get.prob}}
-#' @references 
+#' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
 #'   Measuring reproducibility of high-throughput experiments. The Annals of
 #'   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
-#' 
+#'
 #'   Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
 #'   Characterization of Multimodal Distributions with Non-gaussian Modes. 2011
 #'   IEEE 11th International Conference on Data Mining Workshops, 286-292.
@@ -52,52 +52,53 @@
 #' @examples
 #' set.seed(17)
 #' sim <- SimulateGMCMData(n = 1000, m = 3, d = 2)
-#' 
+#'
 #' # Plotting simulated data
 #' par(mfrow = c(1,2))
 #' plot(sim$z, col = rainbow(3)[sim$K], main = "Latent process")
 #' plot(sim$u, col = rainbow(3)[sim$K], main = "GMCM process")
-#' 
+#'
 #' # Observed data
-#' uhat <- Uhat(sim$u) 
-#' 
+#' uhat <- Uhat(sim$u)
+#'
 #' # The model should be fitted multiple times using different starting estimates
 #' start.theta <- choose.theta(uhat, m = 3)  # Random starting estimate
-#' res <- fit.full.GMCM(u = uhat, theta = start.theta, 
+#' res <- fit.full.GMCM(u = uhat, theta = start.theta,
 #'                      method = "NM", max.ite = 3000,
 #'                      reltol = 1e-2, trace = TRUE)  # Note, 1e-2 is too big
-#' 
+#'
 #' # Confusion matrix
 #' Khat <- apply(get.prob(uhat, theta = res), 1, which.max)
 #' table("Khat" = Khat, "K" = sim$K)  # Note, some components have been swapped
-#' 
+#'
 #' # Simulation from GMCM with the fitted parameters
 #' simfit <- SimulateGMCMData(n = 1000, theta = res)
-#' 
+#'
 #' # As seen, the underlying latent process is hard to estimate.
 #' # The clustering, however, is very good.
 #' par(mfrow = c(2,2))
 #' plot(simfit$z, col = simfit$K, main = "Model check 1\nSimulated GMM")
 #' plot(simfit$u, col = simfit$K, main = "Model check 2\nSimulated GMCM")
 #' plot(sim$u, col = Khat, main = "MAP clustering")
-fit.full.GMCM <- function (u, 
+#' @export
+fit.full.GMCM <- function (u,
                            m,
                            theta = choose.theta(u, m),
                            method = c("NM", "SANN", "L-BFGS", "L-BFGS-B", "PEM"),
-                           max.ite = 1000, 
+                           max.ite = 1000,
                            verbose = TRUE,
                            ...) {
   # Note, Uhat is idempotent. Hence, already ranked data will not change
   u <- Uhat(u)
 
-  method <- gsub("NM", "Nelder-Mead", match.arg(method)) 
-  
+  method <- gsub("NM", "Nelder-Mead", match.arg(method))
+
   if (missing(m) & missing(theta)) {
     stop("m is not supplied.")
   }
 
   if (method != "PEM") {
-    
+
     gmcm.loglik <- function (par, u, m) { # Defining objective function
       #cat("par=", par, "\n")  # FOR DEBUGGING
       theta <- par2theta(par, d = ncol(u), m = m)
@@ -110,23 +111,23 @@ fit.full.GMCM <- function (u,
 
     par <- theta2par(theta)
     fit <- optim(par, gmcm.loglik, u = u, m = theta$m,
-                 control = list(maxit = max.ite, 
-                                fnscale = -1, trace = verbose, ...), 
+                 control = list(maxit = max.ite,
+                                fnscale = -1, trace = verbose, ...),
                  method = method)
     theta <- par2theta(fit$par, d = theta$d, m = theta$m)
     theta$pie <- theta$pie/sum(theta$pie)
 
     return(theta)
-    
+
   } else {
-    
-    fit <- PseudoEMAlgorithm(x = u, 
-                             theta = theta, 
-                             max.ite = max.ite, 
+
+    fit <- PseudoEMAlgorithm(x = u,
+                             theta = theta,
+                             max.ite = max.ite,
                              verbose = verbose,
                              meta.special.case = FALSE,
                              ...)
-    
+
     return(fit$theta)
   }
 }

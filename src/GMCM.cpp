@@ -21,20 +21,20 @@ inline double cube(double x) {
 
 
 //' Multivariate Gaussian probability density function and simulation
-//' 
+//'
 //' Fast simulation and evalutation of multivariate Gaussian probability
 //' densities.
-//' 
+//'
 //' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
-//' \code{mvtnorm}-package and like-wise for \code{rmvnormal} and 
+//' \code{mvtnorm}-package and like-wise for \code{rmvnormal} and
 //' \code{rmvnorm}.
-//' 
+//'
 //' @aliases dmvnormal rmvnormal
 //' @param x A p times k matrix of quantiles. Each rows correspond to a
 //' realization from the density and each column corresponds to a dimension.
 //' @param mu The mean vector of dimension k.
 //' @param sigma The variance-covariance matrix of dimension k times k.
-//' @return \code{dmvnormal} returns a 1 by p matrix of the probability 
+//' @return \code{dmvnormal} returns a 1 by p matrix of the probability
 //'   densities corresponding to each row of x.
 //' \code{sigma}. Each row corresponds to an observation.
 //' @author Anders Ellern Bilgrau
@@ -43,7 +43,7 @@ inline double cube(double x) {
 //' dmvnormal(x = matrix(rnorm(300), 100, 3),
 //'           mu = 1:3,
 //'           sigma = diag(3))
-//' 
+//' @export
 // [[Rcpp::export]]
 arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
   int m = x.n_cols;
@@ -69,11 +69,12 @@ arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
 
 //' @rdname dmvnormal
 //' @param n The number of observations to be simulated.
-//' @return \code{rmvnormal} returns a p by k matrix of observations from at 
-//'   multivariate normal distribution with the given mean \code{mu} and 
+//' @return \code{rmvnormal} returns a p by k matrix of observations from at
+//'   multivariate normal distribution with the given mean \code{mu} and
 //'   covariance
 //' @examples
 //' rmvnormal(n = 10, mu = 1:4, sigma = diag(4))
+//' @export
 // [[Rcpp::export]]
 arma::mat rmvnormal(const int n, arma::rowvec mu, arma::mat sigma) {
   Rcpp::RNGScope();
@@ -335,18 +336,18 @@ arma::mat EStepRcpp(arma::mat& z,
 //
 //  arma::colvec pie = sum(kappa, 0); // column means
 //  pie = pie/sum(pie);
-//  
+//
 //  Rcpp::List mu(m);
 //  Rcpp::List sigma(m);
 //  for (int j=0; j<m; ++j) {
 //    arma::mat tmp_z = z.each_col() %= kappa.col(j);  // Element-wise product
 //    mu[j] = sum(tmp_z, 0)/sum(kappa.col(j));
-//    
+//
 //    arma::colvec wt = kappa.col(j)/sum(kappa.col(j));
-//    
+//
 //    sigma[j] = ; //??
 //  }
-//  
+//
 //  return  Rcpp::List::create(Rcpp::Named("m")     = m,
 //                             Rcpp::Named("d")     = d,
 //                             Rcpp::Named("pie")   = pie,

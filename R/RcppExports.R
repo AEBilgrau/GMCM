@@ -2,20 +2,20 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' Multivariate Gaussian probability density function and simulation
-#' 
+#'
 #' Fast simulation and evalutation of multivariate Gaussian probability
 #' densities.
-#' 
+#'
 #' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
-#' \code{mvtnorm}-package and like-wise for \code{rmvnormal} and 
+#' \code{mvtnorm}-package and like-wise for \code{rmvnormal} and
 #' \code{rmvnorm}.
-#' 
+#'
 #' @aliases dmvnormal rmvnormal
 #' @param x A p times k matrix of quantiles. Each rows correspond to a
 #' realization from the density and each column corresponds to a dimension.
 #' @param mu The mean vector of dimension k.
 #' @param sigma The variance-covariance matrix of dimension k times k.
-#' @return \code{dmvnormal} returns a 1 by p matrix of the probability 
+#' @return \code{dmvnormal} returns a 1 by p matrix of the probability
 #'   densities corresponding to each row of x.
 #' \code{sigma}. Each row corresponds to an observation.
 #' @author Anders Ellern Bilgrau
@@ -24,18 +24,19 @@
 #' dmvnormal(x = matrix(rnorm(300), 100, 3),
 #'           mu = 1:3,
 #'           sigma = diag(3))
-#' 
+#' @export
 dmvnormal <- function(x, mu, sigma) {
     .Call('GMCM_dmvnormal', PACKAGE = 'GMCM', x, mu, sigma)
 }
 
 #' @rdname dmvnormal
 #' @param n The number of observations to be simulated.
-#' @return \code{rmvnormal} returns a p by k matrix of observations from at 
-#'   multivariate normal distribution with the given mean \code{mu} and 
+#' @return \code{rmvnormal} returns a p by k matrix of observations from at
+#'   multivariate normal distribution with the given mean \code{mu} and
 #'   covariance
 #' @examples
 #' rmvnormal(n = 10, mu = 1:4, sigma = diag(4))
+#' @export
 rmvnormal <- function(n, mu, sigma) {
     .Call('GMCM_rmvnormal', PACKAGE = 'GMCM', n, mu, sigma)
 }

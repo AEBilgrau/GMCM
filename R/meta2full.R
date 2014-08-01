@@ -2,6 +2,7 @@
 #' @param d The dimension of the mixture distribution.
 #' @return meta2full returns a formatted list of parameters as described by
 #'   \code{\link{rtheta}}.
+#' @export
 meta2full <- function(par, d) {  # par = c(pie1, mu, sigma, rho)
   if (par[4] <= -1/(d-1))
     stop("correlation coefficient is not valid")

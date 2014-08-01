@@ -20,7 +20,9 @@ I.e. the values are ranked column-wise and divided by \code{nrow(x) + 1}.
 data <- SimulateGMMData()
 par(mfrow = c(1,2))
 plot(data$z, xlab = expression(z[1]), ylab = expression(z[2]))
-plot(Uhat(data$z), xlab = expression(hat(u)[1]), ylab = expression(hat(u)[2]))
+plot(Uhat(data$z),
+     xlab = expression(hat(u)[1]),
+     ylab = expression(hat(u)[2]))
 }
 \author{
 Anders Ellern Bilgrau (abilgrau@math.aau.dk)

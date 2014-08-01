@@ -21,4 +21,4 @@ PackageInstallArgs: --resave-data
 PackageBuildArgs: --resave-data
 PackageBuildBinaryArgs: --resave-data
 PackageCheckArgs: --as-cran
-PackageRoxygenize: rd
+PackageRoxygenize: rd,namespace
