@@ -39,6 +39,4 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{rtheta}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

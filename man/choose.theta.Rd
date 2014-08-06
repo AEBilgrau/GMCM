@@ -3,7 +3,7 @@
 \alias{choose.theta}
 \title{Heuristically chosen starting value of theta}
 \usage{
-choose.theta(u, m, fac = 2, ...)
+choose.theta(u, m, ...)
 }
 \arguments{
 \item{u}{A matrix of (estimates of) realizations from the GMCM.}
@@ -17,7 +17,7 @@ each component and each dimension.}
 }
 \value{
 A list of parameters for the GMCM model on the form described in
-\code{\link{rtheta}}.
+  \code{\link{rtheta}}.
 }
 \description{
 This function uses a \code{k}-means algorithm to heuristically select
@@ -32,7 +32,7 @@ correlations between each dimension are taken to be zero.
 }
 \note{
 The function uses the \code{kmeans} function from the
-\code{stats}-package.
+  \code{stats}-package.
 }
 \examples{
 set.seed(2)
@@ -60,6 +60,4 @@ plot(data2$z, main = "initial GMM")
 \author{
 Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 
