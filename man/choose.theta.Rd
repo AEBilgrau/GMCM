@@ -10,9 +10,6 @@ choose.theta(u, m, ...)
 
 \item{m}{The number of components to be fitted.}
 
-\item{fac}{Numeric. A factor applied to the standard deviation estimates of
-each component and each dimension.}
-
 \item{\dots}{Arguments passed to \code{\link{kmeans}}.}
 }
 \value{

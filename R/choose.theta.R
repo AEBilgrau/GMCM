@@ -11,8 +11,8 @@
 #'
 #' @param u A matrix of (estimates of) realizations from the GMCM.
 #' @param m The number of components to be fitted.
-##' @param fac Numeric. A factor applied to the standard deviation estimates of
-##'   each component and each dimension.
+# @param fac Numeric. A factor applied to the standard deviation estimates of
+#   each component and each dimension.
 #' @param \dots Arguments passed to \code{\link{kmeans}}.
 #' @return A list of parameters for the GMCM model on the form described in
 #'   \code{\link{rtheta}}.
