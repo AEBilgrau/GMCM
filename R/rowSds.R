@@ -4,8 +4,9 @@
 #' y <- matrix(rnorm(50), 10, 5)
 #' GMCM:::rowSds(y)
 rowSds <- function(x) {
-  n <- ncol(x)
-  means <- rowMeans(x)
-  return(sqrt(rowMeans((x - means)^2)*(n/(n - 1))))
+  ans <- rowSdsArma(x)
+  dim(ans) <- NULL
+  names(ans) <- rownames(x)
+  return(ans)
 }
 

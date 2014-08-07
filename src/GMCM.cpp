@@ -19,6 +19,15 @@ inline double cube(double x) {
   return (x*x)*x;
 }
 
+// [[Rcpp::export]]
+arma::rowvec colSdsArma(const arma::mat & X, const int norm_type = 0) {
+  return stddev(X, norm_type, 0);
+}
+
+// [[Rcpp::export]]
+arma::colvec rowSdsArma(const arma::mat & X, const int norm_type = 0) {
+  return stddev(X, norm_type, 1);
+}
 
 //' Multivariate Gaussian probability density function and simulation
 //'
