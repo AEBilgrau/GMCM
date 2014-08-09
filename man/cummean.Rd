@@ -18,7 +18,7 @@ Returns a vector whose \code{i}'th element is the cumulative mean
 }
 \examples{
 x <- sort(rnorm(100))
-  GMCM:::cummean(x)
+GMCM:::cummean(x)
 }
 \author{
 Anders Ellern Bilgrau (abilgrau@math.aau.dk)
@@ -26,6 +26,4 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{cumsum}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 
