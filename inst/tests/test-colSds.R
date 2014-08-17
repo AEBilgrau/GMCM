@@ -10,8 +10,10 @@ test_that("colSds and rowSds is computed correctly", {
 })
 
 test_that("colSds and rowSds fails correctly", {
-  expect_that(GMCM:::rowSds(x[, 0]), throws_error("zero columns"))
-  expect_that(GMCM:::colSds(x[0, ]), throws_error("zero rows"))
+  expect_that(capture.output(GMCM:::rowSds(x[, 0])),
+              throws_error("zero columns"))
+  expect_that(capture.output(GMCM:::colSds(x[0, ])),
+              throws_error("zero rows"))
 })
 
 test_that("colSds and rowSds handles zero rows and columns correctly", {
