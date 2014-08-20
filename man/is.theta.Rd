@@ -10,28 +10,29 @@ is.theta(theta)
 \code{\link{rtheta}}}
 }
 \value{
-\code{logical}. Return \code{TRUE} if \code{theta} is coherent and
-in the correct format. Otherwise, returns \code{FALSE} with warning message.
+\code{logical}. Returns \code{TRUE} if \code{theta} is coherent and
+  in the correct format. Otherwise, the function returns \code{FALSE} with
+  an accompanying warning message of the problem.
 }
 \description{
 Function to check whether the argument is coherent and in the correct
 format.
 }
 \examples{
-theta1 <- rtheta()
-  GMCM:::is.theta(theta1)
+theta1 <- rtheta()  # Create a random correctly formatted theta
+is.theta(theta1)
 
-  theta2 <- rtheta(d=3,m=5)
-  theta2$m <- 6  # m is now incoherent with the number of components
-  GMCM:::is.theta(theta2)
+theta2 <- rtheta(d = 3, m = 5)
+theta2$m <- 6  # m is now incoherent with the number of components
+is.theta(theta2)
 
-  theta3 <- rtheta(d=4,m=2)
-  theta3$sigma$comp1[1,2] <- 0
-  GMCM:::is.theta(theta3)
+theta3 <- rtheta(d = 4, m = 2)
+theta3$sigma$comp1[1, 2] <- 0  # Making the covariance matrix non-symmetric
+is.theta(theta3)
 
-  theta4 <- rtheta(d=10,m=10)
-  theta4$sigma$comp1[1,1] <- 0
-  GMCM:::is.theta(theta4)
+theta4 <- rtheta(d = 10, m = 10)
+theta4$sigma$comp1[1, 1] <- 0  # Destroy positive semi-definiteness
+is.theta(theta4)
 }
 \author{
 Anders Ellern Bilgrau (abilgrau@math.aau.dk)

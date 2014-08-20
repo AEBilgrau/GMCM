@@ -12,10 +12,9 @@
 #'   \item{mu}{A list of mean vectors for each component.}
 #'   \item{comp}{A list of variance-covariance matrices for each component.}
 #' @note The function \code{\link{is.theta}} checks whether or not \code{theta}
-#' is in the correct format.
+#'   is in the correct format.
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso \code{\link{is.theta}}
-#' @keywords ~kwd1 ~kwd2
 #' @examples
 #'
 #' GMCM:::rtheta()
@@ -25,16 +24,17 @@ rtheta <- function (m = 3, d = 2) {
 
   getPosDefMat <- function(d) {  # Function to get postive definite matrix
     spherePointPicking <- function(n, d) {
-      # n points on the d-dimensional hypersphere
+      # n uniform points on the d-dimensional hypersphere
       x <- replicate(d, rnorm(n))
       return(x/sqrt(rowSums(x^2)))
     }
     r <- abs(rnorm(d, mean = 0, sd = 8))
     basis <- t(spherePointPicking(n = d, d = d))
-    decomp <- qr(basis)
+    decomp <- qr(basis, tol = 1e-17)  # QR decomposition
     Q <- qr.Q(decomp)
-    D <- diag(r)
-    return(t(Q)%*%D%*%Q)
+    #D <- diag(r)
+    return(crossprod(Q * sqrt(r)))
+    #return( t(Q) %*% D %*% Q )
   }
 
   #   getPositiveDefMat <- function(d) {

@@ -24,7 +24,7 @@ model (GMM) and Gaussian mixture copula model (GMCM).
 }
 \note{
 The function \code{\link{is.theta}} checks whether or not \code{theta}
-is in the correct format.
+  is in the correct format.
 }
 \examples{
 GMCM:::rtheta()
@@ -36,6 +36,4 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{is.theta}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 
