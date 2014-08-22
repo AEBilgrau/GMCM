@@ -12,7 +12,7 @@ ans1 <- GMCM:::dgmm.loglik.marginal(theta = theta, x = z)
 ans2 <- GMCM:::dgmm.loglik.marginal(theta = theta, x = z,
                                     marginal.loglik = FALSE)
 
-test_that(paste0("dgmcm.loglik returns proper size (n = ",
+test_that(paste0("dgmm.loglik.marginal returns proper size (n = ",
                  n, ", m = ", m, ")"), {
   expect_that(ans1, is_a("matrix"))
   expect_that(nrow(ans1), equals(n))
