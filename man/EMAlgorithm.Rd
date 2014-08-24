@@ -24,11 +24,12 @@ returned. Default is \code{FALSE}.}
 \code{FALSE}.}
 }
 \value{
-A list of length 3 with elements: \item{theta }{A list of the
-estimated parameters as described in \code{\link{rtheta}}.} \item{loglik.tr
-}{A numeric vector of the log-likelihood trace.} \item{kappa }{A matrix
-where \code{kappa[i,j]} is the probability that \code{x[i, ]} is realized
-from the \code{j}'th component.}
+A list of length 3 with elements:
+  \item{theta }{A list of the estimated parameters as described in
+                \code{\link{rtheta}}.}
+  \item{loglik.tr}{A numeric vector of the log-likelihood trace.}
+  \item{kappa }{A matrix where \code{kappa[i,j]} is the probability that
+                \code{x[i, ]} is realized from the \code{j}'th component.}
 }
 \description{
 The regular expectation-maximization algorithm for general multivariate
@@ -56,6 +57,4 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{rtheta}}, \code{\link{PseudoEMAlgorithm}}
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

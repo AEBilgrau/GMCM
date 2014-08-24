@@ -1,42 +1,43 @@
 #' EM algorithm for Gaussian mixture models
-#' 
+#'
 #' The regular expectation-maximization algorithm for general multivariate
 #' Gaussian mixture models.
-#' 
+#'
 #' Though not as versatile, the algorithm can be a faster alternative to
 #' \code{Mclust} in the \code{mclust}-package.
-#' 
+#'
 #' @param x A matrix of observations where rows correspond to features and
-#' columns to experiments.
+#'   columns to experiments.
 #' @param theta A list of parameters as described in \code{\link{rtheta}}.
 #' @param eps The maximal required difference in sucessive likelihoods to
-#' establish convergence.
+#'   establish convergence.
 #' @param max.ite The maximum number of interations.
 #' @param trace.theta Logical. If \code{TRUE}, all estimates are stored and
-#' returned. Default is \code{FALSE}.
+#'   returned. Default is \code{FALSE}.
 #' @param verbose Set to \code{TRUE} for verbose output. Default is
 #' \code{FALSE}.
-#' @return A list of length 3 with elements: \item{theta }{A list of the
-#' estimated parameters as described in \code{\link{rtheta}}.} \item{loglik.tr
-#' }{A numeric vector of the log-likelihood trace.} \item{kappa }{A matrix
-#' where \code{kappa[i,j]} is the probability that \code{x[i, ]} is realized
-#' from the \code{j}'th component.}
+#' @return
+#'   A list of length 3 with elements:
+#'   \item{theta }{A list of the estimated parameters as described in
+#'                 \code{\link{rtheta}}.}
+#'   \item{loglik.tr}{A numeric vector of the log-likelihood trace.}
+#'   \item{kappa }{A matrix where \code{kappa[i,j]} is the probability that
+#'                 \code{x[i, ]} is realized from the \code{j}'th component.}
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso \code{\link{rtheta}}, \code{\link{PseudoEMAlgorithm}}
-#' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
+#'
 #' set.seed(10)
 #' data <- SimulateGMCMData(n = 1000, d = 2, m = 3)
 #' start.theta <- rtheta(d = 2, m = 3)
 #' res <- GMCM:::EMAlgorithm(data$z, theta = start.theta)
-#' 
+#'
 #' par(mfrow = c(1,2))
 #' plot(data$z, cex = 0.5, pch = 16, main = "Simulated data",
 #'      col = rainbow(3)[data$K])
 #' plot(data$z, cex = 0.5, pch = 16, main = "GMM clustering",
 #'      col = rainbow(3)[apply(res$kappa,1,which.max)])
-#' 
+#'
 EMAlgorithm <- function (x, theta, eps = 10^-6, max.ite = 10^5,
                          trace.theta = FALSE, verbose = FALSE) {
   loglik.tr <- c(dgmm.loglik(theta, x))
@@ -50,18 +51,18 @@ EMAlgorithm <- function (x, theta, eps = 10^-6, max.ite = 10^5,
     if (verbose) {
       cat("iteration", k, "\tDelta loglik =", delta, "\n"); flush.console()
     }
-    if (delta < 0) 
+    if (delta < 0)
       stop("Delta likelihood was negative. Something went wrong!")
-    if (delta < eps) 
+    if (delta < eps)
       break
-    if (k == max.ite) 
+    if (k == max.ite)
       warning(paste("Max (", max.ite, ") iterations reached", sep = ""))
   }
-  res <- list(theta = theta, 
-              loglik.tr = loglik.tr, 
-              kappa = kappa, 
+  res <- list(theta = theta,
+              loglik.tr = loglik.tr,
+              kappa = kappa,
               theta.tr = theta.tr)
-  if (!trace.theta) 
+  if (!trace.theta)
     res <- res[-4]
   return(res)
 }
