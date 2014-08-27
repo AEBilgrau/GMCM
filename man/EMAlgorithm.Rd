@@ -3,7 +3,7 @@
 \alias{EMAlgorithm}
 \title{EM algorithm for Gaussian mixture models}
 \usage{
-EMAlgorithm(x, theta, eps = 10^-6, max.ite = 10^5, trace.theta = FALSE,
+EMAlgorithm(x, theta, eps = 1e-06, max.ite = 1e+05, trace.theta = FALSE,
   verbose = FALSE)
 }
 \arguments{

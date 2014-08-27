@@ -38,7 +38,7 @@
 #' plot(data$z, cex = 0.5, pch = 16, main = "GMM clustering",
 #'      col = rainbow(3)[apply(res$kappa,1,which.max)])
 #'
-EMAlgorithm <- function (x, theta, eps = 10^-6, max.ite = 10^5,
+EMAlgorithm <- function (x, theta, eps = 1e-6, max.ite = 1e5,
                          trace.theta = FALSE, verbose = FALSE) {
   loglik.tr <- c(dgmm.loglik(theta, x))
   theta.tr  <- vector("list", 1); theta.tr[[1]] <- theta
