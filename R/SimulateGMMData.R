@@ -7,7 +7,7 @@
 #' @export
 SimulateGMMData <- function(n = 1000, theta = rtheta(...), ...) {
 
-  K <- sample(1:theta$m, size = n, replace = TRUE, prob = theta$pie)
+  K <- sample(seq_len(theta$m), size = n, replace = TRUE, prob = theta$pie)
 
   if (length(unique(K)) != theta$m) {
     warning(paste("Some components was not represented in sample.",
@@ -29,6 +29,6 @@ SimulateGMMData <- function(n = 1000, theta = rtheta(...), ...) {
     #mvtnorm::rmvnorm(tab[i], theta$mu[[comp.k]], theta$sigma[[comp.k]])
   }
 
-  z <- do.call(rbind, lapply(1:length(tab), FUN = SampFunc))[order(order(K)), ]
+  z <- do.call(rbind, lapply(seq_along(tab), FUN = SampFunc))[order(order(K)), ]
   return(list(z = unname(z), K = K, theta = theta))
 }
