@@ -1,6 +1,6 @@
 context("Check EStep")
 
-set.seed(1230219301928)
+set.seed(123021930)
 n <- 100
 
 for (m in 1:4) {
