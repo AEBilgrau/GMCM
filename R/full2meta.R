@@ -39,7 +39,7 @@ full2meta <- function(theta) {
   if (theta$m != 2) {
     stop("Too many components: m != 2")
   }
-  par <- c("pie1"   = theta$pie[1],
+  par <- c("pie1"  = unname(theta$pie[1]),
            "mu"    = theta$mu[[2]][1],
            "sigma" = sqrt(theta$sigma[[2]][1,1]),
            "rho"   = cov2cor(theta$sigma[[2]])[1,2])
