@@ -92,7 +92,6 @@
 #' }
 NULL
 
-
 #' Reproduciblity between Affymetrix HG-U133 plus 2.0 and Human Exon 1.0 ST
 #' microarrays
 #'
@@ -124,3 +123,9 @@ NULL
 #' # Plot ranked and scaled P-values
 #' plot(Uhat(1-u133VsExon), cex = 0.5)
 NULL
+
+# The following ensures that the DLL is unloaded when the package is unloaded.
+# See http://r-pkgs.had.co.nz/src.html
+.onUnload <- function(libpath) {
+ library.dynam.unload("GMCM", libpath)
+}
