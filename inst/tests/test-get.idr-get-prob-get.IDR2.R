@@ -1,7 +1,21 @@
 context("Check get.idr, get.IDR, get.prob")
 
 
-
+#' Tests if the returned value(s) within a range
+#'
+#' This function tests if the range of the returned values is within
+#' the interval from \code{a} to \code{b}.
+#'
+#' @param a The lower limit.
+#' @param b The upper limit.
+#' @author
+#'   Anders Ellern Bilgrau <abilgrau(at)math.aau.dk> \cr
+#'   (rewritten from  functions in the \testthat package by Hadley Wickham)
+#' @seealso \code{\link{is_less_than}} \code{\link{is_more_than}}
+#' @examples
+#' library("testthat")
+#' expect_that(runif(100), is_between(0, 1))
+#' expect_that(rnorm(100), is_between(-2, 2))
 is_between <- function(a, b, label = NULL, ...) {
   if (is.null(label)) {
     label <- find_expr("expected")
