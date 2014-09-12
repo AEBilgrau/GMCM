@@ -15,8 +15,9 @@
       visible to the user. These are now both implemented in Rcpp
       and are faster versions of \code{rmvnorm} and
       \code{dmvnorm} from \cpkg{mvtnorm}.
-    \item \cpkg{GMCM} has now started using \pkg{testthat} for automated
-      testing.
+    \item \cpkg{GMCM} is now using \cpkg{testthat} for automated
+      testing. The automated test suite will further be expanded in the
+      upcoming versions.
   }
 }
 
