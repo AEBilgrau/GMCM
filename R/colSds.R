@@ -10,6 +10,7 @@
 #' @examples
 #' x <- matrix(rnorm(50), 10, 5)
 #' GMCM:::colSds(x)
+#' @keywords internal
 colSds <- function(x) {
   ans <- colSdsArma(x)
   dim(ans) <- NULL

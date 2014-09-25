@@ -11,6 +11,7 @@
 #' @examples
 #' x <- sort(rnorm(100))
 #' GMCM:::cummean(x)
+#' @keywords internal
 cummean <- function(x) { # Cumulative mean function
   cumsum(x)/seq_along(x)
 }

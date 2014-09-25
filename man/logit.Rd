@@ -36,6 +36,5 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 Used in \code{\link{tt}} and \code{\link{inv.tt}}.
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
+\keyword{internal}
 

@@ -41,4 +41,5 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 Used in \code{\link{tt}} and \code{\link{inv.tt}}.
 }
+\keyword{internal}
 

@@ -26,4 +26,5 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 \seealso{
 \code{\link{cumsum}}
 }
+\keyword{internal}
 

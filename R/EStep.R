@@ -1,8 +1,8 @@
 #' Steps of the EM algorithm for a Gaussian Mixture model
-#' 
+#'
 #' Functions to perform the expectation and maximization steps of the EM
 #' algorithm for an multivariate Gaussian mixture model.
-#' 
+#'
 #' @aliases EStep MStep
 #' @param x A matrix of observations where rows corresponds to features and
 #'   columns to experiments.
@@ -27,14 +27,15 @@
 #' x <- sim$z
 #' true.theta <- sim$theta
 #' init.theta <- GMCM:::rtheta()  # Generate starting parameters
-#' 
+#'
 #' # Do one EM interation
 #' es <- GMCM:::EStep(x, init.theta)
 #' new.theta <- GMCM:::MStep(x, es)
-#' 
+#'
 #' # Compare current estimate with the true
 #' new.theta
 #' true.theta
+#' @keywords internal
 EStep <- function (x, theta) {
   return(EStepRcpp(x, mus = theta$mu, sigmas = theta$sigma, pie = theta$pie))
 }

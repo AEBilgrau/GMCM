@@ -18,6 +18,8 @@
     \item \cpkg{GMCM} is now using \cpkg{testthat} for automated
       testing. The automated test suite will further be expanded in the
       upcoming versions.
+    \item Internal functions have now correctly hidden using the internal
+      keyword.
   }
 }
 

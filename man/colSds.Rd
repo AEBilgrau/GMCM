@@ -32,4 +32,5 @@ Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 \seealso{
 \code{\link{rowMeans}}, \code{\link{colMeans}}
 }
+\keyword{internal}
 

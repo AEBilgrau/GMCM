@@ -60,4 +60,5 @@ Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
 \seealso{
 \code{\link{rtheta}}
 }
+\keyword{internal}
 
