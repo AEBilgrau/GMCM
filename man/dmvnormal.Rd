@@ -9,23 +9,25 @@ dmvnormal(x, mu, sigma)
 rmvnormal(n, mu, sigma)
 }
 \arguments{
-\item{x}{A p times k matrix of quantiles. Each rows correspond to a
-realization from the density and each column corresponds to a dimension.}
+\item{x}{A \code{p} times \code{k} matrix of quantiles. Each rows
+correspond to a realization from the density and each column corresponds
+to a dimension.}
 
-\item{mu}{The mean vector of dimension k.}
+\item{mu}{The mean vector of dimension \code{k}.}
 
-\item{sigma}{The variance-covariance matrix of dimension k times k.}
+\item{sigma}{The variance-covariance matrix of dimension \code{k} times
+\code{k}.}
 
 \item{n}{The number of observations to be simulated.}
 }
 \value{
 \code{dmvnormal} returns a 1 by p matrix of the probability
-  densities corresponding to each row of x.
+  densities corresponding to each row of \code{x}.
 \code{sigma}. Each row corresponds to an observation.
 
-\code{rmvnormal} returns a p by k matrix of observations from at
-  multivariate normal distribution with the given mean \code{mu} and
-  covariance
+\code{rmvnormal} returns a \code{p} by \code{k} matrix of
+  observations from a multivariate normal distribution with the given mean
+  \code{mu} and covariance
 }
 \description{
 Fast simulation and evalutation of multivariate Gaussian probability
@@ -33,7 +35,7 @@ densities.
 }
 \details{
 \code{dmvnormal} functions similarly to \code{dmvnorm} from the
-\code{mvtnorm}-package and like-wise for \code{rmvnormal} and
+\code{mvtnorm}-package and likewise for \code{rmvnormal} and
 \code{rmvnorm}.
 }
 \examples{

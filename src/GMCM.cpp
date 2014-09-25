@@ -35,16 +35,18 @@ arma::colvec rowSdsArma(const arma::mat & X, const int norm_type = 0) {
 //' densities.
 //'
 //' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
-//' \code{mvtnorm}-package and like-wise for \code{rmvnormal} and
+//' \code{mvtnorm}-package and likewise for \code{rmvnormal} and
 //' \code{rmvnorm}.
 //'
 //' @aliases dmvnormal rmvnormal
-//' @param x A p times k matrix of quantiles. Each rows correspond to a
-//' realization from the density and each column corresponds to a dimension.
-//' @param mu The mean vector of dimension k.
-//' @param sigma The variance-covariance matrix of dimension k times k.
+//' @param x A \code{p} times \code{k} matrix of quantiles. Each rows
+//'   correspond to a realization from the density and each column corresponds
+//'   to a dimension.
+//' @param mu The mean vector of dimension \code{k}.
+//' @param sigma The variance-covariance matrix of dimension \code{k} times
+//'   \code{k}.
 //' @return \code{dmvnormal} returns a 1 by p matrix of the probability
-//'   densities corresponding to each row of x.
+//'   densities corresponding to each row of \code{x}.
 //' \code{sigma}. Each row corresponds to an observation.
 //' @author Anders Ellern Bilgrau
 //' @seealso \code{dmvnorm} and \code{rmvnorm} in the \code{mvtnorm}-package.
@@ -78,9 +80,9 @@ arma::mat dmvnormal(arma::mat& x, arma::rowvec mu, arma::mat sigma) {
 
 //' @rdname dmvnormal
 //' @param n The number of observations to be simulated.
-//' @return \code{rmvnormal} returns a p by k matrix of observations from at
-//'   multivariate normal distribution with the given mean \code{mu} and
-//'   covariance
+//' @return \code{rmvnormal} returns a \code{p} by \code{k} matrix of
+//'   observations from a multivariate normal distribution with the given mean
+//'   \code{mu} and covariance
 //' @examples
 //' rmvnormal(n = 10, mu = 1:4, sigma = diag(4))
 //' @export
