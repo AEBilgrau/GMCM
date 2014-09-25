@@ -6,19 +6,26 @@
 #' @param m The number of components in the mixture.
 #' @param d The dimension of the mixture distribution.
 #' @return A named list of parameters with the 4 elements:
-#'   \item{m}{The number of components in the mixture. Default is 3.}
-#'   \item{d}{The dimension of the mixture distribution. Default is 2.}
-#'   \item{pie}{A numeric vector of mixture proportions which sums to one.}
-#'   \item{mu}{A list of mean vectors for each component.}
-#'   \item{comp}{A list of variance-covariance matrices for each component.}
+#'   \item{\code{m}}{An integer giving the number of components in the mixture.
+#'     Default is 3.}
+#'   \item{\code{d}}{An integer giving the dimension of the mixture
+#'     distribution. Default is 2.}
+#'   \item{\code{pie}}{A numeric vector of length \code{m} of mixture
+#'     proportions between 0 and 1 which sums to one.}
+#'   \item{\code{mu}}{A list of length \code{m} of numeric vectors of length
+#'     \code{d} for each component.}
+#'   \item{\code{sigma}}{A list of length \code{m} of variance-covariance
+#'      matrices (of size \code{d} times \code{d}) for each component.}
 #' @note The function \code{\link{is.theta}} checks whether or not \code{theta}
 #'   is in the correct format.
 #' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
 #' @seealso \code{\link{is.theta}}
 #' @examples
+#' rtheta()
+#' rtheta(d = 5, m = 2)
 #'
-#' GMCM:::rtheta()
-#' GMCM:::rtheta(d = 5, m = 2)
+#' test <- rtheta()
+#' is.theta(test)
 #' @export
 rtheta <- function (m = 3, d = 2) {
 
