@@ -20,6 +20,9 @@
       upcoming versions.
     \item Internal functions have now correctly hidden using the internal
       keyword.
+    \item The order of function arguments \code{verbose} and \code{max.ite} in
+      \code{fit.meta.GMCM} has been swapped to make it consistent with
+      \code{fit.full.GMCM}. Apologies for any inconveniences.
   }
 }
 
