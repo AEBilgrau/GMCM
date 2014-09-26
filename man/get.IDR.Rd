@@ -3,7 +3,7 @@
 \alias{get.IDR}
 \alias{get.idr}
 \alias{get.prob}
-\title{Get local and adjusted irreproducibility discovery rates.}
+\title{Posterior class propbabilites and local, and adjusted IDR.}
 \usage{
 get.IDR(x, par, threshold = 0.05, ...)
 
@@ -29,7 +29,7 @@ reproducible component.}
 }
 \value{
 \code{get.IDR} returns a list of length 5 with elements:
-  \item{idr}{A vector of the local IDR values. I.e. the posterior
+  \item{idr}{A vector of the local idr values. I.e. the posterior
     probability that \code{x[i, ]} belongs to the irreprodicible component.}
   \item{IDR}{A vector of the adjusted IDR values.}
   \item{l}{The number of reproducible features at the specified
@@ -47,8 +47,10 @@ reproducible component.}
   \code{j}.
 }
 \description{
-Functions for computing posterior cluster probabilities and local and
-adjusted irreproducibility discovery rates as defined by Li et. al. (2011).
+Functions for computing posterior cluster probabilities (\code{get.prob})
+in the general GMCM as well as local (\code{get.idr}) and
+adjusted irreproducibility discovery rates (\code{get.IDR}) in the
+special GMCM.
 }
 \examples{
 set.seed(1123)
@@ -78,5 +80,10 @@ Anders Ellern Bilgrau (abilgrau@math.aau.dk)
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
   Measuring reproducibility of high-throughput experiments. The Annals of
   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+
+  Tewari, A., Giering, M., & Raghunathan, A. (2011). Parametric
+  Characterization of Multimodal Distributions with Non-gaussian Modes. IEEE
+  11th International Conference on Data Mining Workshops, 2011, 286-292.
+  doi:10.1109/ICDMW.2011.135
 }
 

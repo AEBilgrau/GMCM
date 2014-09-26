@@ -41,7 +41,7 @@ A list of parameters formatted as described in \code{\link{rtheta}}.
 \description{
 Perform unsupervised clusering using various optimization procedures to find
 the maximum likelihood estimate of the general Gaussian mixture copula
-model [Tewari et al. (2011)].
+model by Tewari et al. (2011).
 }
 \details{
 The \code{"L-BFGS-B"} method does not perform a transformation of the

@@ -1,7 +1,9 @@
-#' Get local and adjusted irreproducibility discovery rates.
+#' Posterior class propbabilites and local, and adjusted IDR.
 #'
-#' Functions for computing posterior cluster probabilities and local and
-#' adjusted irreproducibility discovery rates as defined by Li et. al. (2011).
+#' Functions for computing posterior cluster probabilities (\code{get.prob})
+#' in the general GMCM as well as local (\code{get.idr}) and
+#' adjusted irreproducibility discovery rates (\code{get.IDR}) in the
+#' special GMCM.
 #'
 #' @aliases get.IDR get.idr get.prob
 #' @param x A matrix of observations where rows corresponds to features and
@@ -16,7 +18,7 @@
 #' @param \dots Arguments passed to \code{\link{qgmm.marginal}}.
 #' @return
 #' \code{get.IDR} returns a list of length 5 with elements:
-#'   \item{idr}{A vector of the local IDR values. I.e. the posterior
+#'   \item{idr}{A vector of the local idr values. I.e. the posterior
 #'     probability that \code{x[i, ]} belongs to the irreprodicible component.}
 #'   \item{IDR}{A vector of the adjusted IDR values.}
 #'   \item{l}{The number of reproducible features at the specified
@@ -30,6 +32,11 @@
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
 #'   Measuring reproducibility of high-throughput experiments. The Annals of
 #'   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+#'
+#'   Tewari, A., Giering, M., & Raghunathan, A. (2011). Parametric
+#'   Characterization of Multimodal Distributions with Non-gaussian Modes. IEEE
+#'   11th International Conference on Data Mining Workshops, 2011, 286-292.
+#'   doi:10.1109/ICDMW.2011.135
 #' @examples
 #' set.seed(1123)
 #'
@@ -50,7 +57,6 @@
 #'
 #' # Plot results
 #' plot(data$u, col = res$Khat, pch = c(3,16)[data$K])
-#'
 #' @export
 get.IDR <- function (x, par, threshold = 0.05, ...) {
   theta <- meta2full(par, d = ncol(x))

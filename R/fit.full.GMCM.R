@@ -2,7 +2,7 @@
 #'
 #' Perform unsupervised clusering using various optimization procedures to find
 #' the maximum likelihood estimate of the general Gaussian mixture copula
-#' model [Tewari et al. (2011)].
+#' model by Tewari et al. (2011).
 #'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
 #' parameters and uses box-contraints as implemented in \code{optim}. \cr
