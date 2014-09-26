@@ -1,8 +1,8 @@
 #' Convert between parameter formats
 #'
-#' These functions converts the parameters between the unconstrained Gaussian
-#' mixture (copula) model of Tewari et. al. (2011) and the constrained model of
-#' Li et. al. (2011). Most functions of the GMCM packages use the \code{theta}
+#' These functions converts the parameters between the general Gaussian
+#' mixture (copula) model and the special GMCM.
+#' Most functions of the GMCM packages use the \code{theta}
 #' format described in \code{\link{rtheta}}.
 #'
 #' If a \code{theta} is supplied which is not on the form of Li et. al. (2011)

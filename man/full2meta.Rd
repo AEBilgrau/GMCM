@@ -27,9 +27,9 @@ meta2full returns a formatted list of parameters as described by
   \code{\link{rtheta}}.
 }
 \description{
-These functions converts the parameters between the unconstrained Gaussian
-mixture (copula) model of Tewari et. al. (2011) and the constrained model of
-Li et. al. (2011). Most functions of the GMCM packages use the \code{theta}
+These functions converts the parameters between the general Gaussian
+mixture (copula) model and the special GMCM.
+Most functions of the GMCM packages use the \code{theta}
 format described in \code{\link{rtheta}}.
 }
 \details{
