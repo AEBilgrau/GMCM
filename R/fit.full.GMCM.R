@@ -1,15 +1,16 @@
-#' Maximum likelihood estimate of the GMCM of Tewari et. al. (2011).
+#' Unsupervised clustering using a general GMCM
 #'
-#' Various optimization procedures to find the maximum likelihood estimate of a
-#' Gaussian mixture copula model [Tewari et al. (2011)].
+#' Perform unsupervised clusering using various optimization procedures to find
+#' the maximum likelihood estimate of the general Gaussian mixture copula
+#' model [Tewari et al. (2011)].
 #'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
-#' parameters and uses box-contraints as implemented in \code{optim}.
-#'
+#' parameters and uses box-contraints as implemented in \code{optim}. \cr
 #' Note that the many parameter configurations are poorly estimable or directly
 #' unidentifiable.
 #'
-#' @param u An n by d matrix of ranked and scaled test statistics. Rows
+#' @param u An \code{n} by \code{d} matrix of ranked and scaled test statistics.
+#'   Rows
 #'   correspond to observations and columns to the dimensions of the variables.
 #' @param m The number of components to be fitted.
 #' @param theta A list of parameters as defined in \code{\link{rtheta}}. If
