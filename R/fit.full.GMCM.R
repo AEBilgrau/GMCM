@@ -102,7 +102,7 @@ fit.full.GMCM <- function (u,
 
     gmcm.loglik <- function (par, u, m) { # Defining objective function
       #cat("par=", par, "\n")  # FOR DEBUGGING
-      theta <- par2theta(par, d = ncol(u), m = m)
+      theta <- vector2theta(par, d = ncol(u), m = m)
       theta$pie <- theta$pie/sum(theta$pie)
       #cat("theta=", unlist(theta$sigma), "\n")  # FOR DEBUGGING
       loglik <- dgmcm.loglik(theta = theta, u)
@@ -110,12 +110,12 @@ fit.full.GMCM <- function (u,
       return(loglik)
     }
 
-    par <- theta2par(theta)
+    par <- theta2vector(theta)
     fit <- optim(par, gmcm.loglik, u = u, m = theta$m,
                  control = list(maxit = max.ite,
                                 fnscale = -1, trace = verbose, ...),
                  method = method)
-    theta <- par2theta(fit$par, d = theta$d, m = theta$m)
+    theta <- vector2theta(fit$par, d = theta$d, m = theta$m)
     theta$pie <- theta$pie/sum(theta$pie)
 
     return(theta)
