@@ -1,14 +1,16 @@
-#' Maximum likelihood estimation of the GMCM by Li. et. al. (2011).
+#' Reproducibility/meta analysis using GMCMs
 #'
-#' Various optimization routines to find the maximum likelihood estimate of the
-#' Li et. al. (2011) Gaussian mixture copula model.
+#' This function performs reproducibility (or meta) analysis using GMCM.
+#' It features various optimization routines to identify the
+#' maximum likelihood estimate of the speical Gaussian mixture
+#' copula model proposed by Li et. al. (2011).
 #'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
 #' parameters.
 #'
-#' @param u An n by d matrix of test statistics. Rows correspond to features
-#'   and columns to experiments. Large values are assumed to be indicative of
-#'   reproducible genes.
+#' @param u An \code{n} by \code{d} matrix of test statistics. Rows correspond
+#'   to features and columns to experiments. Large values are assumed to be
+#'   indicative of reproducible genes.
 #' @param init.par A 4-dimensional vector of the initial parameters where,
 #'   \code{init.par[1]} is the mixture proportion of spurious signals,
 #'   \code{init.par[2]} is the mean, \code{init.par[3]} is the standard
@@ -20,11 +22,11 @@
 #'   quasi-Newton method with box constraints, and the pseudo EM algorithm,
 #'   respectively. Default is \code{"NM"}. See \code{\link{optim}} for further
 #'   details.
-#' @param verbose Logical. If \code{TRUE}, the log likelihood values are
-#'   printed.
 #' @param max.ite The maximum number of iterations.  If the \code{method} is
 #'   \code{"SANN"} this is the number of interations as there is no other
 #'   stopping criterion. (See \code{\link{optim}})
+#' @param verbose Logical. If \code{TRUE}, the log likelihood values are
+#'   printed.
 #' @param positive.rho Logical. If \code{TRUE}, the correlation parameter is
 #'   restricted to be positive.
 #' @param trace.theta Logical. Extra convergence information is appended as a
@@ -84,8 +86,8 @@
 fit.meta.GMCM <- function(u,
                           init.par,
                           method = c("NM", "SANN", "L-BFGS", "L-BFGS-B", "PEM"),
-                          verbose = TRUE,
                           max.ite = 1000,
+                          verbose = TRUE,
                           positive.rho = TRUE,
                           trace.theta = FALSE,
                           ...)
