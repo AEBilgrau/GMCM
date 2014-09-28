@@ -40,7 +40,8 @@ reproducible component.}
     reproducible or not.}
 
 \code{get.idr} returns a vector where the i'th entry is the
-  posterior probability that observation i is irreproducible.
+  posterior probability that observation i is irreproducible. A simple wrapper
+  for \code{get.prob}.
 
 \code{get.prob} returns a matrix where entry \code{(i,j)} is the
   posterior probability that the observation \code{x[i, ]} belongs to cluster
