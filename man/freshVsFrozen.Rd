@@ -5,9 +5,11 @@
 \title{Reproduciblity between Fresh and Frozen B-cell subtypes}
 \format{The format of the \code{data.frame} is:
 
- \code{'data.frame':  18708 obs. of  2 variables:}\cr
+ \code{'data.frame':  18708 obs. of  4 variables:}\cr
  \code{$ Fresh : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
- \code{$ Frozen: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr}
+ \code{$ Frozen: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr
+ \code{$ Fresh.pval  : num  0.283 0.703 0.269 0.576 0.292 ...}\cr
+ \code{$ Frozen.pval : num  0.806 0.465 0.408 0.57 0.279 ...}\cr}
 \description{
 This dataset contains two paired lists (columns) of t-scores (from a Linear
 mixed effects model) for
