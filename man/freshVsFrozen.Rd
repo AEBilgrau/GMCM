@@ -3,7 +3,8 @@
 \name{freshVsFrozen}
 \alias{freshVsFrozen}
 \title{Reproduciblity between Fresh and Frozen B-cell subtypes}
-\format{The format of the data is:\cr
+\format{The format of the \code{data.frame} is:
+
  \code{'data.frame':  18708 obs. of  2 variables:}\cr
  \code{$ Fresh : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
  \code{$ Frozen: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr}
