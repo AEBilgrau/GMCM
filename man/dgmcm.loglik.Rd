@@ -10,9 +10,9 @@
 \usage{
 dgmcm.loglik(theta, u, marginal.loglik = FALSE, ...)
 
-dgmm.loglik.marginal(theta, x, marginal.loglik = TRUE)
-
 dgmm.loglik(theta, z, marginal.loglik = FALSE)
+
+dgmm.loglik.marginal(theta, x, marginal.loglik = TRUE)
 
 pgmm.marginal(z, theta)
 
@@ -29,10 +29,10 @@ functions for each multivariate observation (i.e. the log densities) are
 returned. In other words, if \code{TRUE} the sum of the marginal
 likelihoods is not computed.}
 
-\item{x}{A matrix where each row corresponds to an observation.}
-
 \item{z}{A matrix of realizations from the latent process where each row
 corresponds to an observation.}
+
+\item{x}{A matrix where each row corresponds to an observation.}
 
 \item{res}{The resolution at which the inversion of \code{qgmm.marginal} is
 done. Default is 1000.}

@@ -17,20 +17,8 @@ cells.
 The second column contain the t-scores for cryopreserved (frozen), thawed,
 sorted and gene profiled cells.
 The used array type was Affymetrix Human Exon 1.0 ST microarray.
-
-This dataset contains two paired lists (columns) of t-scores (from a Linear
-mixed effects model) for
-differential expression between pre (Im, N) and post germinal (M, PB) centre
-cells within peripheral blood.
-The first column contain the t-scores for freshly sorted and gene profiled
-cells.
-The second column contain the t-scores for cryopreserved (frozen), thawed,
-sorted and gene profiled cells.
-The used array type was Affymetrix Human Exon 1.0 ST microarray.
 }
 \details{
-Further details can be found in Rasmussen and Bilgrau et al. (2014).
-
 Further details can be found in Rasmussen and Bilgrau et al. (2014).
 }
 \examples{
@@ -42,29 +30,11 @@ plot(freshVsFrozen, cex = 0.5)
 
 # Plot ranked and scaled P-values
 plot(Uhat(abs(freshVsFrozen)), cex = 0.5)
-data(freshVsFrozen)
-str(freshVsFrozen)
-
-# Plot P-values
-plot(freshVsFrozen, cex = 0.5)
-
-# Plot ranked and scaled P-values
-plot(Uhat(abs(freshVsFrozen)), cex = 0.5)
 }
 \author{
 Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
-
-Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 }
 \references{
-Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
-  Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
-  Boegsted M, Johnsen HE (2014).
-  "Stable Phenotype Of B-Cell Subsets Following Cryopreservation and Thawing
-  of Normal Human Lymphocytes Stored in a Tissue Biobank."
-  Cytometry Part B: Clinical Cytometry. ISSN 1552-4957.
-  doi:10.1002/cytob.21192. URL http://dx.doi.org/10. 1002/cytob.21192.
-
 Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
   Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
   Boegsted M, Johnsen HE (2014).
