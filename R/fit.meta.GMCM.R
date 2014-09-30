@@ -8,6 +8,7 @@
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
 #' parameters.
 #'
+#' @aliases fit.meta.gmcm
 #' @param u An \code{n} by \code{d} matrix of test statistics. Rows correspond
 #'   to features and columns to experiments. Large values are assumed to be
 #'   indicative of reproducible genes.

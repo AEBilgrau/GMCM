@@ -18,7 +18,7 @@
     \item \cpkg{GMCM} is now using \cpkg{testthat} for automated
       testing. The automated test suite will further be expanded in the
       upcoming versions.
-    \item Internal functions have now correctly hidden using the internal
+    \item Internal functions are now correctly hidden using the internal
       keyword.
     \item The order of function arguments \code{verbose} and \code{max.ite} in
       \code{fit.meta.GMCM} has been swapped to make it consistent with

@@ -9,6 +9,7 @@
 #' Note that the many parameter configurations are poorly estimable or directly
 #' unidentifiable.
 #'
+#' @aliases fit.full.gmcm
 #' @param u An \code{n} by \code{d} matrix of ranked and scaled test statistics.
 #'   Rows
 #'   correspond to observations and columns to the dimensions of the variables.
