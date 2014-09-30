@@ -39,19 +39,23 @@ reproducible component.}
   \item{Khat}{A vector signifying whether the corresponding feature is
     reproducible or not.}
 
-\code{get.idr} returns a vector where the i'th entry is the
-  posterior probability that observation i is irreproducible. A simple wrapper
-  for \code{get.prob}.
-
 \code{get.prob} returns a matrix where entry \code{(i,j)} is the
   posterior probability that the observation \code{x[i, ]} belongs to cluster
   \code{j}.
 }
 \description{
 Functions for computing posterior cluster probabilities (\code{get.prob})
-in the general GMCM as well as local (\code{get.idr}) and
+in the general GMCM as well as local and
 adjusted irreproducibility discovery rates (\code{get.IDR}) in the
 special GMCM.
+}
+\note{
+\code{get.idr} returns a vector where the \eqn{i}'th entry is the
+  posterior probability that observation \eqn{i} is irreproducible.
+  It is a simple wrapper for \code{get.prob}.
+  From \pkg{GMCM} version 1.1 it is an internal. Use \code{get.prop} or
+  \code{get.IDR} instead. However, the function can still be accessed with
+  \code{GMCM:::get.idr}.
 }
 \examples{
 set.seed(1123)

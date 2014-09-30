@@ -1,11 +1,11 @@
 #' Posterior class propbabilites and local, and adjusted IDR.
 #'
 #' Functions for computing posterior cluster probabilities (\code{get.prob})
-#' in the general GMCM as well as local (\code{get.idr}) and
+#' in the general GMCM as well as local and
 #' adjusted irreproducibility discovery rates (\code{get.IDR}) in the
 #' special GMCM.
 #'
-#' @aliases get.IDR get.idr get.prob
+#' @aliases get.IDR get.prob get.idr
 #' @param x A matrix of observations where rows corresponds to features and
 #'   colums to studies.
 #' @param par A vector of length 4 where \code{par[1]} is mixture proportion of
