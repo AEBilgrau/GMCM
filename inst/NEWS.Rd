@@ -24,8 +24,8 @@
       \code{fit.meta.GMCM} has been swapped to make it consistent with
       \code{fit.full.GMCM}. Apologies for any inconveniences.
     \item \code{get.idr} is no longer exported and visible to the user.
-      Use \code{get.IDR} to get the local (posterior class probabilities) 
-      and adjusted irrepoducibility discovery rates (IDR).
+      Use \code{get.IDR} to get the local (posterior class probabilities)
+      and adjusted irreproducibility discovery rates (IDR).
   }
 }
 
