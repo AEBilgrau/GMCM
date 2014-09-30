@@ -52,7 +52,7 @@ choose.theta <- function(u,
   mu  <- lapply(1:m, function(i) km$centers[i, ])
 
   get.sigma <- function(i) {
-    diag(colSds(u[km$cluster == i, ]))/sqrt(km$size[i])
+    diag(colSds(u[km$cluster == i, , drop = FALSE]))/sqrt(km$size[i])
   }
   sigma <- lapply(1:m, get.sigma)
   #sigma <- lapply(sigma, "*", fac^2)
