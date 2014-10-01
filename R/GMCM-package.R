@@ -95,7 +95,7 @@ NULL
 
 #' Reproduciblity between U133 plus 2 and Exon microarrays
 #'
-#' This dataset contains two paired lists (columns) of unadjusted P-values for
+#' This dataset contains a \code{data.frame} of unadjusted P-values for
 #' differential expression between germinal center cells and other B-cells
 #' within tonsils for two different experiments. The experiments differ
 #' primarily in the microarray platform used. The first column corresponds the
@@ -104,7 +104,8 @@ NULL
 #' Array.
 #' @docType data
 #' @name u133VsExon
-#' @details Further details can be found in Rasmussen and Bilgrau et al. (2014).
+#' @details Further details can be found in Bergkvist et al. (2014) and
+#'   Rasmussen and Bilgrau et al. (2014).
 #' @format The format of the \code{data.frame} is:
 #'
 #'   \code{'data.frame':  19577 obs. of  2 variables:}\cr
@@ -113,13 +114,18 @@ NULL
 #'
 #' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 #' @references
+#'   Bergkvist, Kim Steve, Mette Nyegaard, Martin Bøgsted, Alexander Schmitz,
+#'   Julie Støve Bødker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
+#'   "Validation and implementation of a method for microarray gene expression
+#'   profiling of minor B-cell subpopulations in man."
+#'   BMC immunology 15, no. 1 (2014): 3.
+#'
 #'   Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
 #'   Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
 #'   Boegsted M, Johnsen HE (2014).
 #'   "Stable Phenotype Of B-Cell Subsets Following Cryopreservation and Thawing
 #'   of Normal Human Lymphocytes Stored in a Tissue Biobank."
 #'   Cytometry Part B: Clinical Cytometry. ISSN 1552-4957.
-#'   doi:10.1002/cytob.21192. URL http://dx.doi.org/10. 1002/cytob.21192.
 #' @keywords datasets, data
 #' @examples
 #' data(u133VsExon)
@@ -135,14 +141,18 @@ NULL
 
 #' Reproduciblity between Fresh and Frozen B-cell subtypes
 #'
-#' This dataset contains two paired lists (columns) of t-scores (from a Linear
-#' mixed effects model) for
+#' This dataset contains a \code{data.frame} of \eqn{t}-scores (from a Linear
+#' mixed effects model) and \eqn{p}-values for
 #' differential expression between pre (Im, N) and post germinal (M, PB) centre
 #' cells within peripheral blood.
-#' The first column contain the t-scores for freshly sorted and gene profiled
-#' cells.
-#' The second column contain the t-scores for cryopreserved (frozen), thawed,
-#' sorted and gene profiled cells.
+#' The first and second column contain the the test for the hypothesis of no
+#' differentially expression between pre and post germinal cells for the
+#' freshly sorted and gene profiled cells.
+#' The third and fourth column contain the the test for the hypothesis of no
+#' differentially expression between pre and post germinal cells for the
+#' cryopreserved (frozen), thawed, sorted, and gene profiled cells.
+#' The fifth and sixth column contain the the test for the hypothesis of no
+#' differentially expression between fresh and frozen cells.
 #' The used array type was Affymetrix Human Exon 1.0 ST microarray.
 #'
 #' @docType data
@@ -150,11 +160,13 @@ NULL
 #' @details Further details can be found in Rasmussen and Bilgrau et al. (2014).
 #' @format The format of the \code{data.frame} is:
 #'
-#'  \code{'data.frame':  18708 obs. of  4 variables:}\cr
-#'  \code{$ Fresh : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
-#'  \code{$ Frozen: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr
-#'  \code{$ Fresh.pval  : num  0.283 0.703 0.269 0.576 0.292 ...}\cr
-#'  \code{$ Frozen.pval : num  0.806 0.465 0.408 0.57 0.279 ...}\cr
+#'  \code{'data.frame':  18708 obs. of  6 variables:}\cr
+#'  \code{$ PreVsPost.Fresh.tstat : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
+#'  \code{$ PreVsPost.Fresh.pval  : num  0.283 0.703 0.269 0.576 0.292 ...}\cr
+#'  \code{$ PreVsPost.Frozen.tstat: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr
+#'  \code{$ PreVsPost.Frozen.pval : num  0.806 0.465 0.408 0.57 0.279 ...}\cr
+#'  \code{$ FreshVsFrozen.tstat   : num  0.836 1.135 -0.221 0.191 -0.783 ...}\cr
+#'  \code{$ FreshVsFrozen.pval    : num  0.403 0.256 0.825 0.849 0.434 ...}\cr
 #'
 #' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 #' @references
@@ -171,10 +183,10 @@ NULL
 #' str(freshVsFrozen)
 #'
 #' # Plot P-values
-#' plot(freshVsFrozen, cex = 0.5)
+#' plot(freshVsFrozen[,c(2,4)], cex = 0.5)
 #'
 #' # Plot ranked and scaled P-values
-#' plot(Uhat(abs(freshVsFrozen)), cex = 0.5)
+#' plot(Uhat(abs(freshVsFrozen[,c(1,3)])), cex = 0.5)
 NULL
 
 

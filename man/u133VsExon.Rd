@@ -9,7 +9,7 @@
   \code{$ u133: num  0.17561 0.00178 0.005371 0.000669 0.655261 ...}\cr
   \code{$ exon: num  1.07e-01 6.74e-10 1.51e-03 6.76e-05 3.36e-01 ...}\cr}
 \description{
-This dataset contains two paired lists (columns) of unadjusted P-values for
+This dataset contains a \code{data.frame} of unadjusted P-values for
 differential expression between germinal center cells and other B-cells
 within tonsils for two different experiments. The experiments differ
 primarily in the microarray platform used. The first column corresponds the
@@ -18,7 +18,8 @@ The second column corresponds to the Affymetrix GeneChip Human Exon 1.0 ST
 Array.
 }
 \details{
-Further details can be found in Rasmussen and Bilgrau et al. (2014).
+Further details can be found in Bergkvist et al. (2014) and
+  Rasmussen and Bilgrau et al. (2014).
 }
 \examples{
 data(u133VsExon)
@@ -34,13 +35,18 @@ plot(Uhat(1-u133VsExon), cex = 0.5)
 Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 }
 \references{
-Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
+Bergkvist, Kim Steve, Mette Nyegaard, Martin Bøgsted, Alexander Schmitz,
+  Julie Støve Bødker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
+  "Validation and implementation of a method for microarray gene expression
+  profiling of minor B-cell subpopulations in man."
+  BMC immunology 15, no. 1 (2014): 3.
+
+  Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
   Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
   Boegsted M, Johnsen HE (2014).
   "Stable Phenotype Of B-Cell Subsets Following Cryopreservation and Thawing
   of Normal Human Lymphocytes Stored in a Tissue Biobank."
   Cytometry Part B: Clinical Cytometry. ISSN 1552-4957.
-  doi:10.1002/cytob.21192. URL http://dx.doi.org/10. 1002/cytob.21192.
 }
 \keyword{data}
 \keyword{datasets,}

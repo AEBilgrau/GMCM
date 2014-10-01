@@ -5,20 +5,26 @@
 \title{Reproduciblity between Fresh and Frozen B-cell subtypes}
 \format{The format of the \code{data.frame} is:
 
- \code{'data.frame':  18708 obs. of  4 variables:}\cr
- \code{$ Fresh : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
- \code{$ Frozen: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr
- \code{$ Fresh.pval  : num  0.283 0.703 0.269 0.576 0.292 ...}\cr
- \code{$ Frozen.pval : num  0.806 0.465 0.408 0.57 0.279 ...}\cr}
+ \code{'data.frame':  18708 obs. of  6 variables:}\cr
+ \code{$ PreVsPost.Fresh.tstat : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
+ \code{$ PreVsPost.Fresh.pval  : num  0.283 0.703 0.269 0.576 0.292 ...}\cr
+ \code{$ PreVsPost.Frozen.tstat: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr
+ \code{$ PreVsPost.Frozen.pval : num  0.806 0.465 0.408 0.57 0.279 ...}\cr
+ \code{$ FreshVsFrozen.tstat   : num  0.836 1.135 -0.221 0.191 -0.783 ...}\cr
+ \code{$ FreshVsFrozen.pval    : num  0.403 0.256 0.825 0.849 0.434 ...}\cr}
 \description{
-This dataset contains two paired lists (columns) of t-scores (from a Linear
-mixed effects model) for
+This dataset contains a \code{data.frame} of \eqn{t}-scores (from a Linear
+mixed effects model) and \eqn{p}-values for
 differential expression between pre (Im, N) and post germinal (M, PB) centre
 cells within peripheral blood.
-The first column contain the t-scores for freshly sorted and gene profiled
-cells.
-The second column contain the t-scores for cryopreserved (frozen), thawed,
-sorted and gene profiled cells.
+The first and second column contain the the test for the hypothesis of no
+differentially expression between pre and post germinal cells for the
+freshly sorted and gene profiled cells.
+The third and fourth column contain the the test for the hypothesis of no
+differentially expression between pre and post germinal cells for the
+cryopreserved (frozen), thawed, sorted, and gene profiled cells.
+The fifth and sixth column contain the the test for the hypothesis of no
+differentially expression between fresh and frozen cells.
 The used array type was Affymetrix Human Exon 1.0 ST microarray.
 }
 \details{
@@ -29,10 +35,10 @@ data(freshVsFrozen)
 str(freshVsFrozen)
 
 # Plot P-values
-plot(freshVsFrozen, cex = 0.5)
+plot(freshVsFrozen[,c(2,4)], cex = 0.5)
 
 # Plot ranked and scaled P-values
-plot(Uhat(abs(freshVsFrozen)), cex = 0.5)
+plot(Uhat(abs(freshVsFrozen[,c(1,3)])), cex = 0.5)
 }
 \author{
 Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
