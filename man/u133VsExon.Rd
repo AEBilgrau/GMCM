@@ -35,8 +35,8 @@ plot(Uhat(1-u133VsExon), cex = 0.5)
 Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 }
 \references{
-Bergkvist, Kim Steve, Mette Nyegaard, Martin Bøgsted, Alexander Schmitz,
-  Julie Støve Bødker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
+Bergkvist, Kim Steve, Mette Nyegaard, Martin Boegsted, Alexander Schmitz,
+  Julie Stoeve Boedker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
   "Validation and implementation of a method for microarray gene expression
   profiling of minor B-cell subpopulations in man."
   BMC immunology 15, no. 1 (2014): 3.
