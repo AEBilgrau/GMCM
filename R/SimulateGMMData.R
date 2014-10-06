@@ -11,7 +11,8 @@ SimulateGMMData <- function(n = 1000, theta = rtheta(...), ...) {
 
   if (length(unique(K)) != theta$m) {
     warning(paste("Some components were not represented in the sample.",
-                  "The mixture proportions may be too small to be sampled.",
+                  "The mixture proportions may be too small to be sampled",
+                  "with the given n.",
                   "Ignore this warning, try to resample, or change theta."))
   }
 
