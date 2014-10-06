@@ -11,7 +11,7 @@ for (d in seq_len(3) + 1) {
     test_that("qgmm.marginal returns proper format", {
       expect_that(is.numeric(ans), is_true())
       expect_that(dim(ans), equals(c(n, d)))
-      expect_that(anyNA(ans), is_false())
+      expect_that(any(is.na(ans)), is_false())
     })
 
   }
