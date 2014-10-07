@@ -2,9 +2,16 @@
 \title{News for Package \pkg{GMCM}}
 \newcommand{\cpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 
+\section{Changes in version 1.1.2}{
+  \itemize{
+    \item Fill!
+  }
+}
+
 \section{Changes in version 1.1.1}{
   \itemize{
-    \item Fill
+    \item Fixed a small testing issue on CRAN for old R versions.
+      (Used \code{anyNA} on R versions older than 3.1.0).
   }
 }
 

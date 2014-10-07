@@ -3,7 +3,7 @@ Type: Package
 Title: Fast estimation of Gaussian Mixture Copula Models
 Description: Unsupervised Clustering and Meta-analysis using Gaussian Mixture
     Copula Models.
-Version: 1.1.1
+Version: 1.1.2
 Date: 2014-08-16
 Author: Anders Ellern Bilgrau, Martin Boegsted, Poul Svante Eriksen
 Maintainer: Anders Ellern Bilgrau <abilgrau@math.aau.dk>
