@@ -70,7 +70,7 @@ is.theta <- function(theta) {
   }
   if (!all(c(sapply(theta[[5]], dim)) ==  theta[[2]])) {
     warning("The covariance matrices in theta[[5]] does not have dimensions ",
-            theta[[2]], "times", theta[[2]], " as given by theta[[2]].")
+            theta[[2]], " times ", theta[[2]], " as given by theta[[2]].")
     return(FALSE)
   }
   is.PosDef <- function(x) {
