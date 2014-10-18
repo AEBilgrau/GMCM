@@ -4,7 +4,8 @@
 
 \section{Changes in version 1.1.2}{
   \itemize{
-    \item Fill!
+    \item \code{rtheta} has been updated substantially to allow for finer and
+      more explicit control if needed. Default is the old behavior.
   }
 }
 

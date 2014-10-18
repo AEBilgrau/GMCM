@@ -33,6 +33,10 @@ is.theta(theta3)
 theta4 <- rtheta(d = 10, m = 10)
 theta4$sigma$comp1[1, 1] <- 0  # Destroy positive semi-definiteness
 is.theta(theta4)
+
+theta5 <- rtheta()
+names(theta5) <- c("m", "d", "prop", "mu", "sigmas") # Incorrect names
+is.theta(theta5)
 }
 \author{
 Anders Ellern Bilgrau (abilgrau@math.aau.dk)
