@@ -2,7 +2,7 @@
 \name{dmvnormal}
 \alias{dmvnormal}
 \alias{rmvnormal}
-\title{Multivariate Gaussian probability density function and simulation}
+\title{Multivariate Gaussian density and simulation}
 \usage{
 dmvnormal(x, mu, sigma)
 
@@ -21,8 +21,8 @@ to a dimension.}
 \item{n}{The number of observations to be simulated.}
 }
 \value{
-\code{dmvnormal} returns a 1 by p matrix of the probability
-  densities corresponding to each row of \code{x}.
+\code{dmvnormal} returns a \eqn{1} by \eqn{p} matrix of the
+  probability densities corresponding to each row of \code{x}.
 \code{sigma}. Each row corresponds to an observation.
 
 \code{rmvnormal} returns a \code{p} by \code{k} matrix of
@@ -30,7 +30,7 @@ to a dimension.}
   \code{mu} and covariance
 }
 \description{
-Fast simulation and evalutation of multivariate Gaussian probability
+Fast simulation from and evalutation of multivariate Gaussian probability
 densities.
 }
 \details{

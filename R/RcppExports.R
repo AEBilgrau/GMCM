@@ -9,9 +9,9 @@ rowSdsArma <- function(X, norm_type = 0L) {
     .Call('GMCM_rowSdsArma', PACKAGE = 'GMCM', X, norm_type)
 }
 
-#' Multivariate Gaussian probability density function and simulation
+#' Multivariate Gaussian density and simulation
 #'
-#' Fast simulation and evalutation of multivariate Gaussian probability
+#' Fast simulation from and evalutation of multivariate Gaussian probability
 #' densities.
 #'
 #' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
@@ -25,8 +25,8 @@ rowSdsArma <- function(X, norm_type = 0L) {
 #' @param mu The mean vector of dimension \code{k}.
 #' @param sigma The variance-covariance matrix of dimension \code{k} times
 #'   \code{k}.
-#' @return \code{dmvnormal} returns a 1 by p matrix of the probability
-#'   densities corresponding to each row of \code{x}.
+#' @return \code{dmvnormal} returns a \eqn{1} by \eqn{p} matrix of the
+#'   probability densities corresponding to each row of \code{x}.
 #' \code{sigma}. Each row corresponds to an observation.
 #' @author Anders Ellern Bilgrau
 #' @seealso \code{dmvnorm} and \code{rmvnorm} in the \code{mvtnorm}-package.
