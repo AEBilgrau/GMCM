@@ -11,7 +11,7 @@ Gaussian copula mixture models (GMCMs) are a very flexible alternative to gaussi
 
 The optimization of the complicated likelihood function is difficult, however. The **GMCM** package utilizes [**Rcpp**](https://github.com/RcppCore/Rcpp) and [**RcppArmadillo**](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly and arrive at a parameter estimate using various optimization routines.
 
-Additional information and documentation will follow. For now, run `help("GMCM")` in R for some help and examples.
+Additional information and documentation will follow. For now, run `help("GMCM")` in R for help and examples. The core functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 
 ## Installation
 
