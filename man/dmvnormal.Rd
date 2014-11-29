@@ -30,7 +30,7 @@ to a dimension.}
   \code{mu} and covariance
 }
 \description{
-Fast simulation from and evalutation of multivariate Gaussian probability
+Fast simulation from and evaluation of multivariate Gaussian probability
 densities.
 }
 \details{

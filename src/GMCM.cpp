@@ -31,7 +31,7 @@ arma::colvec rowSdsArma(const arma::mat & X, const int norm_type = 0) {
 
 //' Multivariate Gaussian density and simulation
 //'
-//' Fast simulation from and evalutation of multivariate Gaussian probability
+//' Fast simulation from and evaluation of multivariate Gaussian probability
 //' densities.
 //'
 //' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
@@ -396,6 +396,5 @@ arma::mat EStepRcpp(arma::mat& z,
 library(GMCM)
 data <- matrix(runif(200), 100, 2)
 theta <- rtheta(d = 2, m = 3)
-
 */
 

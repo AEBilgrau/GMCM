@@ -11,7 +11,7 @@ rowSdsArma <- function(X, norm_type = 0L) {
 
 #' Multivariate Gaussian density and simulation
 #'
-#' Fast simulation from and evalutation of multivariate Gaussian probability
+#' Fast simulation from and evaluation of multivariate Gaussian probability
 #' densities.
 #'
 #' \code{dmvnormal} functions similarly to \code{dmvnorm} from the
