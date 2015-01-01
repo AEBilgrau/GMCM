@@ -2,7 +2,7 @@
 \name{colSds}
 \alias{colSds}
 \alias{rowSds}
-\title{Compute row and column standard deviations}
+\title{Row and column standard deviations}
 \usage{
 colSds(x)
 
@@ -18,11 +18,12 @@ rowSds(x)
 }
 \description{
 The \code{rowSds} and \code{colSds} respectively computes the
-  standard deviations of the rows and columns of the given matrix.
+  standard deviations of each rows and columns of the given matrix.
 }
 \examples{
 x <- matrix(rnorm(50), 10, 5)
 GMCM:::colSds(x)
+apply(x, 2, sd)  # slower equivalent code
 y <- matrix(rnorm(50), 10, 5)
 GMCM:::rowSds(y)
 }
