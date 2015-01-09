@@ -37,7 +37,8 @@
 #' @export
 full2meta <- function(theta) {
   if (theta$m != 2) {
-    stop("Too many components: m != 2")
+    stop("Too many components as m != 2. The special GMCM for meta-analysis",
+         "only supports 2 components.")
   }
   par <- c("pie1"  = unname(theta$pie[1]),
            "mu"    = theta$mu[[2]][1],
