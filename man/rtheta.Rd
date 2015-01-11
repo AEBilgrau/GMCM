@@ -78,7 +78,7 @@ Depending on the \code{method} argument the parameters are generated as
 }
 \note{
 The function \code{\link{is.theta}} checks whether or not \code{theta}
-is in the correct format.
+  is in the correct format.
 }
 \examples{
 rtheta()
