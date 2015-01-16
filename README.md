@@ -21,7 +21,7 @@ The released and tested version of **GMCM** is available at
 install.packages("GMCM")
 ```
 
-If you wish to install the latest version of GMCM directly from the master branch here at GitHub, run 
+If you wish to install the latest version of **GMCM** directly from the master branch here at GitHub, run 
 
 ```R
 #install.packages("devtools")
