@@ -66,10 +66,10 @@
 #' # Visualizing P-values and the ranked and scaled P-values
 #' \dontrun{
 #' par(mfrow = c(1,2))
-#' plot(u133VsExon, cex = 0.5, pch = 4, col = "tomato", main = "P-values"
-#'      xlab = "P   (U133)", ylab = "P   (Exon)"
+#' plot(u133VsExon, cex = 0.5, pch = 4, col = "tomato", main = "P-values",
+#'      xlab = "P   (U133)", ylab = "P   (Exon)")
 #' plot(uhat, cex = 0.5, pch = 4, col = "tomato", main = "Ranked P-values",
-#'      xlab = "rank(1-P)   (U133)", ylab = "rank(1-P)   (Exon)"
+#'      xlab = "rank(1-P)   (U133)", ylab = "rank(1-P)   (Exon)")
 #' }
 #'
 #' # Fitting using BFGS
@@ -85,10 +85,10 @@
 #' par(mfrow = c(1,2))
 #' plot(u133VsExon, cex = 0.5, pch = 4, main = "Classified genes",
 #'      col = c("tomato", "steelblue")[idr$K],
-#'      xlab = "P   (U133)", ylab = "P   (Exon)")
-#'   plot(uhat, cex = 0.5, pch = 4, main = "Classified genes",
-#'        col = c("tomato", "steelblue")[idr$K],
-#'        xlab = "rank(1-P)   (U133)", ylab = "rank(1-P)   (Exon)")
+#'      xlab = "P-value (U133)", ylab = "P-value (Exon)")
+#' plot(uhat, cex = 0.5, pch = 4, main = "Classified genes",
+#'      col = c("tomato", "steelblue")[idr$K],
+#'      xlab = "rank(1-P) (U133)", ylab = "rank(1-P) (Exon)")
 #' }
 NULL
 
