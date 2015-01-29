@@ -35,4 +35,56 @@ When installed, run `news(package = "GMCM")` to view the latest notable changes 
 
 For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](http://cran.r-project.org/src/contrib/Archive/GMCM/)
 
+
+## Usage
+### Meta Analysis example
+This is a very short tutorial for using the special GMCM for meta analysis. To illustrate we load the `u133VsExon` dataset within the package. The dataset contains 19577 P-values for the null hypothesis of no differential gene expression between two cell types for each of two different experiments called `u133` and `exon`.
+```R
+# Load and show data
+data(u133VsExon)
+head(u133VsExon, n = 3)
+#                        u133         exon
+#ENSG00000265096 1.756104e-01 1.072572e-01
+#ENSG00000152495 1.779757e-03 6.741108e-10
+#ENSG00000198040 5.370574e-03 1.505019e-03
+```
+See e.g. `?u133VsExon` for more information.
+Next, we subset the data, rank it, and visualize it:
+```R
+# Subsetting data to reduce computation time
+u133VsExon <- u133VsExon[1:5000, ]
+
+# Ranking and scaling, remember large values should be critical to the null!
+uhat <- Uhat(1 - u133VsExon)
+
+par(mfrow = c(1,2))  # Visualizing P-values and the ranked P-values
+plot(u133VsExon, cex = 0.5, pch = 4, col = "tomato", main = "P-values",
+     xlab = "P-value (U133)", ylab = "P-value (Exon)")
+plot(uhat, cex = 0.5, pch = 4, col = "tomato", main = "Ranked P-values",
+     xlab = "rank(1-P) (U133)", ylab = "rank(1-P) (Exon)")
+```
+Here each point represent a gene. The genes in the lower left of the first panel and correspondingly in the upper right of the second panel are the seemingly reproducible genes.
+Next, we do the actual fit using the core user function `fit.meta.GMCM` with a L-BFGS-like procedure and subsequently compute the IDR values:
+```R
+fit <- fit.meta.GMCM(uhat, init.par = c(0.5, 1, 1, 0.5), 
+                     method = "L-BFGS", pgtol = 1e-2, verbose = TRUE)
+                     
+idr <- get.IDR(uhat, par = fit)  # Compute IDR values and classify
+table(idr$K)  # Show results, 1 = irreproducible, 2 = reproducible
+#   1    2 
+#4136  864 
+````
+Where we see that 864 of the 5000 genes are deemed reproducible by the model at the default 0.05 threshold.
+The clustering results and the reproducible genes can be visualized in the following manner:
+```R
+par(mfrow = c(1,2))
+plot(u133VsExon, cex = 0.5, pch = 4, main = "Classified genes",
+     col = c("tomato", "steelblue")[idr$K],
+     xlab = "P-value (U133)", ylab = "P-value (Exon)")
+plot(uhat, cex = 0.5, pch = 4, main = "Classified genes",
+     col = c("tomato", "steelblue")[idr$K],
+     xlab = "rank(1-P) (U133)", ylab = "rank(1-P) (Exon)")
+````
+The model indeed capture the the genes in the upper right (of the second panel) and classify these as reproducible.
+
 ---
