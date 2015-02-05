@@ -44,7 +44,7 @@ means the \code{pgmm.marginal} is to be evaluated on.}
 }
 \value{
 The returned value depends on the value of \code{marginal.loglik}.
-  If \code{TRUE}, the unsummed marginal likelihood values are returned. If
+  If \code{TRUE}, the non-summed marginal likelihood values are returned. If
   \code{FALSE}, the scalar sum log-likelihood is returned.
 
   \code{dgmcm.loglik}: As above, with the GMCM density.
@@ -61,7 +61,7 @@ The returned value depends on the value of \code{marginal.loglik}.
   entry of \code{u} evaluated in the inverse jth marginal GMM density.
 }
 \description{
-Marginal and simulataneuos cumulative distribution, log probability density,
+Marginal and simultaneous cumulative distribution, log probability density,
 and log-likelihood functions of the Gaussian mixture model (GMM) and
 Gaussian mixture copula model (GMCM) and the relevant inverse marginal
 quantile functions.
@@ -70,7 +70,7 @@ quantile functions.
 \code{qgmm.marginal} distributes approximately \code{res} points around the
 cluster centers according to the mixture proportions in \code{theta$pie} and
 evaluates \code{pgmm.marginal} on these points. An approximate inverse of
-\code{pgmm.marginal} function is contructed by linear interpolation of the
+\code{pgmm.marginal} function is constructed by linear interpolation of the
 flipped evaluated coordinates.
 }
 \examples{
