@@ -1,11 +1,11 @@
 #' Unsupervised clustering using a general GMCM
 #'
-#' Perform unsupervised clusering using various optimization procedures to find
+#' Perform unsupervised clustering using various optimization procedures to find
 #' the maximum likelihood estimate of the general Gaussian mixture copula
 #' model by Tewari et al. (2011).
 #'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
-#' parameters and uses box-contraints as implemented in \code{optim}. \cr
+#' parameters and uses box constraints as implemented in \code{optim}. \cr
 #' Note that the many parameter configurations are poorly estimable or directly
 #' unidentifiable.
 #'
@@ -24,7 +24,7 @@
 #'   method with box constraints, and the pseudo EM algorithm, respectively.
 #'   Default is \code{"NM"}. See \code{\link{optim}} for further details.
 #' @param max.ite The maximum number of iterations. If the \code{method} is
-#'   \code{"SANN"} this is the number of interations as there is no other
+#'   \code{"SANN"} this is the number of iterations as there is no other
 #'   stopping criterion. (See \code{\link{optim}})
 #' @param verbose Logical. If \code{TRUE}, a trace of the parameter estimates
 #'   is made.
@@ -32,11 +32,11 @@
 #'   \code{\link{optim}} or \code{\link{PseudoEMAlgorithm}} if the \code{method}
 #'   is \code{"PEM"}.
 #' @return A list of parameters formatted as described in \code{\link{rtheta}}.
-#' @note All the optimization procedures are stongly dependent on the initial
+#' @note All the optimization procedures are strongly dependent on the initial
 #'   values and the cooling scheme. Therefore it is advisable to apply multiple
 #'   different initial parameters and select the best fit.
 #'
-#'   The \code{\link{choose.theta}} itself chooses random initializations.
+#'   The \code{\link{choose.theta}} itself chooses random a initialization.
 #'   Hence, the output when \code{theta} is not directly supplied can vary.
 #'
 #'   See \code{\link{optim}} for further details.
