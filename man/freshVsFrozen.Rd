@@ -2,7 +2,7 @@
 \docType{data}
 \name{freshVsFrozen}
 \alias{freshVsFrozen}
-\title{Reproduciblity between Fresh and Frozen B-cell subtypes}
+\title{Reproducibility between Fresh and Frozen B-cell subtypes}
 \format{The format of the \code{data.frame} is:
 
  \code{'data.frame':  18708 obs. of  6 variables:}\cr

@@ -2,7 +2,7 @@
 \docType{data}
 \name{u133VsExon}
 \alias{u133VsExon}
-\title{Reproduciblity between U133 plus 2 and Exon microarrays}
+\title{Reproducibility between U133 plus 2 and Exon microarrays}
 \format{The format of the \code{data.frame} is:
 
   \code{'data.frame':  19577 obs. of  2 variables:}\cr

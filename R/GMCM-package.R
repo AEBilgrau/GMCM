@@ -14,7 +14,7 @@
 #'   likelihood estimate of the special Gaussian mixture copula model (GMCM)
 #'   defined by Li et al. (2011). The function \code{\link{get.IDR}}
 #'   computes the local and adjusted Irreprodcible Discovery Rates defined
-#'   by Li et al. (2011) to determine the level of reproduciblity.
+#'   by Li et al. (2011) to determine the level of reproducibility.
 #'
 #'   Tewari et. al. (2011) proposed using GMCMs as an general unsupervised
 #'   clustering tool. If such a general unsupervised clustering is needed, like
@@ -93,7 +93,7 @@
 NULL
 
 
-#' Reproduciblity between U133 plus 2 and Exon microarrays
+#' Reproducibility between U133 plus 2 and Exon microarrays
 #'
 #' This dataset contains a \code{data.frame} of unadjusted P-values for
 #' differential expression between germinal center cells and other B-cells
@@ -139,7 +139,7 @@ NULL
 NULL
 
 
-#' Reproduciblity between Fresh and Frozen B-cell subtypes
+#' Reproducibility between Fresh and Frozen B-cell subtypes
 #'
 #' This dataset contains a \code{data.frame} of \eqn{t}-scores (from a Linear
 #' mixed effects model) and \eqn{p}-values for
