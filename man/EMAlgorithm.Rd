@@ -12,10 +12,10 @@ columns to experiments.}
 
 \item{theta}{A list of parameters as described in \code{\link{rtheta}}.}
 
-\item{eps}{The maximal required difference in sucessive likelihoods to
+\item{eps}{The maximal required difference in successive likelihoods to
 establish convergence.}
 
-\item{max.ite}{The maximum number of interations.}
+\item{max.ite}{The maximum number of iterations.}
 
 \item{trace.theta}{Logical. If \code{TRUE}, all estimates are stored and
 returned. Default is \code{FALSE}.}

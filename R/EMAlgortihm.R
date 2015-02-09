@@ -9,9 +9,9 @@
 #' @param x A matrix of observations where rows correspond to features and
 #'   columns to experiments.
 #' @param theta A list of parameters as described in \code{\link{rtheta}}.
-#' @param eps The maximal required difference in sucessive likelihoods to
+#' @param eps The maximal required difference in successive likelihoods to
 #'   establish convergence.
-#' @param max.ite The maximum number of interations.
+#' @param max.ite The maximum number of iterations.
 #' @param trace.theta Logical. If \code{TRUE}, all estimates are stored and
 #'   returned. Default is \code{FALSE}.
 #' @param verbose Set to \code{TRUE} for verbose output. Default is
