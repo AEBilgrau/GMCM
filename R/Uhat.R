@@ -2,7 +2,7 @@
 #'
 #' Function for computing the scaled ranks for each column of the input matrix.
 #' In other words, the values are ranked column-wise and divided by
-#' \code{nrow(x) + 1}. A "1334" ranking scheme is used where the loweste values
+#' \code{nrow(x) + 1}. A "1334" ranking scheme is used where the lowest values
 #' is awarded rank 1, second lowest value rank 2, and ties are given the
 #' maximum available rank.
 #'
