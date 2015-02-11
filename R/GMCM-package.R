@@ -114,18 +114,17 @@ NULL
 #'
 #' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 #' @references
-#'   Bergkvist, Kim Steve, Mette Nyegaard, Martin Boegsted, Alexander Schmitz,
-#'   Julie Stoeve Boedker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
-#'   "Validation and implementation of a method for microarray gene expression
-#'   profiling of minor B-cell subpopulations in man."
-#'   BMC immunology 15, no. 1 (2014): 3.
+#' Bergkvist, Kim Steve, Mette Nyegaard, Martin Boegsted, Alexander Schmitz,
+#' Julie Stoeve Boedker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
+#' (2014). "Validation and Implementation of a Method for Microarray Gene
+#' Expression Profiling of Minor B-Cell Subpopulations in Man".
+#' BMC immunology, 15(1), 3.
 #'
-#'   Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
-#'   Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
-#'   Boegsted M, Johnsen HE (2014).
-#'   "Stable Phenotype Of B-Cell Subsets Following Cryopreservation and Thawing
-#'   of Normal Human Lymphocytes Stored in a Tissue Biobank."
-#'   Cytometry Part B: Clinical Cytometry. ISSN 1552-4957.
+#' Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
+#' Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
+#' Boegsted M, Johnsen HE (2015). "Stable Phenotype Of B-Cell Subsets Following
+#' Cryopreservation and Thawing of Normal Human Lymphocytes Stored in a Tissue
+#' Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.
 #' @keywords datasets, data
 #' @examples
 #' data(u133VsExon)
@@ -157,7 +156,7 @@ NULL
 #'
 #' @docType data
 #' @name freshVsFrozen
-#' @details Further details can be found in Rasmussen and Bilgrau et al. (2014).
+#' @details Further details can be found in Rasmussen and Bilgrau et al. (2015).
 #' @format The format of the \code{data.frame} is:
 #'
 #'  \code{'data.frame':  18708 obs. of  6 variables:}\cr
@@ -170,13 +169,11 @@ NULL
 #'
 #' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 #' @references
-#'   Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
-#'   Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
-#'   Boegsted M, Johnsen HE (2014).
-#'   "Stable Phenotype Of B-Cell Subsets Following Cryopreservation and Thawing
-#'   of Normal Human Lymphocytes Stored in a Tissue Biobank."
-#'   Cytometry Part B: Clinical Cytometry. ISSN 1552-4957.
-#'   doi:10.1002/cytob.21192. URL http://dx.doi.org/10. 1002/cytob.21192.
+#' Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
+#' Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
+#' Boegsted M, Johnsen HE (2015). "Stable Phenotype Of B-Cell Subsets Following
+#' Cryopreservation and Thawing of Normal Human Lymphocytes Stored in a Tissue
+#' Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.
 #' @keywords datasets, data
 #' @examples
 #' data(freshVsFrozen)

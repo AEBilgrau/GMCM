@@ -28,7 +28,7 @@ differentially expression between fresh and frozen cells.
 The used array type was Affymetrix Human Exon 1.0 ST microarray.
 }
 \details{
-Further details can be found in Rasmussen and Bilgrau et al. (2014).
+Further details can be found in Rasmussen and Bilgrau et al. (2015).
 }
 \examples{
 data(freshVsFrozen)
@@ -45,12 +45,10 @@ Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
 }
 \references{
 Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
-  Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
-  Boegsted M, Johnsen HE (2014).
-  "Stable Phenotype Of B-Cell Subsets Following Cryopreservation and Thawing
-  of Normal Human Lymphocytes Stored in a Tissue Biobank."
-  Cytometry Part B: Clinical Cytometry. ISSN 1552-4957.
-  doi:10.1002/cytob.21192. URL http://dx.doi.org/10. 1002/cytob.21192.
+Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
+Boegsted M, Johnsen HE (2015). "Stable Phenotype Of B-Cell Subsets Following
+Cryopreservation and Thawing of Normal Human Lymphocytes Stored in a Tissue
+Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.
 }
 \keyword{data}
 \keyword{datasets,}
