@@ -12,12 +12,12 @@
 #' columns to experiments.
 #' @param theta A list of parameters formatted as described in
 #' \code{\link{rtheta}}.
-#' @param eps The maximum difference required to achive convergence.
+#' @param eps The maximum difference required to achieve convergence.
 #' @param max.ite The maximum number of iterations.
 #' @param verbose Logical. Set to \code{TRUE} to increase verbosity.
 #' @param trace.theta Logical. If \code{TRUE}, a trace of the estimated thetas
 #' are returned.
-#' @param meta.special.case Logical. If \code{TRUE}, the esimators used are for
+#' @param meta.special.case Logical. If \code{TRUE}, the estimators used are for
 #' the special case GMCM of Li et. al. (2011).
 #' @param convergence.criterion Character. Sets the convergence criterion.  If
 #' \code{"absGMCM"} the absolute value of difference in GMCM is used. If

@@ -14,7 +14,7 @@ columns to experiments.}
 \item{theta}{A list of parameters formatted as described in
 \code{\link{rtheta}}.}
 
-\item{eps}{The maximum difference required to achive convergence.}
+\item{eps}{The maximum difference required to achieve convergence.}
 
 \item{max.ite}{The maximum number of iterations.}
 
@@ -23,7 +23,7 @@ columns to experiments.}
 \item{trace.theta}{Logical. If \code{TRUE}, a trace of the estimated thetas
 are returned.}
 
-\item{meta.special.case}{Logical. If \code{TRUE}, the esimators used are for
+\item{meta.special.case}{Logical. If \code{TRUE}, the estimators used are for
 the special case GMCM of Li et. al. (2011).}
 
 \item{convergence.criterion}{Character. Sets the convergence criterion.  If
