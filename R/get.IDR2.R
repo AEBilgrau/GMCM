@@ -1,4 +1,4 @@
-#' Posterior class propbabilites and local, and adjusted IDR.
+#' Posterior class probabilities, local, and adjusted IDRs.
 #'
 #' Functions for computing posterior cluster probabilities (\code{get.prob})
 #' in the general GMCM as well as local and
@@ -6,20 +6,20 @@
 #' special GMCM.
 #'
 #' @aliases get.IDR get.prob get.idr
-#' @param x A matrix of observations where rows corresponds to features and
-#'   colums to studies.
+#' @param x A \code{matrix} of observations where rows corresponds to features
+#'   and columns to studies.
 #' @param par A vector of length 4 where \code{par[1]} is mixture proportion of
-#'   the irreproducible component, \code{par[2]} is the mean value, \code{par[3]}
-#'   is the standard deviation, and \code{par[4]} is the correlation of the
-#'   reproducible component.
-#' @param threshold The thresholding level of the IDR rate.
+#'   the irreproducible component, \code{par[2]} is the mean value,
+#'   \code{par[3]} is the standard deviation, and \code{par[4]} is the
+#'   correlation of the reproducible component.
+#' @param threshold The threshold level of the IDR rate.
 #' @param theta A list of parameters for the full model as described in
-#' \code{\link{rtheta}}.
+#'   \code{\link{rtheta}}.
 #' @param \dots Arguments passed to \code{\link{qgmm.marginal}}.
 #' @return
 #' \code{get.IDR} returns a list of length 5 with elements:
 #'   \item{idr}{A vector of the local idr values. I.e. the posterior
-#'     probability that \code{x[i, ]} belongs to the irreprodicible component.}
+#'     probability that \code{x[i, ]} belongs to the irreproducible component.}
 #'   \item{IDR}{A vector of the adjusted IDR values.}
 #'   \item{l}{The number of reproducible features at the specified
 #'     \code{threshold}.}
