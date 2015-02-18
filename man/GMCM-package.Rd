@@ -17,7 +17,7 @@ If the meta analysis of Li et al. (2011) is to be performed, the
   function \code{\link{fit.meta.GMCM}} is used to identify the maximum
   likelihood estimate of the special Gaussian mixture copula model (GMCM)
   defined by Li et al. (2011). The function \code{\link{get.IDR}}
-  computes the local and adjusted Irreprodcible Discovery Rates defined
+  computes the local and adjusted Irreproducible Discovery Rates defined
   by Li et al. (2011) to determine the level of reproducibility.
 
   Tewari et. al. (2011) proposed using GMCMs as an general unsupervised
