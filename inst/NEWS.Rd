@@ -6,6 +6,7 @@
   \itemize{
     \item \code{rtheta} has been updated substantially to allow for finer and
       more explicit control if needed. Default is the old behavior.
+    \item Documentation has improved.
   }
 }
 
@@ -26,7 +27,7 @@
     \item \cpkg{GMCM} is no longer dependent on the \cpkg{mvtnorm} package.
       \cpkg{GMCM} now features faster simulation of data.
     \item Functions \code{rmvnormal} and \code{dmvnormal} are now exported and
-      visible to the user. These are now both implemented in Rcpp
+      visible to the user. These are now both implemented in \cpkg{Rcpp}
       and are faster versions of \code{rmvnorm} and
       \code{dmvnorm} from \cpkg{mvtnorm}.
     \item \cpkg{GMCM} is now using \cpkg{testthat} for automated
