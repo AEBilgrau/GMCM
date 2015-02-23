@@ -85,6 +85,6 @@ plot(uhat, cex = 0.5, pch = 4, main = "Classified genes",
      col = c("tomato", "steelblue")[idr$K],
      xlab = "rank(1-P) (U133)", ylab = "rank(1-P) (Exon)")
 ````
-The model indeed capture the the genes in the upper right (of the second panel) and classify these as reproducible.
+The model indeed capture the genes in the upper right (of the second panel) and classify tehm as reproducible.
 
 ---
