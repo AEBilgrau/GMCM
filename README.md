@@ -8,7 +8,7 @@ The [**GMCM** package](http://cran.r-project.org/package=GMCM) offers R function
 
 Gaussian copula mixture models (GMCMs) are a very flexible alternative to gaussian mixture models in unsupervised cluster analysis for continuous data where non-Gaussian clusters are present. GMCMs model the ranks of the observed data and are thus invariant to monotone increasing transformations of the data, i.e. they are semi-parametric and only the ordering of the data is important. Alternatively, a special-case of the GMCMs can be used for a novel meta-analysis approach in high-dimensional settings. In this context, the model tries to cluster results which agree and don't agree on statistical evidence into a reproducible and irreproducible group.
 
-The optimization of the complicated likelihood function is difficult, however. The **GMCM** package utilizes [**Rcpp**](https://github.com/RcppCore/Rcpp) and [**RcppArmadillo**](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly and arrive at a parameter estimate using various optimization routines.
+The optimization of the complicated likelihood function is difficult, however. The **GMCM** package utilizes [**Rcpp**](https://github.com/RcppCore/Rcpp) and [**RcppArmadillo**](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly and arrive at a parameter estimate using various standard numerical optimization routines.
 
 Additional information and documentation will follow. For now, run `help("GMCM")` in R for help and examples. The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 
@@ -38,7 +38,7 @@ For previous versions of **GMCM**, visit the old [releases at GitHub](https://gi
 
 ## Usage
 ### Meta Analysis example
-This is a very short tutorial for using the special GMCM for meta analysis. To illustrate we load the `u133VsExon` dataset within the package. The dataset contains 19577 P-values for the null hypothesis of no differential gene expression between two cell types for each of two different experiments called `u133` and `exon`.
+This is a very short tutorial for using the special GMCM for meta analysis. To illustrate we load the `u133VsExon` dataset within the package. The dataset contains 19,577 *p*-values for the null hypothesis of no differential gene expression between two cell types for each of two different experiments called `u133` and `exon`.
 ```R
 # Load and show data
 data(u133VsExon)
@@ -64,6 +64,7 @@ plot(uhat, cex = 0.5, pch = 4, col = "tomato", main = "Ranked P-values",
      xlab = "rank(1-P) (U133)", ylab = "rank(1-P) (Exon)")
 ```
 Here each point represent a gene. The genes in the lower left of the first panel and correspondingly in the upper right of the second panel are the seemingly reproducible genes.
+They have a low *p*-value and thus a high rank and *both* experiments.
 Next, we do the actual fit using the core user function `fit.meta.GMCM` with a L-BFGS-like procedure and subsequently compute the IDR values:
 ```R
 fit <- fit.meta.GMCM(uhat, init.par = c(0.5, 1, 1, 0.5), 
