@@ -1,0 +1,716 @@
+\documentclass[article,jss]{jss}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for jss.cls %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
+\author{Anders E.\ Bilgrau  \\ Aalborg University\And
+        Poul S.\ Eriksen    \\ Aalborg University\And
+        Jakob G.\ Rasmussen \\ Aalborg University\AND
+        Hans E.\ Johnsen    \\ Aalborg University Hospital\And
+        Karen Dybk\ae{}r    \\ Aalborg University Hospital\And
+        Martin B\o{}gsted   \\ Aalborg University Hospital}
+
+\Plainauthor{Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen, Hans Erik Johnsen, Karen Dybkaer, Martin Boegsted}
+\Plaintitle{Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
+\Shorttitle{\pkg{GMCM}: Gaussian Mixture Copula Models}
+
+\Abstract{
+Methods for unsupervised clustering is an important part of the statistical toolbox in numerous scientific disciplines.
+\cite{Tewari2011a} proposed to use so-called Gaussian Mixture Copula Models (GMCM) for general unsupervised clustering.
+\cite{Li2011} independently discussed a special case of these GMCMs as a novel approach to meta-analysis in high-dimensional settings.
+GMCMs have attractive properties which make them highly flexible and therefore interesting alternatives to well-established methods.
+However, parameter estimation is hard because of intrinsic identifiability issues and intractable likelihood functions.
+Both aforementioned papers discuss similar expectation-maximization-like (EM) algorithms as their pseudo maximum likelihood estimation procedure.
+We present and discuss an improved implementation in \proglang{R} of both classes of GMCMs along with various alternative optimization routines to the EM algorithm.
+The software is freely available through the accompanying \proglang{R} package \pkg{GMCM}.
+The implementation is fast, general, and optimized for very large numbers of observations.
+We demonstrate the use of \pkg{GMCM} through different applications. \hfill \vfill
+}
+\Keywords{\pkg{GMCM}, unsupervised clustering, high-dimensional experiments, meta-analysis, reproducibility, evidence aggregation, copulas, $p$-value combination, \pkg{idr}, \pkg{Rcpp}, \proglang{R}, \proglang{C++}}
+\Plainkeywords{GMCM, unsupervised clustering, high-dimensional experiments, meta-analysis, reproducibility, evidence aggregation, copulas, p-value combination, idr, Rcpp, R, C++}
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+Anders Ellern Bilgrau\\
+Department of Mathematical Sciences\\
+The Faculty of Engineering and Science\\
+Aalborg University\\
+9220 Aalborg East, Denmark\\
+E-mail: \email{abilgrau@math.aau.dk}\\
+URL: \url{http://people.math.aau.dk/~abilgrau/}
+}
+% \Address{
+%   Anders Ellern Bilgrau\\
+%   Department of Haematology Research Laboratory\\
+%   Faculty of Medicine\\
+%   Aalborg University Hospital\\
+%   9000 Aalborg, Denmark\\
+%   E-mail: \email{a.bilgrau@rn.dk}\\
+%   URL: \url{http://blodet.dk/}
+% }
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%% Preample %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \overfullrule=1mm # Make overfull boxes appear
+
+% LaTeX Packages
+\RequirePackage{amsmath}  % Enables the align enviroment
+\RequirePackage{amssymb}	% Math symbols (e.g. \mathbb{})
+\RequirePackage{dsfont} 	% For \mathds{1} blackboard bold 1
+
+% Regular figure
+\newcommand{\fig}[3]{
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=#2]{#1}
+  \end{center}
+  \vspace{-5mm}
+  \caption{\emph{#3}}
+  \label{#1}
+\end{figure}
+}
+
+% Tall figure
+\newcommand{\highfig}[3]{
+\begin{figure}
+  \begin{center}
+    \includegraphics[height=#2, keepaspectratio = true]{#1}
+  \end{center}
+  \vspace{-5mm}
+  \caption{\emph{#3}}
+  \label{#1}
+\end{figure}
+}
+
+% My LaTeX commmands
+\renewcommand{\vec}{\boldsymbol}
+\newcommand{\slfrac}[2]{\left.#1\middle/#2\right.}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbOne}{\mathds{1}}
+\newcommand{\var}{\text{var}}
+\newcommand{\mfJ}{\mathfrak{J}}
+\newcommand{\ellgmm}{\ell_{\text{GMM}}}
+\newcommand{\ellgmcm}{\ell_{\text{GMCM}}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\tr}{tr}
+\DeclareMathOperator*{\rank}{rank}
+
+%% END of preample %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+<<initalization, echo = FALSE, results = 'hide', message = FALSE>>=
+library("knitr")
+opts_chunk$set(concordance = TRUE, tidy = FALSE,
+               strip.white = TRUE, dev = 'pdf',
+               prompt = TRUE)
+
+# Change command prompt appearance
+options(replace.assign = TRUE, width = 70,
+        continue = "+  ", prompt = "R> ",
+        useFancyQuotes = FALSE)
+
+read_chunk('GMCM-Standalone.R')  # Read chunks in the script to input here
+@
+
+% Run the first chunk
+<<chunk_1, echo = FALSE, results = 'hide', message = FALSE>>=
+@
+
+\section{Introduction}
+Unsupervised cluster analysis is an important discipline in many fields of science and engineering for detection of clusters of data with similar properties. Gaussian mixture models (GMM) is perhaps the most widely used method for unsupervised clustering of continuous data. However, the assumption of jointly normally distributed clusters in GMMs is often violated. \cite{Tewari2011a} presented the semi-parametric class of Gaussian mixture copula models (GMCM) for general unsupervised clustering and highlighted them as a flexible alternative to GMMs when obvious non-normally distributed clusters are present. The attractiveness of the GMCMs is predominantly due to an invariance under all monotone increasing marginal transformations of the variables. This scale invariance of the variables stems from the rank-based nature of copula models and make the GMCMs highly versatile.
+
+The GMCMs have found some success in applications after \cite{Li2011} independently proposed using a special-case for a non-standard meta-analysis methodology named reproducibility analysis.
+Their method have been adopted by the ENCODE project \citetext{\citealp[p.~58]{Bernstein2012}; \citealp[p.~15]{Encode2011}} and applied on ChIP-sequencing data. The meta-analysis approach with GMCMs works by clustering genes or features that agree on statistical evidence and those that do not. In other words, the features are clustered into a reproducible and an irreproducible group. The flexibility of the GMCMs make them suitable for meta-analysis of multiple similar experiments.
+
+The work of \cite{Li2011} is especially important in genomics as both data and results are subject to substantial variability due to limited samples sizes, high dimensional feature spaces, dependence between genes, and confounding technological factors. This high variability have brought into question the reliability and reproducibility of many genomic results \citep{Ioannidis2001,Ein-dor2006,Tan2003}. Others, however, argue that the lack of reproducibility is only superficial \citep{Zhang2008}.
+Together with a rapid evolution of many different high-throughput technologies and vast on\-line repositories of publicly available data, this motivates the need for a robust and flexible meta-analysis toolbox, which can evaluate or aggregate results of multiple experiments even across confounding factors such as differing technologies.
+
+The high flexibility of the GMCMs comes at a cost, however. The likelihood is difficult to evaluate and maximize, partly because of intrinsic identifiability problems as we describe in detail later. We have solved some of the issues and implemented them in the package \pkg{GMCM} for \proglang{R} \citep{R}.
+
+Though copula theory is an elegant way of approaching rank-based methods, we present the GMCMs in a more traditional fashion. We refer to the general model of \cite{Tewari2011a} simply as the \textit{general model} or \textit{general GMCM} and the special case model of \cite{Li2011} is referred to as the \textit{special model} or \textit{special GMCM}.
+
+In the following, we present the general GMCM followed by the special case and the derivation of the likelihood function. Subsequently, the key features of the \pkg{GMCM} software package are presented and compared to the \pkg{idr} package. The technical details of the problematic maximization of the likelihood are then discussed. Finally, our package is evaluated by different applications before concluding with a discussion of GMCMs.
+
+This document was prepared and generated using \pkg{knitr} \citep{Xie2013}, a dynamic report generation tool inspired by Sweave \citep{Leisch2002}, and the \proglang{R}-packages \pkg{Hmisc} \citep{Harrell2014} and \pkg{RColorBrewer} \citep{Neuwirth2011}.
+
+\clearpage
+\section{Gaussian mixture copula models}
+\label{sec:GMCM}
+\subsection{The general GMCM for unsupervised clustering}
+We consider a large ${p \times d}$ matrix $[x_{gk}]$ of observed values where the rows are to be clustered into $m$ groups.
+The general GMCM assumes an $m$-component Gaussian mixture model (GMM) as a latent process, $\vec{Z} = (Z_1, ..., Z_d)^\top$, with the following distribution
+\begin{align}
+\text{GMM:}\qquad
+\begin{cases}
+\begin{aligned} \label{GMM}
+& H \sim \text{Categorical}(\alpha_1, ..., \alpha_m) \\
+& \vec{Z} |H = h \sim \mathcal{N}_d(\vec{\mu}_h, \vec{\Sigma}_h)
+\end{aligned}
+\end{cases}
+\end{align}
+where $H \in \{1, 2, ..., m\}$ corresponds to the class and $\alpha_1, ..., \alpha_m$ are the mixture proportions satisfying $\sum_{h = 1}^m \alpha_h = 1$. Thus, the latent GMM is parameterized by
+\begin{align*}
+\vec{\theta} = (\alpha_1, ..., \alpha_m, \vec{\mu}_1, ..., \vec{\mu}_m, \vec{\Sigma}_1, ..., \vec{\Sigma}_m).
+\end{align*}
+We denote the joint and $k$'th marginal cumulative distribution functions (cdf) of the GMM by
+\begin{align*}
+\Gamma(\vec{z};\vec{\theta}) = \sum_{h=1}^m
+\alpha_h \Phi(\vec{z}; \vec{\mu}_h, \vec{\Sigma}_h)
+\quad\text{ and }\quad
+\Gamma_k(z;\vec{\theta}) = \sum_{h=1}^m
+\alpha_h \Phi_k(z; \vec{\mu}_h, \vec{\Sigma}_h),
+\end{align*}
+respectively, where $\Phi$ and $\Phi_k$ are the joint and $k$'th marginal cdfs of the multivariate normal distributions, respectively.
+Analogous equations hold for the joint and marginal probability density functions (pdf) which we denote by lower-case $\gamma$ and $\gamma_k$.
+
+Let $\vec{X} = (X_1, ..., X_d)^\top$ be an observation with \textit{known} marginal cdfs $F_1,...,F_d$ and assume the relationship
+\begin{align} \label{eq:link}
+X_{k} = F_k^{-1}\!\big(\Gamma_k(Z_{k}; \vec{\theta})\big), \quad \forall k \in \{1, ..., d\}
+\end{align}
+between the observed and the latent variables. By Equation \eqref{eq:link} and the probability integral transform the vector $\vec{U} = (U_1, ..., U_d)^\top$ where $U_k = \Gamma_k(Z_k) = F_k(X_k)$ have uniformly distributed marginals.
+
+When $F_1, ..., F_d$ are known we can derive an expression for the likelihood of this model.
+For later use we simplify the notation by introducing the vector functions $\Gamma_\circ : \bbR^d \times \Theta \to \bbR^d$ and $F_\circ : \bbR^d \to \bbR^d$ defined by
+\begin{align*}
+\Gamma_\circ(\vec{Z}; \vec{\theta})
+= \big(\Gamma_1(Z_1; \vec{\theta}), ..., \Gamma_d(Z_d; \vec{\theta})\big)^\top
+%  = (U_1, ..., U_d)^\top, \quad \text{and}
+%  = \vec{U} \\
+\quad\text{ and }\quad
+F_{\circ}(\vec{X}) = \big(F_1(X_1), ..., F_d(X_d)\big)^\top,
+\end{align*}
+where $\Theta$ is the parameter space.
+The vector function $\Gamma_\circ$ applies the $k$'th marginal transformation $\Gamma_k$ on the $k$'th entry of the observation and similarly does $F_{\circ}$.
+Again by the probability integral transform,  $\vec{Z}$ is transformed by $\Gamma_\circ$ into the marginally uniformly distributed random vector $\vec{U}$ with cdf
+\begin{align*}
+  C(\vec{u};\vec{\theta})
+  = \Gamma\big(\Gamma_\circ^{-1}(\vec{u};\vec{\theta});\vec{\theta}\big).
+\end{align*}
+
+The pdf $c$ of $\vec{U}$ is computed by the change of variables theorem or by differentiation of $C$ using the multivariable chain rule. If we abbreviate notationally by not explicitly stating dependence on parameters $\vec{\theta}$, the pdf is given by
+\begin{align} \label{GMCMdens}
+c(\vec{u}; \vec{\theta})
+= \gamma\big(\Gamma_\circ^{-1}(\vec{u})\big)
+\left\vert J_{\Gamma_\circ^{-1}}(\vec{u})\right\vert
+%&= \gamma\big(\Gamma_\circ^{-1}(\vec{u})\big)
+%\prod_{k = 1}^d \frac{1}{\gamma_k\big(\Gamma_k^{-1}(u_k)\big)} \notag \\
+= \frac{\gamma\big(\Gamma_\circ^{-1}(\vec{u})\big)}
+{\prod_{k = 1}^d\gamma_k\big(\Gamma_k^{-1}(u_k)\big)}
+\end{align}
+since the Jacobian matrix $J_{\Gamma_\circ^{-1}}(\vec{u})$ is diagonal.
+The cdf $C$ and pdf $c$ are the so-called \textit{copula} and \textit{copula density} of the GMM model, respectively \citep{Nelsen2006}.
+Hence $\vec{U}$ is distributed according to the Gaussian mixture copula density $c$, and the observation $\vec{X}$ is some marginal transformation of $\vec{U}$. The model is thus completely specified by
+\begin{align}
+\text{GMCM:}\quad
+\begin{cases}
+\begin{aligned} \label{GMCM}
+& H \sim \text{Categorical}(\alpha_1, ..., \alpha_m) \\
+& \vec{Z} | H = h \sim \mathcal{N}_d(\vec{\mu}_h, \vec{\Sigma}_h) \\
+& \vec{U} = \Gamma_\circ(\vec{Z}; \vec{\theta}) \\
+& \vec{X} = F_{\circ}^{-1}(\vec{U}).
+\end{aligned}
+\end{cases}
+\end{align}
+From this, we see the GMCM operates on three levels, a latent level $\vec{Z}$, a copula level $\vec{U}$, and an observed level $\vec{X}$.
+%For reasons clarified later, the $\vec{U}$ level could also rightly be called the rank level.
+Figure \ref{Figure1.png} (A-C) illustrates the three levels of a $2$-dimensional $3$-component GMCM. Here, $F_\circ$ and $F_\circ^{-1}$ maps panel A to B and B to A, respectively. Likewise, $\Gamma_\circ$ defines the mappings between panels C and B.
+
+To assess the class of an observation, \cite{Tewari2011a} proposed using
+\begin{align} \label{apostprob}
+\kappa_{h} = P(H = h \;|\; \vec{u}, \vec{\theta}),
+\end{align}
+which is the a posteriori probability that the observation was generated from component $h$. To decide the class for the observation, the maximum a posteriori (MAP) estimate can be used. That is, the $h$ corresponding to $\max_h(\kappa_{h})$.
+
+
+\subsection{The special-case GMCM for meta-analysis}
+In the \cite{Li2011} reproducibility analysis, the $p\times d$ matrix $[x_{gk}]$ consists of test-statistics or $p$-values interrogating the same null hypothesis for a large number $p$ of e.g., genes for each of $d \geq 2$ studies.
+Rows corresponds to genes, indexed by $g$, and columns to experiments, indexed by $k$.
+Without loss of generality, \textit{large} values are considered to be indicative of the alternative hypothesis.
+A prototypical example in genomics is a matrix of transformed $p$-values for the hypothesis of no differential expression of genes between treatment and control groups for two or more experiments.
+The task is here to determine which genes $g$ are commonly significant in all experiments. Ordinary meta-analysis methodologies involve combining confidence intervals of effect sizes, test-statistics, or $p$-values in a row-wise manner and assessing the significance whilst controlling the number of false positives \citep{Owen2009a}.
+
+\cite{Li2011} proposed a special case of \eqref{GMCM} with $m = 2$ components corresponding to whether the null or alternative hypothesis is true, where $h = 1$ corresponds to spurious signals and $h = 2$ to genuine ones. Hence $\alpha_1$ and $\alpha_2 = 1 - \alpha_1$ is the fraction of spurious and genuine signals, respectively.
+\cite{Li2011} further assumes the following constraints on the parameters
+\begin{equation}\label{eq:specialcase1}
+\begin{aligned}
+\vec{\mu}_1 &= \vec{0}_{d\times 1} \phantom{\mu} = (0, 0, ..., 0)^\top,\\
+\vec{\mu}_2 &= \vec{1}_{d\times 1} \mu = (\mu, \mu, ..., \mu)^\top,
+\quad \mu > 0
+\end{aligned}
+\end{equation}
+and
+\begin{align} \label{eq:specialcase2}
+\vec{\Sigma}_{1} = \vec{I}_{d\times d} =
+\begin{bmatrix}
+1 & 0 & \cdots\\
+0 & 1 & \cdots\\
+\vdots & \vdots & \ddots
+\end{bmatrix},
+\qquad
+\vec{\Sigma}_{2} =
+\begin{bmatrix}
+\sigma^2 & \rho\sigma^2 & \cdots\\
+\rho\sigma^2 & \sigma^2 & \cdots\\
+\vdots & \vdots & \ddots
+\end{bmatrix},
+\end{align}
+where $\rho\in[-(d-1)^{-1},1]$ and $\sigma^2 > 0$. The lower bound on $\rho$ is a requirement for $\vec\Sigma_2$ to be positive semi-definite.
+In other words, if the null-hypothesis is true, the latent variable is a $d$-dimensional standard multivariate normal distribution.
+If not, it is an latent $d$-dimensional multivariate normal distribution with equal means and a compound symmetry covariance structure.
+Figure \ref{Figure1.png} (D-F) shows an example of the observed, copula, and latent levels of the special GMCM where $d=2$.
+
+With the above constraints the special model is parameterized by only $\vec{\theta} = (\alpha_1, \mu, \sigma^2, \rho)$ whereby the dimensionality of the parameter space is substantially reduced.
+Furthermore, all marginal cdfs are equal, $\Gamma_1 = \cdots = \Gamma_d$, and similarly are all pdfs equal, $\gamma_1 = \cdots = \gamma_d$.
+
+\cite{Li2011} defines the \textit{local irreproducibility discovery rate} of an observation as
+\begin{align}
+  \label{eq:idr}
+  \text{idr}(\vec{u}) = \kappa_{1} = P(H = 1 \;|\; \vec{u}, \vec{\theta}),
+\end{align}
+analogously to local false discovery rate (Lfdr) of \cite{Efron2004, Efron2005, Efron2007}.
+Notice, that Equation \eqref{apostprob} coincide with Equation \eqref{eq:idr} for the special model.
+As the multiple testing problem is present when more observations are obtained, an adjusted \textit{irreproducibility discovery rate} was also defined by \cite{Li2011}:
+\begin{align}
+  \label{eq:IDR}
+  \text{IDR}(\alpha) = P(H = 1 \;|\; \vec{u} \in I_\alpha, \vec{\theta})
+\end{align}
+where $I_\alpha = \{\vec{u} \;|\; \text{idr}(\vec{u}) < \alpha\}$, i.e., the probability of a gene being non-reproducible while in the rejection region.
+The adjusted $\text{IDR}(\alpha)$ relates to $\text{idr}$ in the same manner as marginal false discovery rate (mFDR) relates to the Lfdr.
+
+
+
+\subsection{The GMCM likelihood function} \label{GMCMlikelihoodfunction}
+Suppose we have observed $p$ i.i.d.\ samples $\vec{x}_1 = (x_{11}, ..., x_{1d}), ..., \vec{x}_p = (x_{p1}, ..., u_{pd})$ from Equation \eqref{GMCM} which can be arranged into the observation matrix introduced in Section \ref{sec:GMCM}.
+From these, the marginal uniform variables $\vec{u}_1 = F_\circ(\vec{x}_1) = (u_{11}, ..., u_{1d}), ..., \vec{u}_p = F_\circ(\vec{x}_p) = (u_{p1}, ..., u_{pd})$ are computed and are independent and identically distributed according to the copula density of Equation \eqref{GMCMdens}. The log-likelihood is thus given by
+\begin{align} \label{GMCMloglik}
+\ell\!\big(\vec{\theta};&\{ \vec{x}_g \}_{g=1}^p\big)
+\propto
+\ell\!\big(\vec{\theta}; \{ \vec{u}_g \}_{g=1}^p\big)
+= \sum_{g = 1}^p \log c(\vec{u}_g; \vec{\theta}) \\ \notag
+=& \sum_{g = 1}^p \log \sum_{h = 1}^{m}
+\frac{\alpha_h}{\sqrt{(2\pi)^{d}|\vec{\Sigma}_h|}}
+\exp\!\left(
+-\frac{1}{2}\big(\Gamma_\circ^{-1}(\vec{u}_g) - \vec{\mu}_h\big)^\top
+\vec{\Sigma}_h^{-1}
+\big(\Gamma_\circ^{-1}(\vec{u}_g) - \vec{\mu}_h\big) \right) \\ \notag
+&\quad - \sum_{g = 1}^p
+\sum_{k = 1}^d \log
+\sum_{h = 1}^{m} \frac{\alpha_h}{\sqrt{2\pi{\Sigma}_{hkk}}}
+\exp\!\left(
+- \frac{1}{2{\Sigma}_{hkk}} \big(\Gamma_k^{-1}(u_{gk}) - \mu_{hk}\big)^2
+\right),
+\end{align}
+since the Jacobian arising from transformation $F_\circ$ is not dependent on $\vec{\theta}$ (and thus constant when optimizing with respect to $\vec{\theta}$).
+
+In practice, $F_1, ..., F_d$ are unknown and estimated by the empirical cdf
+\begin{align*}
+  \hat{F}_k^{(p)}(x) = \frac{1}{p} \sum_{g=1}^p \bbOne[x_{gk} \leq x].
+\end{align*}
+Hence the pseudo-observations
+\begin{align}
+  \label{eq:uhat}
+  \hat{u}_{gk} = \hat{F}_k^{(p)}(x_{gk}) = \frac{1}{p}\rank(x_{gk})
+\end{align}
+of $u_{gk}$ are plugged into the log-likelihood and the maximizing parameters are found.
+However, since $p$ is large, $\hat{F}_k^{(p)}$ is a good estimate of $F_k$ and thus $\hat{u}_{gk} = \hat{F}_k^{(p)}(x_{gk}) \approx F_k(x_{gk}) = u_{gk}$.
+The GMCM is rank-based since plugging a variable into its empirical cdf corresponds to a particular ranking scheme in which the lowest value is awarded rank 1 and ties are given their largest available rank. To avoid infinities in the computations $\hat{u}_{gk}$ is rescaled by the factor $\frac{p}{p+1}$.
+
+The usage of $\hat{u}_{gk}$ violate the assumption of independent observations as the ranking introduces dependency between the observations. The introduced dependency is arguably negligible when $p$ is large. We ignore this problem and refer to \cite{Chen2006} and the references therein for a more detailed discussion about this problem which is common to all copula model estimation procedures.
+
+\fig{Figure1.png}{\textwidth}{From left to right the observed, copula (or rank), and latent process is shown. The first and second row of panels illustrate $10{,}000$ realizations from the general and special model, respectively. The component from which the realizations come are visualized by colour and point-type. Each dimension in the special model corresponds to an experiment where simultaneously high values in both experiments are indicative of good reproducibility.}
+
+
+\section[The GMCM package]{The \pkg{GMCM} package}
+\subsection{Package overview}
+The \pkg{GMCM} package currently have \Sexpr{length(ls("package:GMCM"))} user visible functions of which the majority are for convenience.
+The functions are presented in Table \ref{tab:gmcmfunctions} and the \pkg{GMCM} reference manual.
+Two different parameter formats are used depending on use of the special or general model.
+In the general model a specially formatted list of parameters is used, named \code{theta} in function arguments and documentation.
+The \code{rtheta} function generates such a prototypical list with random parameters and \code{is.theta} conveniently tests if the argument is properly formatted.
+If the special model is to be used, the required parameters are simply given in a numeric vector $(\alpha_1, \mu, \sigma, \rho)$ of length 4, named \code{par} in arguments and documentation.
+The useful functions \code{meta2full} and \code{full2meta} provide easy conversion between the general \code{theta} and the special \code{par} format.
+
+\begin{table}[!tbp]
+\begin{center}
+\begin{tabular}{lp{11cm}}
+\hline\hline
+\multicolumn{1}{l}{Function}
+&\multicolumn{1}{c}{Description}
+\tabularnewline
+\hline
+\code{fit.full.GMCM}
+& Fit the general model\hfill\eqref{GMCM}
+\tabularnewline
+\code{fit.meta.GMCM}
+& Fit the special model\hfill\eqref{GMCM}\eqref{eq:specialcase1}\eqref{eq:specialcase2}
+\tabularnewline
+\code{get.prob}
+& \raggedright Get class probabilities for the general model \hfill\eqref{apostprob}
+\tabularnewline
+\code{get.IDR}
+& \raggedright Get class probabilities (idr and IDR) for the special model \hfill\eqref{eq:idr}\eqref{eq:IDR}
+\tabularnewline
+\code{SimulateGMCMData}
+& \raggedright Generate samples from a GMCM\hfill\eqref{GMCM}
+\tabularnewline
+\code{SimulateGMMData}
+& \raggedright Generate samples from a GMM\hfill\eqref{GMM}
+\tabularnewline
+\code{Uhat}
+& \raggedright Rank and scale the columns of the argument. \hfill\eqref{eq:uhat}
+\tabularnewline
+\code{choose.theta}
+& \raggedright Choose starting parameters in the general GMCM.\hfill
+\tabularnewline
+\code{full2meta}
+& \raggedright Convert from \code{theta}-format to \code{par}.\hfill
+\tabularnewline
+\code{meta2full}
+& \raggedright Convert from \code{par}-format to \code{theta}.\hfill
+\tabularnewline
+\code{rtheta}
+& \raggedright Generate random \code{theta}.\hfill
+\tabularnewline
+\code{is.theta}
+& \raggedright Test if \code{theta} is correctly formatted.\hfill
+\tabularnewline
+\code{rmvnormal}
+& \raggedright Generate multivariate gaussian observations.\hfill
+\tabularnewline
+\code{dmvnormal}
+& \raggedright Fast evaluation of multivariate Gaussian pdf.\hfill
+\tabularnewline
+\hline
+\end{tabular}
+\caption{Overview of the visible user functions and their purpose in approximate order of importance. Confer the documentation (e.g., \code{help("Uhat")}) for function arguments and return types. Relevant equations are right-justified.\label{tab:gmcmfunctions}}
+\end{center}
+\end{table}
+
+The most important functions \code{fit.full.GMCM} and \code{fit.meta.GMCM} fit the general and special GMCMs, respectively.
+The \code{method} argument of these functions specify the optimization routine to be used.
+If the general model is used \code{get.prob} returns a matrix of posterior probabilities $\kappa_{gk}$ defined in Equation \eqref{apostprob}.
+In the special model, the \code{get.IDR} is used to compute local idr (i.e., the posterior probability of belonging to the irreproducible component) and adjusted IDR values.
+
+The \code{SimulateGMMData} and \code{SimulateGMCMData} functions provide simulation of observations from the models specified in Equations \eqref{GMM} and \eqref{GMCM}, respectively.
+
+Beside the following tutorial, a small usage example of the special model is also found in \code{help("GMCM")}. All simulations and computations were carried out on a regular laptop (1.7 GHz Intel Core i5, 4GB DDR3 RAM).
+
+\subsection{Using the package}
+<<start_example, echo = FALSE, eval = TRUE>>=
+@
+
+We proceed with a small tutorial on the package.
+As an illustration, we load the package and simulate \Sexpr{prettyN(n)} observations from a 2-dimensional 3-component GMCM with randomly chosen parameters in the following manner:
+
+<<start_example, echo = TRUE, eval = FALSE>>=
+@
+
+The \code{sim} object is a \code{list} containing the \code{matrix} of the realized latent process (\code{sim\$z}), the \code{matrix} of true realizations from the GMCM density (\code{sim\$u}), the formatted parameters (\code{sim\$theta}), and the component from which each observation is realized (\code{sim\$K}). Figure \ref{Figure2.png} shows the realized data.
+
+<<make_simulation_example_png, results = 'hide', echo = FALSE>>=
+@
+\fig{Figure2.png}{\textwidth}{Panel A shows realizations from the latent process and panel B the corresponding marginally uniformly distributed process. Note, that while B shows true realizations from the GMCM $\vec{u}_g$ the ranked observed values $\hat{\vec{u}}_g$ are almost visually identical because of the relative large number of observations.}
+
+Subsequently, we select a starting estimate from the data, fit the ranked observed data using Nelder-Mead (\code{NM}), and compute the posterior probabilities of each observation belonging to each component:
+<<run_example, results = 'hide', eval = FALSE>>=
+@
+
+<<time_run_example, results = 'hide', echo = FALSE, warning=FALSE>>=
+st <- proc.time()
+info <- capture.output({
+<<run_example>>
+})
+elapsed <- round((proc.time() - st)[3], 1)
+nm.ite <- as.numeric(sub(" *([0-9]+) [a-z ]+", "\\1", info[length(info)]))
+@
+
+The function \code{Uhat} ranks and rescales as described in Section \ref{GMCMlikelihoodfunction}.
+The \code{choose.theta} function uses the $k$-means algorithm on the rank-level to find an initial set of parameters.
+From the $k$-means clustering, crude estimates of the mixture proportions, mean values, and variances can be computed. The correlations in all components are taken to be zero. This usually provides reasonable initial parameters.
+Objections may be made to using such a procedure on the rank and not latent level.
+However, as we are only interested in the relative position of the components this often serves as a reasonable starting parameter.
+The \code{fit.full.GMCM} does the actual optimization of the likelihood to arrive at the MLE.
+The default Nelder-Mead \code{(NM)} procedure converged in \Sexpr{prettyN(nm.ite)} iterations in about \Sexpr{elapsed} second\Sexpr{ifelse(elapsed==1,"","s")}.
+
+<<simulation_example_results, results = 'hide', echo = FALSE>>=
+@
+<<confusion_table, results = 'asis', echo = FALSE>>=
+@
+
+In serious applications the starting values should be chosen carefully and the algorithm ought to be started at different positions of the parameter space to investigate the stability and uniqueness of the maximum likelihood estimate. The estimate with the largest likelihood should then be chosen.
+
+\fig{Figure3.png}{\textwidth}{Panel A shows the estimated class labels of the observations by colour and point-type. As a model control panel B and C shows \Sexpr{prettyN(n)} realizations from the GMM and GMCM using the fitted parameters.}
+
+The confusion matrix for the GMCM clustering, seen in Table \ref{confusion.mat}, yields an accuracy of $\Sexpr{acc}$\%. In (unfair) comparison, the $k$-means algorithm have an accuracy of $\Sexpr{acc.km}$\%. Figure \ref{Figure3.png} shows the clustering results and simple model checks by simulation from the fitted parameters.
+Though a high clustering accuracy is achieved, we see from the model check in Figure \ref{Figure3.png}B compared to Figure \ref{Figure2.png}A that the underlying parameters are not really identifiable. However, we see from panel C, that the fitted parameters model the observed ranks closely and thus provide a high predictive accuracy.
+
+
+
+\subsection{Runtime and technical comparison}\label{techcomp}
+For the special model, the \pkg{GMCM} package implements an arbitrary number of dimensions (or experiments) $d$ to be included whereas the \pkg{idr} package only supports $d = 2$. The \pkg{GMCM} package considerably decreases the per iteration runtime of the pseudo expectation-maximization (PEM) algorithm compared to the \pkg{idr} package. The optimization procedures such as Nelder-Mead (NM), simulated annealing (SANN), and others which only rely on evaluations of the likelihood further reduce the runtime compared to the PEM.
+
+Run and iteration times for an increasing number of observations are seen in Table \ref{speed.tab} on a simulated dataset with parameters $(\alpha_1, \mu, \sigma, \rho) = (\Sexpr{paste(speed.par, collapse=", ")})$.
+The algorithms were all run with the starting values $(\Sexpr{alpha}, \Sexpr{mu}, \Sexpr{sigma}, \Sexpr{rho})$.
+The parameters were chosen such that the \pkg{idr} package does not converge prematurely.
+
+<<table_speed_res, tidy = FALSE, echo = FALSE, results='asis'>>=
+@
+
+To assess the optimization routines in the \pkg{idr} and \pkg{GMCM} packages, $\Sexpr{simulation.n.sims}$  datasets with $\Sexpr{prettyN(simulation.n.obs)}$ observations were simulated from the special model with parameters $\vec{\theta} = (\Sexpr{paste(simulation.true.par, collapse =",")})$. The special model was fitted  to each of the datasets using each of the available routines with random initial parameter values. Figure \ref{Figure4.pdf} shows the results from the fitting procedures. The maximum number of iterations were set to \Sexpr{prettyN(simulation.max.ite)}. The SANN procedure was given $3{,}000$ iterations.
+
+\fig{Figure4.pdf}{\textwidth}{Parameter fitting results for the different optimization procedures. From left to right, the first four panels show plots of the fitted parameter estimates. The true parameter values are plotted as vertical lines. Next, the mean clustering accuracy (and standard deviation), total run time in minutes for all $\Sexpr{simulation.n.sims}$ fits, and the number of warnings and errors is shown. The last panel shows the number of iterations for each fit. The black vertical lines indicate the median.}
+
+The clusters of parameter estimates away from the true values seen in Figure \ref{Figure4.pdf} presumably corresponds to local maxima of the likelihood. Hence many of the procedures are fairly often caught in such local maxima. Interestingly, while the estimates of the standard deviation $\hat{\sigma}$ and correlation $\hat{\rho}$ for the PEM algorithm seem to be biased, the algorithm achieved a high clustering accuracy. We also see that the PEM algorithms in \pkg{GMCM} and \pkg{idr} behave quite differently.
+The maximal number of iterations, \Sexpr{simulation.max.ite}, was hit only by the PEM algorithm $\Sexpr{simulation.max.ite.hit["PEM (idr)"]}$ and $\Sexpr{simulation.max.ite.hit["PEM (GMCM)"]}$ times for the \pkg{idr} and \pkg{GMCM} packages, respectively. Also notable is the factor $\Sexpr{round(sum(sapply(simulation.res.PEMidr, "[[", "time"))/sum(sapply(simulation.res.NM, "[[", "time")),1)}$ reduction in total runtime from between the fastest and slowest fitting procedures.
+
+All warnings produced by the PEM algorithm in \pkg{idr} was \code{"NaNs produced"}. PEM in \pkg{GMCM} only warned that the maximum number of iterations was reached. The errors produced by SANN and L-BFGS-B seemingly arise as the estimates of the covariance matrix became singular. The vast majority of the errors by L-BFGS was divergence to non-finite likelihood values. The only unique error thrown by PEM (\pkg{idr}), \code{"missing value where TRUE/FALSE needed"}, seems to stem from a simple bug.
+
+Considering computational efficiency and robustness, accuracy, and precision of parameter estimates, we chose the Nelder-Mead as the default optimization procedure.
+
+\subsection{Availability of the package}
+The \pkg{GMCM} package is open-source and available both at the CRAN (Comprehensive \proglang{R} Archive Network) and  at the GitHub repository \url{https://github.com/AEBilgrau/GMCM.git} for bug reports as well as easy forking and editing.
+
+
+
+
+\section{Maximum likelihood estimation}
+\subsection{Maximizing the likelihood}
+The optimization of the likelihood function in Equation \eqref{GMCMloglik} is non-trivial. There exists no closed form expression for $\Gamma_k^{-1}$. Furthermore there are intrinsic problems of identifiability of the GMCM parameters. These problems will greatly affect any estimation procedure.
+
+Both \cite{Li2011} and \cite{Tewari2011a} make use of a pseudo EM (PEM) algorithm to find the maximizing parameters. \cite{Tewari2011a} use the PEM as a ``burn-in'' and switch to a gradient decent algorithm.
+Both authors derive the likelihood function of the GMM, $\ellgmm$, specified by Equation \eqref{GMM} and the estimators for the corresponding EM algorithm.
+The PEM algorithm then iteratively alternates between estimating pseudo-observations $\hat{z}_{gk} = \Gamma_k^{-1}(\hat{u}_{gk};\vec{\theta})$ and subsequently updating $\vec{\theta}$ by an E and M step.
+While this intuitively is a viable approach, it effectively ignores the Jacobian of Equation \eqref{GMCMdens} as the transformation $\Gamma^{-1}$ depends on the parameters $\vec{\theta}$. In short, the wrong likelihood is thus optimized and a pseudo (or quasi) maximum likelihood estimate is found. This may yield an inefficient optimization routine and biased parameter estimates. This problem of the PEM is appreciated by \cite{Tewari2011a}.
+
+A fundamental problem with the PEM algorithm is the alternating use of pseudo-observations and parameter updates. The pseudo data is not constant in the $\ellgmm$  which implies no guarantee of convergence nor convergence to the correct parameters.
+
+To clarify, let $\vec{\theta}^{(m)}$ denote the $m$'th estimate of $\vec{\theta}$. From $\vec{\theta}^{(m)}$, pseudo data is estimated by
+\begin{align*}
+\hat{z}_{gk}^{(m)}
+= \Gamma_k^{-1}\!\big( \hat{u}_{gk};  \vec{\theta}^{(m)}\big),
+\quad  g \in \{1, ..., p\}, \; k \in \{1, ...,d\}.
+\end{align*}
+The PEM algorithm alternates between updating parameter estimates and pseudo data which results in the following log-likelihood values,
+\begin{align*}
+\ldots,
+& \ellgmm\big(\vec{\theta}^{(m)}  \big| \{\hat{\vec{z}}_g^{(m)} \}_{g}\big),\;  \ellgmm\big(\vec{\theta}^{(m+1)}\big| \{\hat{\vec{z}}_g^{(m)}\}_{g}\big),\;\\
+&\quad
+\ellgmm\big(\vec{\theta}^{(m+1)}\big| \{\hat{\vec{z}}_g^{(m+1)}\}_{g}\big),\;
+\ellgmm\big(\vec{\theta}^{(m+2)}\big| \{\hat{\vec{z}}_g^{(m+1)}\}_{g}\big),\;
+\ldots,
+\end{align*}
+given in the order of computation. Conventionally, convergence is established when the difference of successive likelihoods is smaller than some $\epsilon>0$.
+The implementation of \cite{Li2011} through the package \pkg{idr} for \proglang{R} determines convergence if
+\begin{align*}
+\ellgmm\big(\vec{\theta}^{(m+1)}\big| \{\hat{\vec{z}}_g^{(m+1)}\}_{g=1}^p\big) -
+\ellgmm\big(\vec{\theta}^{(m)}  \big| \{\hat{\vec{z}}_g^{(m)}\}_{g=1}^p\big) < \epsilon,
+\end{align*}
+where $\epsilon > 0$ is pre-specified.
+However, an increase in successive likelihoods is only guaranteed by the EM algorithm when the (pseudo) data are constant.
+Since both the pseudo data and parameter estimate have changed the above difference can be, and often is to our experience, negative. In the \pkg{idr} package this sometimes happens in the first iteration without warning.
+Such cases arguably stops the procedure prematurely since a negative difference obviously is smaller than some positive $\epsilon$.
+The EM algorithm only guarantees that the difference
+\begin{align*}
+\ellgmm\big(\vec{\theta}^{(m+1)}\big| \{\hat{\vec{z}}_g^{(m)}\}_{g=1}^p\big) -
+\ellgmm\big(\vec{\theta}^{(m)}  \big| \{\hat{\vec{z}}_g^{(m)}\}_{g=1}^p\big)
+\end{align*}
+is non-negative and thus might be more suitable for determining convergence.
+
+The PEM convergence criterion used by \cite{Tewari2011a} is when the difference in successive parameters estimates is sufficiently small while recording the highest observed likelihood estimate which partly remedy the problem. However, the PEM still inherits the conventional problems of the EM algorithm. It often exhibit slow convergence and offers no guarantee for finding the global optimum.
+
+Our software package \pkg{GMCM} offers fast optimization of both the general and special models. Our implementation of the PEM algorithm supports various convergence conditions. By default, it determines convergence when
+\begin{align*}
+\Big\vert
+\ellgmcm\big(\vec{\theta}^{(m+1)}\big| \{\hat{\vec{u}}_g^{(m)}\}_{g=1}^p\big) - \ellgmcm\big(\vec{\theta}^{(m)}  \big| \{\hat{\vec{u}}_g^{(m)}\}_{g=1}^p\big)
+\Big\vert < \epsilon.
+\end{align*}
+and returns the parameters which yield the largest likelihood. This is not necessarily the one obtained in the last iteration. The internal function \code{PseudoEMAlgorithm} is called when \code{fit.full.GMCM} or \code{fit.meta.GMCM} are run with \code{method = "PEM"}..
+
+Instead of the EM approach, however, we propose optimizing the GMCM likelihood function in Equation \eqref{GMCMloglik} using procedures relying only on likelihood evaluations. To make this a feasible approach considerable effort has been put into evaluating the log-likelihood function of Equation \eqref{GMCMloglik} in a fast manner by implementing core functions in \proglang{C++} using \pkg{Rcpp} and \pkg{Rcpp\-Armadillo} \citep{Rcpp2013, Eddelbuettel2011, RcppArmadillo}. With fast likelihood evaluations the standard \code{optim} optimization procedure in \proglang{R} is used with various optimization procedures, such as Nelder-Mead (the amoeba method), simulated annealing, and BFGS quasi-Newton methods.
+
+When the parameters are passed to \code{optim} we use various transformations to reformulate the optimization problem as an unconstrained one. We logit-transform the mixture proportions. In the general model, a Cholesky decomposition combined with a log-transformation is used to ensure positive definiteness of the covariance matrices. In the special model, the variance $\sigma^2$ is ensured positive by a log-transform. The restriction on the correlation $\rho$ to the interval $[-(d-1)^{-1}, 1]$ is guaranteed by an affine and logit function composition.
+
+Additional speed have also been obtained by faster inversion of the marginals $\Gamma_k$. Similarly to \cite{Li2011}, we linearly interpolate between function evaluations. However, we distribute the default $\Sexpr{prettyN(formals(GMCM:::qgmm.marginal)$res)}$ function evaluations to each component according to the current estimate of the mixture proportions. The determined number of function evaluations for component $h$ within the $k$'th dimension is then sampled equidistantly in the interval $\mu_{hk} \pm a\sqrt{\Sigma_{hkk}}$ where $a = \Sexpr{formals(GMCM:::qgmm.marginal)$spread}$ by default. Lastly, the monotonicity of $\Gamma_k$ is used to quickly invert the function by reflection around the identity line. Furthermore, we approximate the mixture cdf $\Gamma_k$ by using the approximation of the error function $\text{erf}(x) \approx 1 - (a_1t + a_2t^2 + a_3t^3)\exp(-x^2)$ where $t = 1/(1+bx)$ and $a_1, a_2, a_3,$ and $b$ are constants \citetext{\citealp[p.~299]{Abramowitz1970}; \citealp{Hastings1955}}.
+
+
+\subsection{Identifiability of parameters}
+The model suffers from unidentifiable parameter configurations.
+As a consequence of the GMCM invariance to translations only relative distances between the location parameters $\vec{\mu}_1, ..., \vec{\mu}_m$ can be inferred.
+%Particularly the location parameters of the GMCM are non-estimable in general.
+We arbitrarily anchor the first component at $\vec{\mu}_1 = \vec{0}$ as a partial solution.
+To account for scaling invariance, the first component is required to have unit variance in each dimension, that is $\Sigma_{1kk} = 1$ for all $k$.
+However, problems of identifiability persists in a number of scenarios.
+In cases where two or more components in the latent GMM are well-separated from each other the relative distances and component variances are not identifiable for all practical purposes.
+For example in the special GMCM, the parameter configuration $\vec{\theta}=(0.5, 10, 1, 0)$, say, will be indistinguishable from $(0.5, 100, 1, 0)$.
+The ranking destroys all information about the relative variances and distances between the well-separated components.
+
+The clustering might also easily fail when the location and variation parameters for two or more components are similar along the same dimension. Suppose for example that $\vec{\mu}_1 = (0,0)$, $\vec{\mu}_2=(4,0)$, and $\vec{\Sigma}_1 = \vec{\Sigma}_2 = \vec{I}_{2\times 2}$ where the location and variation parameters equal along the ordinate axis. In such cases, the ranking will create a homogeneous cluster which cannot be easily be separated.
+
+Even though the parameters may not be fully estimable in all cases, the general model can still be an effective clustering algorithm if measured by clustering accuracy.
+
+Table \ref{BadEst} describes three situations in the special model where the parameter estimates and thus the following clustering should be carefully interpreted. If the parameter estimate approaches any of the given numbers then the remaining parameters, represented by dots, are effectively non-identifiable. For example in Situation 1, if the mixture proportion $\alpha_1$ approaches $1$ then the remaining parameters can easily diverge as they no longer contribute to the likelihood.
+In Situation 2 where $\vec{\theta} = (0, \cdot, \cdot, \rho)$ extra caution should be displayed if $\rho$ becomes substantially different from zero as all observations will be deemed reproducible. While the above corrections somewhat remedy these issues, the three situations can still be observed, especially when data consisting of nearly pure noise is supplied.
+
+<<table_equivalent_optima, results='asis',echo=FALSE>>=
+@
+
+
+
+\section{Applications}
+\subsection{Reproducibility of microarray results}\label{sec:rep}
+In molecular biology, microarrays are often used to screen large numbers of candidate markers for significant differences between case and control groups.
+Microarrays simultaneously probe the genetic DNA composition or transcribed RNA activity of multiple genes in a biological sample.
+The number of probes ranges in the orders of $10{,}000$ to $6{,}000{,}000$, depending on the specific microarray.
+
+In the study of haematological malignancies it is of biological interest to know how normal B-lymphocytes develop \citep{Lenz2010,Rui2011,Kuppers2005}.
+Hence, B-cells from removed tonsil tissue of six healthy donors were sorted and isolated using fluorescence-activated cell sorting (FACS) into five subtypes of B-cells: Na\"{i}ve (N) B-cells, Centrocytes (CC), Centroblasts (CB), Memory (M) B-cells, and Plasmablasts (PB). As part of the immune response to an infection, the CBs proliferate rapidly and become CCs within the so-called germinal centres (GC). The $6 \times 5$ samples were profiled with \textit{Affymetrix GeneChip HG-U133 plus 2.0} (U133) microarrays \citep[See][for further details]{Bergkvist2014}.
+
+It is e.g., of interest to identify which genetic expressions have been altered within the GCs from which the CCs and CBs come. We therefore tested the hypothesis of no difference in genetic expression between CC and CB samples against N, M, and PB samples for all the gene expressions present on the U133 array.
+
+Since genetic profiling technologies are rapidly evolving the experiment was later repeated with new donors and on the newer \textit{GeneChip Human Exon 1.0 ST} (Exon) microarray.
+
+The $30$ samples on the U133 arrays and the $30$ samples on Exon arrays were preprocessed and summarized to gene level separately and independently using the RMA algorithm with the \proglang{R}/Bioconductor package \pkg{affy} using custom CDF-files \citep{Dai2005}.
+%Available at \url{http://brainarray.mbni.med.umich.edu/Brainarray/Database/CustomCDF/17.1.0/ensg.asp}
+This preprocessing resulted in the genetic expression levels of \Sexpr{prettyN(37923)} probe-sets for the U133 array and \Sexpr{prettyN(19750)} probe-sets for the Exon array both annotated with Ensembl gene identifiers (ENSG identifiers).
+%More information at \url{http://www.ensembl.org/info/genome/genebuild/genome\_annotation.html}.
+
+Each experiment was analysed separately using a mixed linear model and empirical Bayes approach using the \pkg{limma} package \citep{Smyth2004} to test the hypothesis of no differential expression for each gene between the CC + CB and the N + M + PB groups.
+The tests yield two lists of $p$-values for the U133 and Exon arrays.
+
+The $p$-value lists were reduced to the $\Sexpr{prettyN(nrow(u133VsExon))}$ common genes present on both array types and combined into a matrix $[x_{gk}]_{\Sexpr{nrow(u133VsExon)}\times 2}$ where $x_{gk}$ is one minus the $p$-value for varying gene expression for gene $g$ in experiment $k\in\{\text{U133}, \text{Exon}\}$.
+
+To determine the genes which are reproducibly differentially expressed, the special GMCM were fitted with the Nelder-Mead optimization procedure using \code{fit.meta.GMCM}. The procedure was started in \Sexpr{length(init.par)} different starting values and the estimate with the largest log-likelihood was chosen. The best estimate converged in \Sexpr{prettyN(bcell.n.ite)} iterations.
+Subsequently, the local and adjusted IDR values were computed with \code{get.IDR}. A total of \Sexpr{bcell.res$l} genes ($\Sexpr{round(mean(bcell.res$IDR<=0.05)*100,1)}\%$) were found to have an adjusted IDR value below 0.05 and deemed reproducible. The results are illustrated in Figure \ref{Figure5.png} along with the parameter estimates. The algorithm successfully picks $p$-values which are high-ranking in both experiments.
+
+If the MAP estimate, corresponding to a local idr value less than 0.5, is used then $\Sexpr{sum(bcell.res$idr <= 0.5)}$ genes, corresponding to $\Sexpr{round(mean(bcell.res$idr <= 0.5)*100,1)}\%$, are deemed reproducible. This agrees with the estimate of the mixture proportion of the null component $\alpha_1 = \Sexpr{round(bcell.par[1],2)}$.
+
+\fig{Figure5.png}{\textwidth}{Panel A shows a plot of the scaled ranks of $p$-values for the exon experiment against the scaled ranks of the $p$-values for the U133 experiment. Presumably, genes located in the upper left or lower right of the plots are false positive results in either experiment. Panel B shows the estimated latent GMM process. The fitted parameters shown are used to marginally transform panel A into the B.}
+
+Note, since no biological ground truth is available, the accuracy cannot be determined. However, since genes which are not differentially expressed are expected to be irreproducible the accuracy may be high.
+
+For comparison, the number of genes marginally significant at 5\% significance level after Benjamini-Hochberg (BH) correction \citep{Benjamini1995} is \Sexpr{sum(u133.sig)} and \Sexpr{sum(exon.sig)} for the U133 and Exon experiments, respectively. The number of commonly significant genes (i.e., simultaneously significant in both experiments) is \Sexpr{sum(exon.sig & u133.sig)} or \Sexpr{round(mean(exon.sig & u133.sig)*100,1)}\%. This corresponds to the common approach of using Venn diagrams.
+
+The list of reproducible genes, which can be ranked by their idr-values, provides a more accessible list of genes for further biological down-stream analyses than the unordered list of genes obtained by the Venn diagram approach.
+
+The $p$-values from the experiments are available in \pkg{GMCM} via \code{data(u133VsExon)}.
+
+
+
+\subsection{Effects of cryopreservation on reproducibility}
+Cryopreservation is a procedure for preserving and storing tissue samples by cooling them to sub-zero temperatures.
+It is convenient for researchers and a crucial component of biobanking.
+Cryopreservation is usually assumed by default to alter the biological sample since many cryopreserving substances are toxic, the freezing procedure may damaged the sample due to ice crystallization, and it may induce cellular stress response.
+Fresh is therefore considered favorable to cryopreserved tissue.
+Few studies have analysed the effect of the cryopreservation on phenotyping and gene expression.
+Recently, we studied cryopreservation to gauge the actual impact of the cryopreservation on global gene expression in a controlled comparison of cryopreserved and fresh B-lymphocytes.
+Similarly to the above, the B-cells were prepared from peripheral blood of 3 individual healthy donors and FACS sorted into $2 \times 4$ B-cell subtypes, Immature (Im),  Na\"{i}ve (N), Memory (M), and Plasmasblasts (PB). Half of the samples were cryopreserved and thawed prior to the gene expression profiling using the Exon array while the other half was profiled fresh. The resulting data was preprocessed using RMA \citep[See][for further details]{RasmussenBilgrau2014}.
+As a supplement to the manuscript, we performed a reproducibility analysis using the special model which however was omitted due to our concerns about complexity and added length to the manuscript.
+
+If cryopreservation has relatively negligible effects on global screenings, then a high reproducibility should be expected for differential expression analyses within the fresh and frozen samples -- however only for the true differentially expressed genes.
+For each probe set, the samples were analysed using linear mixed models as described in \citet{RasmussenBilgrau2014} and the hypothesis of no differential expression between pre (Im + N) and post germinal centre (M + PB) cells was tested for both fresh and cryopreserved samples separately to mimic the situations where only fresh or frozen samples are available.
+The special GMCM was fitted using the resulting absolute value of the test-statistics to determine the level of reproducibility of each probe set. Local and adjusted irreproducible discovery rates were computed for all probe sets and this level of reproducibility was discretized into three groups: highly reproducible ($\text{IDR}_g < 0.05$, cf.\ \eqref{eq:IDR}), reproducible ($\text{idr}_g < 0.5$, cf.\ \eqref{eq:idr}), and irreproducible ($\text{idr}_g \geq 0.5$).
+
+\fig{Figure6.png}{\textwidth}{Results from the reproducibility analysis of cryopreserved samples. Panel A shows the $p$-values $p_g$ for the test of no differential expression between the pre- and post germinal centre groups for fresh and frozen samples. Panel B shows the corresponding ranked $p$-values $\hat{u}_g$, and panel C shows the estimated latent process $\hat{z}_g$. The estimated level of reproduciblity for each probe set is colour coded according to the legend in panel C. Genes significantly different across fresh and frozen samples are plotted as red squares regardless of the reproducibility level.}
+
+<<freshfroz_group_pct, echo=FALSE, results='hide'>>=
+@
+
+The best parameter estimate of \Sexpr{freshfroz.n.fits} fits was $\vec{\theta} = (\alpha_1, \mu, \sigma, \rho) = (\Sexpr{paste(round(best.par.freshfroz, 2), collapse = ",")})$. The reproducibility analysis deemed \Sexpr{freshfroz.group.pct[3]}, \Sexpr{freshfroz.group.pct[2]}, and \Sexpr{freshfroz.group.pct[1]} genes highly reproducible, reproducible, and irreproducible, respectively. Figure \ref{Figure6.png} shows these classifications of the $p$-values for differential expression between pre and post germinal cells for the fresh and frozen samples. The total of \Sexpr{freshfroz.group.pct2} reproducible probe sets seems quite high and agree with the estimated mixture proportion of $\Sexpr{round(best.par.freshfroz, 2)[1]}$. Again, the model correctly captures the genes with simultaneously low $p$-values. Recall also that non-differentially expressed genes are expected to be irreproducible and the actual accuracy is thus much higher although it (again) cannot easily be estimated when no biological ground truth is available.
+
+Naturally, one might wonder whether genes changed due to cryopreservation to a large extent are deemed irreproducible.
+The paired design allowed us to investigate this hypothesis.
+The hypothesis of no difference in expression between fresh and frozen samples for each gene was therefore tested and the significant BH-adjusted $p$-values at the $5\%$ level are highlighted in Figure \ref{Figure6.png}.
+The expectation above was then tested using a test for non-zero Spearman correlation between the $p$-values and idr-values which yielded a non-significant correlation $(\rho = \Sexpr{signif(freshfroz.ctest[["estimate"]], 1)}, p = \Sexpr{signif(freshfroz.ctest[["p.value"]], 2)})$.
+In other words, high evidence for a change between fresh and frozen is not associated with greater irreproducibility (idr).
+Alternatively, a Fisher's exact test also did not yield a difference in odds
+$
+(\text{odds ratio} = \Sexpr{signif(freshfroz.htest[["estimate"]], 2)},
+\text{95 \% CI} = (\Sexpr{paste(round(freshfroz.htest$conf.int, 2), collapse=",")}),
+\text{$p$-value} = \Sexpr{signif(freshfroz.htest[["p.value"]], 2)})
+$
+of having a BH-adjusted significant change due to cryopreservation in the reproducible group
+$(\text{odds} =
+\Sexpr{freshfroz.table["TRUE","TRUE"]}/
+(\Sexpr{freshfroz.table["TRUE","FALSE"]} - \Sexpr{freshfroz.table["TRUE","TRUE"]}))$
+compared to the irreproducible
+$(\text{odds} =
+\Sexpr{freshfroz.table["FALSE","TRUE"]}/
+(\Sexpr{freshfroz.table["FALSE","FALSE"]} - \Sexpr{freshfroz.table["FALSE","TRUE"]}))$.
+Thus there is no evidence for an over-representation of the irreproducible genes among the significant one.
+We might thus conclude that though some genes change due to cryopreservation, the differential analysis between subgroups to a great extent still yields the same results whether the samples are fresh or frozen.
+
+Lastly, notice that some genes in the lower-left of Figure \ref{Figure6.png} (A-C) near the origin are also being deemed reproducible. This is an artifact of the model due to the high correlation of $\rho = \Sexpr{round(best.par.freshfroz[4], 2)}$ in the reproducible component.
+
+The $p$-values and test scores are available in \pkg{GMCM} via \code{data(freshVsFrozen)}.
+
+
+
+\subsection{Image segmentation using the general GMCM}
+In computer vision and graphics, image segmentation is useful to simplify and extract features of pictures. To illustrate the flexibility of the model and the computational capability of the \pkg{GMCM} package a $\Sexpr{round(mm*nn*10^-6,1)}$ Mpx ($\Sexpr{nn} \times \Sexpr{mm}$ px) image of the Space Shuttle Atlantis, seen at the top of Figure \ref{FigImgSeg}, was segmented into $\Sexpr{n.cols}$ colours.
+
+The JPEG image can be represented as a $\Sexpr{prettyN(nn*mm)} \times 3$ matrix where each column corresponds to a colour channel in the RGB colour space and each row corresponds to a pixel and observation in the GMCM. The values are in this case on the interval $[0,1]$.
+
+A $3$-dimensional, $\Sexpr{n.cols}$-component GMCM was fitted using the PEM algorithm which resulted in the middle image of Figure \ref{FigImgSeg}. The segmented colours were chosen using the location estimates $\hat{\vec{\mu}}_1, ..., \hat{\vec{\mu}}_{\Sexpr{n.cols}}$. That is, the three dimensional vector $\hat{F}^{-1}_\circ(\Gamma_\circ(\hat{\vec{\mu}}_h; \vec{\theta})) \in [0,1]^3$ in the RGB space was used as the colour of cluster $h$. Alternatively, the average RGB value of each cluster could be used.
+
+For comparison the $\Sexpr{round(mm*nn*10^-6,1)}$ Mpx image was also segmented with the $k$-means algorithm. The results are seen at the bottom of Figure \ref{FigImgSeg}. The final colours given to each cluster was the means estimated by the algorithm.
+
+As seen, the $k$-means and GMCM yield quite different segmentations and different details of the image are captured. For example, the GMCM seem to capture more details of the bottom of the orange external tank. However perhaps erroneously, the GMCM also cluster the black left edge of the photo together with a light cluster. The superior method is dependent on the application at hand. We acknowledge that disregarding spatial correlations between pixels is quite na\"{i}ve. However, this example should illustrate the computational capability of the package of handling large datasets with a high number of clusters.
+
+The package \pkg{jpeg} was used to read, manipulate, and write the JPEG image from \proglang{R} \citep{Urbanek2012}.
+\begin{figure}
+\centering
+\begin{tabular}[b]{c}
+\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7}.jpg}\\
+\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7.gmcm}.jpg}\\
+\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7.km}.jpg}\\
+\end{tabular}
+\caption{\label{FigImgSeg}Top: The original $\Sexpr{round(mm*nn*10^-6,1)}$ Mpx JPEG image of the space shuttle Atlantis' climb to orbit during mission STS-27 in December 1988. Middle: The image segmented into $\Sexpr{n.cols}$ colours by the GMCM. Bottom: The image segmented into $\Sexpr{n.cols}$ colours by $k$-means clustering. Image credit: NASA.}
+\end{figure}
+
+
+\section{Concluding remarks}
+The software for the gradient decent algorithm used by \cite{Tewari2011a} to arrive at a maximum likelihood estimate is written in the proprietary language \proglang{MATLAB} but not provided as open source. Hybrid procedures, similar to the one proposed by \cite{Tewari2011a}, can easily be constructed with the \pkg{GMCM} package.
+The \pkg{GMCM} package solves some of the previously described issues regarding the maximum likelihood estimation and provides a considerable speed-up in computation times.
+However, there seems to be no complete remedy for all of the challenges of the GMCMs. As stated, the transformation into uniform marginal distributions by ranking will result in a loss of information about the distance between components that are well separated.
+
+The intrinsic identifiability problems of GMCMs may in practice often not be a big issue. Even though the parameters of the assumed underlying GMM can be difficult to estimate due to the flat likelihood function, the clustering accuracy can still be very high.
+Furthermore, the actual parameters, except perhaps the mixture proportions, does often not seem of particular interest in applications.
+Hence, the merit of the GMCMs should be measured by predictive accuracy which still remains to be explored. In this respect, we believe that the theoretical and practical properties of the special GMCM and IDR approach should be studied further and compared to common $p$-value combining meta analyses, such as the methods of Fisher, Stouffer, Wilkinson, Pearson, and others, see e.g., \cite{Owen2009a}.
+Interestingly and perhaps of slight concern, it can be seen that the IDR approach would be deemed unreasonable by Condition 1 in \cite{Birnbaum1954} whenever $\rho \neq 0$. It is unclear whether the method fulfills properties such as admissibility \citep{Birnbaum1954} and relative optimality in Bahadur's sense \citep{Littell1971}.
+
+The simulation study in Section \ref{techcomp} revealed relatively many errors thrown by the \pkg{GMCM} package. We are committed to pinpoint the exact sources of the errors and provide fixes in future versions. We suspect the errors encountered are due to divergence of the parameters and should therefore be treated as such. With this in mind we believe that software should fail loudly with error or warning when it indeed fails.
+
+In conclusion, the \pkg{GMCM} package provides a fast implementation of the flexible and widely applicable tool for reproducibility analysis and unsupervised clustering. The flexibility and applicability is however gained at the cost of a complicated likelihood function.
+
+\section*{Acknowledgements}
+We thank Andreas Petri for his help on the microarray preprocessing workflow. The technical assistance from Alexander Schmitz, Julie S.\ B\o{}dker, Ann-Maria Jensen, Louise H.\ Madsen, and Helle H\o{}holt is also greatly appreciated. As are the helpful statistical comments from Steffen Falgreen. This research is supported by MSCNET, EU FP6, CHEPRE, the Danish Agency for Science, Technology, and Innovation as well as Karen Elise Jensen Fonden.
+
+%% Bibliography
+\newpage
+\bibliography{References}
+
+
+\end{document}
