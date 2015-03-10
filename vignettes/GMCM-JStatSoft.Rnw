@@ -1,6 +1,6 @@
-\documentclass[article,jss]{jss}
 %\VignetteIndexEntry{An Introduction to GMCM}
 %\VignetteEngine{knitr::knitr}
+\documentclass[article,nojss]{jss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%
@@ -14,7 +14,7 @@
         Karen Dybk\ae{}r    \\ Aalborg University Hospital\And
         Martin B\o{}gsted   \\ Aalborg University Hospital}
 
-\Plainauthor{Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen, Hans Erik Johnsen, Karen Dybkaer, Martin Boegsted}
+\Plainauthor{Bilgrau et.\ al.}
 \Plaintitle{Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
 \Shorttitle{\pkg{GMCM}: Gaussian Mixture Copula Models}
 
