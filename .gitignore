@@ -7,3 +7,15 @@ src/*.dll
 src-i386/
 src-x64/
 *.DS_Store
+inst/doc
+vignettes/*.out
+vignettes/*.bbl
+vignettes/*.blg
+vignettes/*.log
+vignettes/*.aux
+vignettes/*.pdf
+vignettes/*.jpg
+vignettes/*.png
+vignettes/*.tex
+vignettes/*.gz
+vignettes/*.RData
