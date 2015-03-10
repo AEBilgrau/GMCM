@@ -1,4 +1,6 @@
 \documentclass[article,jss]{jss}
+%\VignetteIndexEntry{An Introduction to GMCM}
+%\VignetteEngine{knitr::knitr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%
