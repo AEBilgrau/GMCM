@@ -15,7 +15,7 @@ Imports:
     Rcpp (>= 0.10.6)
 LinkingTo: Rcpp, RcppArmadillo
 Suggests:
-    idr,
+    idr, Hmisc, RColorBrewer, doMC, foreach, jpeg,
     testthat (>= 0.3),
     knitr
 VignetteBuilder: knitr
