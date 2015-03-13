@@ -47,9 +47,12 @@ library("idr")
 library("Hmisc")
 library("RColorBrewer")
 library("jpeg")
+
+# To enable multicore processing, change the %do% to %dopar% and
+# uncomment the relevant packages below.
 library("foreach")
-library("doMC") #library("doParallel") # Use this package on windows
-registerDoMC(detectCores())
+# library("doMC") #library("doParallel") # Use this package on windows
+# registerDoMC(detectCores())
 
 # Defining auxiliary functions used
 # Pretty big number formatting
@@ -237,7 +240,7 @@ n.observations <- c(1000, 10000, 100000) # Simulated observations
 if (!exists("speed.res") | recompute) {
 
   speed.res <- foreach(n = n.observations, .combine = "rbind",
-                       .packages = c("GMCM", "idr")) %dopar% {
+                       .packages = c("GMCM", "idr")) %do% {
 
     # Simulating data
     x <- SimulateGMCMData(n = n, par = speed.par)
@@ -391,7 +394,7 @@ if (!all(exists(c("simulation.data", "simulation.start.par"))) | recompute) {
 if (!exists("simulation.res.NM") | recompute) {
   st.tot <- proc.time()
   simulation.res.NM <-
-    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %dopar% {
+    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %do% {
 
       x <- Uhat(simulation.data[[i]]$u)
       K <- simulation.data[[i]]$K
@@ -427,7 +430,7 @@ set.seed(65) # Since the SANN procedure is stochastic
 if (!exists("simulation.res.SANN") | recompute) {
   st.tot <- proc.time()
   simulation.res.SANN <-
-    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %dopar% {
+    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %do% {
 
       x <- Uhat(simulation.data[[i]]$u)
       K <- simulation.data[[i]]$K
@@ -469,7 +472,7 @@ if (!exists("simulation.res.SANN") | recompute) {
 if (!exists("simulation.res.LBFGS") | recompute) {
   st.tot <- proc.time()
   simulation.res.LBFGS <-
-    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %dopar% {
+    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %do% {
 
       x <- Uhat(simulation.data[[i]]$u)
       K <- simulation.data[[i]]$K
@@ -506,7 +509,7 @@ if (!exists("simulation.res.LBFGS") | recompute) {
 if (!exists("simulation.res.LBFGSB") | recompute) {
   st.tot <- proc.time()
   simulation.res.LBFGSB <-
-    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %dopar% {
+    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %do% {
 
       x <- Uhat(simulation.data[[i]]$u)
       K <- simulation.data[[i]]$K
@@ -544,7 +547,7 @@ if (!exists("simulation.res.LBFGSB") | recompute) {
 if (!exists("simulation.res.PEM") | recompute) {
   st.tot <- proc.time()
   simulation.res.PEM <-
-    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %dopar% {
+    foreach(i = seq_len(n.sims), .packages = "GMCM", .inorder = FALSE) %do% {
       x <- Uhat(simulation.data[[i]]$u)
       K <- simulation.data[[i]]$K
       st <- proc.time()
@@ -582,7 +585,7 @@ if (!exists("simulation.res.PEM") | recompute) {
 if (!exists("simulation.res.PEMidr") | recompute) {
   st.tot <- proc.time()
   simulation.res.PEMidr <-
-    foreach(i = seq_len(n.sims), .packages = "idr", .inorder = FALSE) %dopar% {
+    foreach(i = seq_len(n.sims), .packages = "idr", .inorder = FALSE) %do% {
       x <- Uhat(simulation.data[[i]]$u)
       K <- simulation.data[[i]]$K
       start.par <- simulation.start.par[i, ]
