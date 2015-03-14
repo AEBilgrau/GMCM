@@ -36,6 +36,11 @@ When installed, run `news(package = "GMCM")` to view the latest notable changes 
 
 For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](http://cran.r-project.org/src/contrib/Archive/GMCM/)
 
+## References
+
+ * Bilgrau, Anders Ellern; Eriksen, Poul Svante; Boegsted, Martin; Rasmussen, Jakob
+   Gulddahl Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula
+   Models *Accepted for* 'Journal of Statistical Software', 2015.
 
 ## Usage
 ### Meta Analysis example

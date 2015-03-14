@@ -6,14 +6,14 @@ citEntry(entry="article",
                              person(family="Eriksen", given="Poul", middle="Svante"),
                              person(family="Rasmussen", given="Jakob", middle="Gulddahl")
      ),
-         journal = "(Submitted) Journal of Statistical Software",
-         year = "2014",
+         journal = "(Accepted for) Journal of Statistical Software",
+         year = "2015",
          pages = "ZZZ",
          volume = "XX(YY)",
-         textVersion = paste("Bilgrau, Anders Ellern; Eriksen, Poul Svante; Boegsted, Martin; Rasmussen, Jakob Gulddahl", 
-                             "Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models", 
+         textVersion = paste("Bilgrau, Anders Ellern; Eriksen, Poul Svante; Boegsted, Martin; Rasmussen, Jakob Gulddahl",
+                             "Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models",
                              "'Journal of Statistical Software' XX(YY), ZZZ, 2014."))
 
 citFooter("We have invested a lot of time and effort this package,",
           "so please cite it if you are using it. Thanks!")
- 
+
