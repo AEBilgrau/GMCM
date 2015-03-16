@@ -15,6 +15,7 @@ vignettes/*.log
 vignettes/*.aux
 vignettes/*.pdf
 vignettes/*.jpg
+vignettes/*.jpeg
 vignettes/*.png
 vignettes/*.tex
 vignettes/*.gz
