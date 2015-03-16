@@ -128,7 +128,7 @@ x2 <- inv.M2(u2)
 # Create Figure 1
 #
 
-png("Figure1.png", height = 2*7*0.5, width = 3*7*0.5, units = "in", res = 150)
+png("Figure1.png", height = 2*7*0.5, width = 3*7*0.5, units = "in", res = 100)
 {
   lab.cex <- 1
   # Setting plotting parameters
@@ -362,7 +362,7 @@ tryCatch.W.E <- function(expr) {
 # Approximate runtime: 13 seconds
 #
 
-cat("Simulating", n.sims, "datasets and start parameters:\n"); flush.console()
+cat("Simulating", n.sims, "datasets and start parameters... "); flush.console()
 
 sim.tmp <- foreach(i = seq_len(n.sims), .packages = "GMCM") %do% {
   # Draw random starting values and simulate from the GMCM
@@ -379,7 +379,7 @@ simulation.data <- lapply(sim.tmp, "[[", "simdata")
 rm(sim.tmp)
 
 # To save space in the RData file. Data is not saved. Here.
-cat("\nDone.\n")
+cat("Done.\n")
 
 
 #
@@ -647,7 +647,7 @@ names(warning.messages) <- rev(methods)
 names(error.messages)   <- rev(methods)
 
 # Parameter estimates
-pdf("Figure4.pdf", height = 7, width = 2*7)
+png("Figure4.png", height = 7, width = 2*7, units = "in", res = 100)
 {
   # Setting plotting parameters
   par(mfrow = c(1,6),
@@ -831,7 +831,7 @@ exon.sig <- adj.p.vals$exon <= 0.05
 u133.sig <- adj.p.vals$u133 <= 0.05
 
 # Plotting the results and creating Figure 5
-png("Figure5.png", height = 7*0.5, width = 3*7*0.5, units = "in", res = 150)
+png("Figure5.png", height = 7*0.5, width = 3*7*0.5, units = "in", res = 100)
 {
   bcell.cols <- c("grey", "steelblue")#, "black")
 
@@ -1086,7 +1086,7 @@ legend <- paste0(c("Irreproducible\nn = ",
                    "Highly reproducible\nn = ",
                    "Adj. p-value < 0.05\n(Fresh vs Frozen)\nn = "), ng)
 
-png("Figure6.png", height = 7*0.5, width = 3*7*0.5, units = "in", res = 150)
+png("Figure6.png", height = 7*0.5, width = 3*7*0.5, units = "in", res = 100)
 {
   freshfroz.cols <- c("grey", "steelblue", "black", "red")
   freshfroz.cols2 <- freshfroz.cols[ifelse(is.sig, 4, freshfroz.group)]
@@ -1179,7 +1179,7 @@ sim <- SimulateGMCMData(n = n, theta = rtheta(m = 3, d = 2))
 
 # Chunk 4 create figure 2
 ## ---- make_simulation_example_png ----
-png("Figure2.png", width = 3*7*0.5, height = 7*0.5, units = "in", res = 150)
+png("Figure2.png", width = 3*7*0.5, height = 7*0.5, units = "in", res = 100)
 {
   par(mar = c(3, 3.3, 2, 0.1),
       oma = c(0, 0, 0, 0) + .1,
@@ -1242,7 +1242,7 @@ Khat.tmp[Khat==3] <- 3
 Khat <- Khat.tmp
 
 # Plot the results
-png("Figure3.png", width = 3*7*0.5, height = 7*0.5, units = "in", res = 150)
+png("Figure3.png", width = 3*7*0.5, height = 7*0.5, units = "in", res = 100)
 {
 
   par(mfrow = c(1, 3),
