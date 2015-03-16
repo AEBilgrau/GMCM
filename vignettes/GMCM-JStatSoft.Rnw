@@ -33,15 +33,6 @@ We demonstrate the use of \pkg{GMCM} through different applications. \hfill \vfi
 \Keywords{\pkg{GMCM}, unsupervised clustering, high-dimensional experiments, meta-analysis, reproducibility, evidence aggregation, copulas, $p$-value combination, \pkg{idr}, \pkg{Rcpp}, \proglang{R}, \proglang{C++}}
 \Plainkeywords{GMCM, unsupervised clustering, high-dimensional experiments, meta-analysis, reproducibility, evidence aggregation, copulas, p-value combination, idr, Rcpp, R, C++}
 
-%% publication information
-%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
-%% \Volume{50}
-%% \Issue{9}
-%% \Month{June}
-%% \Year{2012}
-%% \Submitdate{2012-06-04}
-%% \Acceptdate{2012-06-04}
-
 %% The address of (at least) one author should be given
 %% in the following format:
 \Address{
@@ -55,7 +46,7 @@ URL: \url{http://people.math.aau.dk/~abilgrau/}
 }
 % \Address{
 %   Anders Ellern Bilgrau\\
-%   Department of Haematology Research Laboratory\\
+%   Department of Haematology, Research Laboratory\\
 %   Faculty of Medicine\\
 %   Aalborg University Hospital\\
 %   9000 Aalborg, Denmark\\
