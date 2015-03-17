@@ -7,19 +7,19 @@
 #' @param m The number of components in the mixture.
 #' @param d The dimension of the mixture distribution.
 #' @param method The method by which the theta should be generated.
-#'   See details. Default \code{"old"} is the regular "old" behavior.
+#'   See details. Defaults to \code{"old"} which is the regular "old" behavior.
 #' @return A named list of parameters with the 4 elements:
 #'   \item{\code{m}}{An integer giving the number of components in the mixture.
 #'                   Default is 3.}
-#' \item{\code{d}}{An integer giving the dimension of the mixture
-#'                 distribution. Default is 2.}
-#' \item{\code{pie}}{A numeric vector of length \code{m} of mixture
-#'                   proportions between 0 and 1 which sums to one.}
-#' \item{\code{mu}}{A \code{list} of length \code{m} of numeric vectors of
-#'                  length \code{d} for each component.}
-#' \item{\code{sigma}}{A \code{list} of length \code{m} of variance-covariance
-#'                     matrices (of size \code{d} times \code{d}) for each
-#'                     component.}
+#'   \item{\code{d}}{An integer giving the dimension of the mixture
+#'                   distribution. Default is 2.}
+#'   \item{\code{pie}}{A numeric vector of length \code{m} of mixture
+#'                    proportions between 0 and 1 which sums to one.}
+#'   \item{\code{mu}}{A \code{list} of length \code{m} of numeric vectors of
+#'                    length \code{d} for each component.}
+#'   \item{\code{sigma}}{A \code{list} of length \code{m} of variance-covariance
+#'                       matrices (of size \code{d} times \code{d}) for each
+#'                       component.}
 #' @note The function \code{\link{is.theta}} checks whether or not \code{theta}
 #'   is in the correct format.
 #' @details
@@ -71,7 +71,10 @@
 #' @seealso \code{\link{is.theta}}
 #' @examples
 #' rtheta()
+#'
 #' rtheta(d = 5, m = 2)
+#'
+#' rtheta(d = 3, m = 2, method = "EqualEllipsoidal")
 #'
 #' test <- rtheta()
 #' is.theta(test)
@@ -141,9 +144,3 @@ rtheta <- function(m = 3, d = 2,
   names(sigma) <- names(mu) <- paste("comp", seq_len(m), sep = "")
   return(list(m = m, d = d, pie = pie, mu = mu, sigma = sigma))
 }
-#m <- 4; n <- 10000; pie <- matrix(rchisq(m*n, df = 3*m), n, m);
-#pie <- pie/rowSums(pie); hist(c(pie), breaks = 100); abline(v = 1/m)
-
-
-
-
