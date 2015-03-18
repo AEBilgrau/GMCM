@@ -895,13 +895,17 @@ file <- "Figure7.jpg"
 
 
 if (!file.exists("Figure7.jpg")) {
-  # The image was downloaded from:
+  # The image was originally downloaded from:
   # http://totallyfreeimages.com/3167/STS-27,-Orbiter-Atlantis,-Liftoff
   # download.file(paste0("http://tfi.s3.amazonaws.com/previews/standard/d/6/",
   #                      "5fecf808486b157ea6971048bb29d6f4e58bd1d6.jpg"),
   #               destfile = file)
-  download.file("http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg",
-                destfile = file)
+  #http://upload.wikimedia.org/wikipedia/commons/d/d3/Atlantis_taking_off_on_STS-27.jpg
+  #   link <- 
+  #     paste0("http://i.space.com/images/i/000/010/634/original/",
+  #            "shuttle-atlantis-lifts-off.jpg?1309297321")
+  link <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
+  download.file(link, destfile = file, method = "internal")
 }
 
 
@@ -909,7 +913,7 @@ if (!file.exists("Figure7.jpg")) {
 pic <- readJPEG(file)
 
 nn <- dim(pic)[1]
-mm <-dim(pic)[2]
+mm <- dim(pic)[2]
 
 seg.gmcm <- seg.km <- pic  # To hold the different segmented pics
 
