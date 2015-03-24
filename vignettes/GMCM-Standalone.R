@@ -128,7 +128,7 @@ x2 <- inv.M2(u2)
 # Create Figure 1
 #
 
-jpeg("Figure1.jpeg", height = 2*7*0.5, width = 3*7*0.5, units = "in", res = 100)
+jpeg("Figure1.jpg", height = 2*7*0.5, width = 3*7*0.5, units = "in", res = 100)
 {
   lab.cex <- 1
   # Setting plotting parameters
@@ -647,7 +647,7 @@ names(warning.messages) <- rev(methods)
 names(error.messages)   <- rev(methods)
 
 # Parameter estimates
-jpeg("Figure4.jpeg", height = 7, width = 2*7, units = "in", res = 100)
+jpeg("Figure4.jpg", height = 7, width = 2*7, units = "in", res = 100)
 {
   # Setting plotting parameters
   par(mfrow = c(1,6),
@@ -831,7 +831,7 @@ exon.sig <- adj.p.vals$exon <= 0.05
 u133.sig <- adj.p.vals$u133 <= 0.05
 
 # Plotting the results and creating Figure 5
-jpeg("Figure5.jpeg", height = 7*0.5, width = 3*7*0.5, units = "in", res = 100)
+jpeg("Figure5.jpg", height = 7*0.5, width = 3*7*0.5, units = "in", res = 100)
 {
   bcell.cols <- c("grey", "steelblue")#, "black")
 
@@ -891,26 +891,26 @@ dev.off()
 # Define the number of colours to segment the data into
 n.cols <- 10
 
-file <- "Figure7.jpg"
+fig7.file <- "./Figure7.jpg"
 
 
-if (!file.exists("Figure7.jpg")) {
+if (!file.exists(fig7.file)) {
   # The image was originally downloaded from:
   # http://totallyfreeimages.com/3167/STS-27,-Orbiter-Atlantis,-Liftoff
   # download.file(paste0("http://tfi.s3.amazonaws.com/previews/standard/d/6/",
   #                      "5fecf808486b157ea6971048bb29d6f4e58bd1d6.jpg"),
   #               destfile = file)
   #http://upload.wikimedia.org/wikipedia/commons/d/d3/Atlantis_taking_off_on_STS-27.jpg
-  #   link <- 
+  #   link <-
   #     paste0("http://i.space.com/images/i/000/010/634/original/",
   #            "shuttle-atlantis-lifts-off.jpg?1309297321")
   link <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
-  download.file(link, destfile = file, method = "internal")
+  download.file(link, destfile = fig7.file, method = "internal")
 }
 
 
 # Read the image
-pic <- readJPEG(file)
+pic <- readJPEG(fig7.file)
 
 nn <- dim(pic)[1]
 mm <- dim(pic)[2]
@@ -926,7 +926,7 @@ pic.rgbmat <- cbind(red   = c(pic[,,1]),
 # Segmentation using GMCM
 #
 
-gmcm.file <- gsub(".jpg$", ".gmcm.RData", file)
+gmcm.file <- gsub(".jpg$", ".gmcm.RData", fig7.file)
 # Approximate runtime: 50 minutes
 if (!exists("seg.res.gmcm") | recompute) {
   best.loglik <- -Inf
@@ -989,7 +989,7 @@ seg.gmcm[,,3] <- matrix(gmcm.rgbmat[,3], nn, mm)
 # Segmentation using K-means clustering
 #
 
-km.file <- gsub(".jpg$", ".km.RData", file)
+km.file <- gsub(".jpg$", ".km.RData", fig7.file)
 if (!exists("seg.res.km") | recompute) {
   system.time(
     seg.res.km <-
@@ -1090,7 +1090,7 @@ legend <- paste0(c("Irreproducible\nn = ",
                    "Highly reproducible\nn = ",
                    "Adj. p-value < 0.05\n(Fresh vs Frozen)\nn = "), ng)
 
-jpeg("Figure6.jpeg", height = 7*0.5, width = 3*7*0.5, units = "in", res = 100)
+jpeg("Figure6.jpg", height = 7*0.5, width = 3*7*0.5, units = "in", res = 100)
 {
   freshfroz.cols <- c("grey", "steelblue", "black", "red")
   freshfroz.cols2 <- freshfroz.cols[ifelse(is.sig, 4, freshfroz.group)]
@@ -1183,7 +1183,7 @@ sim <- SimulateGMCMData(n = n, theta = rtheta(m = 3, d = 2))
 
 # Chunk 4 create figure 2
 ## ---- make_simulation_example_png ----
-jpeg("Figure2.jpeg", width = 3*7*0.5, height = 7*0.5, units = "in", res = 100)
+jpeg("Figure2.jpg", width = 3*7*0.5, height = 7*0.5, units = "in", res = 100)
 {
   par(mar = c(3, 3.3, 2, 0.1),
       oma = c(0, 0, 0, 0) + .1,
@@ -1246,7 +1246,7 @@ Khat.tmp[Khat==3] <- 3
 Khat <- Khat.tmp
 
 # Plot the results
-jpeg("Figure3.jpeg", width = 3*7*0.5, height = 7*0.5, units = "in", res = 100)
+jpeg("Figure3.jpg", width = 3*7*0.5, height = 7*0.5, units = "in", res = 100)
 {
 
   par(mfrow = c(1, 3),

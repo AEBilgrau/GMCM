@@ -219,7 +219,7 @@ Hence $\vec{U}$ is distributed according to the Gaussian mixture copula density 
 \end{align}
 From this, we see the GMCM operates on three levels, a latent level $\vec{Z}$, a copula level $\vec{U}$, and an observed level $\vec{X}$.
 %For reasons clarified later, the $\vec{U}$ level could also rightly be called the rank level.
-Figure \ref{Figure1.png} (A-C) illustrates the three levels of a $2$-dimensional $3$-component GMCM. Here, $F_\circ$ and $F_\circ^{-1}$ maps panel A to B and B to A, respectively. Likewise, $\Gamma_\circ$ defines the mappings between panels C and B.
+Figure \ref{Figure1.jpg} (A-C) illustrates the three levels of a $2$-dimensional $3$-component GMCM. Here, $F_\circ$ and $F_\circ^{-1}$ maps panel A to B and B to A, respectively. Likewise, $\Gamma_\circ$ defines the mappings between panels C and B.
 
 To assess the class of an observation, \cite{Tewari2011a} proposed using
 \begin{align} \label{apostprob}
@@ -263,7 +263,7 @@ and
 where $\rho\in[-(d-1)^{-1},1]$ and $\sigma^2 > 0$. The lower bound on $\rho$ is a requirement for $\vec\Sigma_2$ to be positive semi-definite.
 In other words, if the null-hypothesis is true, the latent variable is a $d$-dimensional standard multivariate normal distribution.
 If not, it is an latent $d$-dimensional multivariate normal distribution with equal means and a compound symmetry covariance structure.
-Figure \ref{Figure1.png} (D-F) shows an example of the observed, copula, and latent levels of the special GMCM where $d=2$.
+Figure \ref{Figure1.jpg} (D-F) shows an example of the observed, copula, and latent levels of the special GMCM where $d=2$.
 
 With the above constraints the special model is parameterized by only $\vec{\theta} = (\alpha_1, \mu, \sigma^2, \rho)$ whereby the dimensionality of the parameter space is substantially reduced.
 Furthermore, all marginal cdfs are equal, $\Gamma_1 = \cdots = \Gamma_d$, and similarly are all pdfs equal, $\gamma_1 = \cdots = \gamma_d$.
@@ -323,7 +323,7 @@ The GMCM is rank-based since plugging a variable into its empirical cdf correspo
 
 The usage of $\hat{u}_{gk}$ violate the assumption of independent observations as the ranking introduces dependency between the observations. The introduced dependency is arguably negligible when $p$ is large. We ignore this problem and refer to \cite{Chen2006} and the references therein for a more detailed discussion about this problem which is common to all copula model estimation procedures.
 
-\fig{Figure1.png}{\textwidth}{From left to right the observed, copula (or rank), and latent process is shown. The first and second row of panels illustrate $10{,}000$ realizations from the general and special model, respectively. The component from which the realizations come are visualized by colour and point-type. Each dimension in the special model corresponds to an experiment where simultaneously high values in both experiments are indicative of good reproducibility.}
+\fig{Figure1.jpg}{\textwidth}{From left to right the observed, copula (or rank), and latent process is shown. The first and second row of panels illustrate $10{,}000$ realizations from the general and special model, respectively. The component from which the realizations come are visualized by colour and point-type. Each dimension in the special model corresponds to an experiment where simultaneously high values in both experiments are indicative of good reproducibility.}
 
 
 \section[The GMCM package]{The \pkg{GMCM} package}
@@ -411,11 +411,11 @@ As an illustration, we load the package and simulate \Sexpr{prettyN(n)} observat
 <<start_example, echo = TRUE, eval = FALSE>>=
 @
 
-The \code{sim} object is a \code{list} containing the \code{matrix} of the realized latent process (\code{sim\$z}), the \code{matrix} of true realizations from the GMCM density (\code{sim\$u}), the formatted parameters (\code{sim\$theta}), and the component from which each observation is realized (\code{sim\$K}). Figure \ref{Figure2.png} shows the realized data.
+The \code{sim} object is a \code{list} containing the \code{matrix} of the realized latent process (\code{sim\$z}), the \code{matrix} of true realizations from the GMCM density (\code{sim\$u}), the formatted parameters (\code{sim\$theta}), and the component from which each observation is realized (\code{sim\$K}). Figure \ref{Figure2.jpg} shows the realized data.
 
 <<make_simulation_example_png, results = 'hide', echo = FALSE>>=
 @
-\fig{Figure2.png}{\textwidth}{Panel A shows realizations from the latent process and panel B the corresponding marginally uniformly distributed process. Note, that while B shows true realizations from the GMCM $\vec{u}_g$ the ranked observed values $\hat{\vec{u}}_g$ are almost visually identical because of the relative large number of observations.}
+\fig{Figure2.jpg}{\textwidth}{Panel A shows realizations from the latent process and panel B the corresponding marginally uniformly distributed process. Note, that while B shows true realizations from the GMCM $\vec{u}_g$ the ranked observed values $\hat{\vec{u}}_g$ are almost visually identical because of the relative large number of observations.}
 
 Subsequently, we select a starting estimate from the data, fit the ranked observed data using Nelder-Mead (\code{NM}), and compute the posterior probabilities of each observation belonging to each component:
 <<run_example, results = 'hide', eval = FALSE>>=
@@ -445,10 +445,10 @@ The default Nelder-Mead \code{(NM)} procedure converged in \Sexpr{prettyN(nm.ite
 
 In serious applications the starting values should be chosen carefully and the algorithm ought to be started at different positions of the parameter space to investigate the stability and uniqueness of the maximum likelihood estimate. The estimate with the largest likelihood should then be chosen.
 
-\fig{Figure3.png}{\textwidth}{Panel A shows the estimated class labels of the observations by colour and point-type. As a model control panel B and C shows \Sexpr{prettyN(n)} realizations from the GMM and GMCM using the fitted parameters.}
+\fig{Figure3.jpg}{\textwidth}{Panel A shows the estimated class labels of the observations by colour and point-type. As a model control panel B and C shows \Sexpr{prettyN(n)} realizations from the GMM and GMCM using the fitted parameters.}
 
-The confusion matrix for the GMCM clustering, seen in Table \ref{confusion.mat}, yields an accuracy of $\Sexpr{acc}$\%. In (unfair) comparison, the $k$-means algorithm have an accuracy of $\Sexpr{acc.km}$\%. Figure \ref{Figure3.png} shows the clustering results and simple model checks by simulation from the fitted parameters.
-Though a high clustering accuracy is achieved, we see from the model check in Figure \ref{Figure3.png}B compared to Figure \ref{Figure2.png}A that the underlying parameters are not really identifiable. However, we see from panel C, that the fitted parameters model the observed ranks closely and thus provide a high predictive accuracy.
+The confusion matrix for the GMCM clustering, seen in Table \ref{confusion.mat}, yields an accuracy of $\Sexpr{acc}$\%. In (unfair) comparison, the $k$-means algorithm have an accuracy of $\Sexpr{acc.km}$\%. Figure \ref{Figure3.jpg} shows the clustering results and simple model checks by simulation from the fitted parameters.
+Though a high clustering accuracy is achieved, we see from the model check in Figure \ref{Figure3.jpg}B compared to Figure \ref{Figure2.jpg}A that the underlying parameters are not really identifiable. However, we see from panel C, that the fitted parameters model the observed ranks closely and thus provide a high predictive accuracy.
 
 
 
@@ -462,11 +462,11 @@ The parameters were chosen such that the \pkg{idr} package does not converge pre
 <<table_speed_res, tidy = FALSE, echo = FALSE, results='asis'>>=
 @
 
-To assess the optimization routines in the \pkg{idr} and \pkg{GMCM} packages, $\Sexpr{simulation.n.sims}$  datasets with $\Sexpr{prettyN(simulation.n.obs)}$ observations were simulated from the special model with parameters $\vec{\theta} = (\Sexpr{paste(simulation.true.par, collapse =",")})$. The special model was fitted  to each of the datasets using each of the available routines with random initial parameter values. Figure \ref{Figure4.pdf} shows the results from the fitting procedures. The maximum number of iterations were set to \Sexpr{prettyN(simulation.max.ite)}. The SANN procedure was given $3{,}000$ iterations.
+To assess the optimization routines in the \pkg{idr} and \pkg{GMCM} packages, $\Sexpr{simulation.n.sims}$  datasets with $\Sexpr{prettyN(simulation.n.obs)}$ observations were simulated from the special model with parameters $\vec{\theta} = (\Sexpr{paste(simulation.true.par, collapse =",")})$. The special model was fitted  to each of the datasets using each of the available routines with random initial parameter values. Figure \ref{Figure4.jpg} shows the results from the fitting procedures. The maximum number of iterations were set to \Sexpr{prettyN(simulation.max.ite)}. The SANN procedure was given $3{,}000$ iterations.
 
-\fig{Figure4.pdf}{\textwidth}{Parameter fitting results for the different optimization procedures. From left to right, the first four panels show plots of the fitted parameter estimates. The true parameter values are plotted as vertical lines. Next, the mean clustering accuracy (and standard deviation), total run time in minutes for all $\Sexpr{simulation.n.sims}$ fits, and the number of warnings and errors is shown. The last panel shows the number of iterations for each fit. The black vertical lines indicate the median.}
+\fig{Figure4.jpg}{\textwidth}{Parameter fitting results for the different optimization procedures. From left to right, the first four panels show plots of the fitted parameter estimates. The true parameter values are plotted as vertical lines. Next, the mean clustering accuracy (and standard deviation), total run time in minutes for all $\Sexpr{simulation.n.sims}$ fits, and the number of warnings and errors is shown. The last panel shows the number of iterations for each fit. The black vertical lines indicate the median.}
 
-The clusters of parameter estimates away from the true values seen in Figure \ref{Figure4.pdf} presumably corresponds to local maxima of the likelihood. Hence many of the procedures are fairly often caught in such local maxima. Interestingly, while the estimates of the standard deviation $\hat{\sigma}$ and correlation $\hat{\rho}$ for the PEM algorithm seem to be biased, the algorithm achieved a high clustering accuracy. We also see that the PEM algorithms in \pkg{GMCM} and \pkg{idr} behave quite differently.
+The clusters of parameter estimates away from the true values seen in Figure \ref{Figure4.jpg} presumably corresponds to local maxima of the likelihood. Hence many of the procedures are fairly often caught in such local maxima. Interestingly, while the estimates of the standard deviation $\hat{\sigma}$ and correlation $\hat{\rho}$ for the PEM algorithm seem to be biased, the algorithm achieved a high clustering accuracy. We also see that the PEM algorithms in \pkg{GMCM} and \pkg{idr} behave quite differently.
 The maximal number of iterations, \Sexpr{simulation.max.ite}, was hit only by the PEM algorithm $\Sexpr{simulation.max.ite.hit["PEM (idr)"]}$ and $\Sexpr{simulation.max.ite.hit["PEM (GMCM)"]}$ times for the \pkg{idr} and \pkg{GMCM} packages, respectively. Also notable is the factor $\Sexpr{round(sum(sapply(simulation.res.PEMidr, "[[", "time"))/sum(sapply(simulation.res.NM, "[[", "time")),1)}$ reduction in total runtime from between the fastest and slowest fitting procedures.
 
 All warnings produced by the PEM algorithm in \pkg{idr} was \code{"NaNs produced"}. PEM in \pkg{GMCM} only warned that the maximum number of iterations was reached. The errors produced by SANN and L-BFGS-B seemingly arise as the estimates of the covariance matrix became singular. The vast majority of the errors by L-BFGS was divergence to non-finite likelihood values. The only unique error thrown by PEM (\pkg{idr}), \code{"missing value where TRUE/FALSE needed"}, seems to stem from a simple bug.
@@ -586,11 +586,11 @@ The tests yield two lists of $p$-values for the U133 and Exon arrays.
 The $p$-value lists were reduced to the $\Sexpr{prettyN(nrow(u133VsExon))}$ common genes present on both array types and combined into a matrix $[x_{gk}]_{\Sexpr{nrow(u133VsExon)}\times 2}$ where $x_{gk}$ is one minus the $p$-value for varying gene expression for gene $g$ in experiment $k\in\{\text{U133}, \text{Exon}\}$.
 
 To determine the genes which are reproducibly differentially expressed, the special GMCM were fitted with the Nelder-Mead optimization procedure using \code{fit.meta.GMCM}. The procedure was started in \Sexpr{length(init.par)} different starting values and the estimate with the largest log-likelihood was chosen. The best estimate converged in \Sexpr{prettyN(bcell.n.ite)} iterations.
-Subsequently, the local and adjusted IDR values were computed with \code{get.IDR}. A total of \Sexpr{bcell.res$l} genes ($\Sexpr{round(mean(bcell.res$IDR<=0.05)*100,1)}\%$) were found to have an adjusted IDR value below 0.05 and deemed reproducible. The results are illustrated in Figure \ref{Figure5.png} along with the parameter estimates. The algorithm successfully picks $p$-values which are high-ranking in both experiments.
+Subsequently, the local and adjusted IDR values were computed with \code{get.IDR}. A total of \Sexpr{bcell.res$l} genes ($\Sexpr{round(mean(bcell.res$IDR<=0.05)*100,1)}\%$) were found to have an adjusted IDR value below 0.05 and deemed reproducible. The results are illustrated in Figure \ref{Figure5.jpg} along with the parameter estimates. The algorithm successfully picks $p$-values which are high-ranking in both experiments.
 
 If the MAP estimate, corresponding to a local idr value less than 0.5, is used then $\Sexpr{sum(bcell.res$idr <= 0.5)}$ genes, corresponding to $\Sexpr{round(mean(bcell.res$idr <= 0.5)*100,1)}\%$, are deemed reproducible. This agrees with the estimate of the mixture proportion of the null component $\alpha_1 = \Sexpr{round(bcell.par[1],2)}$.
 
-\fig{Figure5.png}{\textwidth}{Panel A shows a plot of the scaled ranks of $p$-values for the exon experiment against the scaled ranks of the $p$-values for the U133 experiment. Presumably, genes located in the upper left or lower right of the plots are false positive results in either experiment. Panel B shows the estimated latent GMM process. The fitted parameters shown are used to marginally transform panel A into the B.}
+\fig{Figure5.jpg}{\textwidth}{Panel A shows a plot of the scaled ranks of $p$-values for the exon experiment against the scaled ranks of the $p$-values for the U133 experiment. Presumably, genes located in the upper left or lower right of the plots are false positive results in either experiment. Panel B shows the estimated latent GMM process. The fitted parameters shown are used to marginally transform panel A into the B.}
 
 Note, since no biological ground truth is available, the accuracy cannot be determined. However, since genes which are not differentially expressed are expected to be irreproducible the accuracy may be high.
 
@@ -616,16 +616,16 @@ If cryopreservation has relatively negligible effects on global screenings, then
 For each probe set, the samples were analysed using linear mixed models as described in \citet{RasmussenBilgrau2014} and the hypothesis of no differential expression between pre (Im + N) and post germinal centre (M + PB) cells was tested for both fresh and cryopreserved samples separately to mimic the situations where only fresh or frozen samples are available.
 The special GMCM was fitted using the resulting absolute value of the test-statistics to determine the level of reproducibility of each probe set. Local and adjusted irreproducible discovery rates were computed for all probe sets and this level of reproducibility was discretized into three groups: highly reproducible ($\text{IDR}_g < 0.05$, cf.\ Equation \ref{eq:IDR}), reproducible ($\text{idr}_g < 0.5$, cf.\ Equation~\ref{eq:idr}), and irreproducible ($\text{idr}_g \geq 0.5$).
 
-\fig{Figure6.png}{\textwidth}{Results from the reproducibility analysis of cryopreserved samples. Panel A shows the $p$-values $p_g$ for the test of no differential expression between the pre- and post germinal centre groups for fresh and frozen samples. Panel B shows the corresponding ranked $p$-values $\hat{u}_g$, and panel C shows the estimated latent process $\hat{z}_g$. The estimated level of reproduciblity for each probe set is colour coded according to the legend in panel C. Genes significantly different across fresh and frozen samples are plotted as red squares regardless of the reproducibility level.}
+\fig{Figure6.jpg}{\textwidth}{Results from the reproducibility analysis of cryopreserved samples. Panel A shows the $p$-values $p_g$ for the test of no differential expression between the pre- and post germinal centre groups for fresh and frozen samples. Panel B shows the corresponding ranked $p$-values $\hat{u}_g$, and panel C shows the estimated latent process $\hat{z}_g$. The estimated level of reproduciblity for each probe set is colour coded according to the legend in panel C. Genes significantly different across fresh and frozen samples are plotted as red squares regardless of the reproducibility level.}
 
 <<freshfroz_group_pct, echo=FALSE, results='hide'>>=
 @
 
-The best parameter estimate of \Sexpr{freshfroz.n.fits} fits was $\vec{\theta} = (\alpha_1, \mu, \sigma, \rho) = (\Sexpr{paste(round(best.par.freshfroz, 2), collapse = ",")})$. The reproducibility analysis deemed \Sexpr{freshfroz.group.pct[3]}, \Sexpr{freshfroz.group.pct[2]}, and \Sexpr{freshfroz.group.pct[1]} genes highly reproducible, reproducible, and irreproducible, respectively. Figure \ref{Figure6.png} shows these classifications of the $p$-values for differential expression between pre and post germinal cells for the fresh and frozen samples. The total of \Sexpr{freshfroz.group.pct2} reproducible probe sets seems quite high and agree with the estimated mixture proportion of $\Sexpr{round(best.par.freshfroz, 2)[1]}$. Again, the model correctly captures the genes with simultaneously low $p$-values. Recall also that non-differentially expressed genes are expected to be irreproducible and the actual accuracy is thus much higher although it (again) cannot easily be estimated when no biological ground truth is available.
+The best parameter estimate of \Sexpr{freshfroz.n.fits} fits was $\vec{\theta} = (\alpha_1, \mu, \sigma, \rho) = (\Sexpr{paste(round(best.par.freshfroz, 2), collapse = ",")})$. The reproducibility analysis deemed \Sexpr{freshfroz.group.pct[3]}, \Sexpr{freshfroz.group.pct[2]}, and \Sexpr{freshfroz.group.pct[1]} genes highly reproducible, reproducible, and irreproducible, respectively. Figure \ref{Figure6.jpg} shows these classifications of the $p$-values for differential expression between pre and post germinal cells for the fresh and frozen samples. The total of \Sexpr{freshfroz.group.pct2} reproducible probe sets seems quite high and agree with the estimated mixture proportion of $\Sexpr{round(best.par.freshfroz, 2)[1]}$. Again, the model correctly captures the genes with simultaneously low $p$-values. Recall also that non-differentially expressed genes are expected to be irreproducible and the actual accuracy is thus much higher although it (again) cannot easily be estimated when no biological ground truth is available.
 
 Naturally, one might wonder whether genes changed due to cryopreservation to a large extent are deemed irreproducible.
 The paired design allowed us to investigate this hypothesis.
-The hypothesis of no difference in expression between fresh and frozen samples for each gene was therefore tested and the significant BH-adjusted $p$-values at the $5\%$ level are highlighted in Figure \ref{Figure6.png}.
+The hypothesis of no difference in expression between fresh and frozen samples for each gene was therefore tested and the significant BH-adjusted $p$-values at the $5\%$ level are highlighted in Figure \ref{Figure6.jpg}.
 The expectation above was then tested using a test for non-zero Spearman correlation between the $p$-values and idr-values which yielded a non-significant correlation $(\rho = \Sexpr{signif(freshfroz.ctest[["estimate"]], 1)}, p = \Sexpr{signif(freshfroz.ctest[["p.value"]], 2)})$.
 In other words, high evidence for a change between fresh and frozen is not associated with greater irreproducibility (idr).
 Alternatively, a Fisher's exact test also did not yield a difference in odds
@@ -645,7 +645,7 @@ $(\text{odds} =
 Thus there is no evidence for an over-representation of the irreproducible genes among the significant one.
 We might thus conclude that though some genes change due to cryopreservation, the differential analysis between subgroups to a great extent still yields the same results whether the samples are fresh or frozen.
 
-Lastly, notice that some genes in the lower-left of Figure \ref{Figure6.png} (A-C) near the origin are also being deemed reproducible. This is an artifact of the model due to the high correlation of $\rho = \Sexpr{round(best.par.freshfroz[4], 2)}$ in the reproducible component.
+Lastly, notice that some genes in the lower-left of Figure \ref{Figure6.jpg} (A-C) near the origin are also being deemed reproducible. This is an artifact of the model due to the high correlation of $\rho = \Sexpr{round(best.par.freshfroz[4], 2)}$ in the reproducible component.
 
 The $p$-values and test scores are available in \pkg{GMCM} via \code{data("freshVsFrozen")}.
 
