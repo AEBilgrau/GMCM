@@ -904,8 +904,8 @@ if (!file.exists(fig7.file)) {
   #   link <-
   #     paste0("http://i.space.com/images/i/000/010/634/original/",
   #            "shuttle-atlantis-lifts-off.jpg?1309297321")
-  link <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
-  download.file(link, destfile = fig7.file, method = "internal")
+  url <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
+  download.file(url, destfile = fig7.file, method = "internal", mode = "wb")
 }
 
 
