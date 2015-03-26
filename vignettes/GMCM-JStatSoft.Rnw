@@ -692,8 +692,14 @@ In conclusion, the \pkg{GMCM} package provides a fast implementation of the flex
 We thank Andreas Petri for his help on the microarray preprocessing workflow. The technical assistance from Alexander Schmitz, Julie S.\ B\o{}dker, Ann-Maria Jensen, Louise H.\ Madsen, and Helle H\o{}holt is also greatly appreciated. As are the helpful statistical comments from Steffen Falgreen. This research is supported by MSCNET, EU FP6, CHEPRE, the Danish Agency for Science, Technology, and Innovation as well as Karen Elise Jensen Fonden.
 
 %% Bibliography
-\newpage
 \bibliography{References}
+
+\appendix
+\section{Session information}
+The \code{sessionInfo()} output:
+<<sessionInfo, echo=FALSE, results='asis'>>=
+toLatex(sessionInfo())
+@
 
 
 \end{document}
