@@ -4,7 +4,8 @@
 
 \section{Changes in version 1.1.2}{
   \itemize{
-    \item Added a GMCM package vignette.
+    \item Added the GMCM package vignette. The article is to appear in the
+      Journal of Statistical Software.
     \item \code{rtheta} has been updated substantially to allow for finer and
       more explicit control if needed. Default is the old behavior.
     \item Documentation has improved.
