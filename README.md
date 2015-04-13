@@ -30,7 +30,7 @@ devtools::install_github("AEBilgrau/GMCM")
 ```
 
 Note, that this version is in development and is different from the version at CRAN. As such, it may be unstable. Be sure that you have the 
-[package development prerequisites](http://www.rstudio.com/ide/docs/packages/prerequisites) if you wish to install the package from the source.
+[package development prerequisites](https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites) if you wish to install the package from the source.
 
 When installed, run `news(package = "GMCM")` to view the latest notable changes of GMCM.
 
