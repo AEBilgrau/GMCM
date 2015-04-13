@@ -118,7 +118,7 @@ read_chunk('GMCM-Standalone.R')  # Read chunks in the script to input here
 @
 
 % Run the first chunk
-<<chunk_1, echo = FALSE, results = 'hide', message = FALSE>>=
+<<chunk_1, echo = FALSE, results = 'hide', message = FALSE, warning = FALSE>>=
 @
 
 \section{Introduction}
