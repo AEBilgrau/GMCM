@@ -1,28 +1,28 @@
 citHeader("Thanks for using the GMCM package!")
+
 citEntry(
   entry="article",
   title = paste("Unsupervised Clustering and Meta-analysis using Gaussian",
                 "Mixture Copula Models"),
   author = personList(
     person(family="Bilgrau", given="Anders Ellern",
-           role = c("aut", "cre", "cph"),
-           email="abilgrau@math.aau.dk"),
-    person(family="Boegsted", given="Martin",
-           role = c("ths", "ctb")),
-    person(family="Eriksen", given="Poul Svante",
-           role = c("ths", "ctb")),
-    person(family="Rasmussen", given="Jakob Gulddahl",
-           role = "ctb")
+           role = c("aut", "cre", "cph"), email = "abilgrau@math.aau.dk"),
+    person(family="Eriksen", given="Poul Svante", role = c("ths", "ctb")),
+    person(family="Rasmussen", given="Jakob Gulddahl", role = "ctb"),
+    person(family="Dybkaer", given="Karen"),
+    person(family="Johnsen", given="Hans E."),
+    person(family="Boegsted", given="Martin", role = c("ths", "ctb"))
   ),
   journal = "(Accepted for) Journal of Statistical Software",
   year = "2015",
   pages = "ZZZ",
   volume = "XX(YY)",
   textVersion = paste(
-    "Bilgrau, Anders Ellern; Eriksen, Poul Svante; Boegsted, Martin;",
-    "Rasmussen, Jakob Gulddahl. Unsupervised Clustering and Meta-analysis",
-    "using Gaussian Mixture Copula Models. Accepted for 'Journal of",
-    "Statistical Software', 2015.")
+    "Bilgrau, Anders Ellern; Eriksen, Poul Svante; Rasmussen, Jakob Gulddahl",
+    "Dybkaer, Karen; Johnsen, Hans E; Boegsted, Martin.",
+    "Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula",
+    " Models. Accepted for 'Journal of Statistical Software', 2015.")
   )
+
 citFooter("We have invested a lot of time and effort this package,",
           "so please cite it if you are using it. Thanks!")

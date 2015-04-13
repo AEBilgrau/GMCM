@@ -38,9 +38,7 @@ For previous versions of **GMCM**, visit the old [releases at GitHub](https://gi
 
 ## References
 
- * Bilgrau, Anders Ellern; Eriksen, Poul Svante; Boegsted, Martin; Rasmussen, Jakob
-   Gulddahl Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula
-   Models *Accepted for* 'Journal of Statistical Software', 2015.
+ * Bilgrau, Anders Ellern; Eriksen, Poul Svante; Rasmussen, Jakob Gulddahl Dybkaer, Karen; Johnsen, Hans E; Boegsted, Martin. (2015) **"Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models."** *Accepted for* 'Journal of Statistical Software'.
 
 ## Usage
 ### Meta Analysis example
