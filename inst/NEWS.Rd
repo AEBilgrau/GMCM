@@ -2,7 +2,7 @@
 \title{News for Package \pkg{GMCM}}
 \newcommand{\cpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 
-\section{Changes in version 1.1.2}{
+\section{Changes in version 1.2}{
   \itemize{
     \item Added the GMCM package vignette. The article is to appear in the
       Journal of Statistical Software.
