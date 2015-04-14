@@ -56,8 +56,8 @@ is.theta <- function(theta) {
             " by theta[[1]]")
     return(FALSE)
   }
-  if (1 - sum(theta[[3]]) > .Machine$double.eps) {
-    warning("The mixture proportions theta[[3]] does not sum to 1!")
+  if (!all.equal(sum(theta[[3]]), 1)) {
+    warning("The mixture proportions theta[[3]] does not sum to 1.")
     return(FALSE)
   }
   # Testing mean vectors
