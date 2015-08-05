@@ -52,6 +52,8 @@
 #'   Package by Li et. al. (2011): \code{\link[idr:idr-package]{idr}}.
 #' @useDynLib GMCM
 #' @importFrom Rcpp evalCpp
+#' @importFrom stats approxfun cov.wt cov2cor kmeans optim rchisq rnorm runif
+#' @importFrom utils flush.console
 #' @examples
 #' # Loading data
 #' data(u133VsExon)
