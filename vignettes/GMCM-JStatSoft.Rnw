@@ -530,7 +530,7 @@ Our software package \pkg{GMCM} offers fast optimization of both the general and
 \ellgmcm\big(\vec{\theta}^{(m+1)}\big| \{\hat{\vec{u}}_g^{(m)}\}_{g=1}^p\big) - \ellgmcm\big(\vec{\theta}^{(m)}  \big| \{\hat{\vec{u}}_g^{(m)}\}_{g=1}^p\big)
 \Big\vert < \epsilon.
 \end{align*}
-and returns the parameters which yield the largest likelihood. This is not necessarily the one obtained in the last iteration. The internal function \code{PseudoEMAlgorithm} is called when \code{fit.full.GMCM} or \code{fit.meta.GMCM} are run with \code{method = "PEM"}..
+and returns the parameters which yield the largest likelihood. This is not necessarily the one obtained in the last iteration. The internal function \code{PseudoEMAlgorithm} is called when \code{fit.full.GMCM} or \code{fit.meta.GMCM} are run with \code{method = "PEM"}.
 
 Instead of the EM approach, however, we propose optimizing the GMCM likelihood function in Equation~\ref{GMCMloglik} using procedures relying only on likelihood evaluations. To make this a feasible approach considerable effort has been put into evaluating the log-likelihood function of Equation~\ref{GMCMloglik} in a fast manner by implementing core functions in \proglang{C++} using \pkg{Rcpp} and \pkg{Rcpp\-Armadillo} \citep{Rcpp2013, Eddelbuettel2011, RcppArmadillo}. With fast likelihood evaluations the standard \code{optim} optimization procedure in \proglang{R} is used with various optimization procedures, such as Nelder-Mead (the amoeba method), simulated annealing, and BFGS quasi-Newton methods.
 
