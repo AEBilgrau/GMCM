@@ -3,6 +3,8 @@ GMCM
 ### Fast estimation of Gaussian Mixture Copula Models
 
 [![Build Status](https://api.travis-ci.org/AEBilgrau/GMCM.svg?branch=master)](https://travis-ci.org/AEBilgrau/GMCM)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](http://cran.r-project.org/web/packages/GMCM/index.html)
+[![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](http://cran.r-project.org/web/packages/GMCM/index.html)
 
 The [**GMCM** package](http://cran.r-project.org/package=GMCM) offers R functions that perform high-dimensional meta-analysis [(Li et. al., 2011)](http://arxiv.org/pdf/1110.4705.pdf) and general unsupervised cluster analysis [(Tewari et. al., 2011)](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6137392) using Gaussian Copula Mixture Models in a very fast manner.
 
