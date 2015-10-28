@@ -56,7 +56,7 @@ tpar <- GMCM:::inv.tt(par, d = 3, positive.rho = FALSE)
 GMCM:::tt(tpar, d = 3, positive.rho = FALSE)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

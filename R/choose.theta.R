@@ -18,7 +18,7 @@
 #'   \code{\link{rtheta}}.
 #' @note The function uses the \code{kmeans} function from the
 #'   \code{stats}-package.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @examples
 #' set.seed(2)
 #'

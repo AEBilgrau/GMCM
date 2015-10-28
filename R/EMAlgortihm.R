@@ -23,7 +23,7 @@
 #'   \item{loglik.tr}{A numeric vector of the log-likelihood trace.}
 #'   \item{kappa }{A matrix where \code{kappa[i,j]} is the probability that
 #'                 \code{x[i, ]} is realized from the \code{j}'th component.}
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}, \code{\link{PseudoEMAlgorithm}}
 #' @examples
 #'

@@ -102,7 +102,7 @@ D <- SimulateGMMData(n = 100, rtheta(d = 2, method = "UnequalEllipsoidal"))
 plot(D$z, col = D$K, pch = D$K, asp = 1)}
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Friedman, Jerome H. "Regularized discriminant analysis." Journal of the

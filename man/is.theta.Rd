@@ -40,7 +40,7 @@ names(theta5) <- c("m", "d", "prop", "mu", "sigmas") # Incorrect names
 is.theta(theta5)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 \code{\link{rtheta}}

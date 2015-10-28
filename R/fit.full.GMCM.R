@@ -40,7 +40,7 @@
 #'   Hence, the output when \code{theta} is not directly supplied can vary.
 #'
 #'   See \code{\link{optim}} for further details.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{optim}}, \code{\link{get.prob}}
 #' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

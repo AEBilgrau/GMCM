@@ -29,7 +29,7 @@ y <- matrix(rnorm(50), 10, 5)
 GMCM:::rowSds(y)
 }
 \author{
-Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 \code{\link{rowMeans}}, \code{\link{colMeans}}

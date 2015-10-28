@@ -42,7 +42,7 @@ plot(freshVsFrozen[,c(2,4)], cex = 0.5)
 plot(Uhat(abs(freshVsFrozen[,c(1,3)])), cex = 0.5)
 }
 \author{
-Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,

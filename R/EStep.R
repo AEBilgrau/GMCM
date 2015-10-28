@@ -16,7 +16,7 @@
 #' \code{FALSE}.
 #' @return \code{EStep} returns a matrix of probabilities as \code{kappa}
 #'   above.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}
 #' @references Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
 #'   Measuring reproducibility of high-throughput experiments. The Annals of

@@ -5,7 +5,7 @@
 #'   standard deviations of each rows and columns of the given matrix.
 #' @param x A numeric matrix of size \code{n} times \code{m}
 #' @return \code{colSds} returns a numeric vector of length \code{m}.
-#' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rowMeans}}, \code{\link{colMeans}}
 #' @examples
 #' x <- matrix(rnorm(50), 10, 5)

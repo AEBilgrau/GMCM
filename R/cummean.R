@@ -6,7 +6,7 @@
 #' @param x a numeric vector.
 #' @return A vector of length \code{length(x)} with the cumulative mean. The
 #' \code{i}'th entry \code{cummean(x)[i]} equals \code{mean(x[1:i])}.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{cumsum}}
 #' @examples
 #' x <- sort(rnorm(100))

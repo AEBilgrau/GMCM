@@ -29,7 +29,7 @@ plot(Uhat(data$z),
      ylab = expression(hat(u)[2]))
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 \code{\link{SimulateGMMData}}, \code{\link{SimulateGMCMData}}

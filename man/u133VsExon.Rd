@@ -33,7 +33,7 @@ plot(u133VsExon, cex = 0.5)
 plot(Uhat(1-u133VsExon), cex = 0.5)
 }
 \author{
-Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Bergkvist, Kim Steve, Mette Nyegaard, Martin Boegsted, Alexander Schmitz,

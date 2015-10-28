@@ -56,6 +56,6 @@ plot(Uhat(data1$u), col = cols,
 plot(data2$z, main = "initial GMM")
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 

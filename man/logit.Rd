@@ -32,7 +32,7 @@ print(a <- GMCM:::logit(p))
 p - GMCM:::inv.logit(a)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 Used in \code{\link{tt}} and \code{\link{inv.tt}}.

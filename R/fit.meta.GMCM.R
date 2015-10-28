@@ -47,7 +47,7 @@
 #'   the cooling scheme.
 #'
 #'   See \code{\link{optim}} for further details.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{optim}}
 #' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

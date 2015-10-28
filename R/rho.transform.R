@@ -11,7 +11,7 @@
 #' @param d The dimension of the space.
 #' @return \code{rho.transform} returns a vector of the transformed values with
 #'   the same length as \code{rho} or \code{a}.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso Used in \code{\link{tt}} and \code{\link{inv.tt}}.
 #' @examples
 #' d <- 4

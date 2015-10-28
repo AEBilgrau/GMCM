@@ -74,7 +74,7 @@ Anders Ellern Bilgrau,
   Martin Boegsted,
   Poul Svante Eriksen
 
-  Maintainer: Anders Ellern Bilgrau <abilgrau@math.aau.dk>
+  Maintainer: Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

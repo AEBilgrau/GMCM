@@ -53,7 +53,7 @@ plot(data$z, cex = 0.5, pch = 16, main = "GMM clustering",
      col = rainbow(3)[apply(res$kappa,1,which.max)])
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 \code{\link{rtheta}}, \code{\link{PseudoEMAlgorithm}}

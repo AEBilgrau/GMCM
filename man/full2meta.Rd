@@ -45,7 +45,7 @@ print(par <- full2meta(theta))
 print(theta.special.case <- meta2full(par, d = 2))
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

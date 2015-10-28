@@ -82,7 +82,7 @@ plot(gmcm.data2$z, col = gmcm.data2$K)
 plot(gmcm.data2$u, col = gmcm.data2$K)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 \code{\link{rtheta}}

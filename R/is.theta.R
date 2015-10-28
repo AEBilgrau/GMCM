@@ -8,7 +8,7 @@
 #' @return \code{logical}. Returns \code{TRUE} if \code{theta} is coherent and
 #'   in the correct format. Otherwise, the function returns \code{FALSE} with
 #'   an accompanying warning message of the problem.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}
 #' @examples
 #' theta1 <- rtheta()  # Create a random correctly formatted theta

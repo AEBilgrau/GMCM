@@ -9,7 +9,7 @@
 #' @param x A numeric matrix of observations to be ranked. Rows correspond to
 #'   features and columns to experiments.
 #' @return A matrix with the same dimensions as \code{x} of the scaled ranks.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{SimulateGMMData}}, \code{\link{SimulateGMCMData}}
 #' @examples
 #' data <- SimulateGMMData()

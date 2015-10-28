@@ -45,7 +45,7 @@
 #'
 #'   \code{qgmm.marginal}: A matrix where the (i,j)'th entry is the (i,j)'th
 #'   entry of \code{u} evaluated in the inverse jth marginal GMM density.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @examples
 #' set.seed(1)
 #' data <- SimulateGMCMData(n = 10)

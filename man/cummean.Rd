@@ -22,7 +22,7 @@ x <- sort(rnorm(100))
 GMCM:::cummean(x)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 \code{\link{cumsum}}

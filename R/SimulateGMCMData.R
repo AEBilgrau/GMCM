@@ -28,7 +28,7 @@
 #'     realization comes.}
 #'   \item{theta}{A list containing the used parameters for the simulations
 #'     with the format described in \code{\link{rtheta}}.}
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}
 #' @examples
 #' set.seed(2)

@@ -80,7 +80,7 @@ res <- get.IDR(data$u, nm.par, threshold = 0.05)
 plot(data$u, col = res$Khat, pch = c(3,16)[data$K])
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

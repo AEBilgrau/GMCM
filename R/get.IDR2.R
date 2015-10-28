@@ -27,7 +27,7 @@
 #'     reproducible.}
 #'   \item{Khat}{A vector signifying whether the corresponding feature is
 #'     reproducible or not.}
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
 #'   Measuring reproducibility of high-throughput experiments. The Annals of

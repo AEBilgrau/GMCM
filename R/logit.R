@@ -7,7 +7,7 @@
 #' @param p A vector of probabilities.
 #' @return \code{logit} returns a vector of the same length as \code{p} with
 #'   the log odds of \code{p}.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso Used in \code{\link{tt}} and \code{\link{inv.tt}}.
 #' @examples
 #' p <- runif(100)

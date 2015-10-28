@@ -36,7 +36,7 @@
 #' \code{\link{rtheta}}}
 #' @note The algorithm is highly sensitive to the starting parameters which
 #' therefore should be carefully chosen.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}, \code{\link{EMAlgorithm}}
 #' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

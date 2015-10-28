@@ -19,7 +19,7 @@
 #'   correlation of the reproducible component.
 #' @return \code{full2meta} returns a numeric vector of length 4 formatted as
 #'   \code{par}.
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}
 #' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

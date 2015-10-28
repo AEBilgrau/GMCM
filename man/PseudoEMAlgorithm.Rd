@@ -102,7 +102,7 @@ rbind(init.par, true.par, estimate = full2meta(res$theta))
 table("Khat" = IDRs$Khat, "K" = data$K)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

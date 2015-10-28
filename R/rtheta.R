@@ -64,7 +64,7 @@
 #'     }}
 #'   In all cases, the orientation is selected uniformly.
 #' }
-#' @author Anders Ellern Bilgrau (abilgrau@@math.aau.dk)
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @references
 #'   Friedman, Jerome H. "Regularized discriminant analysis." Journal of the
 #'   American statistical association 84.405 (1989): 165-175.

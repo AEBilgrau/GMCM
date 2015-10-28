@@ -37,7 +37,7 @@ a <- GMCM:::rho.transform(rho, d)
 rho - GMCM:::inv.rho.transform(a, d)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \seealso{
 Used in \code{\link{tt}} and \code{\link{inv.tt}}.

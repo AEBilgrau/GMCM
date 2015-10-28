@@ -94,7 +94,7 @@ plot(simfit$u, col = simfit$K, main = "Model check 2\\nSimulated GMCM")
 plot(sim$u, col = Khat, main = "MAP clustering")
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

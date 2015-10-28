@@ -94,7 +94,7 @@ GMCM:::pgmm.marginal(z, theta)
 GMCM:::qgmm.marginal(u, theta)
 }
 \author{
-Anders Ellern Bilgrau (abilgrau@math.aau.dk)
+Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
 \keyword{internal}
 

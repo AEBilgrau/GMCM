@@ -30,7 +30,7 @@
 #'   Martin Boegsted,
 #'   Poul Svante Eriksen
 #'
-#'   Maintainer: Anders Ellern Bilgrau <abilgrau@@math.aau.dk>
+#'   Maintainer: Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @docType package
 #' @references
 #'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
@@ -114,7 +114,7 @@ NULL
 #'   \code{$ u133: num  0.17561 0.00178 0.005371 0.000669 0.655261 ...}\cr
 #'   \code{$ exon: num  1.07e-01 6.74e-10 1.51e-03 6.76e-05 3.36e-01 ...}\cr
 #'
-#' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @references
 #' Bergkvist, Kim Steve, Mette Nyegaard, Martin Boegsted, Alexander Schmitz,
 #' Julie Stoeve Boedker, Simon Mylius Rasmussen, Martin Perez-Andres et al.
@@ -169,7 +169,7 @@ NULL
 #'  \code{$ FreshVsFrozen.tstat   : num  0.836 1.135 -0.221 0.191 -0.783 ...}\cr
 #'  \code{$ FreshVsFrozen.pval    : num  0.403 0.256 0.825 0.849 0.434 ...}\cr
 #'
-#' @author Anders Ellern Bilgrau <abilgrau (at) math.aau.dk>
+#' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @references
 #' Rasmussen SM, Bilgrau AE, Schmitz A, Falgreen S, Bergkvist KS, Tramm AM,
 #' Baech J, Jacobsen CL, Gaihede M, Kjeldsen MK, Boedker JS, Dybkaer K,
