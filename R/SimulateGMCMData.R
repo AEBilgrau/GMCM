@@ -1,16 +1,19 @@
-#' Simulation from the Gaussian mixture (copula) model
+#' Simulation from Gaussian mixture (copula) models
 #'
-#' Functions to simulate data from the Gaussian mixture model (GMM) and the
-#' Gaussian mixture copula model (GMCM).
+#' Easy and fast simulation of data from Gaussian mixture copula models (GMCM)
+#' and Gaussian mixture models (GMM).
 #'
+#' @details
+#' The functions provide simulation of \eqn{n} observations and
+#' \eqn{d}-dimensional GMCMs and GMMs with provided parameters.
 #' The \code{par} argument specifies the parameters of the Li et. al. (2011)
-#' GMCM. The \code{theta} argument specifies an arbitrary GMCM. Either one can
-#' be supplied.  If both are missing, random parameters are chosen for the
-#' general model.
+#' GMCM. The \code{theta} argument specifies an arbitrary GMCM of
+#' Tewari et. al. (2011). Either one can be supplied. If both are missing,
+#' random parameters are chosen for the general model.
 #'
 #' @aliases SimulateGMCMData SimulateGMMData
-#' @param n Integer. The number of realizations drawn from the model. Default
-#'   is 1000.
+#' @param n A single integer giving the number of realizations (observations)
+#'   drawn from the model. Default is 1000.
 #' @param par A vector of parameters of length 4 where \code{par[1]} is the
 #'   mixture proportion, \code{par[2]} is the mean, \code{par[3]} is the
 #'   standard deviation, and \code{par[4]} is the correlation.
@@ -30,6 +33,15 @@
 #'     with the format described in \code{\link{rtheta}}.}
 #' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}
+#' @references
+#'   Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).
+#'   Measuring reproducibility of high-throughput experiments. The Annals of
+#'   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466
+#'
+#'   Tewari, A., Giering, M. J., & Raghunathan, A. (2011). Parametric
+#'   Characterization of Multimodal Distributions with Non-gaussian Modes.
+#'   2011 IEEE 11th International Conference on Data Mining Workshops,
+#'   286-292. doi:10.1109/ICDMW.2011.135
 #' @examples
 #' set.seed(2)
 #'
