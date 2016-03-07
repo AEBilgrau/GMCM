@@ -1,4 +1,6 @@
 library("testthat")
 library("GMCM")
 
-test_package("GMCM")
+test_check("GMCM")
+# test_package("GMCM")
+
