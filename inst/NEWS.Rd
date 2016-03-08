@@ -2,6 +2,13 @@
 \title{News for Package \pkg{GMCM}}
 \newcommand{\cpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 
+\section{Changes in version 1.2.3}{
+  \itemize{
+    \item Minor updates to documentation.
+    \item Patch due to changes in \pkg{testthat}. No visible user changes.
+  }
+}
+
 \section{Changes in version 1.2.2}{
   \itemize{
     \item Patch due to changes in \pkg{RcppArmadillo}. No visible user changes.
