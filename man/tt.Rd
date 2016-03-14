@@ -3,7 +3,7 @@
 \name{inv.tt}
 \alias{inv.tt}
 \alias{tt}
-\title{Reparametrization of GMCM parameters.}
+\title{Reparametrization of GMCM parameters}
 \usage{
 inv.tt(par, d, positive.rho)
 

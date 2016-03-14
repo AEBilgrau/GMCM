@@ -1,4 +1,4 @@
-#' Reparametrization of GMCM parameters.
+#' Reparametrization of GMCM parameters
 #'
 #' These functions map the four GMCM parameters in the model of Li et. al.
 #' (2011) and Tewari et. al. (2011) onto the real line and back. The mixture
