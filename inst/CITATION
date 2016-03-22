@@ -1,28 +1,41 @@
 citHeader("Thanks for using the GMCM package!")
 
-citEntry(
-  entry="article",
-  title = paste("Unsupervised Clustering and Meta-analysis using Gaussian",
-                "Mixture Copula Models"),
-  author = personList(
-    person(family="Bilgrau", given="Anders Ellern",
-           role = c("aut", "cre", "cph"), email = "abilgrau@math.aau.dk"),
-    person(family="Eriksen", given="Poul Svante", role = c("ths", "ctb")),
-    person(family="Rasmussen", given="Jakob Gulddahl", role = "ctb"),
-    person(family="Dybkaer", given="Karen"),
-    person(family="Johnsen", given="Hans E."),
-    person(family="Boegsted", given="Martin", role = c("ths", "ctb"))
-  ),
-  journal = "(Accepted for) Journal of Statistical Software",
-  year = "2015",
-  pages = "ZZZ",
-  volume = "XX(YY)",
-  textVersion = paste(
-    "Bilgrau, Anders Ellern; Eriksen, Poul Svante; Rasmussen, Jakob Gulddahl",
-    "Dybkaer, Karen; Johnsen, Hans E; Boegsted, Martin.",
-    "Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula",
-    " Models. Accepted for 'Journal of Statistical Software', 2015.")
-  )
+bibentry(
+  bibtype     = "article",
+  title       = paste("{GMCM}: Unsupervised Clustering and Meta-Analysis",
+                      "Using Gaussian Mixture Copula Models"),
+  author      = c(person(given = c("Anders", "Ellern"),
+                         family = "Bilgrau",
+                         role = c("aut", "cre", "cph"),
+                         email = "abilgrau@math.aau.dk"),
+                  person(given = c("Poul", "Svante"),
+                         family = "Eriksen",
+                         role = c("ths", "ctb")),
+                  person(given = c("Jakob", "Gulddahl"),
+                         family = "Rasmussen",
+                         role = "ctb"),
+                  person(given = c("Hans", "Erik"),
+                         family = "Johnsen"),
+                  person(given = "Karen",
+                         family = "Dybkaer"),
+                  person(given = "Martin",
+                         family = "Boegsted",
+                         role = c("ths", "ctb"))),
+  journal     = "Journal of Statistical Software",
+  year        = "2016",
+  volume      = "70",
+  number      = "2",
+  pages       = "1--23",
+  doi         = "10.18637/jss.v070.i02",
+  header      = "To cite GMCM in publications please use:",
+  textVersion =
+     paste("Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl",
+           "Rasmussen, Hans Erik Johnsen, Karen Dybkaer, Martin Boegsted",
+           "(2016). GMCM: Unsupervised Clustering and Meta-Analysis Using",
+           "Gaussian Mixture Copula Models.",
+           "Journal of Statistical Software, 70(2), 1-23.",
+           "doi:10.18637/jss.v070.i02")
+)
 
-citFooter("A lot of time and effort is invested in this package,",
+citFooter("A lot of time and effort has been invested into this package,",
           "so please cite it if you use it. Thanks!")
