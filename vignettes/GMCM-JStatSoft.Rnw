@@ -6,7 +6,7 @@
 %% declarations for jss.cls %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
+\title{GMCM: Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
 \author{Anders E.\ Bilgrau  \\ Aalborg University\And
         Poul S.\ Eriksen    \\ Aalborg University\And
         Jakob G.\ Rasmussen \\ Aalborg University\AND
@@ -15,7 +15,7 @@
         Martin B\o{}gsted   \\ Aalborg University Hospital}
 
 \Plainauthor{Bilgrau et.\ al.}
-\Plaintitle{Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
+\Plaintitle{GMCM: Unsupervised Clustering and Meta-Analysis using Gaussian Mixture Copula Models}
 \Shorttitle{\pkg{GMCM}: Gaussian Mixture Copula Models}
 
 \Abstract{
@@ -125,7 +125,7 @@ read_chunk('GMCM-Standalone.R')  # Read chunks in the script to input here
 Unsupervised cluster analysis is an important discipline in many fields of science and engineering for detection of clusters of data with similar properties. Gaussian mixture models (GMM) is perhaps the most widely used method for unsupervised clustering of continuous data. However, the assumption of jointly normally distributed clusters in GMMs is often violated. \cite{Tewari2011a} presented the semi-parametric class of Gaussian mixture copula models (GMCM) for general unsupervised clustering and highlighted them as a flexible alternative to GMMs when obvious non-normally distributed clusters are present. The attractiveness of the GMCMs is predominantly due to an invariance under all monotone increasing marginal transformations of the variables. This scale invariance of the variables stems from the rank-based nature of copula models and make the GMCMs highly versatile.
 
 The GMCMs have found some success in applications after \cite{Li2011} independently proposed using a special-case for a non-standard meta-analysis methodology named reproducibility analysis.
-Their method have been adopted by the ENCODE project \citetext{\citealp[p.~58]{Bernstein2012}; \citealp[p.~15]{Encode2011}} and applied on ChIP-sequencing data. The meta-analysis approach with GMCMs works by clustering genes or features that agree on statistical evidence and those that do not. In other words, the features are clustered into a reproducible and an irreproducible group. The flexibility of the GMCMs make them suitable for meta-analysis of multiple similar experiments.
+Their method have been adopted by the ENCODE project \citetext{\citealp[p.~58]{Bernstein2012}; \citealp[p.~15]{Encode2011}} and applied on ChIP (chromatin immunoprecipitation) sequencing data. The meta-analysis approach with GMCMs works by clustering genes or features that agree on statistical evidence and those that do not. In other words, the features are clustered into a reproducible and an irreproducible group. The flexibility of the GMCMs make them suitable for meta-analysis of multiple similar experiments.
 
 The work of \cite{Li2011} is especially important in genomics as both data and results are subject to substantial variability due to limited samples sizes, high dimensional feature spaces, dependence between genes, and confounding technological factors. This high variability have brought into question the reliability and reproducibility of many genomic results \citep{Ioannidis2001,Ein-dor2006,Tan2003}. Others, however, argue that the lack of reproducibility is only superficial \citep{Zhang2008}.
 Together with a rapid evolution of many different high-throughput technologies and vast on\-line repositories of publicly available data, this motivates the need for a robust and flexible meta-analysis toolbox, which can evaluate or aggregate results of multiple experiments even across confounding factors such as differing technologies.
@@ -154,7 +154,7 @@ The general GMCM assumes an $m$-component Gaussian mixture model (GMM) as a late
 \end{aligned}
 \end{cases}
 \end{align}
-where $H \in \{1, 2, ..., m\}$ corresponds to the class and $\alpha_1, ..., \alpha_m$ are the mixture proportions satisfying $\sum_{h = 1}^m \alpha_h = 1$. Thus, the latent GMM is parameterized by
+where $H \in \{1, 2, ..., m\}$ corresponds to the class and $\alpha_1, ..., \alpha_m$ are the mixture proportions satisfying $\alpha_h > 0$ for $h = 1, ...,m$ and $\sum_{h = 1}^m \alpha_h = 1$. Thus, the latent GMM is parameterized by
 \begin{align*}
 \vec{\theta} = (\alpha_1, ..., \alpha_m, \vec{\mu}_1, ..., \vec{\mu}_m, \vec{\Sigma}_1, ..., \vec{\Sigma}_m).
 \end{align*}
@@ -588,7 +588,8 @@ The $p$-value lists were reduced to the $\Sexpr{prettyN(nrow(u133VsExon))}$ comm
 To determine the genes which are reproducibly differentially expressed, the special GMCM were fitted with the Nelder-Mead optimization procedure using \code{fit.meta.GMCM}. The procedure was started in \Sexpr{length(init.par)} different starting values and the estimate with the largest log-likelihood was chosen. The best estimate converged in \Sexpr{prettyN(bcell.n.ite)} iterations.
 Subsequently, the local and adjusted IDR values were computed with \code{get.IDR}. A total of \Sexpr{bcell.res$l} genes ($\Sexpr{round(mean(bcell.res$IDR<=0.05)*100,1)}\%$) were found to have an adjusted IDR value below 0.05 and deemed reproducible. The results are illustrated in Figure \ref{Figure5.jpg} along with the parameter estimates. The algorithm successfully picks $p$-values which are high-ranking in both experiments.
 
-If the MAP estimate, corresponding to a local idr value less than 0.5, is used then $\Sexpr{sum(bcell.res$idr <= 0.5)}$ genes, corresponding to $\Sexpr{round(mean(bcell.res$idr <= 0.5)*100,1)}\%$, are deemed reproducible. This agrees with the estimate of the mixture proportion of the null component $\alpha_1 = \Sexpr{round(bcell.par[1],2)}$.
+If the MAP estimate is used---which corresponds to a local idr value less than 0.5---then $\Sexpr{sum(bcell.res$idr <= 0.5)}$ $(\Sexpr{round(mean(bcell.res$idr <= 0.5)*100,1)}\%)$ genes are deemed reproducible.
+This percentage is consistent with the estimate of the mixture proportion $\alpha_1 = \Sexpr{round(bcell.par[1],2)}$ of the null component.
 
 \fig{Figure5.jpg}{\textwidth}{Panel A shows a plot of the scaled ranks of $p$-values for the exon experiment against the scaled ranks of the $p$-values for the U133 experiment. Presumably, genes located in the upper left or lower right of the plots are false positive results in either experiment. Panel B shows the estimated latent GMM process. The fitted parameters shown are used to marginally transform panel A into the B.}
 
@@ -610,7 +611,7 @@ Fresh is therefore considered favorable to cryopreserved tissue.
 Few studies have analysed the effect of the cryopreservation on phenotyping and gene expression.
 Recently, we studied cryopreservation to gauge the actual impact of the cryopreservation on global gene expression in a controlled comparison of cryopreserved and fresh B-lymphocytes.
 Similarly to the above, the B-cells were prepared from peripheral blood of 3 individual healthy donors and FACS sorted into $2 \times 4$ B-cell subtypes, Immature (Im),  Na\"{i}ve (N), Memory (M), and Plasmasblasts (PB). Half of the samples were cryopreserved and thawed prior to the gene expression profiling using the Exon array while the other half was profiled fresh. The resulting data was preprocessed using RMA \citep[See][for further details]{RasmussenBilgrau2014}.
-As a supplement to the manuscript, we performed a reproducibility analysis using the special model which however was omitted due to our concerns about complexity and added length to the manuscript.
+As a supplement to \citet{RasmussenBilgrau2014}, we performed a reproducibility analysis using the special model. The analysis now presented here was originally omitted from \citet{RasmussenBilgrau2014} due to our concerns about complexity and the length added to the manuscript.
 
 If cryopreservation has relatively negligible effects on global screenings, then a high reproducibility should be expected for differential expression analyses within the fresh and frozen samples -- however only for the true differentially expressed genes.
 For each probe set, the samples were analysed using linear mixed models as described in \citet{RasmussenBilgrau2014} and the hypothesis of no differential expression between pre (Im + N) and post germinal centre (M + PB) cells was tested for both fresh and cryopreserved samples separately to mimic the situations where only fresh or frozen samples are available.
