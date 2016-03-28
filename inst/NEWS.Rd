@@ -4,8 +4,9 @@
 
 \section{Changes in version 1.2.3}{
   \itemize{
+    \item Updated citation information and manuscript.
     \item Minor updates to documentation.
-    \item Patch due to changes in \pkg{testthat}. No visible user changes.
+    \item Patch due to changes in \pkg{testthat} and published manuscript.
   }
 }
 
