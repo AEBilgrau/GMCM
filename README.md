@@ -1,6 +1,6 @@
 [![Build Status](https://api.travis-ci.org/AEBilgrau/GMCM.svg?branch=master)](https://travis-ci.org/AEBilgrau/GMCM)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](http://cran.r-project.org/web/packages/GMCM/index.html)
-[![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](http://cran.r-project.org/web/packages/GMCM/index.html)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](http://cran.r-project.org/package=GMCM)
+[![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](http://cran.r-project.org/package=GMCM)
 
 GMCM
 ----
