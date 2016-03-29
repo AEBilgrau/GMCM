@@ -12,7 +12,8 @@ Gaussian copula mixture models (GMCMs) are a very flexible alternative to gaussi
 
 The optimization of the complicated likelihood function is difficult, however. The **GMCM** package utilizes [**Rcpp**](https://github.com/RcppCore/Rcpp) and [**RcppArmadillo**](https://github.com/RcppCore/RcppArmadillo) to evaluate the likelihood function quickly and arrive at a parameter estimate using various standard numerical optimization routines.
 
-Additional information and documentation can be found by running `help(package = "GMCM")` in R for help and examples.
+Additional information, documentation, help, and examples can be found by running `help(package = "GMCM")`  or `?GMCM` in **R**. 
+The paper [1] is also found as a vignette by `vignette("GMCM-JStatSoft")`.
 The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 
 ## Installation
@@ -40,10 +41,10 @@ For previous versions of **GMCM**, visit the old [releases at GitHub](https://gi
 
 ## References
 
- * Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen, Hans 
-   Erik Johnsen, Karen Dybkaer, Martin Boegsted (2016). **GMCM: Unsupervised 
-   Clustering and Meta-Analysis Using Gaussian Mixture Copula Models.** 
-   Journal of Statistical Software, 70(2), 1-23. doi:10.18637/jss.v070.i02
+  1. Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen, Hans 
+     Erik Johnsen, Karen Dybkaer, Martin Boegsted (2016). **GMCM: Unsupervised 
+     Clustering and Meta-Analysis Using Gaussian Mixture Copula Models.** 
+     Journal of Statistical Software, 70(2), 1-23. doi:10.18637/jss.v070.i02
 
 ## Usage
 ### Meta Analysis example
