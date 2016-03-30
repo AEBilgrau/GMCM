@@ -41,18 +41,13 @@ Department of Mathematical Sciences\\
 The Faculty of Engineering and Science\\
 Aalborg University\\
 9220 Aalborg East, Denmark\\
-E-mail: \email{abilgrau@math.aau.dk}\\
-URL: \url{http://people.math.aau.dk/~abilgrau/}
+E-mail: \email{anders.ellern.bilgrau@gmail.com} \\
+\textit{and}\\
+Department of Haematology, Research Laboratory\\
+Faculty of Medicine\\
+Aalborg University Hospital\\
+9000 Aalborg, Denmark
 }
-% \Address{
-%   Anders Ellern Bilgrau\\
-%   Department of Haematology, Research Laboratory\\
-%   Faculty of Medicine\\
-%   Aalborg University Hospital\\
-%   9000 Aalborg, Denmark\\
-%   E-mail: \email{a.bilgrau@rn.dk}\\
-%   URL: \url{http://blodet.dk/}
-% }
 
 %% for those who use Sweave please include the following line (with % symbols):
 %% need no \usepackage{Sweave.sty}
