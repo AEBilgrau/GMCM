@@ -61,7 +61,7 @@ For previous versions of **GMCM**, visit the old [releases at GitHub](https://gi
   1. Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen, Hans 
      Erik Johnsen, Karen Dybkaer, Martin Boegsted (2016). **GMCM: Unsupervised 
      Clustering and Meta-Analysis Using Gaussian Mixture Copula Models.** 
-     Journal of Statistical Software, 70(2), 1-23. doi:10.18637/jss.v070.i02
+     Journal of Statistical Software, 70(2), 1-23. [doi:10.18637/jss.v070.i02](https://www.jstatsoft.org/article/view/v070i02)
 
 ## Usage
 ### Meta Analysis example
