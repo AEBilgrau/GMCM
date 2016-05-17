@@ -9,9 +9,10 @@ fit.full.GMCM(u, m, theta = choose.theta(u, m), method = c("NM", "SANN",
   "L-BFGS", "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE, ...)
 }
 \arguments{
-\item{u}{An \code{n} by \code{d} matrix of ranked and scaled test statistics.
-Rows
-correspond to observations and columns to the dimensions of the variables.}
+\item{u}{An \code{n} by \code{d} matrix of marginally uniform observations.
+Rows corresponds to observations and columns to the dimensions of the
+variables. I.e. these are often ranked and scaled test statistics or other
+observations.}
 
 \item{m}{The number of components to be fitted.}
 
