@@ -1,8 +1,8 @@
-#' Unsupervised clustering using a general GMCM
+#' Estimate general GMCM parameters
 #'
-#' Perform unsupervised clustering using various optimization procedures to find
-#' the maximum likelihood estimate of the general Gaussian mixture copula
-#' model by Tewari et al. (2011).
+#' Estimates the parameters of general Gaussian mixture copula models (GMCM).
+#' The function finds the maximum likelihood estimate of a general
+#' GMCM with various user-specified optimization procedures.
 #'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
 #' parameters and uses box constraints as implemented in \code{optim}. \cr
@@ -34,8 +34,10 @@
 #'   is \code{"PEM"}.
 #' @return A list of parameters formatted as described in \code{\link{rtheta}}.
 #' @note All the optimization procedures are strongly dependent on the initial
-#'   values and the cooling scheme. Therefore it is advisable to apply multiple
-#'   different initial parameters and select the best fit.
+#'   values and other parameters (such as the cooling scheme for method SANN).
+#'   Therefore it is advisable to apply multiple
+#'   different initial parameters (and optimization routines) and select the
+#'   best fit.
 #'
 #'   The \code{\link{choose.theta}} itself chooses random a initialization.
 #'   Hence, the output when \code{theta} is not directly supplied can vary.
