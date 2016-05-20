@@ -1,9 +1,10 @@
-#' Reproducibility/meta analysis using GMCMs
+#' Estimate GMCM parameters of the special model
 #'
-#' This function performs reproducibility (or meta) analysis using GMCMs.
+#' This function estimates the parameters of the special restricted Gaussian
+#' mixture copula model (GMCM) proposed by Li et. al. (2011).
+#' It is used to perform reproducibility (or meta) analysis using GMCMs.
 #' It features various optimization routines to identify the maximum likelihood
-#' estimate of the special Gaussian mixture copula model proposed by
-#' Li et. al. (2011).
+#' estimate of the special GMCMs.
 #'
 #' The \code{"L-BFGS-B"} method does not perform a transformation of the
 #' parameters.

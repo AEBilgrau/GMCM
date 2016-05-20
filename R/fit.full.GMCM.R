@@ -1,4 +1,4 @@
-#' Estimate general GMCM parameters
+#' Estimate GMCM parameters of the general model
 #'
 #' Estimates the parameters of general Gaussian mixture copula models (GMCM).
 #' The function finds the maximum likelihood estimate of a general

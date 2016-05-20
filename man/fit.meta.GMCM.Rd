@@ -3,7 +3,7 @@
 \name{fit.meta.GMCM}
 \alias{fit.meta.GMCM}
 \alias{fit.meta.gmcm}
-\title{Reproducibility/meta analysis using GMCMs}
+\title{Estimate GMCM parameters of the special model}
 \usage{
 fit.meta.GMCM(u, init.par, method = c("NM", "SANN", "L-BFGS", "L-BFGS-B",
   "PEM"), max.ite = 1000, verbose = TRUE, positive.rho = TRUE,
@@ -55,10 +55,11 @@ A vector \code{par} of length 4 of the fitted parameters where
   deviation, and \code{par[4]} is the correlation.
 }
 \description{
-This function performs reproducibility (or meta) analysis using GMCMs.
+This function estimates the parameters of the special restricted Gaussian
+mixture copula model (GMCM) proposed by Li et. al. (2011).
+It is used to perform reproducibility (or meta) analysis using GMCMs.
 It features various optimization routines to identify the maximum likelihood
-estimate of the special Gaussian mixture copula model proposed by
-Li et. al. (2011).
+estimate of the special GMCMs.
 }
 \details{
 The \code{"L-BFGS-B"} method does not perform a transformation of the

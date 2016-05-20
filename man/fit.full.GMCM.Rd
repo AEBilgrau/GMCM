@@ -3,7 +3,7 @@
 \name{fit.full.GMCM}
 \alias{fit.full.GMCM}
 \alias{fit.full.gmcm}
-\title{Estimate general GMCM parameters}
+\title{Estimate GMCM parameters of the general model}
 \usage{
 fit.full.GMCM(u, m, theta = choose.theta(u, m), method = c("NM", "SANN",
   "L-BFGS", "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE, ...)
