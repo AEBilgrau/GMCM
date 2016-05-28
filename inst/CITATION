@@ -7,7 +7,7 @@ bibentry(
   author      = c(person(given = c("Anders", "Ellern"),
                          family = "Bilgrau",
                          role = c("aut", "cre", "cph"),
-                         email = "abilgrau@math.aau.dk"),
+                         email = "anders.ellern.bilgrau@gmail.com"),
                   person(given = c("Poul", "Svante"),
                          family = "Eriksen",
                          role = c("ths", "ctb")),

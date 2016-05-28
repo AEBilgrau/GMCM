@@ -11,7 +11,7 @@ context("Check get.idr, get.IDR, get.prob")
 #' @param upper The upper limit.
 #' @param included Specifies which limits are included in the interval.
 #' @author
-#'   Anders Ellern Bilgrau <abilgrau(at)math.aau.dk> \cr
+#'   Anders Ellern Bilgrau <anders.ellern.bilgrau (at) gmail.com> \cr
 #' @seealso \code{\link{is_less_than}} \code{\link{is_more_than}}
 #' @examples
 #' library("testthat")
