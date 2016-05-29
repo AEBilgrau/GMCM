@@ -18,7 +18,7 @@ coming from the first component, \code{par[2]} is the mean value,
 \code{par[3]} is the standard deviation, and \code{par[4]} is the
 correlation of the reproducible component.}
 
-\item{d}{The dimension of the mixture distribution.}
+\item{d}{An integer giving the dimension of the mixture distribution.}
 }
 \value{
 \code{full2meta} returns a numeric vector of length 4 formatted as
