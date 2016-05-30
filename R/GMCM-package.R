@@ -1,11 +1,12 @@
 #' Fast optimization of Gaussian Mixture Copula Models
 #'
-#' Gaussian mixture copula models (GMCM) can be used for unsupervised
-#' clustering and meta analysis. In meta analysis, GMCMs can be used to
-#' quantify and identify which features which have been reproduce across
+#' Gaussian mixture copula models (GMCM) are a flexible class of statistical
+#' models which can be used for unsupervised clustering, meta analysis, and
+#' many other things. In meta analysis, GMCMs can be used to
+#' quantify and identify which features which have been reproduced across
 #' multiple experiments. This package provides a fast and general
-#' implementation of GMCM cluster analysis and serves as an extension of the
-#' features available in the \code{idr} package.
+#' implementation of GMCM cluster analysis and serves as an improvement and
+#' extension of the features available in the \code{idr} package.
 #'
 #' @name GMCM-package
 #' @aliases GMCM-package GMCM
