@@ -202,3 +202,5 @@ NULL
 .onUnload <- function(libpath) {
  library.dynam.unload("GMCM", libpath)
 }
+
+# 6f037e235ba745d55fea4baa9f32caf64ce2d336ac431578a4ce67ee6e1aebf2
