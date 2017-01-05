@@ -901,10 +901,9 @@ if (!file.exists(fig7.file)) {
   #                      "5fecf808486b157ea6971048bb29d6f4e58bd1d6.jpg"),
   #               destfile = file)
   #http://upload.wikimedia.org/wikipedia/commons/d/d3/Atlantis_taking_off_on_STS-27.jpg
-  #   link <-
-  #     paste0("http://i.space.com/images/i/000/010/634/original/",
-  #            "shuttle-atlantis-lifts-off.jpg?1309297321")
-  url <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
+  url <- paste0("http://i.space.com/images/i/000/010/634/original/",
+                "shuttle-atlantis-lifts-off.jpg?1309297321")
+  # url <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
   download.file(url, destfile = fig7.file, method = "internal", mode = "wb")
 }
 
