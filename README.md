@@ -1,13 +1,13 @@
 [![Build Status](https://api.travis-ci.org/AEBilgrau/GMCM.svg?branch=master)](https://travis-ci.org/AEBilgrau/GMCM)
-[![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](http://cran.r-project.org/package=GMCM)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](http://cran.r-project.org/package=GMCM)
-[![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/GMCM)](http://cran.r-project.org/package=GMCM)
+[![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](https://cran.r-project.org/package=GMCM)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](https://cran.r-project.org/package=GMCM)
+[![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/GMCM)](https://cran.r-project.org/package=GMCM)
 
 GMCM
 ----
 ### Fast estimation of Gaussian Mixture Copula Models
 
-The [**GMCM** package](http://cran.r-project.org/package=GMCM) 
+The [**GMCM** package](https://cran.r-project.org/package=GMCM) 
 offers R functions that perform high-dimensional meta-analysis 
 [(Li et. al., 2011)](http://arxiv.org/pdf/1110.4705.pdf) 
 and general unsupervised cluster analysis 
@@ -33,7 +33,7 @@ The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 ## Installation
 
 The released and tested version of **GMCM** is available at
-[CRAN](http://cran.r-project.org/package=GMCM) 
+[CRAN](https://cran.r-project.org/package=GMCM) 
 (Comprehensive R Archive Network).
 It can be easily be installed from within R by running 
 
@@ -55,7 +55,7 @@ if you wish to install the package from the source.
 
 When installed, run `news(package = "GMCM")` to view the latest notable changes of GMCM.
 
-For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](http://cran.r-project.org/src/contrib/Archive/GMCM/)
+For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](https://cran.r-project.org/src/contrib/Archive/GMCM/)
 
 ## References
 
