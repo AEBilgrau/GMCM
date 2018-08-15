@@ -18,3 +18,5 @@ Suggests:
     testthat (>= 0.3),
     knitr
 VignetteBuilder: knitr
+RoxygenNote: 6.1.0
+Encoding: UTF-8
