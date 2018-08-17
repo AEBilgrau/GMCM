@@ -4,6 +4,8 @@ language: r
 
 r_build_args: --no-build-vignettes
 
+r_check_args: --no-build-vignettes
+
 notifications:
   email:
     on_success: change
