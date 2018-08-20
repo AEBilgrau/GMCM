@@ -5,6 +5,7 @@
 #' GMCM:::rowSds(y)
 #' @keywords internal
 rowSds <- function(x) {
+  stopifnot(ncol(x)>0)
   ans <- rowSdsArma(x)
   dim(ans) <- NULL
   names(ans) <- rownames(x)

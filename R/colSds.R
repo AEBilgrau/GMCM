@@ -13,6 +13,7 @@
 #' apply(x, 2, sd)  # slower equivalent code
 #' @keywords internal
 colSds <- function(x) {
+  stopifnot(nrow(x)>0)
   ans <- colSdsArma(x)
   dim(ans) <- NULL
   names(ans) <- colnames(x)

@@ -10,7 +10,7 @@ test_that("colSds and rowSds is computed correctly", {
 })
 
 test_that("colSds and rowSds fails as intented", {
-  expect_error(GMCM:::rowSds(x[, 0]), "column")
+  expect_error(GMCM:::rowSds(x[, 0]), "col")
   expect_error(GMCM:::colSds(x[0, ]), "row")
 })
 
