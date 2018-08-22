@@ -3,6 +3,14 @@
 \newcommand{\cpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}}
 
 
+\section{Changes in version 1.3}{
+  \itemize{
+    \item Fixed issue with optim wrappers for the likelihood (\code{vector2theta} and \code{theta2vector}) causing the first anchored component to be scaled sligtly incorrectly. Note, fitted results will be changed compared to earlier versions (altough hopefully not much).
+    \item Updated package to use latest \cpkg{roxygen2} and \cpkg{Rcpp} packages.
+    \item Updated Travis-CI yaml file
+  }
+}
+
 \section{Changes in version 1.2.4}{
   \itemize{
     \item Minor tweaks to documentation.

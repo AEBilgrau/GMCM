@@ -15,10 +15,11 @@ theta2vector <- function(theta) {
   }
 
   # Cholesky decomposing and rescaling
-  theta$sigma <- lapply(theta$sigma, chol)  # Cholesky decomp.
-  scaling     <- diag(theta$sigma[[1]])     # Scaling factors
-  theta$sigma <- lapply(theta$sigma, "/", scaling)  # Scaling cholesky decomp.
-  theta$mu    <- lapply(theta$mu, "/", scaling)     # Scaling means
+  scaling     <- sqrt(diag(theta$sigma[[1]]))        # Scaling factors
+  mscaling    <- tcrossprod(scaling)                 # Scaling for the variances
+  theta$mu    <- lapply(theta$mu, "/", scaling)      # Scaling means
+  theta$sigma <- lapply(theta$sigma, "/", mscaling)  # Scaling cholesky decomp.
+  theta$sigma <- lapply(theta$sigma, chol)           # Cholesky decomp.
 
   # Log transforming diagonal entries
   theta$sigma[[1]] <- get.upper.trans(theta$sigma[[1]], diag = FALSE)
@@ -35,11 +36,3 @@ theta2vector <- function(theta) {
 
   return(par) # Returning parameter vector
 }
-#theta <- rtheta(d = 3, m = 4)
-#X <- matrix(rnorm(25), 5, 5)
-#X <- t(X)%*%X
-#Z <- chol(X)/diag(chol(X))
-#diag(diag(chol(X))) %*% (t(Z)%*%Z) %*% diag(diag(chol(X)))
-
-
-
