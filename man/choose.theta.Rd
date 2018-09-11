@@ -4,12 +4,15 @@
 \alias{choose.theta}
 \title{Heuristically chosen starting value of theta}
 \usage{
-choose.theta(u, m, ...)
+choose.theta(u, m, no.scaling = FALSE, ...)
 }
 \arguments{
 \item{u}{A matrix of (estimates of) realizations from the GMCM.}
 
 \item{m}{The number of components to be fitted.}
+
+\item{no.scaling}{Logical. If TRUE, no scaling of the means and
+variance-covariance matrices is done.}
 
 \item{\dots}{Arguments passed to \code{\link{kmeans}}.}
 }
@@ -25,7 +28,8 @@ suitable starting values for the general model.
 The function selects the centers from the k-means algorithm as an initial
 estimate of the means. The proportional sizes of the clusters are selected
 as the initial values of the mixture proportions. The within cluster
-standard deviations are used as the variance of the clusters. The
+standard deviations are squared and used as the variance of the clusters
+within each dimension. The
 correlations between each dimension are taken to be zero.
 }
 \note{

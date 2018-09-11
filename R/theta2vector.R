@@ -1,6 +1,6 @@
 theta2vector <- function(theta) {
   # Note1: mu comp1 is always the zero vector
-  # Note2: pie1 is determined by the remaining pies
+  # Note2: pie1 is determined by the remaining
 
   # Function to extract the lower triangular part of a matrix
   get.upper.tri  <- function(x, diag = TRUE) {

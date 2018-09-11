@@ -6,13 +6,14 @@
 #' The function selects the centers from the k-means algorithm as an initial
 #' estimate of the means. The proportional sizes of the clusters are selected
 #' as the initial values of the mixture proportions. The within cluster
-#' standard deviations are used as the variance of the clusters. The
+#' standard deviations are squared and used as the variance of the clusters
+#' within each dimension. The
 #' correlations between each dimension are taken to be zero.
 #'
 #' @param u A matrix of (estimates of) realizations from the GMCM.
 #' @param m The number of components to be fitted.
-# @param fac Numeric. A factor applied to the standard deviation estimates of
-#   each component and each dimension.
+#' @param no.scaling Logical. If TRUE, no scaling of the means and
+#'   variance-covariance matrices is done.
 #' @param \dots Arguments passed to \code{\link{kmeans}}.
 #' @return A list of parameters for the GMCM model on the form described in
 #'   \code{\link{rtheta}}.
@@ -44,25 +45,35 @@
 #' @export
 choose.theta <- function(u,
                          m,
-                         #fac = 2,
+                         no.scaling = FALSE,
                          ...) {
 
+  # Get K-means estimate
   km  <- kmeans(u, centers = m, ...)
-  pie <- km$size/sum(km$size)  #  Estimate of pie
-  mu  <- lapply(1:m, function(i) km$centers[i, ])
 
-  get.sigma <- function(i) {
-    diag(colSds(u[km$cluster == i, , drop = FALSE]))/sqrt(km$size[i])
+  # Estimate pie
+  pie <- km$size/sum(km$size)
+
+  # Extract mu and translate clusters to such that cluster 1 have zero mean
+  mu <- lapply(1:m, function(i) km$centers[i, ])
+  mu <- lapply(mu, "-", mu[[1]])           # Translating means
+
+  # Get sds
+  get.sds <- function(i) {
+    colSds(u[km$cluster == i, , drop = FALSE])
   }
-  sigma <- lapply(1:m, get.sigma)
-  #sigma <- lapply(sigma, "*", fac^2)
+  sds <- lapply(1:m, get.sds)
 
-  # Scaling and translating
-  mu      <- lapply(mu, "-", mu[[1]])           # Translating means
+  # Construct sigma
+  sigma <- lapply(sds, function(sd) diag(sd^2))
 
-  scaling <- diag(sigma[[1]])[1]                # Get scaling factor
-  sigma   <- lapply(sigma, "/", scaling)        # Scaling sigma
-  mu      <- lapply(mu, "/", sqrt(scaling))     # Scaling means
+  # Scaling to unit variances in component 1 and scaling means
+  if (!no.scaling) {
+    scaling <- sds[[1]]                           # Get scaling factor (sds)
+    mscaling <- tcrossprod(scaling)               # Get "matrix" scaling factor
+    sigma   <- lapply(sigma, "/", mscaling)       # Scaling sigma
+    mu      <- lapply(mu, "/", scaling)           # Scaling means
+  }
 
   # Naming
   names(pie) <- paste("pie", 1:m, sep = "")
