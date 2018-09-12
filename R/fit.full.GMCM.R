@@ -105,10 +105,10 @@ fit.full.GMCM <- function (u,
   if (method != "PEM") {
 
     gmcm.loglik <- function (par, u, m) { # Defining objective function
-      #cat("par=", par, "\n")  # FOR DEBUGGING
+      # cat("par =", capture.output(dput(par)), "\n")  # FOR DEBUGGING
       theta <- vector2theta(par, d = ncol(u), m = m)
       theta$pie <- theta$pie/sum(theta$pie)
-      #cat("theta=", unlist(theta$sigma), "\n")  # FOR DEBUGGING
+      # cat("theta=", unlist(theta$sigma), "\n")  # FOR DEBUGGING
       loglik <- dgmcm.loglik(theta = theta, u)
 
       return(loglik)
@@ -122,8 +122,6 @@ fit.full.GMCM <- function (u,
     theta <- vector2theta(fit$par, d = theta$d, m = theta$m)
     theta$pie <- theta$pie/sum(theta$pie)
 
-    return(theta)
-
   } else {
 
     fit <- PseudoEMAlgorithm(x = u,
@@ -132,7 +130,10 @@ fit.full.GMCM <- function (u,
                              verbose = verbose,
                              meta.special.case = FALSE,
                              ...)
+    theta <- fit$theta
 
-    return(fit$theta)
   }
+
+  class(theta) <- "theta"
+  return(theta)
 }

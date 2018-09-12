@@ -31,7 +31,7 @@
 #' theta <- choose.theta(u = obs.data, m = 3)
 #' print(theta)
 #'
-#' # To illustrate theta, we simulate from the model
+#' # To illustrate theta, we can simulate from the model
 #' data2 <- SimulateGMMData(n = 10000, theta = theta)
 #'
 #' cols <- apply(get.prob(obs.data,theta),1,which.max)
@@ -42,6 +42,11 @@
 #' plot(Uhat(data1$u), col = cols,
 #'      main = "Observed GMCM\nColoured by k-means clustering")
 #' plot(data2$z, main = "initial GMM")
+#'
+#' # Alteratively, theta can simply be plotted to illustrate the GMM density
+#' dev.off()
+#' plot(theta, add.ellipses = TRUE)
+#' points(data2$z, pch = 16, cex = 0.4)
 #' @export
 choose.theta <- function(u,
                          m,
@@ -78,7 +83,8 @@ choose.theta <- function(u,
   # Naming
   names(pie) <- paste("pie", 1:m, sep = "")
   names(mu) <- names(sigma) <- paste("comp", 1:m, sep = "")
-  ans <- list(m = m, d = ncol(u), pie = pie, mu = mu, sigma = sigma)
+  ans <- structure(list(m = m, d = ncol(u), pie = pie, mu = mu, sigma = sigma),
+                   class = "theta")
 
   return(ans)
 }

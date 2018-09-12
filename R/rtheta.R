@@ -142,5 +142,7 @@ rtheta <- function(m = 3, d = 2,
   }
   names(pie)   <- paste("pie", seq_len(m), sep = "")
   names(sigma) <- names(mu) <- paste("comp", seq_len(m), sep = "")
-  return(list(m = m, d = d, pie = pie, mu = mu, sigma = sigma))
+  out <- structure(list(m = m, d = d, pie = pie, mu = mu, sigma = sigma),
+                   class = "theta")
+  return(out)
 }

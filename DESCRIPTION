@@ -11,7 +11,7 @@ BugReports: https://github.com/AEBilgrau/GMCM/issues
 License: GPL (>=2)
 KeepSource: yes
 Imports:
-    Rcpp (>= 0.10.6)
+    Rcpp (>= 0.10.6), ellipse
 LinkingTo: Rcpp, RcppArmadillo
 Suggests:
     idr, Hmisc, RColorBrewer, foreach, jpeg,
