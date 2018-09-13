@@ -1,6 +1,6 @@
 #' Convert between parameter formats
 #'
-#' These functions converts the parameters between the general Gaussian
+#' These functions converts/coerces the parameters between the general Gaussian
 #' mixture (copula) model and the special GMCM.
 #' Most functions of the GMCM packages use the \code{theta}
 #' format described in \code{\link{rtheta}}.

@@ -24,11 +24,11 @@ correlation of the reproducible component.}
 \code{full2meta} returns a numeric vector of length 4 formatted as
   \code{par}.
 
-meta2full returns a formatted list of parameters as described by
-  \code{\link{rtheta}}.
+meta2full returns a formatted 'theta' list of parameters as described
+  by \code{\link{rtheta}}.
 }
 \description{
-These functions converts the parameters between the general Gaussian
+These functions converts/coerces the parameters between the general Gaussian
 mixture (copula) model and the special GMCM.
 Most functions of the GMCM packages use the \code{theta}
 format described in \code{\link{rtheta}}.

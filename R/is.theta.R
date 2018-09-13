@@ -92,5 +92,9 @@ is.theta <- function(theta) {
     warning('names(theta) does not equal c("m", "d", "pie", "mu", "sigma")')
     return(FALSE)
   }
+  if (class(theta)!="theta") {
+    warning('class is not "theta"')
+    return(FALSE)
+  }
   return(TRUE)
 }
