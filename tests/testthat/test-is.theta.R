@@ -45,5 +45,13 @@ for (d in 2:10) {
   }
 }
 
+#
+# Class checks
+#
+
+class(theta1) <- NULL
+
+expect_false(suppressWarnings(is.theta(theta1)))
+expect_true( suppressWarnings(is.theta(theta1, check.class = FALSE)))
 
 # Test degenerate input

@@ -5,6 +5,7 @@
 #'
 #' @param theta A list on the \code{theta}-form described in
 #'   \code{\link{rtheta}}
+#' @param check.class Logical. If \code{TRUE}, the class of \code{theta} is also checked.
 #' @return \code{logical}. Returns \code{TRUE} if \code{theta} is coherent and
 #'   in the correct format. Otherwise, the function returns \code{FALSE} with
 #'   an accompanying warning message of the problem.
@@ -30,7 +31,7 @@
 #' names(theta5) <- c("m", "d", "prop", "mu", "sigmas") # Incorrect names
 #' is.theta(theta5)
 #' @export
-is.theta <- function(theta) {
+is.theta <- function(theta, check.class = TRUE) {
   # Testing structure of theta
   if (!is.list(theta) | length(theta) != 5) {
     warning("theta is not a list of length 5")
@@ -92,7 +93,7 @@ is.theta <- function(theta) {
     warning('names(theta) does not equal c("m", "d", "pie", "mu", "sigma")')
     return(FALSE)
   }
-  if (class(theta)!="theta") {
+  if (class(theta)!="theta" && check.class) {
     warning('class is not "theta"')
     return(FALSE)
   }

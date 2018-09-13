@@ -4,11 +4,13 @@
 \alias{is.theta}
 \title{Check if parameters are valid}
 \usage{
-is.theta(theta)
+is.theta(theta, check.class = TRUE)
 }
 \arguments{
 \item{theta}{A list on the \code{theta}-form described in
 \code{\link{rtheta}}}
+
+\item{check.class}{Logical. If \code{TRUE}, the class of \code{theta} is also checked.}
 }
 \value{
 \code{logical}. Returns \code{TRUE} if \code{theta} is coherent and
