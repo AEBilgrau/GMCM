@@ -1,4 +1,5 @@
 context("Sanity check of vector2theta and theta2vector functions")
+
 d <- 5
 m <- 4
 xtheta <- rtheta(m = m, d = d)
@@ -15,4 +16,7 @@ test_that("First component criteria is satisfied", {
   expect_that(diag(ytheta$sigma$comp1),  equals(rep(1, d)))
 })
 
+test_that("vector2theta returns true 'theta' objects",{
+  expect_true(is.theta(ytheta) && is.theta(ztheta))
+})
 

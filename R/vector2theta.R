@@ -30,5 +30,6 @@ vector2theta <- function(par, d, m) {
     par <- par[-(1:count)]
   }
   names(mu) <- names(sigma) <- paste("comp", 1:m, sep = "")
-  return(list(m = m, d = d, pie = pie, mu = mu, sigma = sigma))
+  return(structure(list(m = m, d = d, pie = pie, mu = mu, sigma = sigma),
+                   class="theta"))
 }
