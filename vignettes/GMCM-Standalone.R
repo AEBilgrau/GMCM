@@ -111,6 +111,7 @@ theta1 <- list(m = 3, d = 2,
                sigma = list(comp1 = cbind(c(1,0),c(0,1)),
                             comp2 = cbind(c(2,1.78),c(1.78,2)),
                             comp3 = cbind(c(1,-0.53),c(-0.53,1))))
+class(theta1) <- "theta"
 data1 <- SimulateGMCMData(n = 10000, theta = theta1)
 z1 <- data1$z
 u1 <- data1$u
@@ -965,6 +966,8 @@ if (!exists("seg.res.gmcm") | recompute) {
   seg.res.gmcm <- best.seg.res.gmcm
   resave(seg.res.gmcm, file = "saved.RData")
 }
+
+class(seg.res.gmcm) <- "theta" # HOTFIX
 
 # Get the most likely component
 gmcm.class <- apply(get.prob(pic.rgbmat, theta = seg.res.gmcm), 1, which.max)
