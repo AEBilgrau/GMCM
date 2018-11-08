@@ -8,19 +8,22 @@
   add.means = TRUE, ..., add.ellipses = FALSE)
 }
 \arguments{
+\item{theta}{An object of class \code{theta}.}
+
 \item{which.dims}{An integer vector of length 2 choosing which two dimensions
 to plot.}
 
 \item{n.sd}{An integer choosing the number of standard deviations in each
 dimension to determine the plotting window.}
 
+\item{add.means}{logical. If TRUE, dots corresponding to the means are
+added to the plot.}
+
 \item{...}{Arguments passed to \code{contour}.}
 
-\item{add.ellipses}{logical. If TRUE, ellipses outlining 95\% confidence
+\item{add.ellipses}{logical. If TRUE, ellipses outlining a 95\% confidence
 regions for each component are added in the bivariate multivariate
 distribution defined by theta and \code{which.dims}.}
-
-\item{x}{An object of class \code{theta}.}
 }
 \value{
 Plots via the \code{contour} function. Invisibly returns a list with

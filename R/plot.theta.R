@@ -3,13 +3,15 @@
 #' Visualizes the chosen dimensions of the theta object graphically by the GMM
 #' density and possibly the individual gaussian components.
 #'
-#' @param x An object of class \code{theta}.
+#' @param theta An object of class \code{theta}.
 #' @param which.dims An integer vector of length 2 choosing which two dimensions
 #'   to plot.
 #' @param n.sd An integer choosing the number of standard deviations in each
 #'   dimension to determine the plotting window.
+#' @param add.means logical. If TRUE, dots corresponding to the means are
+#'    added to the plot.
 #' @param ... Arguments passed to \code{contour}.
-#' @param add.ellipses logical. If TRUE, ellipses outlining 95\% confidence
+#' @param add.ellipses logical. If TRUE, ellipses outlining a 95\% confidence
 #'   regions for each component are added in the bivariate multivariate
 #'   distribution defined by theta and \code{which.dims}.
 #' @return Plots via the \code{contour} function. Invisibly returns a list with
