@@ -4,10 +4,12 @@
 \alias{print.theta}
 \title{Print method for theta class}
 \usage{
-\method{print}{theta}(x)
+\method{print}{theta}(x, ...)
 }
 \arguments{
 \item{x}{A \code{theta} object. See \code{\link{rtheta}}.}
+
+\item{...}{Arguments to be passed to subsequent methods.}
 }
 \value{
 Invisibly returns \code{x}.

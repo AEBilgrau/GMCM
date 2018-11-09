@@ -4,11 +4,11 @@
 \alias{plot.theta}
 \title{Plotting method for "theta" objects}
 \usage{
-\method{plot}{theta}(theta, which.dims = c(1L, 2L), n.sd = 2,
+\method{plot}{theta}(x, which.dims = c(1L, 2L), n.sd = 2,
   add.means = TRUE, ..., add.ellipses = FALSE)
 }
 \arguments{
-\item{theta}{An object of class \code{theta}.}
+\item{x}{An object of class \code{theta}.}
 
 \item{which.dims}{An integer vector of length 2 choosing which two dimensions
 to plot.}

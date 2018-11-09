@@ -3,7 +3,7 @@
 #' Visualizes the chosen dimensions of the theta object graphically by the GMM
 #' density and possibly the individual gaussian components.
 #'
-#' @param theta An object of class \code{theta}.
+#' @param x An object of class \code{theta}.
 #' @param which.dims An integer vector of length 2 choosing which two dimensions
 #'   to plot.
 #' @param n.sd An integer choosing the number of standard deviations in each
@@ -28,7 +28,7 @@
 #'      nlevels = 40, axes = FALSE)
 #' @importFrom ellipse ellipse
 #' @export
-plot.theta <- function(theta, which.dims = c(1L,2L), n.sd = 2,
+plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
                        add.means = TRUE, ..., add.ellipses = FALSE) {
   # plot(xx$mu$comp1)
   stopifnot(is.theta(theta))

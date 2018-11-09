@@ -4,10 +4,12 @@
 \alias{summary.theta}
 \title{Summary method for theta class}
 \usage{
-\method{summary}{theta}(x)
+\method{summary}{theta}(object, ...)
 }
 \arguments{
-\item{x}{A \code{theta} object. See \code{\link{rtheta}}.}
+\item{object}{A \code{theta} object. See \code{\link{rtheta}}.}
+
+\item{...}{arguments to be passed to subsequent methods}
 }
 \value{
 Invisibly returns \code{x}.
