@@ -27,26 +27,24 @@
 #' plot(theta, asp = 1, n.sd = 3, add.ellipses = TRUE,
 #'      nlevels = 40, axes = FALSE)
 #' @importFrom ellipse ellipse
+#' @importFrom graphics points lines
 #' @export
 plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
                        add.means = TRUE, ..., add.ellipses = FALSE) {
+
   # plot(xx$mu$comp1)
-  stopifnot(is.theta(theta))
+  stopifnot(is.theta(x))
   stopifnot(is.integer(which.dims))
   stopifnot(length(which.dims)==2)
-  stopifnot(all(which.dims <= theta$d))
+  stopifnot(all(which.dims <= x$d))
 
   # Subset theta to relevant dimensions
-  new_theta <- theta
+  new_theta <- x
   new_theta$d <- 2
-  new_theta$mu <- lapply(theta$mu, "[", which.dims)
-  new_theta$sigma <- lapply(theta$sigma, function(m) m[which.dims,which.dims])
+  new_theta$mu <- lapply(x$mu, "[", which.dims)
+  new_theta$sigma <- lapply(x$sigma, function(m) m[which.dims,which.dims])
 
   # Wrapper for GMM log-likelihood
-  loglik <- function(x, y) {
-    GMCM:::dgmm.loglik(new_theta, z = cbind(x, y), marginal.loglik = TRUE)
-  }
-
   l <- 1000
 
   # Identify plotting area
@@ -61,7 +59,9 @@ plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
   y2 <- seq(dim_min[2], dim_max[2], length.out = l)
 
   # Evauate loglikelihood
-  res2 <- outer(x2, y2, FUN = loglik)
+  res2 <- outer(x2, y2, FUN = function(x, y) {
+    dgmm.loglik(new_theta, z = cbind(x, y), marginal.loglik = TRUE)
+  })
 
   # Capture ...
   additional.args <- list(...)
@@ -73,16 +73,16 @@ plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
   do.call("contour", c(list(x = x2, y = y2, z = res2), additional.args))
 
   if (add.means) {
-    points(do.call("rbind", new_theta$mu), pch = 16, cex = .6)
+    graphics::points(do.call("rbind", new_theta$mu), pch = 16, cex = .6)
   }
 
   if (add.ellipses) {
 
     for (comp in seq_len(new_theta$m)) {
-      ell <- ellipse::ellipse(theta$sigma[[comp]],
+      ell <- ellipse::ellipse(new_theta$sigma[[comp]],
                               which = which.dims,
-                              centre = theta$mu[[comp]])
-      lines(ell, lwd = 2, col = "red")
+                              centre = new_theta$mu[[comp]])
+      graphics::lines(ell, lwd = 2, col = "red")
     }
   }
 
