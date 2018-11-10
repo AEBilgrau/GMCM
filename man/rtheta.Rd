@@ -91,6 +91,10 @@ rtheta(d = 3, m = 2, method = "EqualEllipsoidal")
 test <- rtheta()
 is.theta(test)
 
+summary(test)
+print(test)
+plot(test)
+
 \dontrun{
 A <- SimulateGMMData(n = 100, rtheta(d = 2, method = "EqualSpherical"))
 plot(A$z, col = A$K, pch = A$K, asp = 1)
