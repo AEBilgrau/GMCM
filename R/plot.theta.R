@@ -25,7 +25,8 @@
 #' plot(theta, col = "blue", asp = 1, add.means = TRUE)
 #' plot(theta, which.dims = c(3L, 2L), asp = 1)
 #' plot(theta, asp = 1, n.sd = 3, add.ellipses = TRUE,
-#'      nlevels = 40, axes = FALSE)
+#'      nlevels = 40, axes = FALSE,
+#'      xlab = "Dimension 1", ylab = "Dimension 2")
 #' @importFrom ellipse ellipse
 #' @importFrom graphics points lines
 #' @export
@@ -68,9 +69,16 @@ plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
   if (!("col" %in% names(additional.args))) {
     additional.args$col <- "#FF000080"
   }
+  if (!("xlab" %in% names(additional.args))) {
+    additional.args$xlab <- paste("Comp", which.dims[1])
+  }
+  if (!("ylab" %in% names(additional.args))) {
+    additional.args$ylab <- paste("Comp", which.dims[2])
+  }
 
   # Perform the plotting operations
-  do.call("contour", c(list(x = x2, y = y2, z = res2), additional.args))
+  do.call("graphics::contour", c(list(x = x2, y = y2, z = res2),
+                                 additional.args))
 
   if (add.means) {
     graphics::points(do.call("rbind", new_theta$mu), pch = 16, cex = .6)
