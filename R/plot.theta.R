@@ -28,7 +28,7 @@
 #'      nlevels = 40, axes = FALSE,
 #'      xlab = "Dimension 1", ylab = "Dimension 2")
 #' @importFrom ellipse ellipse
-#' @importFrom graphics points lines
+#' @importFrom graphics points lines contour
 #' @export
 plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
                        add.means = TRUE, ..., add.ellipses = FALSE) {
@@ -77,7 +77,7 @@ plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
   }
 
   # Perform the plotting operations
-  do.call("graphics::contour", c(list(x = x2, y = y2, z = res2),
+  do.call("contour", c(list(x = x2, y = y2, z = res2),
                                  additional.args))
 
   if (add.means) {

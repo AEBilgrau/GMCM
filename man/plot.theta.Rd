@@ -41,7 +41,8 @@ plot(theta, col = "blue", asp = 1, add.means = FALSE)
 plot(theta, col = "blue", asp = 1, add.means = TRUE)
 plot(theta, which.dims = c(3L, 2L), asp = 1)
 plot(theta, asp = 1, n.sd = 3, add.ellipses = TRUE,
-     nlevels = 40, axes = FALSE)
+     nlevels = 40, axes = FALSE,
+     xlab = "Dimension 1", ylab = "Dimension 2")
 }
 \author{
 Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
