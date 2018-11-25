@@ -14,9 +14,14 @@ Imports:
     Rcpp (>= 0.10.6), ellipse
 LinkingTo: Rcpp, RcppArmadillo
 Suggests:
-    idr, Hmisc, RColorBrewer, foreach, jpeg,
+    idr,
+    Hmisc,
+    RColorBrewer,
+    foreach,
+    jpeg,
     testthat (>= 0.3),
-    knitr
+    knitr,
+    covr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.0
 Encoding: UTF-8

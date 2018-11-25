@@ -2,6 +2,8 @@
 [![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](https://cran.r-project.org/package=GMCM)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](https://cran.r-project.org/package=GMCM)
 [![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/GMCM)](https://cran.r-project.org/package=GMCM)
+[![Coverage status](https://codecov.io/gh/AEBilgrau/GMCM/branch/master/graph/badge.svg)](https://codecov.io/github/AEBilgrau/GMCM?branch=master)
+
 
 GMCM
 ----
