@@ -8,8 +8,11 @@ r_check_args: --no-build-vignettes --no-manual
 
 warnings_are_errors: false
 
+r_github_packages:
+  - r-lib/covr
+
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::coveralls()'
 
 notifications:
   email:
