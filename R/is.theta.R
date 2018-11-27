@@ -57,7 +57,7 @@ is.theta <- function(theta, check.class = TRUE) {
             " by theta[[1]]")
     return(FALSE)
   }
-  if (!all.equal(sum(theta[[3]]), 1)) {
+  if (!isTRUE(all.equal(sum(theta[[3]]), 1))) {
     warning("The mixture proportions theta[[3]] does not sum to 1.")
     return(FALSE)
   }

@@ -12,7 +12,28 @@ theta4 <- rtheta(d = 10, m = 10)
 theta4$sigma$comp1[1, 1] <- 0  # Destroy positive semi-definiteness
 
 theta5 <- rtheta(d = 2, m = 5)
-names(theta5)[3] <- "prop"
+names(theta5)[3] <- "prop" # Destory naming convention
+
+theta6 <- rtheta(d = 2, m = 3)
+theta6[[4]] <- simplify2array(theta6[[4]]) # Improper mu element
+
+theta7 <- rtheta(d = 3, m = 2)
+theta7[[5]] <- simplify2array(theta7[[5]]) # Improper sigma element
+
+theta8 <- rtheta(d = 3, m = 2)
+theta8[[1]] <- c(1,1) # Improper m
+
+theta9 <- rtheta(d = 4, m = 3)
+theta9[[2]] <- c(2,2,2) # Improper d
+
+theta10 <- rtheta(d = 4, m = 3)
+theta10[[3]][1] <- theta10[[3]][1] + 0.1 # Improper mix props
+
+theta11 <- rtheta(d = 4, m = 3)
+theta11[[5]] <- theta11[[5]][-1] # Improper number of sigmas
+
+theta12 <- rtheta(d = 4, m = 3)
+theta12[[5]] <- lapply(theta12[[5]], function(x) x[-1,-1]) # Improper dimension of sigmas
 
 test_that("rtheta returns proper formatted output (old method)", {
   expect_that(is.logical(is.theta(theta1)), is_true())
@@ -20,10 +41,17 @@ test_that("rtheta returns proper formatted output (old method)", {
   expect_that(is.theta(theta1), is_true())
 
   suppressWarnings({
-    expect_that(is.theta(theta2), is_false())
-    expect_that(is.theta(theta3), is_false())
-    expect_that(is.theta(theta4), is_false())
-    expect_that(is.theta(theta5), is_false())
+    expect_false(is.theta(theta2))
+    expect_false(is.theta(theta3))
+    expect_false(is.theta(theta4))
+    expect_false(is.theta(theta5))
+    expect_false(is.theta(theta6))
+    expect_false(is.theta(theta7))
+    expect_false(is.theta(theta8))
+    expect_false(is.theta(theta9))
+    expect_false(is.theta(theta10))
+    expect_false(is.theta(theta11))
+    expect_false(is.theta(theta12))
   })
 })
 
@@ -50,8 +78,8 @@ for (d in 2:10) {
 #
 
 class(theta1) <- NULL
-
-expect_false(suppressWarnings(is.theta(theta1)))
-expect_true( suppressWarnings(is.theta(theta1, check.class = FALSE)))
-
+test_that('Test is.theta check.class arugment', {
+  expect_false(suppressWarnings(is.theta(theta1)))
+  expect_true( suppressWarnings(is.theta(theta1, check.class = FALSE)))
+})
 # Test degenerate input
