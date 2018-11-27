@@ -5,7 +5,8 @@ for (d in 2:10) {
   theta <- rtheta(m = m, d = d)
   theta$sigma$comp2[1,2] <- 0.5
   neg.eps <- .Machine$double.neg.eps
-  eps <- .Machine$double.eps
+  eps     <- .Machine$double.eps
+
   par <- full2meta(theta)
 
   test_that("full2meta returns proper formatted output", {
@@ -17,6 +18,15 @@ for (d in 2:10) {
     expect_that(par["sigma"], is_more_than(-neg.eps))    # Sigma >= 0
     expect_that(par["rho"], is_more_than(-1 - neg.eps))  # -1 <= rho <= 1
     expect_that(par["rho"], is_less_than(1 + eps))
+  })
+
+  test_that("full2meta fails when intended", {
+    theta_f <- rtheta(m = m, d = d)
+    theta_f$sigma[[2]][1,2] <- theta_f$sigma[[2]][2,1] <-
+      tcrossprod(sqrt(diag(theta_f$sigma[[2]])))[1,2]*-(1/(d-1))*1.05
+
+    expect_error(full2meta(theta_f))
+    expect_error(full2meta(rtheta(m = 3, d = d)))
   })
 
   theta_back <- meta2full(par, d = d)
