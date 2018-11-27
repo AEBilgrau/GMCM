@@ -44,6 +44,10 @@
 #'   \code{par[1]} is the probability of being from the first (or null)
 #'   component, \code{par[2]} is the mean, \code{par[3]} is the standard
 #'   deviation, and \code{par[4]} is the correlation.
+#'
+#'   If \code{trace.theta} is \code{TRUE}, then a \code{list} is returned where
+#'   the first entry is as described above and the second entry is the trace
+#'   information (dependent of \code{method}.).
 #' @note Simulated annealing is strongly dependent on the initial values and
 #'   the cooling scheme.
 #'

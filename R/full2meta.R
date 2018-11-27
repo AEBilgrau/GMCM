@@ -6,9 +6,11 @@
 #' format described in \code{\link{rtheta}}.
 #'
 #' If a \code{theta} is supplied which is not on the form of Li et. al. (2011)
-#' the output is coerced by simply picking the first elements of the first mean
-#' vector and first covariance matrix as mean and standard deviation,
-#' respectively.
+#' the output is coerced by simply picking the first element of the second
+#' component mean vector as mean,
+#' the square roof of the first diagonal entry of the second component
+#' covariance matrix as standard deviation, and first off-diagonal entry as
+#' correlation (properly scaled).
 #'
 #' @aliases meta2full full2meta
 #' @param theta A list of parameters for the full model. Formatted as described
@@ -38,7 +40,7 @@
 full2meta <- function(theta) {
   if (theta$m != 2) {
     stop("Too many components as m != 2. The special GMCM for meta-analysis",
-         "only supports 2 components.")
+         " only supports 2 components.")
   }
   par <- c("pie1"  = unname(theta$pie[1]),
            "mu"    = theta$mu[[2]][1],

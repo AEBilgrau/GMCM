@@ -35,9 +35,11 @@ format described in \code{\link{rtheta}}.
 }
 \details{
 If a \code{theta} is supplied which is not on the form of Li et. al. (2011)
-the output is coerced by simply picking the first elements of the first mean
-vector and first covariance matrix as mean and standard deviation,
-respectively.
+the output is coerced by simply picking the first element of the second
+component mean vector as mean,
+the square roof of the first diagonal entry of the second component
+covariance matrix as standard deviation, and first off-diagonal entry as
+correlation (properly scaled).
 }
 \examples{
 theta <- GMCM:::rtheta(m = 2, d = 2)
