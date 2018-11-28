@@ -2,8 +2,7 @@
 [![CRAN version](http://www.r-pkg.org/badges/version/GMCM)](https://cran.r-project.org/package=GMCM)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/GMCM)](https://cran.r-project.org/package=GMCM)
 [![Total CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/GMCM)](https://cran.r-project.org/package=GMCM)
-[![Coverage status](https://coveralls.io/repos/github/AEBilgrau/GMCM/badge.svg)](https://coveralls.io/r/AEBilgrau/GMCM?branch=master)
-
+[![Coverage Status](https://coveralls.io/repos/github/AEBilgrau/GMCM/badge.svg?branch=master)](https://coveralls.io/github/AEBilgrau/GMCM?branch=master)
 
 GMCM
 ----
