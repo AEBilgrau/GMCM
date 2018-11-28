@@ -64,11 +64,11 @@ set.seed(10)
 for (d in 2:10) {
   for (m in 2:10) {
     for (method in as.character(formals(rtheta)$method)[-1]) {
-      theta.tmp <- rtheta(m = m, d = d, method = "EqualSpherical")
+      theta.tmp <- rtheta(m = m, d = d, method = method)
       test_that(paste("rtheta returns proper formatted output, ",
                       "m=", m, ", d=", d, ", method=", method, sep = ""), {
-                        expect_that(is.theta(theta.tmp), is_true())
-                      })
+         expect_that(is.theta(theta.tmp), is_true())
+      })
     }
   }
 }
