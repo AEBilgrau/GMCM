@@ -3,15 +3,16 @@ context("Check EMAlgorithm")
 set.seed(1)
 n <- 1000
 
-for (d in 3:4) {
-  for (m in 3) {
-    data <- SimulateGMMData(n = n, d = d, m = m)  # Simulate some data
-    start.theta <- rtheta(d = d, m = m)
+test_that("EMAlgorithm returns properly formatted output", {
+  for (d in 3:4) {
+    for (m in 3) {
+      data <- SimulateGMMData(n = n, d = d, m = m)  # Simulate some data
+      start.theta <- rtheta(d = d, m = m)
 
-    for (trace_theta in c(TRUE, FALSE)) {
-      res <- GMCM:::EMAlgorithm(data$z, theta = start.theta, max.ite = 100,
-                                trace.theta = trace_theta)
-      test_that(paste0("EMAlgorithm returns properly formatted output"), {
+      for (trace_theta in c(TRUE, FALSE)) {
+        res <- GMCM:::EMAlgorithm(data$z, theta = start.theta, max.ite = 100,
+                                  trace.theta = trace_theta)
+
         expect_that(length(res), equals(ifelse(trace_theta, 4L, 3L)))
         expect_that(is.theta(res$theta), is_true())  # theta
         expect_that(is.numeric(res$loglik.tr), is_true())
@@ -23,9 +24,28 @@ for (d in 3:4) {
         expect_that(length(res$theta$mu), equals(m))
         expect_that(length(res$theta$sigma), equals(m))
         expect_that(all(sapply(res$theta.tr, is.theta)), is_true())
-      })
+
+      }
     }
   }
-}
+})
 
-# Test more parameters!
+# Test failures
+
+m <- 2
+d <- 3
+
+test_that("EMAlgorithm warns if max iterations is hit", {
+  data <- SimulateGMMData(n = n, d = d, m = m)  # Simulate some data
+  expect_warning(
+    GMCM:::EMAlgorithm(data$z, theta = rtheta(d = d, m = m), max.ite = 5)
+  )
+})
+
+test_that("EMAlgorithm is verbose if asked", {
+  data <- SimulateGMMData(n = n, d = d, m = m)  # Simulate some data
+  expect_output(
+    GMCM:::EMAlgorithm(data$z, theta = rtheta(d = d, m = m), verbose = TRUE)
+  )
+})
+

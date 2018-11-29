@@ -40,6 +40,11 @@ for (d in 2:10) {
                 is_equivalent_to(rep(par["sigma"]^2, d)))
   })
 
+  test_that("meta2full fail as intended", {
+    expect_error(meta2full(c(0.5, 1, 1, -0.2), d = 10))
+    expect_error(meta2full(c(0.5, 1, 1, -0.51), d = 3))
+  })
+
 
 }
 

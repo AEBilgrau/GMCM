@@ -41,51 +41,58 @@ true.par <- c(0.9, 2, 0.7, 0.6)
 n <- 1000
 data <- SimulateGMCMData(n = n, par = true.par, d = 2)
 
-l <- 0.5
-res1 <- get.IDR(data$u, true.par, threshold = l)
-res2 <- GMCM:::get.idr(data$u, data$theta)
-res3 <- get.prob(data$u, data$theta)
 
-
+# res1
 test_that("test get.IDR result format", {
-  # res1
-  expect_that(length(res1), equals(5))
-  expect_that(is.list(res1), is_true())
-  expect_that(names(res1), equals(c("idr", "IDR", "l", "threshold", "Khat")))
 
-  # idr
-  expect_that(is.numeric(res1$idr), is_true())
-  expect_that(length(res1$idr), equals(n))
-  expect_between(res1$idr, 0, 1)
+  res1_pri <- get.IDR(data$u, true.par, threshold = 0.5)
+  res1_alt <- get.IDR(data$u, true.par, threshold = 0)
 
-  # IDR
-  expect_that(is.numeric(res1$IDR), is_true())
-  expect_that(length(res1$IDR), equals(n))
-  expect_between(res1$IDR, 0, 1)
+  for (res1 in list(res1_pri, res1_alt)) {
 
-  # l
-  expect_that(is.numeric(res1$l), is_true())
-  expect_that(length(res1$l), equals(1))
-  expect_that(res1$l, equals(sum(res1$IDR < l)))
-  expect_between(res1$l, 0, n)
+    expect_that(length(res1), equals(5))
+    expect_that(is.list(res1), is_true())
+    expect_that(names(res1), equals(c("idr", "IDR", "l", "threshold", "Khat")))
 
-  # Khat
-  expect_that(is.numeric(res1$Khat), is_true())
-  expect_that(length(res1$Khat), equals(n))
-  expect_between(res1$Khat, 1, data$theta$m)
+    # idr
+    expect_that(is.numeric(res1$idr), is_true())
+    expect_that(length(res1$idr), equals(n))
+    expect_between(res1$idr, 0, 1)
+
+    # IDR
+    expect_that(is.numeric(res1$IDR), is_true())
+    expect_that(length(res1$IDR), equals(n))
+    expect_between(res1$IDR, 0, 1)
+
+    # l
+    expect_that(is.numeric(res1$l), is_true())
+    expect_that(length(res1$l), equals(1))
+    expect_that(res1$l, equals(sum(res1$IDR < res1$threshold)))
+    expect_between(res1$l, 0, n)
+
+    # Khat
+    expect_that(is.numeric(res1$Khat), is_true())
+    expect_that(length(res1$Khat), equals(n))
+    expect_between(res1$Khat, 1, data$theta$m)
+  }
 })
 
 
+# res2
+res2 <- GMCM:::get.idr(data$u, data$theta)
 test_that("test get.idr result format", {
-  # res2
+  res2 <- GMCM:::get.idr(data$u, data$theta)
   expect_that(is.numeric(res2), is_true())
   expect_that(length(res2), equals(n))
   expect_between(res2, 0, 1)
 })
 
 
+# res3
+
+
 test_that("test get.prob result format", {
-  # res3
+  res3 <- get.prob(data$u, data$theta)
   expect_that(is.numeric(res3), is_true())
   expect_that(is.matrix(res3), is_true())
   expect_that(dim(res3), equals(c(n, data$theta$m)))
