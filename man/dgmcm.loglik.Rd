@@ -18,7 +18,7 @@ dgmm.loglik.marginal(theta, x, marginal.loglik = TRUE)
 
 pgmm.marginal(z, theta)
 
-qgmm.marginal(u, theta, res = 1000, spread = 5)
+qgmm.marginal(u, theta, res = 1000, spread = 5, rule = 2)
 }
 \arguments{
 \item{theta}{A list parameters as described in \code{\link{rtheta}}.}
@@ -43,6 +43,8 @@ done. Default is 1000.}
 
 \item{spread}{The number of marginal standard deviations from the marginal
 means the \code{pgmm.marginal} is to be evaluated on.}
+
+\item{rule}{The extrapolation rule used in \code{\link{approxfun}}.}
 }
 \value{
 The returned value depends on the value of \code{marginal.loglik}.

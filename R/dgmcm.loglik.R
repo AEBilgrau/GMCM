@@ -24,10 +24,6 @@
 #'   returned. In other words, if \code{TRUE} the sum of the marginal
 #'   likelihoods is not computed.
 #' @param x A matrix where each row corresponds to an observation.
-#' @param res The resolution at which the inversion of \code{qgmm.marginal} is
-#'   done. Default is 1000.
-#' @param spread The number of marginal standard deviations from the marginal
-#'   means the \code{pgmm.marginal} is to be evaluated on.
 #' @param \dots Arguments passed to \code{qgmm.marginal}.
 #' @return The returned value depends on the value of \code{marginal.loglik}.
 #'   If \code{TRUE}, the non-summed marginal likelihood values are returned. If
