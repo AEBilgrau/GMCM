@@ -20,9 +20,17 @@ for (d in seq_len(3) + 1) {
     })
 
     test_that("pgmm.marginal fails when intended", {
-      expect_error(GMCM:::pgmm.marginal(z = sim$z, theta = c(0.5, 1, 1, 0.5)))
-      expect_error(GMCM:::pgmm.marginal(z = sim$z[1, ], theta = rtheta(d = d)))
-      expect_error(GMCM:::pgmm.marginal(z = sim$z, theta = rtheta(d = 1)))
+
+      sim <- SimulateGMMData(n = n,
+                             theta = rtheta(d = d, method = "EqualEllipsoidal"))
+      suppressWarnings({
+        expect_error(GMCM:::pgmm.marginal(z = sim$z, theta = c(0.5, 1, 1, 0.5)),
+                     "theta is formatted incorrectly")
+        expect_error(GMCM:::pgmm.marginal(z = sim$z[1, ], theta = rtheta(d = d)),
+                     "not a matrix")
+        expect_error(GMCM:::pgmm.marginal(z = sim$z, theta = rtheta(d = 1)),
+                     "Number of columns")
+      })
     })
 
 

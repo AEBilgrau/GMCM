@@ -29,3 +29,11 @@ test_that("PseudoEMAlgorithm returns proper format", {
   expect_that(is.matrix(res$kappa), is_true())
   expect_that(dim(res$kappa), equals(c(n, m)))
 })
+
+
+test_that("PseudoEMAlgorithm expected errors & warnigns", {
+  expect_error(GMCM:::PseudoEMAlgorithm(uhat, meta2full(c(0.5, 15, 0.1, 0.8), d = d)))
+  expect_warning(GMCM:::PseudoEMAlgorithm(uhat, meta2full(c(0.5, 2,  0.1, 0.8), d = d),
+                                          max.ite = 2))
+})
+
