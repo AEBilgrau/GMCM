@@ -108,7 +108,7 @@ PseudoEMAlgorithm <- function (x, theta,
     kappa <- EStep(x = z, theta = theta)
     if (any(colSums(kappa) == 0)) {
       stop("No observations are estimated to be from component(s): ",
-           paste(which(colSums(kappa) == 0), collapse = " and "), ". ",
+           paste(which(colSums(kappa) == 0), collapse = ", "), ". ",
            "All posterior probabilities are zero. ",
            "Try another start estimate or fewer components.")
     }
