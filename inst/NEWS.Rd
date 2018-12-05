@@ -3,23 +3,30 @@
 \newcommand{\cpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}}
 
 
-\section{Changes in version 1.3}{
+\section{Changes in version 1.3 (2018-12-05)}{
   \itemize{
     \item Fixed issue with optim wrappers for the likelihood (\code{vector2theta} and \code{theta2vector}) causing the first anchored component to be scaled sligtly incorrectly. Note, fitted results will be changed compared to earlier versions (altough hopefully not much).
-    \item Updated package to use latest \cpkg{roxygen2} and \cpkg{Rcpp} packages.
-    \item Updated Travis-CI yaml file
+    \item Functions now return a proper \code{S3} object of class \code{\link{theta}} and \code{\link{print.theta}}, \code{\link{summary.theta}}, and \code{\link{plot.theta}} functions have been made to fit the usually expected generic functions.
+    \item Minor improvements and corrections to documentation.
+    \item Technical changes (with no impact on user interface):
+    \itemize{
+      \item Updated package to use latest \cpkg{roxygen2} and \cpkg{Rcpp} packages.
+      \item Updated \href{https://travis-ci.org/AEBilgrau/GMCM}{Travis-CI} yaml file to 'newly' supported R-language.
+      \item Expanded unit tests and added continuous integration of test coverage with \href{https://coveralls.io/github/AEBilgrau/GMCM?branch=master}{coveralls.io} utilizing the \pkg{covr} package.
+    }
   }
 }
 
-\section{Changes in version 1.2.4}{
+\section{Changes in version 1.2.4 (2017-01-13)}{
   \itemize{
+    \item Added vignette.
     \item Minor tweaks to documentation.
     \item Updated affiliations.
     \item Fixed broken links.
   }
 }
 
-\section{Changes in version 1.2.3}{
+\section{Changes in version 1.2.3 (2016-03-30)}{
   \itemize{
     \item Updated citation information and manuscript.
     \item Minor updates to documentation.
@@ -27,14 +34,15 @@
   }
 }
 
-\section{Changes in version 1.2.2}{
+\section{Changes in version 1.2.2 (2015-08-05)}{
   \itemize{
     \item Patch due to changes in \pkg{RcppArmadillo}. No visible user changes.
+
   }
 }
 
 
-\section{Changes in version 1.2.1}{
+\section{Changes in version 1.2.1 (2015-04-20)}{
   \itemize{
     \item Hotfix due to failure of unit tests on sparc solaris. No visible user
       changes.
@@ -42,7 +50,7 @@
 }
 
 
-\section{Changes in version 1.2}{
+\section{Changes in version 1.2 (2015-04-14)}{
   \itemize{
     \item Added the GMCM package vignette. The article is to appear in the
       Journal of Statistical Software.
@@ -52,14 +60,14 @@
   }
 }
 
-\section{Changes in version 1.1.1}{
+\section{Changes in version 1.1.1 (2014-10-07)}{
   \itemize{
     \item Fixed a small testing issue on CRAN for old R versions.
       (Used \code{anyNA} on R versions older than 3.1.0).
   }
 }
 
-\section{Changes in version 1.1}{
+\section{Changes in version 1.1 (2014-10-01)}{
   \itemize{
     \item This NEWS.Rd file have been added!
     \item The \cpkg{GMCM}-package is now using the in-source documentation
@@ -83,10 +91,11 @@
     \item \code{get.idr} is no longer exported and visible to the user.
       Use \code{get.IDR} to get the local (posterior class probabilities)
       and adjusted irreproducibility discovery rates (IDR).
+    \item Added \href{https://travis-ci.org/AEBilgrau/GMCM}{Travis Continuous Integration} for R building.
   }
 }
 
-\section{Changes in version 1.0.1}{
+\section{Changes in version 1.0.1 (2014-05-30)}{
   \itemize{
     \item \code{pgmm_marginal} and other functions in \code{src/GMCM.cpp} have
       been rewritten to address memory issues. \cpkg{GMCM} should now be more
@@ -94,5 +103,8 @@
   }
 }
 
-
-
+\section{Changes in version 1.0 (2014-02-07)}{
+  \itemize{
+    \item First version on CRAN.
+  }
+}
