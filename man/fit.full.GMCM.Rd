@@ -36,11 +36,16 @@ stopping criterion. (See \code{\link{optim}})}
 is made.}
 
 \item{\dots}{Arguments passed to the \code{control}-list in
-\code{\link{optim}} or \code{\link{PseudoEMAlgorithm}} if the \code{method}
-is \code{"PEM"}.}
+\code{\link{optim}} when \code{method} is not equal to \code{"PEM"}.
+If \code{method} equals \code{"PEM"}, the arguments are passed to
+ \code{\link{PseudoEMAlgorithm}} if the \code{method}.}
 }
 \value{
 A list of parameters formatted as described in \code{\link{rtheta}}.
+
+When \code{method} equals \code{"PEM"}, a list of extra information
+(log-likelihood trace, the matrix of group probabilities, theta trace) is
+added as an attribute called "extra".
 }
 \description{
 Estimates the parameters of general Gaussian mixture copula models (GMCM).

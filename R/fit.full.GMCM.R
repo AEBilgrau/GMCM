@@ -30,9 +30,16 @@
 #' @param verbose Logical. If \code{TRUE}, a trace of the parameter estimates
 #'   is made.
 #' @param \dots Arguments passed to the \code{control}-list in
-#'   \code{\link{optim}} or \code{\link{PseudoEMAlgorithm}} if the \code{method}
-#'   is \code{"PEM"}.
+#'   \code{\link{optim}} when \code{method} is not equal to \code{"PEM"}.
+#'   If \code{method} equals \code{"PEM"}, the arguments are passed to
+#'    \code{\link{PseudoEMAlgorithm}} if the \code{method}.
+#'
 #' @return A list of parameters formatted as described in \code{\link{rtheta}}.
+#'
+#' When \code{method} equals \code{"PEM"}, a list of extra information
+#' (log-likelihood trace, the matrix of group probabilities, theta trace) is
+#' added as an attribute called "extra".
+#'
 #' @note All the optimization procedures are strongly dependent on the initial
 #'   values and other parameters (such as the cooling scheme for method SANN).
 #'   Therefore it is advisable to apply multiple
@@ -105,12 +112,9 @@ fit.full.GMCM <- function (u,
   if (method != "PEM") {
 
     gmcm.loglik <- function (par, u, m) { # Defining objective function
-      # cat("par =", capture.output(dput(par)), "\n")  # FOR DEBUGGING
       theta <- vector2theta(par, d = ncol(u), m = m)
       theta$pie <- theta$pie/sum(theta$pie)
-      # cat("theta=", unlist(theta$sigma), "\n")  # FOR DEBUGGING
       loglik <- dgmcm.loglik(theta = theta, u)
-
       return(loglik)
     }
 
@@ -131,6 +135,8 @@ fit.full.GMCM <- function (u,
                              meta.special.case = FALSE,
                              ...)
     theta <- fit$theta
+
+    attr(theta, "extra") <- fit[setdiff(names(fit), "theta")]
 
   }
 
