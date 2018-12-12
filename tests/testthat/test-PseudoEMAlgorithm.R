@@ -1,7 +1,8 @@
 context("Check PseudoEMAlgorithm")
 
-d <- 3
-n <- 2000
+set.seed(319561)
+d <- 2
+n <- 1000
 m <- 2
 true.par <- c(runif(1, 0.2, 0.8), rnorm(1, 3, 0.5),
               rchisq(1, df = 1), runif(1, 0.5, 0.95))
@@ -32,7 +33,7 @@ test_that("PseudoEMAlgorithm returns proper format", {
 
 
 test_that("PseudoEMAlgorithm expected errors & warnigns", {
-  expect_error(GMCM:::PseudoEMAlgorithm(uhat, meta2full(c(0.5, 15, 0.1, 0.8), d = d)))
+  expect_error(GMCM:::PseudoEMAlgorithm(uhat, meta2full(c(0.5, 25, 0.1, 0.8), d = d)))
   expect_warning(GMCM:::PseudoEMAlgorithm(uhat, meta2full(c(0.5, 2,  0.1, 0.8), d = d),
                                           max.ite = 2))
 })
