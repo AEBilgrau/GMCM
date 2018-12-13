@@ -1,5 +1,9 @@
 %\VignetteIndexEntry{An Introduction to GMCM}
+%\VignetteKeywords{GMCM, clustering, meta analysis}
 %\VignetteEngine{knitr::knitr}
+%\VignettePackage{GMCM}
+%\VignetteDepends{GMCM,knitr,idr,Hmisc,RColorBrewer,jpeg}
+
 \documentclass[article,nojss]{jss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,6 +36,13 @@ We demonstrate the use of \pkg{GMCM} through different applications. \hfill \vfi
 }
 \Keywords{\pkg{GMCM}, unsupervised clustering, high-dimensional experiments, meta-analysis, reproducibility, evidence aggregation, copulas, $p$-value combination, \pkg{idr}, \pkg{Rcpp}, \proglang{R}, \proglang{C++}}
 \Plainkeywords{GMCM, unsupervised clustering, high-dimensional experiments, meta-analysis, reproducibility, evidence aggregation, copulas, p-value combination, idr, Rcpp, R, C++}
+
+\Volume{70}
+\Issue{2}
+\Month{April}
+\Year{2016}
+\Submitdate{2014-03-07}
+\Acceptdate{2016-04-04}
 
 %% The address of (at least) one author should be given
 %% in the following format:
