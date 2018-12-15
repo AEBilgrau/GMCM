@@ -20,10 +20,12 @@
 #' @examples
 #' set.seed(5)
 #' theta <- rtheta(d = 3, m = 4)
+#' \dontrun{
 #' plot(theta)
 #' plot(theta, col = "blue", asp = 1, add.means = FALSE)
 #' plot(theta, col = "blue", asp = 1, add.means = TRUE)
 #' plot(theta, which.dims = c(3L, 2L), asp = 1)
+#' }
 #' plot(theta, asp = 1, n.sd = 3, add.ellipses = TRUE,
 #'      nlevels = 40, axes = FALSE,
 #'      xlab = "Dimension 1", ylab = "Dimension 2")
