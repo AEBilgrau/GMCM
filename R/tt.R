@@ -1,12 +1,12 @@
 #' Reparametrization of GMCM parameters
 #'
-#' These functions map the four GMCM parameters in the model of Li et. al.
+#' @description These functions map the four GMCM parameters in the model of Li et. al.
 #' (2011) and Tewari et. al. (2011) onto the real line and back. The mixture
 #' proportion is logit transformed. The mean and standard deviation are log
 #' transformed. The correlation is translated and scaled to the interval (0,1)
 #' and logit transformed by \code{\link{rho.transform}}.
 #'
-#' The functions are used only in the wrapper to \code{optim} when the GMCM
+#' @details The functions are used only in the wrapper to \code{optim} when the GMCM
 #' log-likelihood is optimized.
 #'
 #' \code{par[1]} should be between 0 and 1. \code{par[2]} and \code{par[3]}
@@ -24,8 +24,8 @@
 #'   transformed by a simple \code{\link{logit}} transformation. If
 #'   \code{FALSE} the
 #' \code{\link{rho.transform}} is used.
-#' @return A vector of the transformed or inversely transformed values of
-#'   length 4.
+#' @return A \code{numeric} vector of the transformed or inversely transformed
+#'   values of length 4.
 #'
 #'   \code{tt} returns \code{par} as described above.
 #' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>

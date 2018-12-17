@@ -7,11 +7,12 @@
 Uhat(x)
 }
 \arguments{
-\item{x}{A numeric matrix of observations to be ranked. Rows correspond to
-features and columns to experiments.}
+\item{x}{A \code{numeric} \code{matrix} of observations to be ranked. Rows
+correspond to features and columns to experiments.}
 }
 \value{
-A matrix with the same dimensions as \code{x} of the scaled ranks.
+A \code{matrix} with the same dimensions as \code{x} of the scaled
+  ranks.
 }
 \description{
 Function for computing the scaled ranks for each column of the input matrix.

@@ -29,8 +29,8 @@ correlation.}
 \value{
 \code{inv.tt} returns \code{tpar} as described above.
 
-A vector of the transformed or inversely transformed values of
-  length 4.
+A \code{numeric} vector of the transformed or inversely transformed
+  values of length 4.
 
   \code{tt} returns \code{par} as described above.
 }
