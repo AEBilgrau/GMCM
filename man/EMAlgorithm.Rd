@@ -4,14 +4,19 @@
 \alias{EMAlgorithm}
 \title{EM algorithm for Gaussian mixture models}
 \usage{
-EMAlgorithm(x, theta, eps = 1e-06, max.ite = 1e+05,
+EMAlgorithm(x, theta, m, eps = 1e-06, max.ite = 1e+05,
   trace.theta = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{A matrix of observations where rows correspond to features and
 columns to experiments.}
 
-\item{theta}{A list of parameters as described in \code{\link{rtheta}}.}
+\item{theta}{A list of parameters of class \code{theta} as described in
+\code{\link{rtheta}}.
+Optional. If not provided \code{m} should be given.}
+
+\item{m}{\code{numeric}. The number of components if \code{theta} is not
+supplied.}
 
 \item{eps}{The maximal required difference in successive likelihoods to
 establish convergence.}
@@ -38,7 +43,8 @@ Gaussian mixture models.
 }
 \details{
 Though not as versatile, the algorithm can be a faster alternative to
-\code{Mclust} in the \code{mclust}-package.
+\code{Mclust} in the \code{mclust}-package. If \code{theta} is not given,
+a k-means clustering is used to determine the initial \code{theta}.
 }
 \examples{
 
