@@ -8,8 +8,8 @@ EMAlgorithm(x, theta, m, eps = 1e-06, max.ite = 1e+05,
   trace.theta = FALSE, verbose = FALSE)
 }
 \arguments{
-\item{x}{A matrix of observations where rows correspond to features and
-columns to experiments.}
+\item{x}{A \code{matrix} of observations where each row correspond to an
+observation and each columns to a feature/variable.}
 
 \item{theta}{A list of parameters of class \code{theta} as described in
 \code{\link{rtheta}}.
@@ -42,8 +42,8 @@ The regular expectation-maximization algorithm for general multivariate
 Gaussian mixture models.
 }
 \details{
-Though not as versatile, the algorithm can be a faster alternative to
-\code{Mclust} in the \code{mclust}-package. If \code{theta} is not given,
+Though not as versatile, the algorithm can be a faster alternative
+to \code{Mclust} in the \code{mclust}-package. If \code{theta} is not given,
 a k-means clustering is used to determine the initial \code{theta}.
 }
 \examples{

@@ -3,12 +3,12 @@
 #' The regular expectation-maximization algorithm for general multivariate
 #' Gaussian mixture models.
 #'
-#' @details Though not as versatile, the algorithm can be a faster alternative to
-#' \code{Mclust} in the \code{mclust}-package. If \code{theta} is not given,
+#' @details Though not as versatile, the algorithm can be a faster alternative
+#' to \code{Mclust} in the \code{mclust}-package. If \code{theta} is not given,
 #' a k-means clustering is used to determine the initial \code{theta}.
 #'
-#' @param x A matrix of observations where rows correspond to features and
-#'   columns to experiments.
+#' @param x A \code{matrix} of observations where each row correspond to an
+#'   observation and each columns to a feature/variable.
 #' @param theta A list of parameters of class \code{theta} as described in
 #'   \code{\link{rtheta}}.
 #'   Optional. If not provided \code{m} should be given.
