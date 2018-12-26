@@ -5,7 +5,7 @@
 
 \section{Changes in version 1.3 (2018-12-05)}{
   \itemize{
-    \item Fixed issue with optim wrappers for the likelihood (\code{vector2theta} and \code{theta2vector}) causing the first anchored component to be scaled sligtly incorrectly. Note, fitted results will be changed compared to earlier versions (altough hopefully not much).
+    \item Fixed issue with optim wrappers for the likelihood (\code{vector2theta} and \code{theta2vector}) causing the first anchored component to be scaled slightly incorrectly. Note, fitted results will be changed compared to earlier versions (although hopefully not much).
     \item Functions now return a proper \code{S3} object of class \code{\link{theta}} and \code{\link{print.theta}}, \code{\link{summary.theta}}, and \code{\link{plot.theta}} functions have been made to fit the usually expected generic functions.
     \item Minor improvements and corrections to documentation.
     \item Technical changes (with no impact on user interface):
@@ -17,7 +17,7 @@
   }
 }
 
-\section{Changes in version 1.2.4 (2017-01-13)}{
+\section{Changes in version 1.2.4 (2017-01-13 )}{
   \itemize{
     \item Added vignette.
     \item Minor tweaks to documentation.
