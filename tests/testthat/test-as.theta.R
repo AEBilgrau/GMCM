@@ -15,10 +15,13 @@ test_that("Check that as.theta works as intended", {
 
 # Coercion tests
 d <- 3
-x2 <- unname(list(
-  pie = c(0.5, 0.5),
-  mu = simplify2array(list(comp1 = rep(0,d), comp2 = rep(1,d))),
-  sigma = simplify2array(list(comp1 = diag(d), comp2 = diag(d)))
+x2 <- unname(list( # Unnamed
+  # missing m and d
+  pie = c(1, 1),   # Does not sum to 1
+  mu = simplify2array(list(comp1 = rep(0,d),
+                           comp2 = rep(1,d))), # matrix, not a list
+  sigma = simplify2array(list(comp1 = diag(d),
+                              comp2 = diag(d)))  # array, not a list
 ))
 
 test_that("Check that as.theta works for 'matrix means'", {

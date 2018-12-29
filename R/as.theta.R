@@ -14,6 +14,7 @@
 #' Means on matrix form are as assumed to be \code{d} by \code{m}. I.e.
 #' rows correspond to the dimensions and columns to components, or the mean vectors
 #' as column vectors.
+#' Finally, the sum constriant of 1 for the mixture proportions is enforced.
 #'
 #' @param x A theta-like object that can be coerced.
 #' @return A theta object. See \code{\link{rtheta}}.
@@ -29,10 +30,11 @@
 #' theta <- as.theta(x)
 #' print(theta)
 #'
-#' x2 <- unname(list(
-#'   pie = c(0.5, 0.5),
-#'   mu = simplify2array(list(comp1=rep(0,d), comp2=rep(1,d))),
-#'   sigma = simplify2array(list(comp1=diag(d), comp2=diag(d)))
+#' x2 <- unname(list( # Unnamed
+#'   # missing m and d
+#'   pie = c(1, 1),   # Does not sum to 1
+#'   mu = simplify2array(list(comp1=rep(0,d), comp2=rep(1,d))), # matrix, not a list
+#'   sigma = simplify2array(list(comp1=diag(d), comp2=diag(d)))  # array, not a list
 #' ))
 #' theta2 <- as.theta(x2)
 #' print(theta2)
@@ -78,6 +80,12 @@ as.theta <- function(x) {
     stopifnot(dim(x[[5]]) == c(x[[2]], x[[2]], x[[1]]))
     x[[5]] <- structure(lapply(seq_len(x[[1]]), function(k) x[[5]][, , k]),
                         names = dimnames(x[[5]])[[3]])
+  }
+
+  # Enforce sum contraint of pie to 1
+  if (!isTRUE(all.equal(sum(x$pie), 1))) {
+    x$pie <- x$pie/sum(x$pie)
+    warning("x$pie rescaled to enforce sum constraint of 1")
   }
 
   if (is.theta(x)) {
