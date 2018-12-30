@@ -1,4 +1,5 @@
 library(shiny)
+library(DT)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -7,7 +8,7 @@ shinyServer(function(input, output) {
   user_data <- reactiveVal()
 
   # Load input file
-  output$in_file <- renderTable({
+  output$in_file_table <- renderDT({
 
     # Set required dependency, input$in_file is NULL initially.
     req(input$in_file)
@@ -16,9 +17,9 @@ shinyServer(function(input, output) {
     tryCatch(
       {
         user_data(read.table(input$in_file$datapath,
-                      header = input$header,
-                      sep = input$sep,
-                      quote = input$quote))
+                             header = input$header,
+                             sep = input$sep,
+                             quote = input$quote))
       },
       error = function(e) {
         # Return a safeError if a parsing error occurs
@@ -26,7 +27,12 @@ shinyServer(function(input, output) {
       }
     )
 
-    return(head(user_data(), n = input$n_rows))
+    d_t <- datatable(user_data(),
+                     style = "bootstrap",
+                     class = "display cell-border compact",
+                     selection = list(target = 'column')
+    )
+    return(d_t)
   })
 
   output$file_description <- renderUI({

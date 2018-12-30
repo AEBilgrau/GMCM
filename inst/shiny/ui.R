@@ -1,4 +1,5 @@
 library(shiny)
+library(DT)
 
 # Define UI for application
 shinyUI(
@@ -7,50 +8,52 @@ shinyUI(
     title = "Gaussian Mixture Copula Models",
     theme = "bootstrap.css",
 
-    # File input tab ----
+    # navbarMenu: File input tab ----
     tabPanel(
       title = "File input",
 
-      sidebarPanel(
-        # File input ----
-        fileInput("in_file", "Choose CSV File",
-                  multiple = FALSE,
-                  accept = c("text/csv",
-                             "text/comma-separated-values,text/plain",
-                             ".csv")),
+      sidebarLayout(
+        sidebarPanel(
+          # * Input: File ----
+          fileInput("in_file", "Choose CSV File",
+                    multiple = FALSE,
+                    accept = c("text/csv",
+                               "text/comma-separated-values,text/plain",
+                               ".csv")),
 
-        p("The input file should be a plain text file where columns",
-          "correspond to features/variables/experiments and rows correspond to",
-          "observations."),
+          HTML("<p>The input file should be a plain text file where columns",
+               "correspond to features/<wbr>variables/<wbr>experiments and",
+               "rows correspond to observations.</p>"),
 
-        # Input: Checkbox if file has header ----
-        checkboxInput("header", "Header", TRUE),
+          # * Input: header checkbox ----
+          checkboxInput("header", "Header", TRUE),
 
-        # Input: Select separator ----
-        radioButtons("sep", "Separator",
-                     choices = c(Comma = ",",
-                                 Semicolon = ";",
-                                 Tab = "\t"),
-                     selected = ","),
+          # * Input: select separator ----
+          radioButtons("sep", "Separator",
+                       choices = c(Comma = ",",
+                                   Semicolon = ";",
+                                   Tab = "\t"),
+                       selected = ","),
 
-        # Input: Select quotes ----
-        radioButtons("quote", "Quotes",
-                     choices = c(None = "",
-                                 "Double Quote" = '"',
-                                 "Single Quote" = "'"),
-                     selected = '"'),
+          # * Input: select quotes ----
+          radioButtons("quote", "Quotes",
+                       choices = c(None = "",
+                                   "Double Quote" = '"',
+                                   "Single Quote" = "'"),
+                       selected = '"')
 
-        # Input: Select rows to show ----
-        numericInput("n_rows", "Number of rows to display",
-                     value = 20)
-      ),
+        ),
 
-      htmlOutput("file_description"),
-      tableOutput("in_file")
+        mainPanel(
+          htmlOutput("file_description"),
+          DTOutput("in_file_table")
+        )
+      )
     ),
 
 
-    # General model tab ----
+
+    # navbarMenu: General model ----
     tabPanel(
       title = "General GMCM",
 
@@ -65,11 +68,15 @@ shinyUI(
       )
     ),
 
-    # Special model tab ----
+
+
+    # navbarMenu: Special model ----
     tabPanel(
       title = "Special GMCM"
     ),
 
+
+    # navbarMenu: More ----
     navbarMenu(
       title = "",
       icon = icon("bars"),
