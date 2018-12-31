@@ -3,6 +3,11 @@
 \newcommand{\cpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}}
 
 
+\section{Changes in version 1.3.1 (2018-MM-DD)}{
+  \itemize{
+    \item Minor improvements to documentation.
+  }
+
 \section{Changes in version 1.3 (2018-12-05)}{
   \itemize{
     \item Fixed issue with optim wrappers for the likelihood (\code{vector2theta} and \code{theta2vector}) causing the first anchored component to be scaled slightly incorrectly. Note, fitted results will be changed compared to earlier versions (although hopefully not much).

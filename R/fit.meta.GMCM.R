@@ -11,8 +11,8 @@
 #'
 #' @aliases fit.meta.gmcm
 #' @param u An \code{n} by \code{d} matrix of test statistics. Rows correspond
-#'   to features and columns to experiments. Large values are assumed to be
-#'   indicative of reproducible genes.
+#'   to features and columns to experiments. Larger values are assumed to be
+#'   indicative of stronger evidence and reproducibility.
 #' @param init.par A 4-dimensional vector of the initial parameters where,
 #'   \code{init.par[1]} is the mixture proportion of spurious signals,
 #'   \code{init.par[2]} is the mean, \code{init.par[3]} is the standard
@@ -50,6 +50,8 @@
 #'   information (dependent of \code{method}.).
 #' @note Simulated annealing is strongly dependent on the initial values and
 #'   the cooling scheme.
+#'
+#'
 #'
 #'   See \code{\link{optim}} for further details.
 #' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
