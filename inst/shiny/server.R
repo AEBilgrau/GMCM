@@ -1,4 +1,5 @@
 library(shiny)
+library(shinydashboard)
 library(DT)
 library(GMCM)
 
@@ -85,7 +86,7 @@ shinyServer(function(input, output) {
          xlab = names(d)[i],
          ylab = names(d)[j],
          axes = FALSE,
-         main = "Scatter",
+         main = "Scatter plot of raw data",
          col = cols,
          asp = 1)
     axis(1)
@@ -119,19 +120,27 @@ shinyServer(function(input, output) {
   # Initalise reative values ----
   user_data_pre <- reactiveVal()
   meta_fit <- reactiveVal()
+  meta_fit_classified <- reactiveVal()
+
 
   observeEvent(input$meta_large_vals, {
     user_data_pre(Uhat(ifelse(input$meta_large_vals, 1, -1) * user_data()))
   })
 
   # observe button push and fit model ----
-  observeEvent(input$fit_meta_push, {
-    u <- user_data_pre()
+  observeEvent(input$meta_fit_push, {
 
+    # Require user (preprocessed) data
+    req(u <- user_data_pre())
+
+
+    # Set initial parameters
     init.par <- c(pie1  = input$par1,
                   mu    = input$par2,
                   sigma = input$par3,
                   rho   = input$par4)
+
+    # Fit model
     res <- fit.meta.GMCM(u = u,
                          init.par = init.par,
                          method = input$meta_method,
@@ -139,8 +148,100 @@ shinyServer(function(input, output) {
                          verbose = TRUE,
                          positive.rho = input$meta_positive_rho,
                          trace.theta = TRUE)
+
+    # Determine reproducibility
+    idr <- get.IDR(x = u, par = res[[1]], threshold = input$meta_IDR_thres)
+
+    # Append data and reproducibility results
+    res <- c(res, list(idr = idr, u = u))
+
+    # Save results
     meta_fit(res)
   })
+
+
+  output$infoBoxes <- renderUI({
+    req(meta_fit())
+
+    fitted_vals <- signif(meta_fit()[[1]], 3)
+
+    box(
+      # Box args
+      title = "Fitted values",
+      status = "primary",
+      collapsible = TRUE,
+      width = 12,
+
+      # Content
+      valueBox(subtitle = "Mixture proportion",
+              value = fitted_vals["pie1"],
+              width = 3, color = "aqua",
+              icon = icon("percent")),
+      valueBox(subtitle = "Mean value",
+              value = fitted_vals["mu"],
+              width = 3, color = "teal",
+              icon = icon("minus")),
+      valueBox(subtitle = "Standard deviation",
+              value = fitted_vals["sigma"],
+              width = 3, color = "fuchsia",
+              icon = icon("resize-horizontal", lib = "glyphicon")),
+      valueBox(subtitle = "Correlation",
+              value = fitted_vals["rho"],
+              width = 3, color = "light-blue",
+              icon = icon("bar-chart"))
+    )
+
+  })
+
+  output$rank_plot <- renderPlot(
+    # width = 700, #px
+    # height = 700, #px
+    expr = {
+
+      req(meta_fit())
+
+
+      col_sel <- setdiff(input$in_file_table_columns_selected, 0) # Exclude index 0 (rownames)
+      row_sel <- input$in_file_table_rows_selected
+
+      if (is.null(col_sel) || length(col_sel) != 2) {
+        i <- 1
+        j <- 2
+      } else {
+        i <- col_sel[1]
+        j <- col_sel[2]
+      }
+
+
+      the_fit <- meta_fit()
+
+      # Get ranked data
+      u <- the_fit[["u"]]
+
+      # Colour selected rows and reproducible
+      cols <- rep("#00000050", nrow(u))
+      cols[row_sel] <- "red"
+
+
+      cols[the_fit$idr$Khat == 2] <- "steelblue"
+
+      # Do plot
+      plot(x = u[, i],
+           y = u[, j],
+           xlab = colnames(u)[i],
+           ylab = colnames(u)[j],
+           axes = FALSE,
+           main = "",
+           col = cols,
+           asp = 1)
+      axis(1)
+      axis(2)
+
+
+      # Add selected points on top
+      points(u[row_sel, i], u[row_sel, j], col = "red", pch = 16)
+    })
+
 
   output$meta_str <- renderPrint({
     cat("\n\nstr(meta_fit())\n")
