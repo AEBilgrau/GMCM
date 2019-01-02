@@ -3,8 +3,10 @@ library(shinydashboard)
 library(DT)
 library(GMCM)
 
+
 # Define server logic required to draw a histogram
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
+  session$onSessionEnded(stopApp)
 
   # Reactive value containing the data.frame ----
   user_data <- reactiveVal()
@@ -120,7 +122,6 @@ shinyServer(function(input, output) {
   # Initalise reative values ----
   user_data_pre <- reactiveVal()
   meta_fit <- reactiveVal()
-  meta_fit_classified <- reactiveVal()
 
 
   observeEvent(input$meta_large_vals, {
@@ -153,14 +154,29 @@ shinyServer(function(input, output) {
     idr <- get.IDR(x = u, par = res[[1]], threshold = input$meta_IDR_thres)
 
     # Append data and reproducibility results
-    res <- c(res, list(idr = idr, u = u))
+    res <- c(res, list(u = u))
 
     # Save results
     meta_fit(res)
   })
 
+  # Classify the observations based on fit
+  meta_classification <- reactive({
+    req(meta_fit())
+
+    input$meta_IDR_thres
+    fit <- meta_fit()
+
+    # Classify
+    idr <- get.IDR(x = fit$u,
+                   par = fit[[1]],
+                   threshold = input$meta_IDR_thres)
+    return(idr)
+  })
+
 
   output$infoBoxes <- renderUI({
+    #req(meta_classification())
     req(meta_fit())
 
     fitted_vals <- signif(meta_fit()[[1]], 3)
@@ -193,59 +209,57 @@ shinyServer(function(input, output) {
 
   })
 
-  output$rank_plot <- renderPlot(
-    # width = 700, #px
-    # height = 700, #px
-    expr = {
+  # Rank plot ----
+  output$rank_plot <- renderPlot({
 
-      req(meta_fit())
+    req(meta_fit())
+    req(meta_classification())
+    fit <- meta_fit()
+    idr <- meta_classification()
 
+    col_sel <- setdiff(input$in_file_table_columns_selected, 0) # Exclude index 0 (rownames)
+    row_sel <- input$in_file_table_rows_selected
 
-      col_sel <- setdiff(input$in_file_table_columns_selected, 0) # Exclude index 0 (rownames)
-      row_sel <- input$in_file_table_rows_selected
+    if (is.null(col_sel) || length(col_sel) != 2) {
+      i <- 1
+      j <- 2
+    } else {
+      i <- col_sel[1]
+      j <- col_sel[2]
+    }
 
-      if (is.null(col_sel) || length(col_sel) != 2) {
-        i <- 1
-        j <- 2
-      } else {
-        i <- col_sel[1]
-        j <- col_sel[2]
-      }
+    # Get ranked data
+    u <- fit$u
 
+    # Colour selected rows and reproducible
+    cols <- rep("#00000050", nrow(u))
+    cols[row_sel] <- "red"
 
-      the_fit <- meta_fit()
+    # Color by classification
+    cols[idr$Khat == 2] <- "steelblue"
 
-      # Get ranked data
-      u <- the_fit[["u"]]
-
-      # Colour selected rows and reproducible
-      cols <- rep("#00000050", nrow(u))
-      cols[row_sel] <- "red"
-
-
-      cols[the_fit$idr$Khat == 2] <- "steelblue"
-
-      # Do plot
-      plot(x = u[, i],
-           y = u[, j],
-           xlab = colnames(u)[i],
-           ylab = colnames(u)[j],
-           axes = FALSE,
-           main = "",
-           col = cols,
-           asp = 1)
-      axis(1)
-      axis(2)
+    # Do plot
+    plot(x = u[, i],
+         y = u[, j],
+         xlab = colnames(u)[i],
+         ylab = colnames(u)[j],
+         axes = FALSE,
+         main = "",
+         col = cols,
+         asp = 1)
+    axis(1)
+    axis(2)
 
 
-      # Add selected points on top
-      points(u[row_sel, i], u[row_sel, j], col = "red", pch = 16)
-    })
-
+    # Add selected points on top
+    points(u[row_sel, i], u[row_sel, j], col = "red", pch = 16)
+  })
 
   output$meta_str <- renderPrint({
     cat("\n\nstr(meta_fit())\n")
     str(meta_fit())
+    cat("\n\nstr(meta_classification())\n")
+    str(meta_classification())
     cat("\n\nstr(input$in_file_table)\n")
     str(input$in_file_table)
     cat("\n\nprint(input$in_file_table_columns_selected)\n")
