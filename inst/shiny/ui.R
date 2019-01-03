@@ -14,10 +14,9 @@ shinyUI(
     # navbar: File input tab ----
     tabPanel(
       title = "File input",
-
-      sidebarLayout(
-        sidebarPanel(
-          width = 3,
+      dashboardPage(
+        dashboardHeader(disable = TRUE),
+        dashboardSidebar(
 
           # * Input: File ----
           fileInput("in_file", "Choose CSV File",
@@ -26,9 +25,9 @@ shinyUI(
                                "text/comma-separated-values,text/plain",
                                ".csv")),
 
-          HTML("<p>The input file should be a plain text file where columns",
-               "correspond to features/<wbr>variables/<wbr>experiments and",
-               "rows correspond to observations.</p>"),
+          div(HTML("The input file should be a plain text file where columns",
+                   "correspond to features/<wbr/>variables/<wbr/>>experiments and",
+                   "rows correspond to observations.")),
 
           # * Input: header checkbox ----
           checkboxInput("header", "Header", TRUE),
@@ -46,15 +45,12 @@ shinyUI(
                                    "Double Quote" = '"',
                                    "Single Quote" = "'"),
                        selected = '"')
-
         ),
-
-        # * Output ----
-        mainPanel(
+        dashboardBody(
           htmlOutput("file_description"),
           DTOutput("in_file_table"),
           column(9, align = "center",
-            plotOutput("raw_data_plot")
+                 plotOutput("raw_data_plot")
           )
         )
       )
@@ -65,15 +61,19 @@ shinyUI(
     # navbar: General model ----
     tabPanel(
       title = "General GMCM",
-
-      # Show a plot of the generated distribution
-      titlePanel("General GMCM for unsupervised clustering"),
-      hr(),
-      sidebarPanel(
-        sliderInput(inputId = "bins", label = "No bins", min = 0, max = 50, value = 10)
-      ),
-      mainPanel(
-        plotOutput("distPlot")
+      dashboardPage(
+        dashboardHeader(disable = TRUE),
+        dashboardSidebar(),
+        dashboardBody(
+          titlePanel("General GMCM for unsupervised clustering"),
+          hr(),
+          sidebarPanel(
+            sliderInput(inputId = "bins", label = "No bins", min = 0, max = 50, value = 10)
+          ),
+          mainPanel(
+            plotOutput("distPlot")
+          )
+        )
       )
     ),
 
@@ -82,57 +82,79 @@ shinyUI(
     # navbar: Special model ----
     tabPanel(
       title = "Special GMCM",
-
       dashboardPage(
         dashboardHeader(disable = TRUE),
         dashboardSidebar(
           sidebarMenu(
             type = "tabs",
 
+            # sidebarSearchForm(textId = "searchText",
+            #                   buttonId = "searchButton",
+            #                   label = "Search..."),
+
             # * Input: tab Start parameters ----
             menuItem(
-              text = "Start parameters",
+              text = "Fit model",
               icon = icon("tachometer"),
-              startExpanded = TRUE,
+              startExpanded = FALSE,
 
-              # Content
-              sliderInput(inputId = "par1",
-                          label = "Mixture proportion of spurious signals",
-                          min = 0, max = 1, value = 0.7, step = 0.01),
+              menuItem(
+                text = "Start parameters",
+                icon = icon("chevron-circle-right"),
+                startExpanded = FALSE,
 
-              numericInput(inputId = "par2",
-                           label = "Mean value in reproducible component",
-                           min = 0, value = 1),
+                # Content
+                sliderInput(inputId = "par1",
+                            label = "Mixture proportion of spurious signals",
+                            min = 0, max = 1, value = 0.7, step = 0.01),
 
-              numericInput(inputId = "par3",
-                           label = "Standard deviation in reproducible component",
-                           min = 0, value = 1),
+                numericInput(inputId = "par2",
+                             label = "Mean value in reproducible component",
+                             min = 0, value = 1),
 
-              sliderInput(inputId = "par4",
-                          label = "Correlation in reproducible component",
-                          min = 0, max = 1, value = 0.5, step = 0.01)
+                numericInput(inputId = "par3",
+                             label = "Standard deviation in reproducible component",
+                             min = 0, value = 1),
 
-            ),
+                sliderInput(inputId = "par4",
+                            label = "Correlation in reproducible component",
+                            min = 0, max = 1, value = 0.5, step = 0.01)
 
-            # * Input: tab Addtional parameters ----
-            menuItem(
-              text = "Additional fit parameters",
-              icon = icon("cog"),
+              ),
 
-              # Content
-              selectInput(inputId = "meta_method",
-                          label = "Optimization method",
-                          choices = eval(formals(fit.meta.GMCM)$method)),
+              # * Input: tab Addtional parameters ----
+              menuItem(
+                text = "Additional fit parameters",
+                icon = icon("chevron-circle-right"),
 
-              checkboxInput(inputId = "meta_positive_rho",
-                            label = "Force positive correlation",
-                            value = formals(fit.meta.GMCM)$positive.rho),
+                # Content
+                selectInput(inputId = "meta_method",
+                            label = "Optimization method",
+                            choices = eval(formals(fit.meta.GMCM)$method)),
 
-              numericInput(inputId = "meta_max_ite",
-                           label = "Maximum iterations",
-                           min = 1,
-                           value = formals(fit.meta.GMCM)$max.ite),
+                numericInput(inputId = "meta_max_ite",
+                             label = "Maximum iterations",
+                             min = 1,
+                             value = formals(fit.meta.GMCM)$max.ite),
+
+                checkboxInput(inputId = "meta_positive_rho",
+                              label = "Force positive correlation",
+                              value = formals(fit.meta.GMCM)$positive.rho)
+              ),
+
+              # * Input: Large vals => reproducible
+              checkboxInput(inputId = "meta_large_vals",
+                            label = HTML(paste(strong("Important:"),
+                                               "Larger values in data indicate stronger evidence")),
+                            value = TRUE),
+
+              # * Input: Fit model ----
+              actionButton(inputId = "meta_fit_push",
+                           label = "Fit model",
+                           icon = icon("cogs")),
               br()
+
+
 
             ),
 
@@ -146,25 +168,15 @@ shinyUI(
                           min = 0, max = 1, value = 0.05, step = 0.01)
 
             )
-          ),
+          )
 
-          # * Input: Fit model ----
-          tags$hr(),
-          actionButton(inputId = "meta_fit_push",
-                       label = "Fit model",
-                       icon = icon("cogs")),
-
-          # * Input: Large vals => reproducible
-          checkboxInput(inputId = "meta_large_vals",
-                        label = HTML(paste(strong("Important:"),
-                                      "Larger values in data indicate stronger evidence")),
-                        value = TRUE)
 
         ),
 
         # * Output ----
         dashboardBody(
           h1("Special GMCM for reproducibility analysis"),
+          br(),
           uiOutput("infoBoxes"),
           box(
             # Box args

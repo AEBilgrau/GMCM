@@ -183,7 +183,7 @@ shinyServer(function(input, output, session) {
 
     box(
       # Box args
-      title = "Fitted values",
+      title = "Estimated parameters:",
       status = "primary",
       collapsible = TRUE,
       width = 12,
