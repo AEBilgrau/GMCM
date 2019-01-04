@@ -5,11 +5,11 @@ library(GMCM)
 
 # Define UI for application
 shinyUI(
-
   navbarPage(
     title = strong("GMCM"),
     windowTitle = "GMCM",
     theme = "bootstrap.css",
+
 
     # navbar: File input tab ----
     tabPanel(
@@ -47,10 +47,14 @@ shinyUI(
                        selected = '"')
         ),
         dashboardBody(
-          htmlOutput("file_description"),
-          DTOutput("in_file_table"),
-          column(9, align = "center",
-                 plotOutput("raw_data_plot")
+          box(
+            width = 12,
+            collapsible = TRUE,
+            htmlOutput("input_file_description"),
+            DTOutput("in_file_table")
+          ),
+          box(
+            plotOutput("raw_data_plot")
           )
         )
       )
@@ -145,7 +149,7 @@ shinyUI(
               # * Input: Large vals => reproducible
               checkboxInput(inputId = "meta_large_vals",
                             label = HTML(paste(strong("Important:"),
-                                               "Larger values in data indicate stronger evidence")),
+                                               "Check if larger values in data indicate stronger evidence")),
                             value = TRUE),
 
               # * Input: Fit model ----

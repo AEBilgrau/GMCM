@@ -3,10 +3,11 @@ library(shinydashboard)
 library(DT)
 library(GMCM)
 
+options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
-  session$onSessionEnded(stopApp)
+  #session$onSessionEnded(stopApp)
 
   # Reactive value containing the data.frame ----
   user_data <- reactiveVal()
@@ -33,12 +34,11 @@ shinyServer(function(input, output, session) {
       }
     )
 
-    d_t <- datatable(
-      user_data(),
-      style = "bootstrap",
-      class = "display cell-border compact",
-      selection = list(target = 'row+column')
-    ) %>%
+    d_t <-
+      datatable(user_data(),
+                style = "bootstrap",
+                class = "display cell-border compact",
+                selection = list(target = 'row+column')) %>%
       formatSignif(columns = numeric())
 
     return(d_t)
@@ -46,23 +46,22 @@ shinyServer(function(input, output, session) {
 
 
   # Create input file text ----
-  output$file_description <- renderUI({
+  output$input_file_description <- renderUI({
     # Set required dependency
     req(usr_df <- user_data())
 
     tagList(
       h1("Dataset loaded"),
-      p(sprintf("%i rows and %i columns detected. Showing %i rows below:",
-                nrow(usr_df), ncol(usr_df), input$n_rows)),
+      p(sprintf("%i rows and %i columns detected. Showing %i rows below.",
+                nrow(usr_df),
+                ncol(usr_df),
+                length(input$in_file_table_rows_current)),
+        "Select columns by pressing the bottom column names."),
       hr()
     )
   })
 
-  output$raw_data_plot <- renderPlot(
-    width = 700, #px
-    height = 700, #px
-    expr = {
-
+  output$raw_data_plot <- renderPlot({
     req(user_data())
 
     # Get data, select
@@ -236,23 +235,25 @@ shinyServer(function(input, output, session) {
     cols[row_sel] <- "red"
 
     # Color by classification
-    cols[idr$Khat == 2] <- "steelblue"
+    repro <- idr$Khat == 2
+    cols[repro] <- "steelblue"
 
+    o <- order(repro)
     # Do plot
-    plot(x = u[, i],
-         y = u[, j],
+    plot(x = u[o, i],
+         y = u[o, j],
          xlab = colnames(u)[i],
          ylab = colnames(u)[j],
          axes = FALSE,
          main = "",
-         col = cols,
+         col = cols[o],
          asp = 1)
     axis(1)
     axis(2)
 
-
     # Add selected points on top
     points(u[row_sel, i], u[row_sel, j], col = "red", pch = 16)
+    #points(u[repro, i],   u[repro, j], col = "steelblue")
   })
 
   output$meta_str <- renderPrint({
