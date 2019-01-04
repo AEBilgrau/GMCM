@@ -256,6 +256,55 @@ shinyServer(function(input, output, session) {
     #points(u[repro, i],   u[repro, j], col = "steelblue")
   })
 
+
+  output$latent_plot <- renderPlot({
+
+    req(meta_fit())
+    req(meta_classification())
+    fit <- meta_fit()
+    idr <- meta_classification()
+
+    col_sel <- setdiff(input$in_file_table_columns_selected, 0) # Exclude index 0 (rownames)
+    row_sel <- input$in_file_table_rows_selected
+
+    if (is.null(col_sel) || length(col_sel) != 2) {
+      i <- 1
+      j <- 2
+    } else {
+      i <- col_sel[1]
+      j <- col_sel[2]
+    }
+
+    # Get latent data
+    z <- GMCM:::qgmm.marginal(fit$u,
+                              theta = meta2full(fit[[1]], d = ncol(fit$u)))
+
+    # Colour selected rows and reproducible
+    cols <- rep("#00000050", nrow(z))
+    cols[row_sel] <- "red"
+
+    # Color by classification
+    repro <- idr$Khat == 2
+    cols[repro] <- "steelblue"
+
+    o <- order(repro)
+    # Do plot
+    plot(x = z[o, i],
+         y = z[o, j],
+         xlab = colnames(z)[i],
+         ylab = colnames(z)[j],
+         axes = FALSE,
+         main = "",
+         col = cols[o],
+         asp = 1)
+    axis(1)
+    axis(2)
+
+    # Add selected points on top
+    points(z[row_sel, i], z[row_sel, j], col = "red", pch = 16)
+    #points(u[repro, i],   u[repro, j], col = "steelblue")
+  })
+
   output$meta_str <- renderPrint({
     cat("\n\nstr(meta_fit())\n")
     str(meta_fit())

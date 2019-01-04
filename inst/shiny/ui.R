@@ -192,6 +192,16 @@ shinyUI(
             # Content
             plotOutput("rank_plot")
           ),
+          box(
+            # Box args
+            title = "Latent process plot",
+            footer = "The ranked observations mapped back to the latent process given the estimated parameters",
+            status = "primary",
+            collapsible = TRUE,
+
+            # Content
+            plotOutput("latent_plot")
+          ),
           verbatimTextOutput("meta_str")
 
         )
@@ -206,8 +216,6 @@ shinyUI(
       tabPanel("Links"),
       tabPanel("References")
     )
-
-
 
   )
 )
