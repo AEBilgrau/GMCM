@@ -180,10 +180,15 @@ shinyUI(
               icon = icon("flag-checkered"),
 
               # Content
+              radioButtons(inputId = "meta_IDR_thres_type",
+                           label = "Thresholding by",
+                           choices = c("Adjusted IDR" = "IDR",
+                                       "Local idr" = "idr"),
+                           selected = "IDR",
+                           inline = TRUE),
               sliderInput(inputId = "meta_IDR_thres",
-                          label = "IDR threshold",
+                          label = "meta_IDR_thres",
                           min = 0, max = 1, value = 0.05, step = 0.01)
-
             )
           )
 
@@ -195,6 +200,7 @@ shinyUI(
           h1("Special GMCM for reproducibility analysis"),
           br(),
           uiOutput("infoBoxes"),
+          uiOutput("classificationBoxes"),
           box(
             # Box args
             title = "Observed values plot",

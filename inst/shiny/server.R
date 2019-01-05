@@ -227,9 +227,6 @@ shinyServer(function(input, output, session) {
                          positive.rho = input$meta_positive_rho,
                          trace.theta = TRUE)
 
-    # Determine reproducibility
-    idr <- get.IDR(x = u, par = res[[1]], threshold = input$meta_IDR_thres)
-
     # Append data and reproducibility results
     res <- c(res, list(u = u, x = user_data()))
 
@@ -237,7 +234,7 @@ shinyServer(function(input, output, session) {
     meta_fit(res)
   })
 
-  # Classify the observations based on fit
+  # Classify the observations based on fit ----
   meta_classification <- reactive({
     req(meta_fit())
 
@@ -245,15 +242,16 @@ shinyServer(function(input, output, session) {
     fit <- meta_fit()
 
     # Classify
-    idr <- get.IDR(x = fit$u,
-                   par = fit[[1]],
-                   threshold = input$meta_IDR_thres)
-    return(idr)
+    out <- get.IDR(x = fit$u, par = fit[[1]], threshold = input$meta_IDR_thres)
+    below <- out[[input$meta_IDR_thres_type]] < input$meta_IDR_thres
+    out$l <- sum(below)
+    out$Khat <- ifelse(below, 2, 1)
+
+    return(out)
   })
 
-
+  # infoBoxes ----
   output$infoBoxes <- renderUI({
-    #req(meta_classification())
     req(meta_fit())
 
     fitted_vals <- signif(meta_fit()[[1]], 3)
@@ -268,15 +266,15 @@ shinyServer(function(input, output, session) {
       # Content
       valueBox(subtitle = "Mixture proportion",
               value = fitted_vals["pie1"],
-              width = 3, color = "aqua",
+              width = 3, color = "light-blue",#"aqua",
               icon = icon("percent")),
       valueBox(subtitle = "Mean value",
               value = fitted_vals["mu"],
-              width = 3, color = "teal",
+              width = 3, color = "light-blue", #"teal",
               icon = icon("minus")),
       valueBox(subtitle = "Standard deviation",
               value = fitted_vals["sigma"],
-              width = 3, color = "fuchsia",
+              width = 3, color = "light-blue", #"fuchsia",
               icon = icon("resize-horizontal", lib = "glyphicon")),
       valueBox(subtitle = "Correlation",
               value = fitted_vals["rho"],
@@ -341,6 +339,40 @@ shinyServer(function(input, output, session) {
       plot_type = "gmm",
       col_sel = input$model_cols_xy,
       row_sel = input$in_file_table_rows_selected
+    )
+  })
+
+
+
+  # Classification UI update ----
+  observeEvent(input$meta_IDR_thres_type, {
+    updateSliderInput(session,
+                      inputId = "meta_IDR_thres",
+                      label = ifelse(input$meta_IDR_thres_type == "idr",
+                                     "Local idr threshold:",
+                                     "Adjusted IDR threshold:"),
+                      value = ifelse(input$meta_IDR_thres_type == "idr",
+                                     0.5,
+                                     0.05))
+  })
+
+  # Classification boxes ----
+  output$classificationBoxes <- renderUI({
+    req(idr <- meta_classification())
+
+    tagList(
+      valueBox(subtitle = tags$div("features deemed", tags$b("reproducible")),
+               value =  with(idr, paste0(l, "/", length(Khat),
+                          " (", 100*round(l/length(Khat), 3), "%)")),
+               width = 6,
+               color = "green",
+               icon = icon("thumbs-up", lib = "glyphicon")),
+      valueBox(subtitle = tags$div("features deemed", tags$b(HTML("<em>ir</em>reproducible"))),
+               value =  with(idr, paste0(length(Khat) - l, "/", length(Khat),
+                         " (", 100*round(1 - l/length(Khat), 3), "%)")),
+               width = 6,
+               color = "red",
+               icon = icon("thumbs-down", lib = "glyphicon"))
     )
   })
 

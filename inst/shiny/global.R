@@ -1,7 +1,7 @@
 
 # Function for plotting meta results
 meta_plot <- function(fit, # A fitted object data
-                      idr, # A
+                      idr, # Output from get.IDR
                       plot_type = c("rank", "gmm"),
                       col_sel,
                       row_sel,
