@@ -3,10 +3,17 @@ library(shinydashboard)
 library(DT)
 library(GMCM)
 
+method_choices <-
+  c("Nelder-Mead" = "NM",
+    "Simulated Annealing" = "SANN",
+    "limited-memory quasi-Newton method" = "L-BFGS",
+    "limited-memory quasi-Newton method with box constraints" = "L-BFGS-B",
+    "Pseudo EM algorithm" = "PEM")
+
 # Define UI for application
 shinyUI(
   navbarPage(
-    title = strong("GMCM"),
+    title = tagList(icon("box-open"), strong("GMCM")),
     windowTitle = "GMCM",
     theme = "bootstrap.css",
 
@@ -26,7 +33,7 @@ shinyUI(
                                ".csv")),
 
           div(HTML("The input file should be a plain text file where columns",
-                   "correspond to features/<wbr/>variables/<wbr/>>experiments and",
+                   "correspond to features/<wbr/>variables/<wbr/>experiments and",
                    "rows correspond to observations.")),
 
           # * Input: header checkbox ----
@@ -127,6 +134,7 @@ shinyUI(
               ),
 
               # * Input: tab Addtional parameters ----
+
               menuItem(
                 text = "Additional fit parameters",
                 icon = icon("chevron-circle-right"),
@@ -134,7 +142,8 @@ shinyUI(
                 # Content
                 selectInput(inputId = "meta_method",
                             label = "Optimization method",
-                            choices = eval(formals(fit.meta.GMCM)$method)),
+                            choices = method_choices),
+                            #choices = eval(formals(fit.meta.GMCM)$method)),
 
                 numericInput(inputId = "meta_max_ite",
                              label = "Maximum iterations",
@@ -184,20 +193,39 @@ shinyUI(
           uiOutput("infoBoxes"),
           box(
             # Box args
-            title = "Rank plot",
-            footer = "Values in the top right corresponds to reproducible values.",
+            title = "Observed values plot",
+            footer = "The raw, observed values classified by the special GMCM approach.",
             status = "primary",
+            width = 4,
             collapsible = TRUE,
+            collapsed = FALSE,
+            solidHeader = TRUE,
+
+            # Content
+            plotOutput("obs_plot")
+          ),
+          box(
+            # Box args
+            title = "Rank GMCM plot",
+            footer = "Values in the top right corresponds to reproducible values. This plots shows the realisation for the Gaussian Mixture Copula Model.",
+            status = "primary",
+            width = 4,
+            collapsible = TRUE,
+            collapsed = FALSE,
+            solidHeader = TRUE,
 
             # Content
             plotOutput("rank_plot")
           ),
           box(
             # Box args
-            title = "Latent process plot",
-            footer = "The ranked observations mapped back to the latent process given the estimated parameters",
+            title = "Latent GMM process plot",
+            footer = "The ranked observations mapped back to the latent process given the estimated parameters. I.e. this plots shows the estimated latent Gaussian Mixture Model realisations.",
             status = "primary",
+            width = 4,
             collapsible = TRUE,
+            collapsed = FALSE,
+            solidHeader = TRUE,
 
             # Content
             plotOutput("latent_plot")
@@ -213,8 +241,9 @@ shinyUI(
       title = "",
       icon = icon("bars"),
       #title = "More",
-      tabPanel("Links"),
-      tabPanel("References")
+      tabPanel("About", icon = icon("question")),
+      tabPanel("Bug reports", icon = icon("bug"),
+               tags$embed(src = "https://github.com/AEBilgrau/GMCM/issues"))
     )
 
   )
