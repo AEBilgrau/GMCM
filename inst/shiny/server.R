@@ -38,7 +38,7 @@ shinyServer(function(input, output, session) {
       datatable(user_data(),
                 style = "bootstrap",
                 class = "display cell-border compact",
-                selection = list(target = 'row+column')) %>%
+                selection = list(target = 'row')) %>%
       formatSignif(columns = numeric())
 
     return(d_t)
@@ -48,28 +48,87 @@ shinyServer(function(input, output, session) {
   # Create input file text ----
   output$input_file_description <- renderUI({
     # Set required dependency
-    req(usr_df <- user_data())
+    validate(need(user_data(), "Please upload some data."))
 
     tagList(
       h1("Dataset loaded"),
       p(sprintf("%i rows and %i columns detected. Showing %i rows below.",
-                nrow(usr_df),
-                ncol(usr_df),
+                nrow(user_data()),
+                ncol(user_data()),
                 length(input$in_file_table_rows_current)),
-        "Select columns by pressing the bottom column names."),
+        "Select rows to hightlight in plots."),
       hr()
+    )
+  })
+
+  # model_cols_box ----
+  output$model_cols_box <- renderUI({
+    req(user_data())
+
+    box(
+      title = "Model column selection",
+      solidHeader = TRUE,
+      status = "success",
+      collapsible = TRUE,
+
+      # Content
+      selectizeInput(inputId = "model_cols",
+                     label = "Select columns to pass to model",
+                     choices = names(user_data()),
+                     multiple = TRUE,
+                     options = list(plugins = list('remove_button', 'drag_drop'))),
+      withTags(p(i("Note: "), "You can drag and drop to change the order
+                 of the selected variables.")),
+      checkboxInput(inputId = "do_matrix_plot",
+                    label = "Create matrix plot if nessesary.",
+                    value = TRUE)
+    )
+  })
+
+  output$raw_data_box <- renderUI({
+    req(user_data())
+
+    footer <- NULL
+    if (!is.null(input$model_cols) && length(input$model_cols) >= 2) {
+      status <- "success"
+      height <- "800px"
+      if (length(input$model_cols) > 2 && !input$do_matrix_plot) {
+        footer <- "Note: More than 2 variables/Columns selected but showing
+        only the first two here. All selected columns are kept and used in
+        the estimation."
+      }
+    } else {
+      height <- "50px"
+      status <- "warning"
+    }
+
+    box(
+      # Box args
+      title = "Scatter plot of raw data",
+      solidHeader = TRUE,
+      status = status,
+      collapsible = TRUE,
+      width = 12,
+      footer = footer,
+
+      # Content
+      plotOutput("raw_data_plot",
+                 height = height)
     )
   })
 
   output$raw_data_plot <- renderPlot({
     req(user_data())
+    validate(need(length(input$model_cols) >= 2,
+                  "Please select at least two columns."))
 
     # Get data, select
     d <- user_data()
-    col_sel <- setdiff(input$in_file_table_columns_selected, 0) # Exclude index 0 (rownames)
+
+    col_sel <- match(input$model_cols, names(d))
     row_sel <- input$in_file_table_rows_selected
 
-    if (is.null(col_sel) || length(col_sel) != 2) {
+    if (is.null(col_sel) || length(col_sel) < 2) {
       i <- 1
       j <- 2
     } else {
@@ -79,22 +138,36 @@ shinyServer(function(input, output, session) {
 
     # Colour selected rows
     cols <- rep("#00000050", nrow(d))
-    cols[row_sel] <- "red"
+    cols[row_sel] <- "blue"
 
-    # Do plot
-    plot(x = d[, i],
-         y = d[, j],
-         xlab = names(d)[i],
-         ylab = names(d)[j],
-         axes = FALSE,
-         main = "Scatter plot of raw data",
-         col = cols,
-         asp = 1)
-    axis(1)
-    axis(2)
 
-    # Add selected points on top
-    points(d[row_sel, i], d[row_sel, j], col = "red", pch = 16)
+    if (input$do_matrix_plot && length(input$model_cols) > 2) {
+      # Order to draw red on top
+      o <- order(seq_along(cols) %in% row_sel)
+
+      pairs(d[o, input$model_cols],
+            lower.panel = NULL,
+            col = cols,
+            asp = 1,
+            pch = 16,
+            cex = 0.1)
+    } else {
+      plot(x = d[, i],
+           y = d[, j],
+           xlab = names(d)[i],
+           ylab = names(d)[j],
+           axes = FALSE,
+           col = cols,
+           asp = 1)
+      axis(1)
+      axis(2)
+
+      # Add selected points on top
+      points(d[row_sel, i], d[row_sel, j], col = "red", pch = 16)
+    }
+
+
+
   })
 
 
@@ -119,16 +192,21 @@ shinyServer(function(input, output, session) {
   # SPECIAL GMCM __________________________________________________________ ----
 
   # Initalise reative values ----
-  user_data_pre <- reactiveVal()
-  meta_fit <- reactiveVal()
+  user_data_pre <- reactiveVal()  # Holds 'preprocessed' user data
+  meta_fit <- reactiveVal() # Holds fitted values
 
-
+  # Preprocess ----
   observeEvent(input$meta_large_vals, {
     user_data_pre(Uhat(ifelse(input$meta_large_vals, 1, -1) * user_data()))
   })
 
+  observeEvent(input$model_cols, {
+    user_data_pre(user_data()[, input$model_cols])
+  })
+
   # observe button push and fit model ----
   observeEvent(input$meta_fit_push, {
+    cat("Fit model clicked.\n")
 
     # Require user (preprocessed) data
     req(u <- user_data_pre())
@@ -163,7 +241,7 @@ shinyServer(function(input, output, session) {
   meta_classification <- reactive({
     req(meta_fit())
 
-    input$meta_IDR_thres
+    input$meta_IDR_thres # Declare dependency
     fit <- meta_fit()
 
     # Classify
@@ -208,6 +286,20 @@ shinyServer(function(input, output, session) {
 
   })
 
+  # X/Y selection ----
+  output$ui_selectize_model_cols_xy <- renderUI({
+    req(input$model_cols)
+
+    box(
+      selectizeInput(inputId = "model_cols_xy",
+                     label = "Select variables for X and Y axis",
+                     choices = input$model_cols,
+                     selected = input$model_cols[1:2],
+                     multiple = TRUE,
+                     options = list(plugins = list('remove_button', 'drag_drop')))
+    )
+  })
+
   # Values plot ----
   output$obs_plot <- renderPlot({
 
@@ -218,7 +310,7 @@ shinyServer(function(input, output, session) {
       fit = meta_fit(), # A fitted object data
       idr = meta_classification(),
       plot_type = "obs",
-      col_sel = input$in_file_table_columns_selected,
+      col_sel = input$model_cols_xy,
       row_sel = input$in_file_table_rows_selected
     )
   })
@@ -233,7 +325,7 @@ shinyServer(function(input, output, session) {
       fit = meta_fit(), # A fitted object data
       idr = meta_classification(),
       plot_type = "rank",
-      col_sel = input$in_file_table_columns_selected,
+      col_sel = input$model_cols_xy,
       row_sel = input$in_file_table_rows_selected
     )
   })
@@ -247,7 +339,7 @@ shinyServer(function(input, output, session) {
       fit = meta_fit(), # A fitted object data
       idr = meta_classification(),
       plot_type = "gmm",
-      col_sel = input$in_file_table_columns_selected,
+      col_sel = input$model_cols_xy,
       row_sel = input$in_file_table_rows_selected
     )
   })
@@ -261,8 +353,8 @@ shinyServer(function(input, output, session) {
     str(input$in_file_table)
     cat("\n\nprint(input$in_file_table_rows_selected)\n")
     print(input$in_file_table_rows_selected)
-    cat("\n\nprint(input$in_file_table_columns_selected)\n")
-    print(input$in_file_table_columns_selected)
+    cat("\n\nprint(input$model_cols)\n")
+    print(input$model_cols)
   })
 
 })

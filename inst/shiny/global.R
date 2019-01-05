@@ -8,14 +8,12 @@ meta_plot <- function(fit, # A fitted object data
                       col = c(rep = "steelblue", irrep = "#00000050", sel = "red"),
                       pch = c(rep = 1, irrep = 1, sel = 16)) {
 
-  col_sel <- setdiff(col_sel, 0) # Exclude index 0 (rownames)
-
-  if (is.null(col_sel) || length(col_sel) != 2) {
+  if (is.null(col_sel) || length(col_sel) < 2) {
     i <- 1
     j <- 2
   } else {
-    i <- col_sel[1]
-    j <- col_sel[2]
+    i <- match(col_sel[1], colnames(fit$u))
+    j <- match(col_sel[2], colnames(fit$u))
   }
 
   # Get ranked data

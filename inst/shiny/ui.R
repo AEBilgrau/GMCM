@@ -3,6 +3,7 @@ library(shinydashboard)
 library(DT)
 library(GMCM)
 
+# General named list for method choices
 method_choices <-
   c("Nelder-Mead" = "NM",
     "Simulated Annealing" = "SANN",
@@ -55,14 +56,21 @@ shinyUI(
         ),
         dashboardBody(
           box(
+            # box args
             width = 12,
+            title = " ",
+            status = "primary",
             collapsible = TRUE,
+            solidHeader = FALSE,
+
+
+            # Content
             htmlOutput("input_file_description"),
             DTOutput("in_file_table")
           ),
-          box(
-            plotOutput("raw_data_plot")
-          )
+          uiOutput("model_cols_box"),
+          uiOutput("raw_data_box")
+
         )
       )
     ),
@@ -98,10 +106,6 @@ shinyUI(
         dashboardSidebar(
           sidebarMenu(
             type = "tabs",
-
-            # sidebarSearchForm(textId = "searchText",
-            #                   buttonId = "searchButton",
-            #                   label = "Search..."),
 
             # * Input: tab Start parameters ----
             menuItem(
@@ -230,6 +234,7 @@ shinyUI(
             # Content
             plotOutput("latent_plot")
           ),
+          uiOutput("ui_selectize_model_cols_xy"),
           verbatimTextOutput("meta_str")
 
         )
@@ -241,7 +246,10 @@ shinyUI(
       title = "",
       icon = icon("bars"),
       #title = "More",
-      tabPanel("About", icon = icon("question")),
+      tabPanel("About", icon = icon("question"),
+         h1("About"),
+         p("This shiny app. was developed by Anders Ellern Bilgrau.")
+      ),
       tabPanel("Bug reports", icon = icon("bug"),
                tags$embed(src = "https://github.com/AEBilgrau/GMCM/issues"))
     )
