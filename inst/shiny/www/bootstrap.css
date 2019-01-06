@@ -1,3 +1,7 @@
+.content {
+    overflow: auto;
+}
+
 .navbar {
     position: relative;
     min-height: 50px;
