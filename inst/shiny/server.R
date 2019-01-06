@@ -194,6 +194,7 @@ shinyServer(function(input, output, session) {
   # Initalise reative values ----
   user_data_pre <- reactiveVal()  # Holds 'preprocessed' user data
   meta_fit <- reactiveVal() # Holds fitted values
+  meta_output_dataset <- reactiveVal()
 
   # Preprocess ----
   observeEvent(input$meta_large_vals, {
@@ -375,6 +376,50 @@ shinyServer(function(input, output, session) {
                icon = icon("thumbs-down", lib = "glyphicon"))
     )
   })
+
+  output$meta_out_file_table <- renderDT({
+
+    # Set required dependency
+    req(tab <- user_data())
+    req(cls <- meta_classification())
+
+    tab$local_idr <- cls$idr
+    tab$adj_IDR <- cls$IDR
+    tab[[paste0("reprodicible_", input$meta_IDR_thres_type, "_at_",
+                input$meta_IDR_thres)]] <- cls$Khat == 2
+
+    # Save as output dataset
+    meta_output_dataset(tab)
+
+    # Make DT
+    d_t <- datatable(tab,
+                     style = "bootstrap",
+                     class = "display cell-border compact",
+                     selection = list(target = 'row')) %>%
+      formatSignif(columns = numeric())
+
+    return(d_t)
+  })
+
+  output$downloadData <- downloadHandler(
+    # This function returns a string which tells the client
+    # browser what name to use when saving the file.
+    filename = function() {
+      paste0(input$in_file$name, "_classified.csv")
+    },
+    # This function should write data to a file given to it by
+    # the argument 'file'.
+    content = function(file) {
+      # Write to a file specified by the 'file' argument
+      write.table(meta_output_dataset(),
+                  file = file,
+                  col.names = input$header,
+                  sep = input$sep,
+                  quote = ifelse(input$quote == "", FALSE, TRUE),
+                  row.names = TRUE)
+    }
+  )
+
 
   output$meta_str <- renderPrint({
     cat("\n\nstr(meta_fit())\n")

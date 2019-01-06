@@ -41,7 +41,8 @@ shinyUI(
           checkboxInput("header", "Header", TRUE),
 
           # * Input: select separator ----
-          radioButtons("sep", "Separator",
+          radioButtons(inputId = "sep",
+                       label = "Separator",
                        choices = c("Comma" = ",",
                                    "Semicolon" = ";",
                                    "Tabs" = "\t"),
@@ -241,7 +242,18 @@ shinyUI(
             plotOutput("latent_plot")
           ),
           uiOutput("ui_selectize_model_cols_xy"),
-          verbatimTextOutput("meta_str")
+          box(
+            title = "Classified data",
+            footer = downloadButton('downloadData', 'Download'),
+            status = "info",
+            width = 12,
+            collapsible = TRUE,
+            collapsed = TRUE,
+            solidHeader = TRUE,
+
+            DTOutput("meta_out_file_table")
+          )
+          #,verbatimTextOutput("meta_str")
 
         )
       )
