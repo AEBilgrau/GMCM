@@ -255,7 +255,7 @@ shinyUI(
               DTOutput("meta_out_file_table")
             )
           )
-          ,verbatimTextOutput("meta_str")
+          #,verbatimTextOutput("meta_str")
 
         )
       )

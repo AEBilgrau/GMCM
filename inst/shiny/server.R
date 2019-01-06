@@ -56,8 +56,7 @@ shinyServer(function(input, output, session) {
                 nrow(user_data()),
                 ncol(user_data()),
                 length(input$in_file_table_rows_current)),
-        "Select rows to hightlight in plots."),
-      hr()
+        "Select rows to hightlight in plots.")
     )
   })
 
@@ -409,7 +408,7 @@ shinyServer(function(input, output, session) {
 
     tab$local_idr <- cls$idr
     tab$adj_IDR <- cls$IDR
-    tab[[paste0("reprodicible_", input$meta_IDR_thres_type, "_at_",
+    tab[[paste0("reprodicible_", input$meta_IDR_thres_type, "_above_",
                 input$meta_IDR_thres)]] <- cls$Khat == 2
 
     # Save as output dataset
