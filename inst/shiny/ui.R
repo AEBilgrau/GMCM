@@ -200,60 +200,62 @@ shinyUI(
         dashboardBody(
           h1("Special GMCM for reproducibility analysis"),
           br(),
-          uiOutput("infoBoxes"),
-          uiOutput("classificationBoxes"),
-          box(
-            # Box args
-            title = "Observed values plot",
-            footer = "The raw, observed values classified by the special GMCM approach.",
-            status = "primary",
-            width = 4,
-            collapsible = TRUE,
-            collapsed = FALSE,
-            solidHeader = TRUE,
+          conditionalPanel("input.meta_fit_push > 0",
+            uiOutput("infoBoxes"),
+            uiOutput("classificationBoxes"),
+            box(
+              # Box args
+              title = "Observed values plot",
+              footer = "The raw, observed values classified by the special GMCM approach.",
+              status = "primary",
+              width = 4,
+              collapsible = TRUE,
+              collapsed = FALSE,
+              solidHeader = TRUE,
 
-            # Content
-            plotOutput("obs_plot")
-          ),
-          box(
-            # Box args
-            title = "Rank GMCM plot",
-            footer = "Values in the top right corresponds to reproducible values. This plots shows the realisation for the Gaussian Mixture Copula Model.",
-            status = "primary",
-            width = 4,
-            collapsible = TRUE,
-            collapsed = FALSE,
-            solidHeader = TRUE,
+              # Content
+              plotOutput("obs_plot")
+            ),
+            box(
+              # Box args
+              title = "Rank GMCM plot",
+              footer = "Values in the top right corresponds to reproducible values. This plots shows the realisation for the Gaussian Mixture Copula Model.",
+              status = "primary",
+              width = 4,
+              collapsible = TRUE,
+              collapsed = FALSE,
+              solidHeader = TRUE,
 
-            # Content
-            plotOutput("rank_plot")
-          ),
-          box(
-            # Box args
-            title = "Latent GMM process plot",
-            footer = "The ranked observations mapped back to the latent process given the estimated parameters. I.e. this plots shows the estimated latent Gaussian Mixture Model realisations.",
-            status = "primary",
-            width = 4,
-            collapsible = TRUE,
-            collapsed = FALSE,
-            solidHeader = TRUE,
+              # Content
+              plotOutput("rank_plot")
+            ),
+            box(
+              # Box args
+              title = "Latent GMM process plot",
+              footer = "The ranked observations mapped back to the latent process given the estimated parameters. I.e. this plots shows the estimated latent Gaussian Mixture Model realisations.",
+              status = "primary",
+              width = 4,
+              collapsible = TRUE,
+              collapsed = FALSE,
+              solidHeader = TRUE,
 
-            # Content
-            plotOutput("latent_plot")
-          ),
-          uiOutput("ui_selectize_model_cols_xy"),
-          box(
-            title = "Classified data",
-            footer = downloadButton('downloadData', 'Download'),
-            status = "info",
-            width = 12,
-            collapsible = TRUE,
-            collapsed = TRUE,
-            solidHeader = TRUE,
+              # Content
+              plotOutput("latent_plot")
+            ),
+            uiOutput("ui_selectize_model_cols_xy"),
+            box(
+              title = "Classified data",
+              footer = downloadButton('downloadData', 'Download'),
+              status = "info",
+              width = 12,
+              collapsible = TRUE,
+              collapsed = TRUE,
+              solidHeader = TRUE,
 
-            DTOutput("meta_out_file_table")
+              DTOutput("meta_out_file_table")
+            )
           )
-          #,verbatimTextOutput("meta_str")
+          ,verbatimTextOutput("meta_str")
 
         )
       )

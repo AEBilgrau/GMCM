@@ -195,6 +195,8 @@ shinyServer(function(input, output, session) {
   user_data_pre <- reactiveVal()  # Holds 'preprocessed' user data
   meta_fit <- reactiveVal() # Holds fitted values
   meta_output_dataset <- reactiveVal()
+  meta_rv <- reactiveValues(fit_time = 0,
+                            ite = 0)
 
   # Preprocess ----
   observeEvent(input$meta_large_vals, {
@@ -220,19 +222,30 @@ shinyServer(function(input, output, session) {
                   rho   = input$par4)
 
     # Fit model
-    res <- fit.meta.GMCM(u = u,
-                         init.par = init.par,
-                         method = input$meta_method,
-                         max.ite = input$meta_max_ite,
-                         verbose = TRUE,
-                         positive.rho = input$meta_positive_rho,
-                         trace.theta = TRUE)
+    fit_time <- system.time(
+      res <- fit.meta.GMCM(u = u,
+                           init.par = init.par,
+                           method = input$meta_method,
+                           max.ite = input$meta_max_ite,
+                           verbose = TRUE,
+                           positive.rho = input$meta_positive_rho,
+                           trace.theta = TRUE)
+    )[3]
 
     # Append data and reproducibility results
     res <- c(res, list(u = u, x = user_data()))
 
     # Save results
     meta_fit(res)
+    meta_rv$fit_time <- fit_time
+    if (input$meta_method == "PEM") {
+      meta_rv$ite <- ncol(res[[2]]$loglik_tr)
+    } else {
+      meta_rv$ite <- res[[2]]$counts[1]
+    }
+
+
+
   })
 
   # Classify the observations based on fit ----
@@ -362,21 +375,32 @@ shinyServer(function(input, output, session) {
     req(idr <- meta_classification())
 
     tagList(
-      valueBox(subtitle = tags$div("features deemed", tags$b("reproducible")),
-               value =  with(idr, paste0(l, "/", length(Khat),
-                          " (", 100*round(l/length(Khat), 3), "%)")),
-               width = 6,
+      valueBox(value =  with(idr, paste0(l, "/", length(Khat),
+                                         " (", 100*round(l/length(Khat), 3), "%)")),
+               subtitle = tags$div("features deemed", tags$b("reproducible")),
+               width = 4,
                color = "green",
                icon = icon("thumbs-up", lib = "glyphicon")),
-      valueBox(subtitle = tags$div("features deemed", tags$b(HTML("<em>ir</em>reproducible"))),
-               value =  with(idr, paste0(length(Khat) - l, "/", length(Khat),
-                         " (", 100*round(1 - l/length(Khat), 3), "%)")),
-               width = 6,
+      valueBox(value =  with(idr, paste0(length(Khat) - l, "/", length(Khat),
+                                         " (", 100*round(1 - l/length(Khat), 3), "%)")),
+               subtitle = tags$div("features deemed", tags$b(HTML("<em>ir</em>reproducible"))),
+
+               width = 4,
                color = "red",
-               icon = icon("thumbs-down", lib = "glyphicon"))
+               icon = icon("thumbs-down", lib = "glyphicon")),
+      valueBox(value = meta_rv$ite,
+              #title = "Procedure stopped after",
+              subtitle = paste("iterations in",
+                                       round(meta_rv$fit_time,0),
+                                       "seconds"),
+              width = 4,
+              color = "light-blue",
+              icon = icon("hashtag"))
     )
   })
 
+
+  # Output file -------------
   output$meta_out_file_table <- renderDT({
 
     # Set required dependency
