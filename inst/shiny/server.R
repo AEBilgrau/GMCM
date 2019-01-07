@@ -9,8 +9,9 @@ library(GMCM)
 shinyServer(function(input, output, session) {
   #session$onSessionEnded(stopApp)
 
-  # Reactive value containing the data.frame ----
+  # Reactive values concering the data.frame ----
   user_data <- reactiveVal()
+  rv <- reactiveValues(d = 2)
 
   # FILE INPUT ____________________________________________________________ ----
 
@@ -176,18 +177,36 @@ shinyServer(function(input, output, session) {
 
 
 
+
   # GENERAL GMCM __________________________________________________________ ----
 
-  output$distPlot <- renderPlot({
+  # Initalise reative values ----
+  full_start_theta <- reactiveVal()
 
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  # Randomize start theta
+  observeEvent(input$full_random_theta, {
+    req(input$full_m)
+    req(rv$d)
 
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    # A bit of interface fun
+    die <-
+      sprintf("dice-%s",c("one","two","three","four","five","six")[sample(6,1)])
+    updateActionButton(session, inputId = "full_random_theta", icon = icon(die))
 
+    # Generate random theta and set
+    full_start_theta(
+      rtheta(m = input$full_m, d = rv$d, method = input$full_rtheta_method)
+    )
   })
+
+  # View theta ----
+  output$full_start_theta_str <- renderPrint({
+    cat("str(full_start_theta())\n")
+    cat(str(full_start_theta()))
+  })
+
+
+
 
 
 

@@ -19,7 +19,7 @@ shinyUI(
     theme = "bootstrap.css",
 
 
-    # navbar: File input tab ----
+    # File input tab ______________________________________________________ ----
     tabPanel(
       title = "File input",
       dashboardPage(
@@ -78,46 +78,114 @@ shinyUI(
 
 
 
-    # navbar: General model ----
+
+    # General model _______________________________________________________ ----
     tabPanel(
       title = "General GMCM",
       dashboardPage(
         dashboardHeader(disable = TRUE),
-        dashboardSidebar(),
-        dashboardBody(
-          titlePanel("General GMCM for unsupervised clustering"),
-          hr(),
-          sidebarPanel(
-            sliderInput(inputId = "bins", label = "No bins", min = 0, max = 50, value = 10)
-          ),
-          mainPanel(
-            plotOutput("distPlot")
+        dashboardSidebar(
+          sidebarMenu(
+
+            menuItem(
+              text = "Fit model",
+              icon = icon("tachometer"),
+              startExpanded = FALSE,
+
+              # * Input: Start parameters ----
+              menuItem(
+                text = "Start parameters",
+                icon = icon("chevron-circle-right"),
+
+                # Content
+                numericInput(inputId = "full_m",
+                             label = "Number of components (m)",
+                             value = 2, min = 2, step = 1),
+
+                selectInput(inputId = "full_rtheta_method",
+                            label = "Random theta method",
+                            choices = eval(formals(rtheta)$method),
+                            selected = eval(formals(rtheta)$method)[2]),
+
+                actionButton(inputId = "full_random_theta",
+                             label = "Randomize theta",
+                             icon = icon("dice-one"))
+
+
+              ),
+
+              # * Input: Addtional parameters ----
+              menuItem(
+                text = "Additional fit parameters",
+                icon = icon("chevron-circle-right"),
+
+                # Content
+                selectInput(inputId = "full_method",
+                            label = "Optimization method",
+                            choices = method_choices),
+
+                numericInput(inputId = "full_max_ite",
+                             label = "Maximum iterations",
+                             min = 1,
+                             value = formals(fit.meta.GMCM)$max.ite)
+              ),
+
+              # * Input: Fit model ----
+              actionButton(inputId = "full_fit_push",
+                           label = "Fit model",
+                           icon = icon("cogs")),
+              br()
+            ),
+
+            menuItem(
+              text = "Classification",
+              icon = icon("flag-checkered"),
+
+              # Content
+              radioButtons(inputId = "full_class_type",
+                           label = "Classification by",
+                           choices = c("Maximum a posterior probability" = "max_prob",
+                                       "Thresholded posterior probability" = "thres_prob"),
+                           selected = "max_prob",
+                           inline = FALSE),
+              conditionalPanel(
+                condition = "input.full_class_type == 'thres_prob'",
+                sliderInput(inputId = "full_thres_prob",
+                            label = "Threshold",
+                            min = 0, max = 1, value = 0.5, step = 0.01)
+              ),
+              br()
+            )
           )
+        ),
+        # * Output ----
+        dashboardBody(
+          verbatimTextOutput("full_start_theta_str")
+
         )
       )
     ),
 
 
 
-    # navbar: Special model ----
+
+    # Special model _______________________________________________________ ----
     tabPanel(
       title = "Special GMCM",
       dashboardPage(
         dashboardHeader(disable = TRUE),
         dashboardSidebar(
           sidebarMenu(
-            type = "tabs",
 
-            # * Input: tab Start parameters ----
             menuItem(
               text = "Fit model",
               icon = icon("tachometer"),
               startExpanded = FALSE,
 
+              # * Input: Start parameters ----
               menuItem(
                 text = "Start parameters",
                 icon = icon("chevron-circle-right"),
-                startExpanded = FALSE,
 
                 # Content
                 sliderInput(inputId = "par1",
@@ -138,7 +206,7 @@ shinyUI(
 
               ),
 
-              # * Input: tab Addtional parameters ----
+              # * Input: Addtional parameters ----
 
               menuItem(
                 text = "Additional fit parameters",
