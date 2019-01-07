@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(rhandsontable)
 library(DT)
 library(GMCM)
 
@@ -11,7 +12,7 @@ shinyServer(function(input, output, session) {
 
   # Reactive values concering the data.frame ----
   user_data <- reactiveVal()
-  rv <- reactiveValues(d = 2)
+  rv <- reactiveValues(d = 4, m = 3)
 
   # FILE INPUT ____________________________________________________________ ----
 
@@ -182,6 +183,7 @@ shinyServer(function(input, output, session) {
 
   # Initalise reative values ----
   full_start_theta <- reactiveVal()
+  pie <- reactiveVal()
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
@@ -194,19 +196,135 @@ shinyServer(function(input, output, session) {
     updateActionButton(session, inputId = "full_random_theta", icon = icon(die))
 
     # Generate random theta and set
+    rt <- rtheta(m = input$full_m, d = rv$d, method = input$full_rtheta_method)
     full_start_theta(
-      rtheta(m = input$full_m, d = rv$d, method = input$full_rtheta_method)
+      rt
+    )
+    pie(rt$pie)
+  })
+
+  # Render pie box ----
+  output$full_pie_box <- renderUI({
+    req(m <- input$full_m)
+
+    # Get pie if available, otherwise create it
+    start_theta <- full_start_theta()
+    if (!is.null(start_theta)) {
+      pie <- start_theta$pie
+    } else {
+      pie <- rep(1/m, times = m)
+    }
+
+    # Ensure step size from digits chosen
+    digits <- 3
+    step <- round(1/9, digits) - round(1/9, digits - 1)
+
+    # Ensure the initial pies are compatible with the 'step' size
+    pie <- round(pie, digits)
+    pie[1] <- 1 - sum(pie[-1])
+
+    # Make the box and content
+    box(
+      # Args
+      title = "Mixture proportions",
+      status = "primary",
+      collapsible = TRUE,
+
+      # Generate content on the form:
+      #   sliderInput(inputId = "full_slider_pie1",
+      #               label = "Component 1", ...),
+      #   sliderInput(inputId = "full_slider_pie2",
+      #               label = "Component 2", ...),
+      #   ...
+      lapply(seq_along(pie), function(k)
+        sliderInput(inputId = paste0("full_slider_pie", k),
+                    label = paste("Component", k),
+                    min = 0, max = 1, step = step,
+                    ticks = FALSE,
+                    value = pie[k])
+      ),
+
+      renderPrint(print(pie))
     )
   })
 
-  # View theta ----
-  output$full_start_theta_str <- renderPrint({
-    cat("str(full_start_theta())\n")
-    cat(str(full_start_theta()))
+  observeEvent(input$full_m, {
+    rv$m <- input$full_m
+  })
+
+  observe({# Needed to access rv$m
+    # Observe all sliders and change the others
+    lapply(seq_len(rv$m), function(k) {
+
+      observeEvent(
+        ignoreNULL = TRUE,
+        ignoreInit = TRUE,
+        eventExpr = input[[paste0("full_slider_pie", k)]],
+        handlerExpr = {
+          cat(paste0("full_slider_pie", k, " changed!\n"))
+
+          # All pie slider IDs
+          pie_slider_ids <- paste0("full_slider_pie", seq_len(rv$m))
+
+          # Require all pies
+          req(sapply(pie_slider_ids, function(s) !is.null(input[[s]])))
+
+          # All non k indices
+          nk <- setdiff(seq_len(rv$m), k)
+
+          # Get value in question and all others
+          pie_k  <- input[[pie_slider_ids[k]]]
+          pie_nk <- sapply(pie_slider_ids[nk], function(s) input[[s]])
+
+          # Solving "sum(pie_nk * x) + pie_k = 1" for x yields
+          print(str(pie_nk))
+          x = (1 - pie_k)/sum(pie_nk)
+
+          # To avoid jumping around if too close
+          if (abs(1 - (pie_k + sum(pie_nk))) < 0.001) {
+            return()
+          }
+
+
+          # Update sliders
+          for (i in nk) {
+            updateSliderInput(
+              session,
+              inputId = pie_slider_ids[i],
+              value = input[[pie_slider_ids[i]]]*x
+            )
+          }
+
+
+        })
+    })
   })
 
 
 
+  # View theta ----
+  # output$full_start_theta_str <- renderPrint({
+  #   cat("str(full_start_theta())\n")
+  #   cat(str(full_start_theta()))
+  #
+  #   cat("\n\nstr(input$hot2[[1]])\n")
+  #   cat(str(input$hot2[[1]]))
+  #
+  #   cat("\n\nstr(hot_to_r(input$hot2))\n")
+  #   if(is.null(input$hot)) return(NULL)
+  #   cat(str(hot_to_r(input$hot2)))
+  # })
+
+  output$hot <- renderRHandsontable({
+    rhandsontable(do.call(cbind,
+                          lapply(1:20, function(i) data.table(rnorm(10000)))))
+  })
+
+  output$hot2 <- renderRHandsontable({
+    req(full_start_theta())
+    dat <- do.call(cbind, full_start_theta()$mu)
+    rhandsontable(dat)
+  })
 
 
 

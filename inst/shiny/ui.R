@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(rhandsontable)
 library(DT)
 library(GMCM)
 
@@ -100,7 +101,7 @@ shinyUI(
                 # Content
                 numericInput(inputId = "full_m",
                              label = "Number of components (m)",
-                             value = 2, min = 2, step = 1),
+                             value = 3, min = 2, step = 1),
 
                 selectInput(inputId = "full_rtheta_method",
                             label = "Random theta method",
@@ -160,8 +161,15 @@ shinyUI(
         ),
         # * Output ----
         dashboardBody(
-          verbatimTextOutput("full_start_theta_str")
+          uiOutput("full_pie_box"),
+          # verbatimTextOutput("full_start_theta_str"),
 
+
+
+          fluidRow(box(rHandsontableOutput("hot", height = 400)),
+                   box(rHandsontableOutput("hot2", width = 200))),
+
+          fluidRow(box(rHandsontableOutput("hot3")))
         )
       )
     ),
