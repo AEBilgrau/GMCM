@@ -187,6 +187,7 @@ shinyServer(function(input, output, session) {
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
+    cat("Randomize theta clicked!\n")
     req(input$full_m)
     req(rv$d)
 
@@ -197,9 +198,9 @@ shinyServer(function(input, output, session) {
 
     # Generate random theta and set
     rt <- rtheta(m = input$full_m, d = rv$d, method = input$full_rtheta_method)
-    full_start_theta(
-      rt
-    )
+    # full_start_theta(
+    #   rt
+    # )
     pie(rt$pie)
   })
 
@@ -208,11 +209,8 @@ shinyServer(function(input, output, session) {
     req(m <- input$full_m)
 
     # Get pie if available, otherwise create it
-    start_theta <- full_start_theta()
-    if (!is.null(start_theta)) {
-      pie <- start_theta$pie
-    } else {
-      pie <- rep(1/m, times = m)
+    if (is.null(pie())) {
+      pie(rep(1/m, times = m))
     }
 
     # Ensure step size from digits chosen
@@ -220,13 +218,14 @@ shinyServer(function(input, output, session) {
     step <- round(1/9, digits) - round(1/9, digits - 1)
 
     # Ensure the initial pies are compatible with the 'step' size
-    pie <- round(pie, digits)
-    pie[1] <- 1 - sum(pie[-1])
+    tmp <- round(pie(), digits)
+    tmp[1] <- 1 - sum(tmp[-1])
+    pie(tmp)
 
     # Make the box and content
     box(
       # Args
-      title = "Mixture proportions",
+      title = "Starting mixture proportions",
       status = "primary",
       collapsible = TRUE,
 
@@ -236,20 +235,23 @@ shinyServer(function(input, output, session) {
       #   sliderInput(inputId = "full_slider_pie2",
       #               label = "Component 2", ...),
       #   ...
-      lapply(seq_along(pie), function(k)
+      lapply(seq_along(pie()), function(k)
         sliderInput(inputId = paste0("full_slider_pie", k),
                     label = paste("Component", k),
                     min = 0, max = 1, step = step,
                     ticks = FALSE,
-                    value = pie[k])
+                    value = pie()[k])
       ),
 
-      renderPrint(print(pie))
+      renderPrint(print(pie()))
     )
   })
 
   observeEvent(input$full_m, {
-    rv$m <- input$full_m
+    rv$m <- input$full_m # Write to reactive value
+
+    # Update pie()
+    pie(rep(1/rv$m , times = rv$m))
   })
 
   observe({# Needed to access rv$m
@@ -277,14 +279,13 @@ shinyServer(function(input, output, session) {
           pie_nk <- sapply(pie_slider_ids[nk], function(s) input[[s]])
 
           # Solving "sum(pie_nk * x) + pie_k = 1" for x yields
-          print(str(pie_nk))
           x = (1 - pie_k)/sum(pie_nk)
+          # I.e. all but k need to be change by a factor x
 
           # To avoid jumping around if too close
           if (abs(1 - (pie_k + sum(pie_nk))) < 0.001) {
             return()
           }
-
 
           # Update sliders
           for (i in nk) {
@@ -295,7 +296,11 @@ shinyServer(function(input, output, session) {
             )
           }
 
-
+          # Update pie() reactive value
+          new_pie <- rep(NA, rv$m)
+          new_pie[k] <- pie_k
+          new_pie[nk] <- pie_nk*x
+          pie(new_pie)  # Update call
         })
     })
   })
@@ -317,7 +322,7 @@ shinyServer(function(input, output, session) {
 
   output$hot <- renderRHandsontable({
     rhandsontable(do.call(cbind,
-                          lapply(1:20, function(i) data.table(rnorm(10000)))))
+                          lapply(1:20, function(i) data.frame(rnorm(10000)))))
   })
 
   output$hot2 <- renderRHandsontable({
