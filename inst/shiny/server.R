@@ -76,11 +76,15 @@ shinyServer(function(input, output, session) {
                      choices = names(user_data()),
                      multiple = TRUE,
                      options = list(plugins = list('remove_button', 'drag_drop'))),
-      withTags(p(i("Note: "), "You can drag and drop to change the order
-                 of the selected variables.")),
-      checkboxInput(inputId = "do_matrix_plot",
-                    label = "Create matrix plot if nessesary.",
-                    value = TRUE)
+      fluidRow(
+        column(width = 7,
+               withTags(p(i("Note: "),
+                          "You can drag and drop to change the order of the selected variables."))),
+        column(width = 5,
+               checkboxInput(inputId = "do_matrix_plot",
+                             label = "Create matrix plot if nessesary.",
+                             value = TRUE))
+      )
     )
   })
 
