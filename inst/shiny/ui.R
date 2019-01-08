@@ -162,14 +162,8 @@ shinyUI(
         # * Output ----
         dashboardBody(
           uiOutput("full_pie_box"),
-          # verbatimTextOutput("full_start_theta_str"),
-
-
-
-          fluidRow(box(rHandsontableOutput("hot", height = 400)),
-                   box(rHandsontableOutput("hot2", width = 200))),
-
-          fluidRow(box(rHandsontableOutput("hot3")))
+          uiOutput("full_mu_box"),
+          verbatimTextOutput("full_start_theta_str")
         )
       )
     ),

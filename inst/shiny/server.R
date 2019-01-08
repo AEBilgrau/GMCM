@@ -183,12 +183,13 @@ shinyServer(function(input, output, session) {
 
   # Initalise reative values ----
   full_start_theta <- reactiveVal()
-  pie <- reactiveVal()
+  in_pie <- reactiveVal()
+  in_mu <- reactiveVal()
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
     cat("Randomize theta clicked!\n")
-    req(input$full_m)
+    req(rv$m)
     req(rv$d)
 
     # A bit of interface fun
@@ -197,64 +198,40 @@ shinyServer(function(input, output, session) {
     updateActionButton(session, inputId = "full_random_theta", icon = icon(die))
 
     # Generate random theta and set
-    rt <- rtheta(m = input$full_m, d = rv$d, method = input$full_rtheta_method)
-    # full_start_theta(
-    #   rt
-    # )
-    pie(rt$pie)
+    rt <- rtheta(m = rv$m, d = rv$d, method = input$full_rtheta_method)
+
+    full_start_theta(rt)
+    in_mu(do.call(cbind, rt$mu))
   })
 
-  # Render pie box ----
-  output$full_pie_box <- renderUI({
-    req(m <- input$full_m)
-
-    # Get pie if available, otherwise create it
-    if (is.null(pie())) {
-      pie(rep(1/m, times = m))
-    }
-
-    # Ensure step size from digits chosen
-    digits <- 3
-    step <- round(1/9, digits) - round(1/9, digits - 1)
-
-    # Ensure the initial pies are compatible with the 'step' size
-    tmp <- round(pie(), digits)
-    tmp[1] <- 1 - sum(tmp[-1])
-    pie(tmp)
-
-    # Make the box and content
-    box(
-      # Args
-      title = "Starting mixture proportions",
-      status = "primary",
-      collapsible = TRUE,
-
-      # Generate content on the form:
-      #   sliderInput(inputId = "full_slider_pie1",
-      #               label = "Component 1", ...),
-      #   sliderInput(inputId = "full_slider_pie2",
-      #               label = "Component 2", ...),
-      #   ...
-      lapply(seq_along(pie()), function(k)
-        sliderInput(inputId = paste0("full_slider_pie", k),
-                    label = paste("Component", k),
-                    min = 0, max = 1, step = step,
-                    ticks = FALSE,
-                    value = pie()[k])
-      ),
-
-      renderPrint(print(pie()))
-    )
-  })
-
+  # Observe full_m change ----
   observeEvent(input$full_m, {
     rv$m <- input$full_m # Write to reactive value
+    req(rv$m)
 
-    # Update pie()
-    pie(rep(1/rv$m , times = rv$m))
+    # Update in_pie()
+    in_pie(rep(1/rv$m , times = rv$m))
+
+    # Update in mu()
+    mu <- in_mu()
+    if (!is.null(mu)) {
+      if (rv$m > ncol(mu)) {
+        mu <- do.call("cbind", c(list(mu), replicate(rv$m - ncol(mu), NA_real_,
+                                                     simplify = FALSE)))
+        colnames(mu) <- paste0("comp", seq_len(rv$m))
+      }
+      if (rv$m < ncol(mu)) {
+        mu <- mu[, seq_len(rv$m)]
+      }
+      in_mu(mu)
+    }
+
   })
 
+  # pie functionality ----
+  # pie box updater ----
   observe({# Needed to access rv$m
+    req(rv$m)
     # Observe all sliders and change the others
     lapply(seq_len(rv$m), function(k) {
 
@@ -296,40 +273,126 @@ shinyServer(function(input, output, session) {
             )
           }
 
-          # Update pie() reactive value
+          # Update in_pie() reactive value
           new_pie <- rep(NA, rv$m)
           new_pie[k] <- pie_k
           new_pie[nk] <- pie_nk*x
-          pie(new_pie)  # Update call
+          in_pie(new_pie)  # Update call
         })
     })
   })
 
+  # Render pie box ----
+  output$full_pie_box <- renderUI({
+    req(m <- rv$m)
+
+    # Get pie if available, otherwise create it
+    if (is.null(in_pie())) {
+      in_pie(rep(1/m, times = m))
+    }
+
+    # Ensure step size from digits chosen
+    digits <- 3
+    step <- round(1/9, digits) - round(1/9, digits - 1)
+
+    # Ensure the initial pies are compatible with the 'step' size
+    tmp <- round(in_pie(), digits)
+    tmp[1] <- 1 - sum(tmp[-1])
+    in_pie(tmp)
+
+    # Mixture props box and content
+    box(
+      # Args
+      title = "Starting mixture proportions",
+      status = "primary",
+      collapsible = TRUE,
+
+      # Generate content on the form:
+      #   sliderInput(inputId = "full_slider_pie1",
+      #               label = "Component 1", ...),
+      #   sliderInput(inputId = "full_slider_pie2",
+      #               label = "Component 2", ...),
+      #   ...
+      lapply(seq_along(in_pie()), function(k)
+        sliderInput(inputId = paste0("full_slider_pie", k),
+                    label = paste("Component", k),
+                    min = 0, max = 1, step = step,
+                    ticks = FALSE,
+                    value = in_pie()[k])
+      ),
+
+      renderPrint(print(in_pie()))
+    )
+  })
+
+
+
+  # mu functionality -----
+  # Update in_mu reactiveVal upon edit event
+  observeEvent(input$rhandson_mu, {
+    req(input$rhandson_mu)
+    in_mu(hot_to_r(input$rhandson_mu))
+  })
+
+  # Create rhandson table ----
+  output$rhandson_mu <- renderRHandsontable({
+    if (is.null(in_mu())) {
+      mu <- replicate(n = rv$m, rep(NA_real_, rv$d), simplify = TRUE)
+      colnames(mu) <- paste0("comp", seq_len(rv$m))
+    } else {
+      mu <- in_mu()
+    }
+
+    rhandsontable(mu)
+  })
+
+  # Render mu box ----
+  output$full_mu_box <- renderUI({
+    # Mixture props box and content
+    box(
+      # Args
+      title = "Starting mean vectors",
+      status = "primary",
+      collapsible = TRUE,
+
+      rHandsontableOutput("rhandson_mu")
+    )
+  })
+
+
+
+
+  # observeEvent(input$rhandson_mu, {
+  #   req(input$rhandson_mu)
+  #   cat("HIT\n")
+  #   in_mu(hot_to_r(input$rhandson_mu))
+  # }, ignoreNULL = TRUE, ignoreInit = TRUE)
 
 
   # View theta ----
-  # output$full_start_theta_str <- renderPrint({
-  #   cat("str(full_start_theta())\n")
-  #   cat(str(full_start_theta()))
-  #
-  #   cat("\n\nstr(input$hot2[[1]])\n")
-  #   cat(str(input$hot2[[1]]))
-  #
-  #   cat("\n\nstr(hot_to_r(input$hot2))\n")
-  #   if(is.null(input$hot)) return(NULL)
-  #   cat(str(hot_to_r(input$hot2)))
-  # })
+  output$full_start_theta_str <- renderPrint({
+    cat("str(full_start_theta())\n")
+    cat(str(full_start_theta()))
 
-  output$hot <- renderRHandsontable({
-    rhandsontable(do.call(cbind,
-                          lapply(1:20, function(i) data.frame(rnorm(10000)))))
+    # cat("\n\nstr(in_mu())\n")
+    # cat(str(in_mu()))
+    cat("\n\nprint(in_pie())\n")
+    print(in_pie())
+
+
+    cat("\n\nprint(hot_to_r(input$rhandson_mu)\n")
+    print(hot_to_r(input$rhandson_mu))
+
+    cat("\n\nprint(in_mu())\n")
+    print(in_mu())
+
+
+    cat("\n\nprint(rv$m)\n")
+    print(rv$m)
+    cat("\n\nprint(rv$d)\n")
+    print(rv$d)
   })
 
-  output$hot2 <- renderRHandsontable({
-    req(full_start_theta())
-    dat <- do.call(cbind, full_start_theta()$mu)
-    rhandsontable(dat)
-  })
 
 
 
