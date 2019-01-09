@@ -4,6 +4,23 @@ library(rhandsontable)
 library(DT)
 library(GMCM)
 
+hot_renderer <- "
+  function (instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    if (row == col) {
+      td.style.background = 'lightgrey';
+    } else if (col < row) {
+      td.style.background = 'grey';
+     td.style.color = 'grey';
+    } else if (value < -1) {
+     td.style.background = 'LightSkyBlue';
+    } else if (value > 1) {
+     td.style.background = 'GreenYellow';
+    }
+    td.style.align = 'center';
+  }"
+
+
 #options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
 
 # Define server logic required to draw a histogram
@@ -186,6 +203,7 @@ shinyServer(function(input, output, session) {
   in_pie <- reactiveVal()
   in_mu <- reactiveVal()
 
+
   # Randomize start theta
   observeEvent(input$full_random_theta, {
     cat("Randomize theta clicked!\n")
@@ -202,6 +220,7 @@ shinyServer(function(input, output, session) {
 
     full_start_theta(rt)
     in_mu(do.call(cbind, rt$mu))
+    in_pie(rt$pie)
   })
 
   # Observe full_m change ----
@@ -225,11 +244,10 @@ shinyServer(function(input, output, session) {
       }
       in_mu(mu)
     }
-
   })
 
-  # pie functionality ----
-  # pie box updater ----
+  # pie input functionality ----
+  # pie box updater
   observe({# Needed to access rv$m
     req(rv$m)
     # Observe all sliders and change the others
@@ -282,7 +300,7 @@ shinyServer(function(input, output, session) {
     })
   })
 
-  # Render pie box ----
+  # Make pie box ----
   output$full_pie_box <- renderUI({
     req(m <- rv$m)
 
@@ -303,9 +321,11 @@ shinyServer(function(input, output, session) {
     # Mixture props box and content
     box(
       # Args
-      title = "Starting mixture proportions",
+      title = "Initial mixture proportions",
       status = "primary",
       collapsible = TRUE,
+      width = 4,
+
 
       # Generate content on the form:
       #   sliderInput(inputId = "full_slider_pie1",
@@ -326,8 +346,17 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Update full_start_theta() based on in_pie()
+  observeEvent(in_pie(), {
+    req(full_start_theta())
+    theta <- full_start_theta()
+    theta$pie <- in_pie()
+    full_start_theta(theta)
+  }, ignoreNULL = TRUE, ignoreInit = TRUE)
 
-  # mu functionality -----
+
+
+  # mu input functionality -----
   # Update in_mu reactiveVal upon edit event
   observeEvent(input$rhandson_mu, {
     req(input$rhandson_mu)
@@ -342,22 +371,123 @@ shinyServer(function(input, output, session) {
     } else {
       mu <- in_mu()
     }
+    rownames(mu) <- paste0("dim", seq_len(rv$d))
 
-    rhandsontable(mu)
+    rhandsontable(mu, contextMenu = FALSE)
   })
 
-  # Render mu box ----
+  # Make mu box ----
   output$full_mu_box <- renderUI({
     # Mixture props box and content
     box(
       # Args
-      title = "Starting mean vectors",
+      title = "Initial mean vectors",
       status = "primary",
       collapsible = TRUE,
+      width = 4,
 
       rHandsontableOutput("rhandson_mu")
     )
   })
+
+  # Update full_start_theta() based on in_mu()
+  observeEvent(in_mu(), {
+    req(full_start_theta())
+    theta <- full_start_theta()
+    theta$mu <- lapply(seq_len(rv$m), function(k) in_mu()[,k])
+    full_start_theta(theta)
+  }, ignoreNULL = TRUE, ignoreInit = TRUE)
+
+
+
+
+  # sigma input functionality -----
+  # Update full_start_theta reactiveVal upon edit event
+
+  observe({
+    req(rv$m)
+
+    # Make sure component are deleted when m is reduced.
+    if (!is.null(full_start_theta())) {
+      theta <- full_start_theta()
+      theta$sigma <- theta$sigma[seq_len(rv$m)]
+      full_start_theta(theta)
+    }
+
+    # Create all rhandsontables
+    lapply(seq_len(rv$m), function(k) {
+      output[[paste0("rhandson_sigma", k)]] <- renderRHandsontable({
+        cat("making rhandson_sigma", k, "\n", sep = "")
+        # req(full_start_theta())
+        #https://github.com/jrowen/rhandsontable/tree/master/inst/examples/rhandsontable_corr
+
+        if (k > length(full_start_theta()$sigma) ||
+              is.null(full_start_theta()$sigma[[k]])) {
+          mat <- diag(rv$d)
+        } else {
+          mat <- full_start_theta()$sigma[[k]]
+        }
+
+        # Colnames are needed for hot_to_r to work
+        if (is.null(rownames(mat))) {
+          colnames(mat) <- paste0("dim", seq_len(nrow(mat)))
+        }
+        if (is.null(rownames(mat))) {
+          rownames(mat) <- colnames(mat)
+        }
+
+        # Make table
+        rhandsontable(mat, readOnly = FALSE, selectCallback = FALSE,
+                      contextMenu = TRUE) %>%
+          hot_cols(renderer = hot_renderer)
+      })
+    })
+
+
+  })
+
+  # Make observers for each sigma change (edit of table)
+  observe({
+    rv$m
+    lapply(seq_len(rv$m), function(k) {
+
+      observeEvent(input[[paste0("rhandson_sigma", k)]], {
+        cat("input$rhandson_sigma", k, " hit!\n", sep = "")
+
+        # Write change full_start_theta
+        theta <- full_start_theta()
+        theta$sigma[[k]] <- hot_to_r(input[[paste0("rhandson_sigma", k)]])
+        full_start_theta(theta)
+      })
+
+    })
+  })
+
+  # Make sigma box ----
+  output$full_sigma_box <- renderUI({
+
+    # Mixture props box and content
+    box(
+      # Args
+      title = "Initial variance-covariance matrices",
+      status = "primary",
+      collapsible = TRUE,
+      width = 4,
+
+      # Show starting sigmas
+      lapply(seq_len(rv$m), function(k) {
+        list(tags$b(paste("Component", k)),
+             rHandsontableOutput(paste0("rhandson_sigma", k)))
+      })
+    )
+  })
+
+
+
+
+
+
+
 
 
 
@@ -369,8 +499,8 @@ shinyServer(function(input, output, session) {
   # }, ignoreNULL = TRUE, ignoreInit = TRUE)
 
 
-  # View theta ----
-  output$full_start_theta_str <- renderPrint({
+  # DEBUG ----
+  output$DEBUG <- renderPrint({
     cat("str(full_start_theta())\n")
     cat(str(full_start_theta()))
 

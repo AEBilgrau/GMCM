@@ -106,7 +106,7 @@ shinyUI(
                 selectInput(inputId = "full_rtheta_method",
                             label = "Random theta method",
                             choices = eval(formals(rtheta)$method),
-                            selected = eval(formals(rtheta)$method)[2]),
+                            selected = eval(formals(rtheta)$method)[5]),
 
                 actionButton(inputId = "full_random_theta",
                              label = "Randomize theta",
@@ -163,7 +163,8 @@ shinyUI(
         dashboardBody(
           uiOutput("full_pie_box"),
           uiOutput("full_mu_box"),
-          verbatimTextOutput("full_start_theta_str")
+          uiOutput("full_sigma_box"),
+          verbatimTextOutput("DEBUG")
         )
       )
     ),
