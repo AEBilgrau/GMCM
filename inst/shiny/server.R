@@ -29,7 +29,7 @@ shinyServer(function(input, output, session) {
 
   # Reactive values concering the data.frame ----
   user_data <- reactiveVal()
-  rv <- reactiveValues(d = 4, m = 3)
+  rv <- reactiveValues(d = NULL, m = NULL)
 
   # FILE INPUT ____________________________________________________________ ----
 
@@ -203,7 +203,6 @@ shinyServer(function(input, output, session) {
   in_pie <- reactiveVal()
   in_mu <- reactiveVal()
 
-
   # Randomize start theta
   observeEvent(input$full_random_theta, {
     cat("Randomize theta clicked!\n")
@@ -223,10 +222,14 @@ shinyServer(function(input, output, session) {
     in_pie(rt$pie)
   })
 
-  # Observe full_m change ----
-  observeEvent(input$full_m, {
+  # Observe d/m change ----
+  observeEvent({
+    input$full_m
+    rv$d
+  },{
     rv$m <- input$full_m # Write to reactive value
     req(rv$m)
+    req(rv$d)
 
     # Update in_pie()
     in_pie(rep(1/rv$m , times = rv$m))
@@ -234,14 +237,29 @@ shinyServer(function(input, output, session) {
     # Update in mu()
     mu <- in_mu()
     if (!is.null(mu)) {
+
+      # Create new cols if needed
       if (rv$m > ncol(mu)) {
         mu <- do.call("cbind", c(list(mu), replicate(rv$m - ncol(mu), NA_real_,
                                                      simplify = FALSE)))
         colnames(mu) <- paste0("comp", seq_len(rv$m))
       }
+      # Remove cols if needed
       if (rv$m < ncol(mu)) {
         mu <- mu[, seq_len(rv$m)]
       }
+      # Create new rows if needed
+      if (rv$d > nrow(mu)) {
+        mu <- do.call("rbind", c(list(mu), replicate(rv$d - nrow(mu), NA_real_,
+                                                     simplify = FALSE)))
+        rownames(mu) <- paste0("dim", seq_len(rv$d))
+      }
+      # Remove rows if needed
+      if (rv$d < nrow(mu)) {
+        mu <- mu[seq_len(rv$d), ]
+      }
+
+      # Update mu
       in_mu(mu)
     }
   })
@@ -357,27 +375,37 @@ shinyServer(function(input, output, session) {
 
 
   # mu input functionality -----
+  # Create rhandson table ----
+  output$rhandson_mu <- renderRHandsontable({
+    req(rv$d)
+    req(rv$m)
+    cat("Rendering rhandson_mu\n")
+
+
+    if (is.null(in_mu())) {
+      mu <- replicate(n = rv$m, rep(NA_real_, rv$d), simplify = TRUE)
+    } else {
+      mu <- in_mu()
+    }
+
+    # Add col/row names
+    colnames(mu) <- paste0("comp", seq_len(ncol(mu)))
+    rownames(mu) <- paste0("dim",  seq_len(nrow(mu)))
+
+    rhandsontable(mu, contextMenu = FALSE)
+  })
+
   # Update in_mu reactiveVal upon edit event
   observeEvent(input$rhandson_mu, {
     req(input$rhandson_mu)
     in_mu(hot_to_r(input$rhandson_mu))
   })
 
-  # Create rhandson table ----
-  output$rhandson_mu <- renderRHandsontable({
-    if (is.null(in_mu())) {
-      mu <- replicate(n = rv$m, rep(NA_real_, rv$d), simplify = TRUE)
-      colnames(mu) <- paste0("comp", seq_len(rv$m))
-    } else {
-      mu <- in_mu()
-    }
-    rownames(mu) <- paste0("dim", seq_len(rv$d))
-
-    rhandsontable(mu, contextMenu = FALSE)
-  })
-
   # Make mu box ----
   output$full_mu_box <- renderUI({
+    req(rv$m)
+    req(rv$d)
+
     # Mixture props box and content
     box(
       # Args
@@ -403,11 +431,12 @@ shinyServer(function(input, output, session) {
 
   # sigma input functionality -----
   # Update full_start_theta reactiveVal upon edit event
-
   observe({
     req(rv$m)
+    req(rv$d)
+    #req(full_start_theta())
 
-    # Make sure component are deleted when m is reduced.
+    # Make sure components are deleted if m is reduced
     if (!is.null(full_start_theta())) {
       theta <- full_start_theta()
       theta$sigma <- theta$sigma[seq_len(rv$m)]
@@ -417,7 +446,7 @@ shinyServer(function(input, output, session) {
     # Create all rhandsontables
     lapply(seq_len(rv$m), function(k) {
       output[[paste0("rhandson_sigma", k)]] <- renderRHandsontable({
-        cat("making rhandson_sigma", k, "\n", sep = "")
+        cat("Creating rhandson_sigma", k, "\n", sep = "")
         # req(full_start_theta())
         #https://github.com/jrowen/rhandsontable/tree/master/inst/examples/rhandsontable_corr
 
@@ -426,6 +455,17 @@ shinyServer(function(input, output, session) {
           mat <- diag(rv$d)
         } else {
           mat <- full_start_theta()$sigma[[k]]
+        }
+
+        # If d has changed:
+        stopifnot(nrow(mat) == ncol(mat))
+        if (ncol(mat) < rv$d) {
+          tmp_mat <- diag(rv$d)
+          tmp_mat[seq_len(nrow(mat)), seq_len(ncol(mat))] <- mat
+          mat <- tmp_mat
+        }
+        if (ncol(mat) > rv$d) {
+          mat <- mat[seq_len(rv$d), seq_len(rv$d)]
         }
 
         # Colnames are needed for hot_to_r to work
@@ -448,7 +488,9 @@ shinyServer(function(input, output, session) {
 
   # Make observers for each sigma change (edit of table)
   observe({
-    rv$m
+    req(rv$m)
+    req(rv$d)
+
     lapply(seq_len(rv$m), function(k) {
 
       observeEvent(input[[paste0("rhandson_sigma", k)]], {
@@ -465,6 +507,8 @@ shinyServer(function(input, output, session) {
 
   # Make sigma box ----
   output$full_sigma_box <- renderUI({
+    req(rv$m)
+    req(rv$d)
 
     # Mixture props box and content
     box(
@@ -476,8 +520,10 @@ shinyServer(function(input, output, session) {
 
       # Show starting sigmas
       lapply(seq_len(rv$m), function(k) {
-        list(tags$b(paste("Component", k)),
-             rHandsontableOutput(paste0("rhandson_sigma", k)))
+        list(
+          tags$b(paste("Component", k)),
+          rHandsontableOutput(paste0("rhandson_sigma", k))
+        )
       })
     )
   })
@@ -501,6 +547,9 @@ shinyServer(function(input, output, session) {
 
   # DEBUG ----
   output$DEBUG <- renderPrint({
+    req(rv$d)
+    req(rv$m)
+
     cat("str(full_start_theta())\n")
     cat(str(full_start_theta()))
 
@@ -510,8 +559,8 @@ shinyServer(function(input, output, session) {
     print(in_pie())
 
 
-    cat("\n\nprint(hot_to_r(input$rhandson_mu)\n")
-    print(hot_to_r(input$rhandson_mu))
+    cat("\n\nprint(str(input$rhandson_mu)\n")
+    print(str(input$rhandson_mu))
 
     cat("\n\nprint(in_mu())\n")
     print(in_mu())
@@ -541,8 +590,10 @@ shinyServer(function(input, output, session) {
     user_data_pre(Uhat(ifelse(input$meta_large_vals, 1, -1) * user_data()))
   })
 
+  # Subset to selected cols, set d
   observeEvent(input$model_cols, {
     user_data_pre(user_data()[, input$model_cols])
+    rv$d <- ncol(user_data_pre())
   })
 
   # observe button push and fit model ----
