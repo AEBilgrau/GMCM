@@ -357,9 +357,7 @@ shinyServer(function(input, output, session) {
                     min = 0, max = 1, step = step,
                     ticks = FALSE,
                     value = in_pie()[k])
-      ),
-
-      renderPrint(print(in_pie()))
+      )
     )
   })
 
@@ -559,8 +557,8 @@ shinyServer(function(input, output, session) {
     print(in_pie())
 
 
-    cat("\n\nprint(str(input$rhandson_mu)\n")
-    print(str(input$rhandson_mu))
+    cat("\n\nprint(hot_to_r(input$rhandson_mu)\n")
+    print(hot_to_r(input$rhandson_mu))
 
     cat("\n\nprint(in_mu())\n")
     print(in_mu())
@@ -579,30 +577,28 @@ shinyServer(function(input, output, session) {
   # SPECIAL GMCM __________________________________________________________ ----
 
   # Initalise reative values ----
-  user_data_pre <- reactiveVal()  # Holds 'preprocessed' user data
   meta_fit <- reactiveVal() # Holds fitted values
   meta_output_dataset <- reactiveVal()
   meta_rv <- reactiveValues(fit_time = 0,
                             ite = 0)
 
   # Preprocess ----
-  observeEvent(input$meta_large_vals, {
-    user_data_pre(Uhat(ifelse(input$meta_large_vals, 1, -1) * user_data()))
-  })
 
-  # Subset to selected cols, set d
+  # Set d
   observeEvent(input$model_cols, {
-    user_data_pre(user_data()[, input$model_cols])
-    rv$d <- ncol(user_data_pre())
+    rv$d <- length(input$model_cols)
   })
 
   # observe button push and fit model ----
   observeEvent(input$meta_fit_push, {
     cat("Fit model clicked.\n")
+    req(!is.null(input$meta_large_vals))
+    req(length(input$model_cols) >= 2)
+    req(user_data())
 
-    # Require user (preprocessed) data
-    req(u <- user_data_pre())
-
+    # Preprocess user data
+    x <- user_data()
+    u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x[, input$model_cols])
 
     # Set initial parameters
     init.par <- c(pie1  = input$par1,
