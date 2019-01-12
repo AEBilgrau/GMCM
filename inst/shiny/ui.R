@@ -101,7 +101,7 @@ shinyUI(
                 # Content
                 numericInput(inputId = "full_m",
                              label = "Number of components (m)",
-                             value = 3, min = 2, step = 1),
+                             value = 2, min = 2, step = 1),
 
                 selectInput(inputId = "full_rtheta_method",
                             label = "Random theta method",
@@ -164,6 +164,7 @@ shinyUI(
           uiOutput("full_pie_box"),
           uiOutput("full_mu_box"),
           uiOutput("full_sigma_box"),
+          uiOutput("full_res_theta_plot"),
           verbatimTextOutput("DEBUG")
         )
       )

@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
   user_data <- reactiveVal()
   rv <- reactiveValues(d = NULL, m = NULL)
 
-  # FILE INPUT ____________________________________________________________ ----
+  # __FILE INPUT___________________________________________________________ ----
 
   # Load input file ----
   output$in_file_table <- renderDT({
@@ -196,7 +196,7 @@ shinyServer(function(input, output, session) {
 
 
 
-  # GENERAL GMCM __________________________________________________________ ----
+  # __GENERAL GMCM_________________________________________________________ ----
 
   # Initalise reative values ----
   full_start_theta <- reactiveVal()
@@ -529,10 +529,39 @@ shinyServer(function(input, output, session) {
 
 
 
+  # Fit general model ----
+  full_fit <- eventReactive(input$full_fit_push, {
+    req(full_start_theta())
+    req(length(input$model_cols) >= 2)
+    req(user_data())
+    req(rv$m)
+
+    # Get and preprocess user data
+    x <- user_data()
+    u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x[, input$model_cols])
+
+    # Fit model
+
+    fit_time <- system.time(
+      theta <- fit.full.GMCM(u = u,
+                           m = rv$m,
+                           theta = choose.theta(u, rv$m), #full_start_theta())
+                           method = input$full_method,
+                           max.ite = input$meta_max_ite,
+                           verbose = TRUE)
+    )[3]
+
+    # Append data and reproducibility results
+    res <- list(theta = theta, u = u, x = x, fit_time = fit_time)
+    return(res)
+  })
 
 
-
-
+  output$full_res_theta_plot <- renderUI({
+    box(
+      renderPlot(plot(full_fit()$theta))
+    )
+  })
 
 
 
@@ -574,7 +603,7 @@ shinyServer(function(input, output, session) {
 
 
 
-  # SPECIAL GMCM __________________________________________________________ ----
+  # __SPECIAL GMCM ________________________________________________________ ----
 
   # Initalise reative values ----
   meta_fit <- reactiveVal() # Holds fitted values
@@ -596,7 +625,7 @@ shinyServer(function(input, output, session) {
     req(length(input$model_cols) >= 2)
     req(user_data())
 
-    # Preprocess user data
+    # Get and preprocess user data
     x <- user_data()
     u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x[, input$model_cols])
 
@@ -618,7 +647,7 @@ shinyServer(function(input, output, session) {
     )[3]
 
     # Append data and reproducibility results
-    res <- c(res, list(u = u, x = user_data()))
+    res <- c(res, list(u = u, x = x))
 
     # Save results
     meta_fit(res)
