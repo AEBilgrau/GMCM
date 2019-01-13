@@ -562,8 +562,65 @@ shinyServer(function(input, output, session) {
   })
 
 
-  output$full_res_theta_plot <- renderUI({
+  output$full_plot_pie <- renderUI({
+    req(fit <- full_fit())
+
+    pie <- fit$theta$pie
+    if (length(pie) >= 7) {
+      names(pie) <- paste("Comp", seq_along(pie))
+    } else {
+      names(pie) <- paste("Component ", seq_along(pie))
+    }
+    mat <- cbind(pie)
+    colnames(mat) <- ""
+    mat <- mat[order(rownames(mat)), , drop = FALSE]
+
     box(
+      # box args
+      title = "Mixture proportions",
+      status = "success",
+      solidHeader = TRUE,
+
+      # Content
+      selectInput("full_pie_plot_type", label = "",
+                  choices = c("Bar plot", "Dot chart", "Pie chart"),
+                  selected = input$full_pie_plot_type),
+      renderPlot({
+        if (!is.null(input$full_pie_plot_type)) {
+          if (input$full_pie_plot_type == "Bar plot") {
+            barplot(mat,
+                    legend.text = rownames(mat),
+                    args.legend = list(x = "top", bty = "n",
+                                       horiz = TRUE, xpd = TRUE, inset = -0.1),
+                    horiz = TRUE,
+                    beside = input$full_pie_beside,
+                    xlab = "Proportion",
+                    ylab = "Components",
+                    xlim = 0:1)
+          } else if (input$full_pie_plot_type == "Dot chart") {
+            dotchart(pie, xlim = c(0, 1), pch = 16, cex = 1.2)
+          } else if (input$full_pie_plot_type == "Pie chart") {
+            pie(pie)
+          }
+        } else {
+          NULL
+        }
+      }),
+      if (!is.null(input$full_pie_plot_type)) {
+        if (input$full_pie_plot_type == "Bar plot") {
+          checkboxInput("full_pie_beside", label = "Split bars", value = FALSE)
+        }
+      }
+    )
+
+  })
+
+
+
+  output$full_res_theta_plot <- renderUI({
+    req(full_fit())
+    box(
+      title = "Vizualisation of theta",
       renderPlot(plot(full_fit()$theta))
     )
   })
@@ -571,10 +628,18 @@ shinyServer(function(input, output, session) {
 
   output$full_fit_log <- renderUI({
     req(full_fit_log())
-    box(
-      title = "Log of fitting procedure:",
-      footer = ifelse(input$full_method == "SANN", "Note: Simulated Annealing always uses all iterations.", NULL),
+    req(input$full_method)
 
+    box(
+      # box args
+      title = "Log of fitting procedure:",
+      footer = if (input$full_method == "SANN") {
+                "Note: Simulated Annealing always uses all iterations."
+               } else {
+                NULL
+               },
+
+      # Content
       renderPrint(cat(full_fit_log(), sep = "\n"))
     )
   })
