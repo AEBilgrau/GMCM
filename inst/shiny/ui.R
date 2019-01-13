@@ -106,7 +106,7 @@ shinyUI(
                 selectInput(inputId = "full_rtheta_method",
                             label = "Random theta method",
                             choices = eval(formals(rtheta)$method),
-                            selected = eval(formals(rtheta)$method)[5]),
+                            selected = eval(formals(rtheta)$method)[2]),
 
                 actionButton(inputId = "full_random_theta",
                              label = "Randomize theta",
@@ -159,12 +159,15 @@ shinyUI(
             )
           )
         ),
-        # * Output ----
+        # * General output ----
         dashboardBody(
+          h2("General GMCM for unsupervised clustering"),
+          br(),
           uiOutput("full_pie_box"),
           uiOutput("full_mu_box"),
           uiOutput("full_sigma_box"),
           uiOutput("full_res_theta_plot"),
+          uiOutput("full_fit_log"),
           verbatimTextOutput("DEBUG")
         )
       )
@@ -268,9 +271,9 @@ shinyUI(
 
         ),
 
-        # * Output ----
+        # * Meta output ----
         dashboardBody(
-          h1("Special GMCM for reproducibility analysis"),
+          h2("Special GMCM for reproducibility analysis"),
           br(),
           conditionalPanel("input.meta_fit_push > 0",
             uiOutput("infoBoxes"),

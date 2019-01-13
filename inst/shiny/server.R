@@ -202,6 +202,7 @@ shinyServer(function(input, output, session) {
   full_start_theta <- reactiveVal()
   in_pie <- reactiveVal()
   in_mu <- reactiveVal()
+  full_fit_log <- reactiveVal()
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
@@ -531,6 +532,7 @@ shinyServer(function(input, output, session) {
 
   # Fit general model ----
   full_fit <- eventReactive(input$full_fit_push, {
+    # Requirements
     req(full_start_theta())
     req(length(input$model_cols) >= 2)
     req(user_data())
@@ -541,19 +543,22 @@ shinyServer(function(input, output, session) {
     u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x[, input$model_cols])
 
     # Fit model
-
     fit_time <- system.time(
-      theta <- fit.full.GMCM(u = u,
-                           m = rv$m,
-                           theta = choose.theta(u, rv$m), #full_start_theta())
-                           method = input$full_method,
-                           max.ite = input$meta_max_ite,
-                           verbose = TRUE)
+      fit_log <- capture.output({
+        theta <- fit.full.GMCM(u = u,
+                               m = rv$m,
+                               theta = choose.theta(u, rv$m), #full_start_theta())
+                               method = input$full_method,
+                               max.ite = input$meta_max_ite,
+                               verbose = TRUE)
+      })
     )[3]
 
+    # Save caputured output to reactive val
+    full_fit_log(fit_log)
+
     # Append data and reproducibility results
-    res <- list(theta = theta, u = u, x = x, fit_time = fit_time)
-    return(res)
+    return(list(theta = theta, u = u, x = x, fit_time = fit_time))
   })
 
 
@@ -564,12 +569,15 @@ shinyServer(function(input, output, session) {
   })
 
 
+  output$full_fit_log <- renderUI({
+    req(full_fit_log())
+    box(
+      title = "Log of fitting procedure:",
+      footer = ifelse(input$full_method == "SANN", "Note: Simulated Annealing always uses all iterations.", NULL),
 
-  # observeEvent(input$rhandson_mu, {
-  #   req(input$rhandson_mu)
-  #   cat("HIT\n")
-  #   in_mu(hot_to_r(input$rhandson_mu))
-  # }, ignoreNULL = TRUE, ignoreInit = TRUE)
+      renderPrint(cat(full_fit_log(), sep = "\n"))
+    )
+  })
 
 
   # DEBUG ----
@@ -577,8 +585,8 @@ shinyServer(function(input, output, session) {
     req(rv$d)
     req(rv$m)
 
-    cat("str(full_start_theta())\n")
-    cat(str(full_start_theta()))
+    cat("str(full_fit())\n")
+    cat(str(full_fit()))
 
     # cat("\n\nstr(in_mu())\n")
     # cat(str(in_mu()))
