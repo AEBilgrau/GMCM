@@ -577,7 +577,7 @@ shinyServer(function(input, output, session) {
 
     box(
       # box args
-      title = "Mixture proportions",
+      title = "Estimated mixture proportions",
       status = "success",
       solidHeader = TRUE,
 
@@ -616,6 +616,28 @@ shinyServer(function(input, output, session) {
   })
 
 
+  output$full_res_mean <- renderUI({
+    req(fit <- full_fit())
+
+    # Create table
+    mu <- fit$theta$mu
+    tab <- do.call(data.frame, mu)
+    rownames(tab) <- paste("Dimension", seq_len(nrow(tab)))
+
+    box(
+      # box args
+      title = "Estimated means",
+      status = "success",
+      solidHeader = TRUE,
+
+      # Content
+      renderTable(
+        tab,
+        striped = TRUE, hover = TRUE,
+        rownames = TRUE
+      )
+    )
+  })
 
   output$full_res_theta_plot <- renderUI({
     req(full_fit())
