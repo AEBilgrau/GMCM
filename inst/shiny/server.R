@@ -580,6 +580,7 @@ shinyServer(function(input, output, session) {
       title = "Estimated mixture proportions",
       status = "success",
       solidHeader = TRUE,
+      collapsible = TRUE,
 
       # Content
       selectInput("full_pie_plot_type", label = "",
@@ -597,6 +598,10 @@ shinyServer(function(input, output, session) {
                     xlab = "Proportion",
                     ylab = "Components",
                     xlim = 0:1)
+            if (input$full_pie_beside) {
+              text(mat, seq_along(mat) + 0.5, labels = round(c(mat), 2), pos = 4)
+              text(mat, seq_along(mat) + 0.5, labels = rownames(mat), pos = 2)
+            }
           } else if (input$full_pie_plot_type == "Dot chart") {
             dotchart(pie, xlim = c(0, 1), pch = 16, cex = 1.2)
           } else if (input$full_pie_plot_type == "Pie chart") {
@@ -616,7 +621,7 @@ shinyServer(function(input, output, session) {
   })
 
 
-  output$full_res_mean <- renderUI({
+  output$full_res_mu <- renderUI({
     req(fit <- full_fit())
 
     # Create table
@@ -629,6 +634,7 @@ shinyServer(function(input, output, session) {
       title = "Estimated means",
       status = "success",
       solidHeader = TRUE,
+      collapsible = TRUE,
 
       # Content
       renderTable(
@@ -636,6 +642,38 @@ shinyServer(function(input, output, session) {
         striped = TRUE, hover = TRUE,
         rownames = TRUE
       )
+    )
+  })
+
+
+  output$full_res_sigma <- renderUI({
+    req(fit <- full_fit())
+
+    # Get list of sigmas
+    sigmas <- fit$theta$sigma
+
+
+    box(
+      # box args
+      title = "Estimated covariances",
+      status = "success",
+      solidHeader = TRUE,
+      collapsible = TRUE,
+
+      # Content
+      lapply(seq_along(sigmas), function(k) {
+        tab <- sigmas[[k]]
+        rownames(tab) <- colnames(tab) <- paste0("dim", seq_len(nrow(tab)))
+        list(
+          tags$b(paste("Component", k)),
+          renderTable(
+            tab,
+            striped = TRUE, hover = TRUE,
+            rownames = TRUE
+          )
+        )
+      })
+
     )
   })
 

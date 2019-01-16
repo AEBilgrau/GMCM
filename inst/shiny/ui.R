@@ -167,7 +167,8 @@ shinyUI(
           uiOutput("full_mu_box"),
           uiOutput("full_sigma_box"),
           uiOutput("full_plot_pie"),
-          uiOutput("full_res_mean"),
+          uiOutput("full_res_mu"),
+          uiOutput("full_res_sigma"),
           uiOutput("full_res_theta_plot"),
           uiOutput("full_fit_log"),
           verbatimTextOutput("DEBUG")
