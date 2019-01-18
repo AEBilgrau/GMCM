@@ -145,8 +145,8 @@ shinyUI(
               # Content
               radioButtons(inputId = "full_class_type",
                            label = "Classification by",
-                           choices = c("Maximum a posterior probability" = "max_prob",
-                                       "Thresholded posterior probability" = "thres_prob"),
+                           choices = c("Maximum posterior probability" = "max_prob",
+                                       "Thresholded maximum posterior probability" = "thres_prob"),
                            selected = "max_prob",
                            inline = FALSE),
               conditionalPanel(
@@ -169,6 +169,8 @@ shinyUI(
           uiOutput("full_plot_pie"),
           uiOutput("full_res_mu"),
           uiOutput("full_res_sigma"),
+          uiOutput("full_obs_plot"),
+          uiOutput("full_ui_selectize_model_cols_xy"),
           uiOutput("full_res_theta_plot"),
           uiOutput("full_fit_log"),
           verbatimTextOutput("DEBUG")
@@ -320,7 +322,7 @@ shinyUI(
               # Content
               plotOutput("latent_plot")
             ),
-            uiOutput("ui_selectize_model_cols_xy"),
+            uiOutput("meta_ui_selectize_model_cols_xy"),
             box(
               title = "Classified data",
               footer = downloadButton('downloadData', 'Download'),

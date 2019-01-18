@@ -532,6 +532,8 @@ shinyServer(function(input, output, session) {
 
   # Fit general model ----
   full_fit <- eventReactive(input$full_fit_push, {
+    cat("Fit (full) model pushed!\n")
+
     # Requirements
     req(full_start_theta())
     req(length(input$model_cols) >= 2)
@@ -539,8 +541,8 @@ shinyServer(function(input, output, session) {
     req(rv$m)
 
     # Get and preprocess user data
-    x <- user_data()
-    u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x[, input$model_cols])
+    x <- user_data()[, input$model_cols]
+    u <- Uhat(x)
 
     # Fit model
     fit_time <- system.time(
@@ -705,6 +707,95 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Classification ----
+  full_classification <- reactive({
+    req(fit <- full_fit())
+    req(input$full_class_type)
+
+    # Get class probabilities
+    prob_mat <- get.prob(fit$u, theta = fit$theta)
+
+    if (input$full_class_type == "max_prob") {
+      comps <- apply(prob_mat, 1, which.max)
+    } else if (input$full_class_type == "thres_prob") {
+      req(input$full_thres_prob)
+      comps <- apply(prob_mat, 1, which.max)
+      ok_max <- apply(prob_mat, 1, max) > input$full_thres_prob
+      comps[!ok_max] <- NA
+    } else {
+      stop("full_class_type not matched")
+    }
+
+    return(comps)
+
+  })
+
+  # X/Y selection ----
+  output$full_ui_selectize_model_cols_xy <- renderUI({
+    req(input$model_cols)
+
+    box(
+      selectizeInput(inputId = "full_model_cols_xy",
+                     label = "Select variables for X and Y axis",
+                     choices = input$model_cols,
+                     selected = input$model_cols[1:2],
+                     multiple = TRUE,
+                     options = list(plugins = list('remove_button', 'drag_drop')))
+    )
+  })
+
+  #Values plot ----
+  output$full_obs_plot <- renderUI({
+
+    req(full_fit())
+    req(full_classification())
+
+    box(
+      # Box args
+
+      # Content
+      renderPlot({
+        full_plot(
+          fit = full_fit(), # A fitted object data
+          comp = full_classification(),
+          plot_type = "obs",
+          col_sel = input$full_model_cols_xy,
+          row_sel = input$in_file_table_rows_selected
+        )
+      })
+    )
+  })
+
+  # # Rank plot ----
+  # output$rank_plot <- renderPlot({
+  #
+  #   req(meta_fit())
+  #   req(meta_classification())
+  #
+  #   meta_plot(
+  #     fit = meta_fit(), # A fitted object data
+  #     idr = meta_classification(),
+  #     plot_type = "rank",
+  #     col_sel = input$model_cols_xy,
+  #     row_sel = input$in_file_table_rows_selected
+  #   )
+  # })
+  #
+  # # Latent plot ----
+  # output$latent_plot <- renderPlot({
+  #   req(meta_fit())
+  #   req(meta_classification())
+  #
+  #   meta_plot(
+  #     fit = meta_fit(), # A fitted object data
+  #     idr = meta_classification(),
+  #     plot_type = "gmm",
+  #     col_sel = input$model_cols_xy,
+  #     row_sel = input$in_file_table_rows_selected
+  #   )
+  # })
+
+
   # DEBUG ----
   output$DEBUG <- renderPrint({
     req(rv$d)
@@ -753,14 +844,15 @@ shinyServer(function(input, output, session) {
 
   # observe button push and fit model ----
   observeEvent(input$meta_fit_push, {
-    cat("Fit model clicked.\n")
+    cat("Fit (meta) model pushed.\n")
+
     req(!is.null(input$meta_large_vals))
     req(length(input$model_cols) >= 2)
     req(user_data())
 
     # Get and preprocess user data
-    x <- user_data()
-    u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x[, input$model_cols])
+    x <- user_data()[, input$model_cols]
+    u <- Uhat(ifelse(input$meta_large_vals, 1, -1) * x)
 
     # Set initial parameters
     init.par <- c(pie1  = input$par1,
@@ -846,11 +938,11 @@ shinyServer(function(input, output, session) {
   })
 
   # X/Y selection ----
-  output$ui_selectize_model_cols_xy <- renderUI({
+  output$meta_ui_selectize_model_cols_xy <- renderUI({
     req(input$model_cols)
 
     box(
-      selectizeInput(inputId = "model_cols_xy",
+      selectizeInput(inputId = "meta_model_cols_xy",
                      label = "Select variables for X and Y axis",
                      choices = input$model_cols,
                      selected = input$model_cols[1:2],
@@ -869,7 +961,7 @@ shinyServer(function(input, output, session) {
       fit = meta_fit(), # A fitted object data
       idr = meta_classification(),
       plot_type = "obs",
-      col_sel = input$model_cols_xy,
+      col_sel = input$meta_model_cols_xy,
       row_sel = input$in_file_table_rows_selected
     )
   })
@@ -884,7 +976,7 @@ shinyServer(function(input, output, session) {
       fit = meta_fit(), # A fitted object data
       idr = meta_classification(),
       plot_type = "rank",
-      col_sel = input$model_cols_xy,
+      col_sel = input$meta_model_cols_xy,
       row_sel = input$in_file_table_rows_selected
     )
   })
@@ -898,7 +990,7 @@ shinyServer(function(input, output, session) {
       fit = meta_fit(), # A fitted object data
       idr = meta_classification(),
       plot_type = "gmm",
-      col_sel = input$model_cols_xy,
+      col_sel = input$meta_model_cols_xy,
       row_sel = input$in_file_table_rows_selected
     )
   })
