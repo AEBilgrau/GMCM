@@ -21,7 +21,11 @@ Suggests:
     jpeg,
     testthat (>= 0.3),
     knitr,
-    covr
+    covr,
+    shiny,
+    shinydashboard,
+    rhandsontable,
+    DT
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 Encoding: UTF-8
