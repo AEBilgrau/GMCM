@@ -746,17 +746,21 @@ shinyServer(function(input, output, session) {
 
   #Values plot ----
   output$full_obs_plot <- renderUI({
-
     req(full_fit())
     req(full_classification())
 
     box(
       # Box args
+      title = "Observed values",
+      status = "primary",
+      collapsible = TRUE,
+      solidHeader = TRUE,
+      width = 4,
 
       # Content
       renderPlot({
         full_plot(
-          fit = full_fit(), # A fitted object data
+          fit = full_fit(),
           comp = full_classification(),
           plot_type = "obs",
           col_sel = input$full_model_cols_xy,
@@ -766,34 +770,57 @@ shinyServer(function(input, output, session) {
     )
   })
 
-  # # Rank plot ----
-  # output$rank_plot <- renderPlot({
-  #
-  #   req(meta_fit())
-  #   req(meta_classification())
-  #
-  #   meta_plot(
-  #     fit = meta_fit(), # A fitted object data
-  #     idr = meta_classification(),
-  #     plot_type = "rank",
-  #     col_sel = input$model_cols_xy,
-  #     row_sel = input$in_file_table_rows_selected
-  #   )
-  # })
-  #
-  # # Latent plot ----
-  # output$latent_plot <- renderPlot({
-  #   req(meta_fit())
-  #   req(meta_classification())
-  #
-  #   meta_plot(
-  #     fit = meta_fit(), # A fitted object data
-  #     idr = meta_classification(),
-  #     plot_type = "gmm",
-  #     col_sel = input$model_cols_xy,
-  #     row_sel = input$in_file_table_rows_selected
-  #   )
-  # })
+  # Rank plot ----
+  output$full_rank_plot <- renderUI({
+    req(full_fit())
+    req(full_classification())
+
+    box(
+      # Box args
+      title = "Ranked values",
+      status = "primary",
+      collapsible = TRUE,
+      solidHeader = TRUE,
+      width = 4,
+
+      # Content
+      renderPlot({
+        full_plot(
+          fit = full_fit(),
+          comp = full_classification(),
+          plot_type = "rank",
+          col_sel = input$full_model_cols_xy,
+          row_sel = input$in_file_table_rows_selected
+        )
+      })
+    )
+  })
+
+  # Latent plot ----
+  output$full_latent_plot <- renderUI({
+    req(full_fit())
+    req(full_classification())
+
+    box(
+      # Box args
+      title = "Latent values",
+      status = "primary",
+      collapsible = TRUE,
+      solidHeader = TRUE,
+      width = 4,
+
+      # Content
+      renderPlot({
+        full_plot(
+          fit = full_fit(),
+          comp =  full_classification(),
+          plot_type = "gmm",
+          col_sel = input$full_model_cols_xy,
+          row_sel = input$in_file_table_rows_selected
+        )
+      })
+    )
+  })
 
 
   # DEBUG ----
