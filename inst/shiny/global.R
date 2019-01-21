@@ -88,7 +88,6 @@ full_plot <- function(fit, # A fitted object data
 
   # Color by classification
   n <- nrow(x)
-  d <- ncol(x)
   m <- max(comp)
   cols <- rainbow(m)[comp]
   cols[is.na(comp)] <- "grey"
