@@ -680,10 +680,26 @@ shinyServer(function(input, output, session) {
   })
 
   output$full_res_theta_plot <- renderUI({
-    req(full_fit())
+    req(fit <- full_fit())
+    req(input$full_model_cols_xy)
+
+    which_dims <- match(input$full_model_cols_xy, colnames(fit$x))[1:2]
+    req(sum(!is.na(which_dims)) == 2)
+
     box(
-      title = "Vizualisation of theta",
-      renderPlot(plot(full_fit()$theta))
+      # Box args
+      title = "Vizualisation of estimated theta",
+      status = "success",
+      solidHeader = TRUE,
+      collapsible = TRUE,
+
+      # Content
+      renderPlot(
+        plot(full_fit()$theta,
+             which.dims = which_dims,
+             add.means = TRUE,
+             add.ellipses = TRUE)
+      )
     )
   })
 
