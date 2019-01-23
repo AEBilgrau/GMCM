@@ -4,7 +4,7 @@
 \alias{plot.theta}
 \title{Plotting method for "theta" objects}
 \usage{
-\method{plot}{theta}(x, which.dims = c(1L, 2L), n.sd = 2,
+\method{plot}{theta}(x, which.dims = c(1L, 2L), n.sd = qnorm(0.99),
   add.means = TRUE, ..., add.ellipses = FALSE)
 }
 \arguments{
@@ -35,7 +35,7 @@ density and possibly the individual gaussian components.
 }
 \examples{
 set.seed(5)
-theta <- rtheta(d = 3, m = 4)
+theta <- rtheta(d = 3, m = 2)
 \dontrun{
 plot(theta)
 plot(theta, col = "blue", asp = 1, add.means = FALSE)
