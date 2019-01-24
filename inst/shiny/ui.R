@@ -175,6 +175,18 @@ shinyUI(
           uiOutput("full_ui_selectize_model_cols_xy"),
           uiOutput("full_res_theta_plot"),
           uiOutput("full_fit_log"),
+
+          box(
+            title = "Classified data",
+            footer = downloadButton('full_downloadData', 'Download'),
+            status = "info",
+            width = 12,
+            collapsible = TRUE,
+            collapsed = TRUE,
+            solidHeader = TRUE,
+
+            DTOutput("full_out_file_table")
+          ),
           verbatimTextOutput("DEBUG")
         )
       )

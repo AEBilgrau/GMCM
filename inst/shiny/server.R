@@ -198,11 +198,12 @@ shinyServer(function(input, output, session) {
 
   # __GENERAL GMCM_________________________________________________________ ----
 
-  # Initalise reative values ----
+  # Initalise reactive values ----
   full_start_theta <- reactiveVal()
   in_pie <- reactiveVal()
   in_mu <- reactiveVal()
   full_fit_log <- reactiveVal()
+  full_output_dataset <- reactiveVal()
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
@@ -709,6 +710,8 @@ shinyServer(function(input, output, session) {
     req(input$full_method)
 
     box(
+      collapsible = TRUE,
+
       # box args
       title = "Log of fitting procedure:",
       footer = if (input$full_method == "SANN") {
@@ -724,12 +727,20 @@ shinyServer(function(input, output, session) {
 
 
   # Classification ----
+  full_prob <- reactive({
+    req(fit <- full_fit())
+    req(input$full_class_type)
+
+    # Get class probabilities
+    return(get.prob(fit$u, theta = fit$theta))
+  })
+
   full_classification <- reactive({
     req(fit <- full_fit())
     req(input$full_class_type)
 
     # Get class probabilities
-    prob_mat <- get.prob(fit$u, theta = fit$theta)
+    prob_mat <- full_prob()
 
     if (input$full_class_type == "max_prob") {
       comps <- apply(prob_mat, 1, which.max)
@@ -839,6 +850,50 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Output file -------------
+  output$full_out_file_table <- renderDT({
+
+    # Set required dependency
+    req(tab <- user_data())
+    req(cls <- full_classification())
+    req(mat <- full_prob())
+
+    colnames(mat) <- paste0("comp", seq_len(ncol(mat)), "prob")
+    tab <- cbind(tab, as.data.frame(mat), class = cls)
+
+    # Save as output dataset
+    full_output_dataset(tab)
+
+    # Make DT
+    d_t <- datatable(tab,
+                     style = "bootstrap",
+                     class = "display cell-border compact",
+                     selection = list(target = 'row')) %>%
+      formatSignif(columns = numeric())
+
+    return(d_t)
+  })
+
+  output$full_downloadData <- downloadHandler(
+    # This function returns a string which tells the client
+    # browser what name to use when saving the file.
+    filename = function() {
+      paste0(input$in_file$name, "_classified.csv")
+    },
+    # This function should write data to a file given to it by
+    # the argument 'file'.
+    content = function(file) {
+      # Write to a file specified by the 'file' argument
+      write.table(full_output_dataset(),
+                  file = file,
+                  col.names = input$header,
+                  sep = input$sep,
+                  quote = ifelse(input$quote == "", FALSE, TRUE),
+                  row.names = TRUE)
+    }
+  )
+
+
   # DEBUG ----
   output$DEBUG <- renderPrint({
     req(rv$d)
@@ -872,7 +927,7 @@ shinyServer(function(input, output, session) {
 
   # __SPECIAL GMCM ________________________________________________________ ----
 
-  # Initalise reative values ----
+  # Initalise reactive values ----
   meta_fit <- reactiveVal() # Holds fitted values
   meta_output_dataset <- reactiveVal()
   meta_rv <- reactiveValues(fit_time = 0,
