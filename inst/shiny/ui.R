@@ -174,8 +174,6 @@ shinyUI(
           uiOutput("full_latent_plot"),
           uiOutput("full_ui_selectize_model_cols_xy"),
           uiOutput("full_res_theta_plot"),
-          uiOutput("full_fit_log"),
-
           box(
             title = "Classified data",
             footer = downloadButton('full_downloadData', 'Download'),
@@ -187,7 +185,8 @@ shinyUI(
 
             DTOutput("full_out_file_table")
           ),
-          verbatimTextOutput("DEBUG")
+          uiOutput("full_fit_log")
+          #,verbatimTextOutput("DEBUG")
         )
       )
     ),
@@ -357,7 +356,8 @@ shinyUI(
     navbarMenu(
       title = "",
       icon = icon("bars"),
-      #title = "More",
+
+
       tabPanel("About", icon = icon("question"),
          h1("About"),
          p("This shiny app. was developed by Anders Ellern Bilgrau.")

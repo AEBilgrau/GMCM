@@ -278,8 +278,6 @@ shinyServer(function(input, output, session) {
         ignoreInit = TRUE,
         eventExpr = input[[paste0("full_slider_pie", k)]],
         handlerExpr = {
-          cat(paste0("full_slider_pie", k, " changed!\n"))
-
           # All pie slider IDs
           pie_slider_ids <- paste0("full_slider_pie", seq_len(rv$m))
 
@@ -379,8 +377,6 @@ shinyServer(function(input, output, session) {
   output$rhandson_mu <- renderRHandsontable({
     req(rv$d)
     req(rv$m)
-    cat("Rendering rhandson_mu\n")
-
 
     if (is.null(in_mu())) {
       mu <- replicate(n = rv$m, rep(NA_real_, rv$d), simplify = TRUE)
@@ -446,7 +442,6 @@ shinyServer(function(input, output, session) {
     # Create all rhandsontables
     lapply(seq_len(rv$m), function(k) {
       output[[paste0("rhandson_sigma", k)]] <- renderRHandsontable({
-        cat("Creating rhandson_sigma", k, "\n", sep = "")
         # req(full_start_theta())
         #https://github.com/jrowen/rhandsontable/tree/master/inst/examples/rhandsontable_corr
 
@@ -494,8 +489,6 @@ shinyServer(function(input, output, session) {
     lapply(seq_len(rv$m), function(k) {
 
       observeEvent(input[[paste0("rhandson_sigma", k)]], {
-        cat("input$rhandson_sigma", k, " hit!\n", sep = "")
-
         # Write change full_start_theta
         theta <- full_start_theta()
         theta$sigma[[k]] <- hot_to_r(input[[paste0("rhandson_sigma", k)]])
@@ -533,8 +526,6 @@ shinyServer(function(input, output, session) {
 
   # Fit general model ----
   full_fit <- eventReactive(input$full_fit_push, {
-    cat("Fit (full) model pushed!\n")
-
     # Requirements
     req(full_start_theta())
     req(length(input$model_cols) >= 2)
