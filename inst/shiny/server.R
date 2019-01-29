@@ -207,7 +207,6 @@ shinyServer(function(input, output, session) {
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
-    cat("Randomize theta clicked!\n")
     req(rv$m)
     req(rv$d)
 
@@ -702,6 +701,7 @@ shinyServer(function(input, output, session) {
 
     box(
       collapsible = TRUE,
+      collapsed = TRUE,
 
       # box args
       title = "Log of fitting procedure:",
@@ -933,8 +933,6 @@ shinyServer(function(input, output, session) {
 
   # observe button push and fit model ----
   observeEvent(input$meta_fit_push, {
-    cat("Fit (meta) model pushed.\n")
-
     req(!is.null(input$meta_large_vals))
     req(length(input$model_cols) >= 2)
     req(user_data())
