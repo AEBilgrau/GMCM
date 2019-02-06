@@ -70,7 +70,6 @@ shinyServer(function(input, output, session) {
     validate(need(user_data(), "Please upload some data."))
 
     tagList(
-      h1("Dataset loaded"),
       p(sprintf("%i rows and %i columns detected. Showing %i rows below.",
                 nrow(user_data()),
                 ncol(user_data()),
@@ -424,7 +423,7 @@ shinyServer(function(input, output, session) {
 
 
 
-  # sigma input functionality -----
+  # Sigma input functionality -----
   # Update full_start_theta reactiveVal upon edit event
   observe({
     req(rv$m)
@@ -555,6 +554,7 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Pie plot ----
   output$full_plot_pie <- renderUI({
     req(fit <- full_fit())
 
@@ -883,6 +883,24 @@ shinyServer(function(input, output, session) {
                   row.names = TRUE)
     }
   )
+
+  output$full_classified_data <- renderUI({
+    req(full_prob())
+    req(full_classification())
+
+    box(
+      title = "Classified data",
+      footer = downloadButton('full_downloadData', 'Download'),
+      status = "info",
+      width = 12,
+      collapsible = TRUE,
+      collapsed = TRUE,
+      solidHeader = TRUE,
+
+      DTOutput("full_out_file_table")
+    )
+  })
+
 
 
   # DEBUG ----

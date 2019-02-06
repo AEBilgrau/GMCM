@@ -65,7 +65,6 @@ shinyUI(
             collapsible = TRUE,
             solidHeader = FALSE,
 
-
             # Content
             htmlOutput("input_file_description"),
             DTOutput("in_file_table")
@@ -167,24 +166,14 @@ shinyUI(
           uiOutput("full_mu_box"),
           uiOutput("full_sigma_box"),
           uiOutput("full_plot_pie"),
+          uiOutput("full_ui_selectize_model_cols_xy"),
+          uiOutput("full_res_theta_plot"),
           uiOutput("full_res_mu"),
           uiOutput("full_res_sigma"),
           uiOutput("full_obs_plot"),
           uiOutput("full_rank_plot"),
           uiOutput("full_latent_plot"),
-          uiOutput("full_ui_selectize_model_cols_xy"),
-          uiOutput("full_res_theta_plot"),
-          box(
-            title = "Classified data",
-            footer = downloadButton('full_downloadData', 'Download'),
-            status = "info",
-            width = 12,
-            collapsible = TRUE,
-            collapsed = TRUE,
-            solidHeader = TRUE,
-
-            DTOutput("full_out_file_table")
-          ),
+          uiOutput("full_classified_data"),
           uiOutput("full_fit_log")
           #,verbatimTextOutput("DEBUG")
         )
