@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(shinyBS)
 library(rhandsontable)
 library(DT)
 library(GMCM)
@@ -18,6 +19,7 @@ shinyUI(
     title = tagList(icon("box-open"), strong("GMCM")),
     windowTitle = "GMCM",
     theme = "bootstrap.css",
+    inverse = TRUE,
 
 
     # File input tab ______________________________________________________ ----
@@ -28,47 +30,49 @@ shinyUI(
         dashboardSidebar(
 
           # * Input: File ----
-          fileInput("in_file", "Choose CSV File",
+          fileInput(inputId = "in_file",
+                    label = list(
+                      "Choose CSV File",
+                      tipify(icon("question-circle"),
+                             title = HTML("The input file should be a plain text file where columns",
+                                          "correspond to features/<wbr/>variables/<wbr/>experiments and",
+                                          "rows correspond to observations."),
+                             placement = "right",
+                             trigger = "hover",
+                             options = list(container = "body")
+                      )
+                    ),
                     multiple = FALSE,
                     accept = c("text/csv",
                                "text/comma-separated-values,text/plain",
                                ".csv")),
+          # File input options for read.csv
+          conditionalPanel(
+            condition = "output.in_file_uploaded",
 
-          div(HTML("The input file should be a plain text file where columns",
-                   "correspond to features/<wbr/>variables/<wbr/>experiments and",
-                   "rows correspond to observations.")),
+            # * Input: header checkbox ----
+            checkboxInput("header", "Header", TRUE),
 
-          # * Input: header checkbox ----
-          checkboxInput("header", "Header", TRUE),
+            # * Input: select separator ----
+            radioButtons(inputId = "sep",
+                         label = "Separator",
+                         choices = c("Comma" = ",",
+                                     "Semicolon" = ";",
+                                     "Tabs" = "\t"),
+                         selected = ";"),
 
-          # * Input: select separator ----
-          radioButtons(inputId = "sep",
-                       label = "Separator",
-                       choices = c("Comma" = ",",
-                                   "Semicolon" = ";",
-                                   "Tabs" = "\t"),
-                       selected = ";"),
+            # * Input: select quotes ----
+            radioButtons(inputId = "quote",
+                         label = "Quotes",
+                         choices = c(None = "",
+                                     "Double Quote" = '"',
+                                     "Single Quote" = "'"),
+                         selected = '"')
+          )
 
-          # * Input: select quotes ----
-          radioButtons("quote", "Quotes",
-                       choices = c(None = "",
-                                   "Double Quote" = '"',
-                                   "Single Quote" = "'"),
-                       selected = '"')
         ),
         dashboardBody(
-          box(
-            # box args
-            width = 12,
-            title = " ",
-            status = "primary",
-            collapsible = TRUE,
-            solidHeader = FALSE,
-
-            # Content
-            htmlOutput("input_file_description"),
-            DTOutput("in_file_table")
-          ),
+          uiOutput("in_file_data_box"),
           uiOutput("model_cols_box"),
           uiOutput("raw_data_box")
 

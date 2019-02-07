@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(shinyBS)
 library(rhandsontable)
 library(DT)
 library(GMCM)
@@ -21,17 +22,13 @@ hot_renderer <- "
   }"
 
 
-#options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
-
-# Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
-  #session$onSessionEnded(stopApp)
+
+  # __FILE INPUT___________________________________________________________ ----
 
   # Reactive values concering the data.frame ----
   user_data <- reactiveVal()
   rv <- reactiveValues(d = NULL, m = NULL)
-
-  # __FILE INPUT___________________________________________________________ ----
 
   # Load input file ----
   output$in_file_table <- renderDT({
@@ -53,28 +50,36 @@ shinyServer(function(input, output, session) {
       }
     )
 
-    d_t <-
-      datatable(user_data(),
-                style = "bootstrap",
-                class = "display cell-border compact",
-                selection = list(target = 'row')) %>%
+    d_t <- datatable(user_data(),
+                     style = "bootstrap",
+                     class = "display cell-border compact",
+                     selection = list(target = 'row')) %>%
       formatSignif(columns = numeric())
 
     return(d_t)
   })
 
+  # Reactive value for conditional panel
+  output$in_file_uploaded <- reactive({
+    return(!is.null(user_data()))
+  })
+  outputOptions(output, 'in_file_uploaded', suspendWhenHidden = FALSE)
 
-  # Create input file text ----
-  output$input_file_description <- renderUI({
-    # Set required dependency
-    validate(need(user_data(), "Please upload some data."))
+  # in_file_data_box ----
+  output$in_file_data_box <- renderUI({
+    req(input$in_file)
 
-    tagList(
-      p(sprintf("%i rows and %i columns detected. Showing %i rows below.",
-                nrow(user_data()),
-                ncol(user_data()),
-                length(input$in_file_table_rows_current)),
-        "Select rows to hightlight in plots.")
+    box(
+      # box args
+      width = 12,
+      title = "Input data",
+      status = "primary",
+      collapsible = TRUE,
+      solidHeader = FALSE,
+      footer = "Select rows to hightlight in plots.",
+
+      # Content
+      DTOutput("in_file_table")
     )
   })
 
@@ -108,12 +113,15 @@ shinyServer(function(input, output, session) {
 
   output$raw_data_box <- renderUI({
     req(user_data())
+    req(input$model_cols)
+    d <- length(input$model_cols)
 
     footer <- NULL
-    if (!is.null(input$model_cols) && length(input$model_cols) >= 2) {
+    if (!is.null(input$model_cols) && d >= 2) {
       status <- "success"
-      height <- "800px"
-      if (length(input$model_cols) > 2 && !input$do_matrix_plot) {
+      height <- ifelse(d > 2, "800px", "600px")
+
+      if (d > 2 && !input$do_matrix_plot) {
         footer <- "Note: More than 2 variables/Columns selected but showing
         only the first two here. All selected columns are kept and used in
         the estimation."
@@ -129,7 +137,7 @@ shinyServer(function(input, output, session) {
       solidHeader = TRUE,
       status = status,
       collapsible = TRUE,
-      width = 12,
+      width = ifelse(d >= 3, 12, 6),
       footer = footer,
 
       # Content
