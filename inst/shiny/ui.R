@@ -357,8 +357,11 @@ shinyUI(
         icon = icon("question"),
         uiOutput('more_about_md')
       ),
-      tabPanel("Bug reports", icon = icon("bug"),
-               tags$embed(src = "https://github.com/AEBilgrau/GMCM/issues"))
+      tabPanel(
+        title = "Bug reports",
+        icon = icon("bug"),
+        uiOutput('more_bug_reports_md')
+      )
     )
 
   )

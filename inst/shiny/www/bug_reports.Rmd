@@ -1,0 +1,38 @@
+---
+title: "Bug reports"
+author: "Anders Ellern Bilgrau"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("htmltools")
+```
+
+## Bug reports
+
+If you encounter a bug or issue with the web-application or package itself, please submit an issue at [the GitHub issues page](https://github.com/AEBilgrau/GMCM/issues). 
+Requests for features are also warmly welcome here.
+If possible try to describe the issue so it can be reproduced.
+
+Alternatively, if you do not have a github account, feel free to email me at anders.ellern.bilgrau (at) gmail.com with your problems or suggestions.
+
+---
+
+```{r bug, echo = FALSE, results='asis'}
+cat(
+as.character(
+  shiny::withTags(
+    div(
+      align = "center", 
+      "Anders Ellern Bilgrau",
+      HTML("&mdash;"),
+      a(href = "https://github.com/AEBilgrau/GMCM/labels/shiny",
+        shiny::icon("bug")),
+      HTML("&mdash;"),
+      "2019"
+    )
+  )
+))
+```

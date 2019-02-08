@@ -1229,4 +1229,18 @@ shinyServer(function(input, output, session) {
     )
   })
 
+  # Bug reports ----
+  output$more_bug_reports_md <- renderUI({
+    div(class = "more-pages",
+        HTML(
+          markdown::markdownToHTML(
+            file = knit('www/bug_reports.rmd', quiet = TRUE),
+            stylesheet = 'www/bootstrap.css',
+            fragment.only = TRUE
+          )
+        )
+    )
+  })
+
+
 })
