@@ -675,7 +675,6 @@ shinyServer(function(input, output, session) {
           )
         )
       })
-
     )
   })
 
@@ -709,10 +708,9 @@ shinyServer(function(input, output, session) {
     req(input$full_method)
 
     box(
+      # box args
       collapsible = TRUE,
       collapsed = TRUE,
-
-      # box args
       title = "Log of fitting procedure:",
       footer = if (input$full_method == "SANN") {
                 "Note: Simulated Annealing always uses all iterations."
@@ -762,6 +760,11 @@ shinyServer(function(input, output, session) {
     req(input$model_cols)
 
     box(
+      # Box args
+      title = "Plotting variables",
+      collapsible = TRUE,
+
+      # Content
       selectizeInput(inputId = "full_model_cols_xy",
                      label = "Select variables for X and Y axis",
                      choices = input$model_cols,

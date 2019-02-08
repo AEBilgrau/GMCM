@@ -167,23 +167,28 @@ shinyUI(
         dashboardBody(
           h2("General GMCM for unsupervised clustering"),
           br(),
+
           uiOutput("full_pie_box"),
           uiOutput("full_mu_box"),
           uiOutput("full_sigma_box"),
-          uiOutput("full_plot_pie"),
-          uiOutput("full_ui_selectize_model_cols_xy"),
-          uiOutput("full_res_theta_plot"),
-          uiOutput("full_res_mu"),
-          uiOutput("full_res_sigma"),
+
           uiOutput("full_obs_plot"),
           uiOutput("full_rank_plot"),
           uiOutput("full_latent_plot"),
+
+          uiOutput("full_ui_selectize_model_cols_xy"),
+          uiOutput("full_res_theta_plot"),
+
+          uiOutput("full_plot_pie"),
+          uiOutput("full_res_mu"),
+          uiOutput("full_res_sigma"),
+
           uiOutput("full_classified_data"),
           uiOutput("full_fit_log")
           #,verbatimTextOutput("DEBUG")
         )
       )
-    ),
+    ),z
 
 
 
