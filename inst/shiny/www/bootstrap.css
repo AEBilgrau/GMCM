@@ -30,3 +30,11 @@
 .left-side, .main-sidebar {
     padding-top: 20px;
 }
+
+.more-pages {
+    width: 50%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}

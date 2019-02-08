@@ -1,0 +1,61 @@
+---
+title: "About"
+author: "Anders Ellern Bilgrau"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## About
+
+This is the [**shiny**](https://shiny.rstudio.com/) web-application accompanying the [**GMCM**](https://cran.r-project.com/package=GMCM) package[1] for [**R**](https://r-project.com). The application is developed and maintained by [Anders Ellern Bilgrau](https://bilgrau.com). You can read more about the underlying methods employed for unsupervised clustering [here](http://doi.org/10.18637/jss.v070.i02) and [here](https://github.com/AEBilgrau/GMCM#GMCM) and the references therein.
+
+### Availability 
+The application is available online at 
+
+> https://gmcm.shinyapps.io 
+
+The application can also be available as a local instance on your own machine via the **GMCM** package. To run the application locally, make sure **GMCM** is installed and run
+
+```{r, eval=FALSE}
+GMCM::runGMCM()
+```
+
+to start a local shiny server. More information on installing **GMCM** and the prerequisites is found at [CRAN](https://cran.r-project.org/web/packages/GMCM/readme/README.html) or [the repository at GitHub](https://github.com/AEBilgrau/GMCM#installation).
+
+
+### Citation
+If you use the web-application or **GMCM** package itself, please cite the reference below.
+
+```{r citation, results='asis', echo = FALSE}
+cat("1. ")
+print(citation("GMCM"), style = "text")
+```
+
+In **R** you can run `citation("GMCM")` to get a copy-friendly bibtex format.
+
+---
+
+
+```{r bug, echo = FALSE, results='asis'}
+cat(
+as.character(
+  shiny::withTags(
+    div(
+      align = "center", 
+      "Anders Ellern Bilgrau",
+      HTML("&mdash;"),
+      a(href = "https://github.com/AEBilgrau/GMCM", padding = "10px",
+        shiny::icon("github")),
+      a(href = "https://stackoverflow.com/users/1568306/anders-ellern-bilgrau", 
+        shiny::icon("stack-overflow")),
+      a(href = "https://scholar.google.dk/citations?user=zQNl61YAAAAJ&hl=en", 
+        shiny::icon("google")),
+      a(href = "https://www.linkedin.com/in/aebilgrau/", 
+        shiny::icon("linkedin")),
+      HTML("&mdash;"),
+      "2019"
+    )
+  )
+))
+```
+

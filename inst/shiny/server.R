@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyBS)
+library(knitr)
 library(rhandsontable)
 library(DT)
 library(GMCM)
@@ -1208,6 +1209,24 @@ shinyServer(function(input, output, session) {
     print(input$in_file_table_rows_selected)
     cat("\n\nprint(input$model_cols)\n")
     print(input$model_cols)
+  })
+
+
+
+
+
+  # __More__________________________________________________________________----
+
+  # About ----
+  output$more_about_md <- renderUI({
+    div(class = "more-pages",
+        HTML(
+          markdown::markdownToHTML(
+            file = knit('www/about.rmd', quiet = TRUE),
+            stylesheet = 'www/bootstrap.css'
+          )
+        )
+    )
   })
 
 })

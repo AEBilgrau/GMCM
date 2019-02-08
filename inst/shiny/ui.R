@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyBS)
+library(knitr)
 library(rhandsontable)
 library(DT)
 library(GMCM)
@@ -351,9 +352,10 @@ shinyUI(
       icon = icon("bars"),
 
 
-      tabPanel("About", icon = icon("question"),
-         h1("About"),
-         p("This shiny app. was developed by Anders Ellern Bilgrau.")
+      tabPanel(
+        title = "About",
+        icon = icon("question"),
+        uiOutput('more_about_md')
       ),
       tabPanel("Bug reports", icon = icon("bug"),
                tags$embed(src = "https://github.com/AEBilgrau/GMCM/issues"))
