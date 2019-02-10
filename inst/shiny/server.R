@@ -915,32 +915,6 @@ shinyServer(function(input, output, session) {
 
 
 
-  # DEBUG ----
-  output$DEBUG <- renderPrint({
-    req(rv$d)
-    req(rv$m)
-
-    cat("str(full_fit())\n")
-    cat(str(full_fit()))
-
-    # cat("\n\nstr(in_mu())\n")
-    # cat(str(in_mu()))
-    cat("\n\nprint(in_pie())\n")
-    print(in_pie())
-
-
-    cat("\n\nprint(hot_to_r(input$rhandson_mu)\n")
-    print(hot_to_r(input$rhandson_mu))
-
-    cat("\n\nprint(in_mu())\n")
-    print(in_mu())
-
-
-    cat("\n\nprint(rv$m)\n")
-    print(rv$m)
-    cat("\n\nprint(rv$d)\n")
-    print(rv$d)
-  })
 
 
 

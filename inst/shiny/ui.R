@@ -185,10 +185,9 @@ shinyUI(
 
           uiOutput("full_classified_data"),
           uiOutput("full_fit_log")
-          #,verbatimTextOutput("DEBUG")
         )
       )
-    ),z
+    ),
 
 
 
