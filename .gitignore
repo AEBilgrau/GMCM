@@ -20,3 +20,5 @@ vignettes/*.png
 vignettes/*.tex
 vignettes/*.gz
 vignettes/*.RData
+*about.md
+*bug_reports.md
