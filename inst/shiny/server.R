@@ -201,6 +201,30 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Notifications ----
+  observe({
+    if (is.null(user_data())) {
+      showNotification(
+        ui = "No data uploaded...",
+        duration = NULL,
+        type = "error",
+        id = "no_data_note"
+      )
+    } else {
+      if (is.null(input$model_cols)) {
+        showNotification(
+          ui = "Please select at least two data columns to use in the model",
+          duration = NULL,
+          type = "warning",
+          id = "no_selected_cols"
+        )
+      } else {
+        removeNotification(id = "no_selected_cols")
+      }
+
+      removeNotification(id = "no_data_note")
+    }
+  })
 
 
 
@@ -212,6 +236,7 @@ shinyServer(function(input, output, session) {
   in_mu <- reactiveVal()
   full_fit_log <- reactiveVal()
   full_output_dataset <- reactiveVal()
+
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
