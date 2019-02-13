@@ -7,6 +7,7 @@
   \itemize{
     \item By request, \code{EMAlgorithm} is now exported to the user interface.
       A better example is also provided.
+    \item Fixed broken link in vignette.
     \item Minor improvements to documentation.
   }
 }
