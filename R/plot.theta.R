@@ -31,6 +31,7 @@
 #'      xlab = "Dimension 1", ylab = "Dimension 2")
 #' @importFrom ellipse ellipse
 #' @importFrom graphics points lines contour
+#' @importFrom stats qnorm
 #' @export
 plot.theta <- function(x, which.dims = c(1L,2L), n.sd = qnorm(0.99),
                        add.means = TRUE, ..., add.ellipses = FALSE) {
