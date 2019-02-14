@@ -5,8 +5,9 @@
 
 \section{Changes in version 1.3.1 (2018-MM-DD)}{
   \itemize{
-    \item By request, \code{EMAlgorithm} is now exported to the user interface.
-      A better example is also provided.
+    \item By request, \code{EMAlgorithm} is now exported to the user interface with slight tweaks.
+      Better docs and examples are also provided.
+    \item Expanded capability of `as.theta()` and fixed issue incorrect default axis labels in `plot.theta`.
     \item Fixed broken link in vignette.
     \item Minor improvements to documentation.
   }
