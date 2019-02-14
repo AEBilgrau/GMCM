@@ -5,5 +5,10 @@
 vignettes/GMCM-JStatSoft.bbl
 vignettes/GMCM-JStatSoft.blg
 vignettes/GMCM-JStatSoft-concordance.tex
+vignettes/STS-27.jpg
 fix.R
 debug.R
+data/freshVsFrozen.csv
+data/u133VsExon.csv
+inst/shiny/*
+Makefile
