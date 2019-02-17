@@ -33,7 +33,8 @@ check:
 	R CMD check --as-cran $(PKGNAME)_$(PKGVERS).tar.gz
 
 prereq:
-	Rscript -e 'stopifnot(Sys.getenv("R_GSCMD") != "")'
+	Rscript -e 'stopifnot(Sys.getenv("R_GSCMD") != "")' \
+	Rscript -e 'stopifnot(rmarkdown::pandoc_available())'
 
 clean:
 	cd ..;\
