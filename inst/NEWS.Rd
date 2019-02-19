@@ -3,6 +3,12 @@
 \newcommand{\cpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}}
 
 
+\section{Changes in version 1.4}{
+  \itemize{
+    \item Added a shiny application for the package. Available at \href{https://gmcm.shinyapps.io/GMCM/}{online} or via \code{GMCM::runGMCM()} for a local instance.
+  }
+}
+
 \section{Changes in version 1.3 (2018-12-05)}{
   \itemize{
     \item Fixed issue with optim wrappers for the likelihood (\code{vector2theta} and \code{theta2vector}) causing the first anchored component to be scaled slightly incorrectly. Note, fitted results will be changed compared to earlier versions (although hopefully not much).
