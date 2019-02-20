@@ -2,7 +2,7 @@
 % Please edit documentation in R/runGMCM.R
 \name{runGMCM}
 \alias{runGMCM}
-\title{Run the GMCM shiny app}
+\title{Run the GMCM shiny application}
 \usage{
 runGMCM(...)
 }
@@ -14,12 +14,14 @@ Retuns nothing (usually). See \code{\link[shiny]{runApp}}.
   Exit or stop the app by interrupting R.
 }
 \description{
-Function for locally running the GMCM shiny application.
+Function for starting a local instance of the GMCM shiny application.
+The online application is found at \link{https://gmcm.shinyapps.ui/GMCM/}.
 }
 \examples{
 \dontrun{
 runGMCM()
 runGMCM(launch.browser = FALSE, port = 1111)
+# Open browser and enter URL http://127.0.0.1:1111/
 }
 }
 \seealso{
