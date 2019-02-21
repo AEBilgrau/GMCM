@@ -1,13 +1,16 @@
 .Rproj.user
 .Rhistory
 .RData
+
 src/*.o
 src/*.so
 src/*.dll
 src-i386/
 src-x64/
+
 *.DS_Store
 inst/doc
+
 vignettes/*.out
 vignettes/*.bbl
 vignettes/*.blg
@@ -20,5 +23,9 @@ vignettes/*.png
 vignettes/*.tex
 vignettes/*.gz
 vignettes/*.RData
-*about.md
-*bug_reports.md
+
+# Shiny aux files
+**/about.md
+**/bug_reports.md
+**/about.html
+**/bug_reports.html

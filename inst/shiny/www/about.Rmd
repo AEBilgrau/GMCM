@@ -5,6 +5,11 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("shiny")
+```
+
 ## About
 
 This is the [**shiny**](https://shiny.rstudio.com/) web-application accompanying the [**GMCM**](https://cran.r-project.com/package=GMCM) package[1] for [**R**](https://r-project.com). The application is developed and maintained by [Anders Ellern Bilgrau](https://bilgrau.com). You can read more about the underlying methods employed for unsupervised clustering [here](http://doi.org/10.18637/jss.v070.i02) and [here](https://github.com/AEBilgrau/GMCM#GMCM) and the references therein.
@@ -21,6 +26,8 @@ GMCM::runGMCM()
 ```
 
 to start a local shiny server. More information on installing **GMCM** and the prerequisites is found at [CRAN](https://cran.r-project.org/web/packages/GMCM/readme/README.html) or [the repository at GitHub](https://github.com/AEBilgrau/GMCM#installation).
+
+This instance is running **GMCM version `r packageVersion("GMCM")`**.
 
 
 ### Citation
