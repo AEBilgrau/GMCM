@@ -35,9 +35,12 @@ shinyUI(
                     label = list(
                       "Choose CSV File",
                       tipify(icon("question-circle"),
-                             title = HTML("The input file should be a plain text file where columns",
-                                          "correspond to features/<wbr/>variables/<wbr/>experiments and",
-                                          "rows correspond to observations."),
+                             title = HTML(
+                               "The input file should be a plain text file where columns",
+                               "correspond to features/<wbr/>variables/<wbr/>experiments and",
+                               "rows correspond to observations. I.e. you intend to cluster",
+                               "rows and not columns."
+                             ),
                              placement = "right",
                              trigger = "hover",
                              options = list(container = "body")
