@@ -885,8 +885,12 @@ shinyServer(function(input, output, session) {
     req(tab <- user_data())
     req(cls <- full_classification())
     req(mat <- full_prob())
-
     colnames(mat) <- paste0("comp", seq_len(ncol(mat)), "prob")
+
+    # Subset to selected cols
+    tab <- tab[, input$model_cols]
+
+    # Construct output dataset
     tab <- cbind(tab, as.data.frame(mat), class = cls)
 
     # Save as output dataset
@@ -1162,6 +1166,10 @@ shinyServer(function(input, output, session) {
     req(tab <- user_data())
     req(cls <- meta_classification())
 
+    # Subset to selected cols
+    tab <- tab[, input$model_cols]
+
+    # Construct output
     tab$local_idr <- cls$idr
     tab$adj_IDR <- cls$IDR
     tab[[paste0("reprodicible_", input$meta_IDR_thres_type, "_above_",
