@@ -339,7 +339,11 @@ shinyUI(
             uiOutput("meta_ui_selectize_model_cols_xy"),
             box(
               title = "Classified data",
-              footer = downloadButton('downloadData', 'Download'),
+              footer = fluidRow(
+                column(1, downloadButton('downloadData', 'Download')),
+                column(4, checkboxInput(inputId = "meta_dl_include_all_cols",
+                                        label = "Include all uploaded columns"))
+              ),
               status = "info",
               width = 12,
               collapsible = TRUE,

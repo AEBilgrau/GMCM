@@ -888,7 +888,9 @@ shinyServer(function(input, output, session) {
     colnames(mat) <- paste0("comp", seq_len(ncol(mat)), "prob")
 
     # Subset to selected cols
-    tab <- tab[, input$model_cols]
+    if (!input$full_dl_include_all_cols) {
+      tab <- tab[, input$model_cols]
+    }
 
     # Construct output dataset
     tab <- cbind(tab, as.data.frame(mat), class = cls)
@@ -931,7 +933,11 @@ shinyServer(function(input, output, session) {
 
     box(
       title = "Classified data",
-      footer = downloadButton('full_downloadData', 'Download'),
+      footer = fluidRow(
+        column(1, downloadButton('full_downloadData', 'Download')),
+        column(4, checkboxInput(inputId = "full_dl_include_all_cols",
+                                label = "Include all uploaded columns"))
+      ),
       status = "info",
       width = 12,
       collapsible = TRUE,
@@ -1167,7 +1173,9 @@ shinyServer(function(input, output, session) {
     req(cls <- meta_classification())
 
     # Subset to selected cols
-    tab <- tab[, input$model_cols]
+    if (!input$meta_dl_include_all_cols) {
+      tab <- tab[, input$model_cols]
+    }
 
     # Construct output
     tab$local_idr <- cls$idr
