@@ -256,8 +256,21 @@ shinyUI(
 
               # * Input: Large vals => reproducible
               checkboxInput(inputId = "meta_large_vals",
-                            label = HTML(paste(strong("Important:"),
-                                               "Check if larger values in data indicate stronger evidence")),
+                            label = tagList(HTML(
+                              "<strong>Important:</strong>",
+                              "Larger values indicate stronger evidence"),
+                              tipify(
+                                icon("question-circle"),
+                                placement = "right",
+                                title = HTML(
+                                  "Should be checked if larger values correspond",
+                                  "to stronger evidence (and thus hopefully reproducibility).",
+                                  "Should <i>not</i> be checked otherwise",
+                                  "If the statistics to be clustered are P-values",
+                                  "the box should <i>not</i> be checked."
+                                )
+                              )
+                            ),
                             value = TRUE),
 
               # * Input: Fit model ----
