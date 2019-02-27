@@ -258,16 +258,18 @@ shinyUI(
               checkboxInput(inputId = "meta_large_vals",
                             label = tagList(HTML(
                               "<strong>Important:</strong>",
-                              "Larger values indicate stronger evidence"),
+                              "Large values indicate strong evidence"),
                               tipify(
                                 icon("question-circle"),
                                 placement = "right",
                                 title = HTML(
                                   "Should be checked if larger values correspond",
-                                  "to stronger evidence (and thus hopefully reproducibility).",
-                                  "Should <i>not</i> be checked otherwise",
-                                  "If the statistics to be clustered are P-values",
-                                  "the box should <i>not</i> be checked."
+                                  "to stronger evidence and thus hopefully reproducibility.",
+                                  "Should <i>not</i> be checked otherwise.",
+                                  "If the statistics to be clustered are P-values, for example,",
+                                  "the box should <i>not</i> be checked. If they",
+                                  "areabsolute values of t- or z-statistics or",
+                                  "equivalent the box should be checked."
                                 )
                               )
                             ),
