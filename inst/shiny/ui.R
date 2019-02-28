@@ -261,7 +261,8 @@ shinyUI(
                               "Large values indicate strong evidence"),
                               tipify(
                                 icon("question-circle"),
-                                placement = "right",
+                                trigger = "hover",
+                                placement = "bottom",
                                 title = HTML(
                                   "Should be checked if larger values correspond",
                                   "to stronger evidence and thus hopefully reproducibility.",
