@@ -269,7 +269,7 @@ shinyUI(
                                   "Should <i>not</i> be checked otherwise.",
                                   "If the statistics to be clustered are P-values, for example,",
                                   "the box should <i>not</i> be checked. If they",
-                                  "areabsolute values of t- or z-statistics or",
+                                  "are absolute values of t- or z-statistics or",
                                   "equivalent the box should be checked."
                                 )
                               )
