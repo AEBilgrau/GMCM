@@ -1,5 +1,6 @@
 context("Check EMAlgorithm")
 
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(1)
 n <- 1000
 
