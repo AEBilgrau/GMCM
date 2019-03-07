@@ -120,7 +120,7 @@ shinyServer(function(input, output, session) {
     footer <- NULL
     if (!is.null(input$model_cols) && d >= 2) {
       status <- "success"
-      height <- ifelse(d > 2, "800px", "600px")
+      height <- ifelse(d > 2, "800px", "550px")
 
       if (d > 2 && !input$do_matrix_plot) {
         footer <- "Note: More than 2 variables/Columns selected but showing
@@ -151,6 +151,11 @@ shinyServer(function(input, output, session) {
     req(user_data())
     validate(need(length(input$model_cols) >= 2,
                   "Please select at least two columns."))
+
+    par(mar = c(3, 3, 0, 0) + 0.1,
+        las = 0,
+        mgp = c(2, 0.7, 0))
+
 
     # Get data, select
     d <- user_data()
@@ -189,6 +194,8 @@ shinyServer(function(input, output, session) {
            axes = FALSE,
            col = cols,
            asp = 1)
+      grid()
+      # graphics::box()
       axis(1)
       axis(2)
 
