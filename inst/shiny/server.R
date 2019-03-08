@@ -419,6 +419,7 @@ shinyServer(function(input, output, session) {
 
     if (is.null(in_mu())) {
       mu <- replicate(n = rv$m, rep(NA_real_, rv$d), simplify = TRUE)
+      #mu <- sapply(seq_len(rv$m) - 1, function(i) rep(i, rv$d))
     } else {
       mu <- in_mu()
     }
@@ -426,6 +427,13 @@ shinyServer(function(input, output, session) {
     # Add col/row names
     colnames(mu) <- paste0("comp", seq_len(ncol(mu)))
     rownames(mu) <- paste0("dim",  seq_len(nrow(mu)))
+
+    # Fill in some defaults
+    for (i in seq_len(ncol(mu))) {
+      if (all(is.na(mu[, i]))) {
+        mu[, i] <- i - 1
+      }
+    }
 
     rhandsontable(mu, contextMenu = FALSE)
   })
