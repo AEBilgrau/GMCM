@@ -147,7 +147,7 @@ shinyUI(
 
             menuItem(
               text = "Classification",
-              icon = icon("flag-checkered"),
+              icon = icon("box-open"),
 
               # Content
               radioButtons(inputId = "full_class_type",
@@ -163,6 +163,23 @@ shinyUI(
                             min = 0, max = 1, value = 0.5, step = 0.01)
               ),
               br()
+            ),
+
+            menuItem(
+              text = "Report",
+              icon = icon("file-code"),
+
+              # Content
+              br(),
+              downloadButton(outputId = "full_dl_pdf",
+                             label = "Download report (.pdf)"),
+              br(),br(),
+              downloadButton(outputId = "full_dl_rmd",
+                             label = "Download source (.rmd)"),
+              br(),br(),
+              downloadButton(outputId = "full_dl_r",
+                             label = "Download code (.r)"),
+              br(),br()
             )
           )
         ),
@@ -288,7 +305,7 @@ shinyUI(
 
             menuItem(
               text = "IDR classification",
-              icon = icon("flag-checkered"),
+              icon = icon("box-open"),
 
               # Content
               radioButtons(inputId = "meta_IDR_thres_type",
@@ -300,9 +317,26 @@ shinyUI(
               sliderInput(inputId = "meta_IDR_thres",
                           label = "meta_IDR_thres",
                           min = 0, max = 1, value = 0.05, step = 0.01)
-            )
-          )
+            ),
 
+            menuItem(
+              text = "Report",
+              icon = icon("file-code"),
+
+              # Content
+              br(),
+              downloadButton(outputId = "meta_dl_pdf",
+                             label = "Download report (.pdf)"),
+              br(),br(),
+              downloadButton(outputId = "meta_dl_rmd",
+                             label = "Download source (.rmd)"),
+              br(),br(),
+              downloadButton(outputId = "meta_dl_r",
+                             label = "Download code (.r)"),
+              br(),br()
+            )
+
+          )
 
         ),
 
