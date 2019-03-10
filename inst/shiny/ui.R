@@ -172,13 +172,16 @@ shinyUI(
               # Content
               br(),
               downloadButton(outputId = "full_dl_pdf",
-                             label = "Download report (.pdf)"),
+                             label = "Download report (.pdf)",
+                             class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "full_dl_rmd",
-                             label = "Download source (.rmd)"),
+                             label = "Download source (.Rmd)",
+                             class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "full_dl_r",
-                             label = "Download code (.r)"),
+                             label = "Download code (.R)",
+                             class = "myDownloadButton"),
               br(),br()
             )
           )
@@ -326,13 +329,16 @@ shinyUI(
               # Content
               br(),
               downloadButton(outputId = "meta_dl_pdf",
-                             label = "Download report (.pdf)"),
+                             label = "Download report (.pdf)",
+                             class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "meta_dl_rmd",
-                             label = "Download source (.rmd)"),
+                             label = "Download source (.rmd)",
+                             class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "meta_dl_r",
-                             label = "Download code (.r)"),
+                             label = "Download code (.r)",
+                             class = "myDownloadButton"),
               br(),br()
             )
 
