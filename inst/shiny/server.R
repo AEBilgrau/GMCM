@@ -963,6 +963,62 @@ shinyServer(function(input, output, session) {
     )
   })
 
+  # Output reports --------
+  # https://shiny.rstudio.com/articles/generating-reports.html
+
+  output$full_dl_rmd <- downloadHandler(
+    # For PDF output, change this to "report.pdf"
+    filename = "report.Rmd",
+    content = function(file) {
+      temp_rmd <- file.path(tempdir(), "report.Rmd")
+      file.copy("report.Rmd", temp_rmd, overwrite = TRUE)
+      writeLines(text = readLines(con = temp_rmd), con = file)
+    }
+  )
+
+  output$full_dl_pdf <- downloadHandler(
+    # For PDF output, change this to "report.pdf"
+    filename = "report.pdf",
+    content = function(file) {
+      # Copy the report file to a temporary directory before processing it, in
+      # case we don't have write permissions to the current working dir (which
+      # can happen when deployed).
+      tempReport <- file.path(tempdir(), "report.Rmd")
+      file.copy("report.Rmd", tempReport, overwrite = TRUE)
+
+      # Set up parameters to pass to Rmd document
+      params <- list(n = 10)
+
+      # Knit the document, passing in the `params` list, and eval it in a
+      # child of the global environment (this isolates the code in the document
+      # from the code in this app).
+      rmarkdown::render(
+        input = tempReport,
+        output_file = file,
+        output_options = list(self_contained = TRUE),
+        params = params,
+        envir = new.env(parent = globalenv())
+      )
+    }
+  )
+
+  output$full_dl_r <- downloadHandler(
+    # For PDF output, change this to "report.pdf"
+    filename = "report.R",
+    content = function(file) {
+      # As above
+      tempReport <- file.path(tempdir(), "report.Rmd")
+      file.copy("report.Rmd", tempReport, overwrite = TRUE)
+
+      # Need workaround to work with parameterized document
+      knitr::purl(
+        input = tempReport,
+        output = file,
+        envir = new.env(parent = globalenv()),
+        documentation = 2L
+      )
+    }
+  )
 
 
 
