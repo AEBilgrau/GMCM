@@ -3,7 +3,13 @@
 \newcommand{\cpkg}{\href{https://cran.r-project.org/package=#1}{\pkg{#1}}}
 
 
-\section{Changes in version 1.3.1 (2018-MM-DD)}{
+\section{Changes in version 1.3.2 (2018-03-12)}{
+  \itemize{
+    \item Hotfix due to new default RNG after R version 3.5.3.
+  }
+}
+
+\section{Changes in version 1.3.1 (2018-02-14)}{
   \itemize{
     \item By request, \code{EMAlgorithm} is now exported to the user interface with slight tweaks.
       Better docs and examples are also provided.
