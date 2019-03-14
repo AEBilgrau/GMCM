@@ -970,7 +970,7 @@ shinyServer(function(input, output, session) {
     # For PDF output, change this to "report.pdf"
     filename = "report.Rmd",
     content = function(file) {
-      temp_rmd <- file.path(tempdir(), "report.Rmd")
+      temp_rmd <- file.path(tempdir(), "report_full.Rmd")
       file.copy("report.Rmd", temp_rmd, overwrite = TRUE)
       writeLines(text = readLines(con = temp_rmd), con = file)
     }
@@ -978,12 +978,12 @@ shinyServer(function(input, output, session) {
 
   output$full_dl_pdf <- downloadHandler(
     # For PDF output, change this to "report.pdf"
-    filename = "report.pdf",
+    filename = "report_full.pdf",
     content = function(file) {
       # Copy the report file to a temporary directory before processing it, in
       # case we don't have write permissions to the current working dir (which
       # can happen when deployed).
-      tempReport <- file.path(tempdir(), "report.Rmd")
+      tempReport <- file.path(tempdir(), "report_full.Rmd")
       file.copy("report.Rmd", tempReport, overwrite = TRUE)
 
       # Set up parameters to pass to Rmd document
@@ -1007,7 +1007,7 @@ shinyServer(function(input, output, session) {
     filename = "report.R",
     content = function(file) {
       # As above
-      tempReport <- file.path(tempdir(), "report.Rmd")
+      tempReport <- file.path(tempdir(), "report_full.Rmd")
       file.copy("report.Rmd", tempReport, overwrite = TRUE)
 
       # Need workaround to work with parameterized document
