@@ -238,12 +238,11 @@ shinyServer(function(input, output, session) {
   # __GENERAL GMCM_________________________________________________________ ----
 
   # Initalise reactive values ----
-  full_start_theta <- reactiveVal()
+  full_start_theta <- reactiveVal(list(pie = NULL, mu = NULL, sigma = NULL))
   in_pie <- reactiveVal()
   in_mu <- reactiveVal()
   full_fit_log <- reactiveVal()
   full_output_dataset <- reactiveVal()
-
 
   # Randomize start theta
   observeEvent(input$full_random_theta, {
@@ -268,7 +267,8 @@ shinyServer(function(input, output, session) {
     input$full_m
     rv$d
   },{
-    rv$m <- input$full_m # Write to reactive value
+    # Write to reactive value
+    rv$m <- input$full_m
     req(rv$m)
     req(rv$d)
 
@@ -411,8 +411,8 @@ shinyServer(function(input, output, session) {
 
 
 
-  # mu input functionality -----
-  # Create rhandson table ----
+  # mu input functionality ----
+  # Create rhandson table ----#
   output$rhandson_mu <- renderRHandsontable({
     req(rv$d)
     req(rv$m)
@@ -511,11 +511,9 @@ shinyServer(function(input, output, session) {
         }
 
         # Colnames are needed for hot_to_r to work
-        if (is.null(rownames(mat))) {
-          colnames(mat) <- paste0("dim", seq_len(nrow(mat)))
-        }
-        if (is.null(rownames(mat))) {
-          rownames(mat) <- colnames(mat)
+        if (is.null(colnames(mat)) || is.null(rownames(mat))) {
+          colnames(mat) <-
+          rownames(mat) <- paste0("dim", seq_len(ncol(mat)))
         }
 
         # Make table
@@ -538,7 +536,9 @@ shinyServer(function(input, output, session) {
       observeEvent(input[[paste0("rhandson_sigma", k)]], {
         # Write change full_start_theta
         theta <- full_start_theta()
-        theta$sigma[[k]] <- hot_to_r(input[[paste0("rhandson_sigma", k)]])
+        sigma_k <- hot_to_r(input[[paste0("rhandson_sigma", k)]])
+        rownames(sigma_k) <- colnames(sigma_k) # Rownames are apparently lost
+        theta$sigma[[k]] <- sigma_k
         full_start_theta(theta)
       })
 
@@ -588,9 +588,9 @@ shinyServer(function(input, output, session) {
       fit_log <- capture.output({
         theta <- fit.full.GMCM(u = u,
                                m = rv$m,
-                               theta = choose.theta(u, rv$m), #full_start_theta())
+                               theta = as.theta(full_start_theta()),
                                method = input$full_method,
-                               max.ite = input$meta_max_ite,
+                               max.ite = input$full_max_ite,
                                verbose = TRUE)
       })
     )[3]
