@@ -29,12 +29,7 @@ set.seed(7869670)
 library("GMCM")
 
 #'
-#' If **GMCM** is not installed, please uncomment the above line and rerun the script.
-#' This document is parameterized with the following parameters:
-# ---- params, results='hold', comment="", echo=FALSE
-# cat("params <- ")
-# cat(capture.output(dput(params)), sep = "\n")
-
+#' If **GMCM** is *not* installed, please uncomment the above line and rerun the script.
 #'
 #' ## Load data
 #' The data is loaded and the first rows are printed

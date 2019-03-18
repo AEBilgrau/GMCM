@@ -966,34 +966,52 @@ shinyServer(function(input, output, session) {
   # Output reports --------
   # https://shiny.rstudio.com/articles/generating-reports.html
 
-  output$full_dl_rmd <- downloadHandler(
-    # For PDF output, change this to "report.pdf"
-    filename = "report.Rmd",
+  output$full_dl_r <- downloadHandler(
+    filename = "report_full.R",
     content = function(file) {
-      temp_rmd <- file.path(tempdir(), "report_full.Rmd")
-      file.copy("report.Rmd", temp_rmd, overwrite = TRUE)
-      writeLines(text = readLines(con = temp_rmd), con = file)
+      file.copy("report_full.R", file, overwrite = TRUE)
     }
   )
 
-  output$full_dl_pdf <- downloadHandler(
-    # For PDF output, change this to "report.pdf"
-    filename = "report_full.pdf",
+  output$full_dl_rmd <- downloadHandler(
+    filename = "report_full.Rmd",
+    content = function(file) {
+      temp_file <- file.path(tempdir(), "report_full.R")
+      file.copy("report_full.R", temp_file, overwrite = TRUE)
+      out <- spin(hair = temp_file,
+                  knit = FALSE,
+                  format = "Rmd")
+      writeLines(text = readLines(out), con = file)
+    }
+  )
+
+  output$full_dl_html <- downloadHandler(
+    filename = "report_full.html",
     content = function(file) {
       # Copy the report file to a temporary directory before processing it, in
       # case we don't have write permissions to the current working dir (which
       # can happen when deployed).
-      tempReport <- file.path(tempdir(), "report_full.Rmd")
-      file.copy("report.Rmd", tempReport, overwrite = TRUE)
+      temp_file <- file.path(tempdir(), "report_full.R")
+      file.copy("report_full.R", temp_file, overwrite = TRUE)
 
       # Set up parameters to pass to Rmd document
-      params <- list(n = 10)
+      params <- list(file = input$in_file$datapath,
+                     header = input$header,
+                     sep = input$sep,
+                     quote = input$quote,
+                     model_cols = input$model_cols,
+                     theta = as.theta(full_start_theta()),
+                     fit_method = input$full_method,
+                     max_ite = input$full_max_ite,
+                     full_class_type = input$full_class_type,
+                     full_thres_prob = input$full_thres_prob)
+      print(str(params))
 
-      # Knit the document, passing in the `params` list, and eval it in a
+      # Spin and knit the document, passing in the `params` list, and eval it in a
       # child of the global environment (this isolates the code in the document
       # from the code in this app).
       rmarkdown::render(
-        input = tempReport,
+        input = temp_file,
         output_file = file,
         output_options = list(self_contained = TRUE),
         params = params,
@@ -1002,23 +1020,7 @@ shinyServer(function(input, output, session) {
     }
   )
 
-  output$full_dl_r <- downloadHandler(
-    # For PDF output, change this to "report.pdf"
-    filename = "report.R",
-    content = function(file) {
-      # As above
-      tempReport <- file.path(tempdir(), "report_full.Rmd")
-      file.copy("report.Rmd", tempReport, overwrite = TRUE)
 
-      # Need workaround to work with parameterized document
-      knitr::purl(
-        input = tempReport,
-        output = file,
-        envir = new.env(parent = globalenv()),
-        documentation = 2L
-      )
-    }
-  )
 
 
 
