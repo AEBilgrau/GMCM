@@ -969,7 +969,7 @@ shinyServer(function(input, output, session) {
   output$full_dl_r <- downloadHandler(
     filename = "report_full.R",
     content = function(file) {
-      file.copy("report_full.R", file, overwrite = TRUE)
+      file.copy("www/report_full.R", file, overwrite = TRUE)
     }
   )
 
@@ -977,7 +977,7 @@ shinyServer(function(input, output, session) {
     filename = "report_full.Rmd",
     content = function(file) {
       temp_file <- file.path(tempdir(), "report_full.R")
-      file.copy("report_full.R", temp_file, overwrite = TRUE)
+      file.copy("www/report_full.R", temp_file, overwrite = TRUE)
       out <- spin(hair = temp_file,
                   knit = FALSE,
                   format = "Rmd")
@@ -992,7 +992,7 @@ shinyServer(function(input, output, session) {
       # case we don't have write permissions to the current working dir (which
       # can happen when deployed).
       temp_file <- file.path(tempdir(), "report_full.R")
-      file.copy("report_full.R", temp_file, overwrite = TRUE)
+      file.copy("www/report_full.R", temp_file, overwrite = TRUE)
 
       # Set up parameters to pass to Rmd document
       params <- list(file = input$in_file$datapath,
