@@ -89,7 +89,11 @@ summary(res)
 
 #'
 #' ## Results
-#' The results are displayed by plotting
+#' The classes are counted by
+# ---- classes_table
+table(res$comp)
+
+#' The results are also displayed by plotting
 # ---- plot_results
 plot(x, col = res$col, asp = 1) # Plot of raw values
 plot(Uhat(x), col = res$col, asp = 1) # Plot of copula values
@@ -98,6 +102,7 @@ plot(z, col = res$col, asp = 1) # Plot of estimated latent process
 
 
 #' The fitted `theta` object can also be plotted directly:
+# ---- plot_theta
 plot(theta)
 
 #'
@@ -110,7 +115,7 @@ sessionInfo()
 
 #'
 #' ### References
-#' Please cite the **GMCM** paper^[1][1]^ if you use the package.
+#' Please cite the **GMCM** paper^[1][1]^ if you use the package or shiny app.
 # ---- citation, echo=FALSE, results='asis'
 cites <- lapply(c("GMCM", "knitr", "rmarkdown"), citation)
 fmt_cites <- unlist(lapply(cites, format, style = "text"))
