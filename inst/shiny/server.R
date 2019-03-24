@@ -1289,6 +1289,69 @@ shinyServer(function(input, output, session) {
   )
 
 
+  # Output reports --------
+  # https://shiny.rstudio.com/articles/generating-reports.html
+
+  output$meta_dl_r <- downloadHandler(
+    filename = "report_meta.R",
+    content = function(file) {
+      file.copy("www/report_meta.R", file, overwrite = TRUE)
+    }
+  )
+
+  output$meta_dl_rmd <- downloadHandler(
+    filename = "report_meta.Rmd",
+    content = function(file) {
+      temp_file <- file.path(tempdir(), "report_meta.R")
+      file.copy("www/report_meta.R", temp_file, overwrite = TRUE)
+      out <- spin(hair = temp_file,
+                  knit = FALSE,
+                  format = "Rmd")
+      writeLines(text = readLines(out), con = file)
+    }
+  )
+
+  output$meta_dl_html <- downloadHandler(
+    filename = "report_meta.html",
+    content = function(file) {
+      # Copy the report file to a temporary directory before processing it, in
+      # case we don't have write permissions to the current working dir (which
+      # can happen when deployed).
+      temp_file <- file.path(tempdir(), "report_meta.R")
+      file.copy("www/report_meta.R", temp_file, overwrite = TRUE)
+
+      # Set up parameters to pass to Rmd document
+      params <- list(file = input$in_file$datapath,
+                     header = input$header,
+                     sep = input$sep,
+                     quote = input$quote,
+                     model_cols = input$model_cols,
+                     meta_large_vals = input$meta_large_vals,
+                     init_par = c(pie1  = input$par1,
+                                  mu    = input$par2,
+                                  sigma = input$par3,
+                                  rho   = input$par4),
+                     meta_method = input$meta_method,
+                     meta_max_ite = input$meta_max_ite,
+                     meta_positive_rho = input$meta_positive_rho,
+                     meta_IDR_thres_type = input$meta_IDR_thres_type,
+                     meta_IDR_thre = input$meta_IDR_thres)
+      print(str(params))
+
+      # Spin and knit the document, passing in the `params` list, and eval it in a
+      # child of the global environment (this isolates the code in the document
+      # from the code in this app).
+      rmarkdown::render(
+        input = temp_file,
+        output_file = file,
+        output_options = list(self_contained = TRUE),
+        params = params,
+        envir = new.env(parent = globalenv())
+      )
+    }
+  )
+
+  # Debugging -----
   output$meta_str <- renderPrint({
     cat("\n\nstr(meta_fit())\n")
     str(meta_fit())

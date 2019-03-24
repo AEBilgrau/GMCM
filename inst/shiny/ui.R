@@ -328,8 +328,8 @@ shinyUI(
 
               # Content
               br(),
-              downloadButton(outputId = "meta_dl_pdf",
-                             label = "Download report (.pdf)",
+              downloadButton(outputId = "meta_dl_html",
+                             label = "Download report (.html)",
                              class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "meta_dl_rmd",
