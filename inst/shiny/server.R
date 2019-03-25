@@ -1335,7 +1335,7 @@ shinyServer(function(input, output, session) {
                      meta_max_ite = input$meta_max_ite,
                      meta_positive_rho = input$meta_positive_rho,
                      meta_IDR_thres_type = input$meta_IDR_thres_type,
-                     meta_IDR_thre = input$meta_IDR_thres)
+                     meta_IDR_thres = input$meta_IDR_thres)
       print(str(params))
 
       # Spin and knit the document, passing in the `params` list, and eval it in a
