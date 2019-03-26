@@ -1,8 +1,14 @@
 library("knitr")
 library("rmarkdown")
+library("GMCM")
+
+# GENERAL GMCM ----
+report_path <- "inst/shiny/www/report_full.R"
+
+# SPECIAL GMCM ----
+report_path <- "inst/shiny/www/report_meta.R"
 
 # Run directly
-report_path <- "inst/shiny/www/report_full.R"
 rmarkdown::render(report_path,
                   envir = new.env(parent = globalenv()))
 
@@ -25,3 +31,5 @@ rmarkdown::render(
 
 # We can also purl
 knitr::purl(rmd, output = file.path(dirname(rmd), "report_full_purl.R"), documentation = 0)
+
+
