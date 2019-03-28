@@ -16,7 +16,7 @@ If you encounter a bug or issue with the web-application or package itself, plea
 Requests for features are also warmly welcome here.
 If possible try to describe the issue so it can be reproduced.
 
-Alternatively, if you do not have a github account, feel free to email me at anders.ellern.bilgrau (at) gmail.com with your problems or suggestions.
+Alternatively, if you do not have a GitHub account, feel free to email me at anders.ellern.bilgrau (at) gmail.com with your problems or suggestions.
 
 
 Please refer to **GMCM version `r packageVersion("GMCM")`** when filing a report.

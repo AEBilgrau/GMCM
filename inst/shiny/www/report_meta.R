@@ -43,7 +43,7 @@ ds <- read.table(file   = params$file,
 head(ds, n = 4)
 
 #'
-#' Next, the data is subsetted to the columns of interest.
+#' Next, the data is subset to the columns of interest.
 # ---- select-data, include=TRUE, echo=TRUE
 x <- ds[, params$model_cols]
 head(x, n = 2)
@@ -59,13 +59,13 @@ if (params$meta_large_vals) { # If checked then
 
 #'
 #' ## Initial parameters
-#' The inital parameters, as chosen in the application, is given by
+#' The initial parameters, as chosen in the application, is given by
 # ---- show-initial-params, include=TRUE, echo=TRUE
 print(params$init_par)
 
 #'
 #' ## Model fitting
-#' With the data loaded and defined initial parameters, the model is now fitted.
+#' With the data loaded and defined initial parameters, the model is can be fitted.
 # ---- fit_model, error=TRUE
 par <- fit.meta.GMCM(u = u,
                      init.par = params$init_par,
@@ -76,7 +76,7 @@ par <- fit.meta.GMCM(u = u,
 print(par)
 
 #'
-#' The fitting method is set `r params$meta_method` with a maximum number of interations of `r params$meta_max_ite`.
+#' The fitting method is set `r params$meta_method` with a maximum number of iterations of `r params$meta_max_ite`.
 #'
 #' ## Meta analysis with unsupervised clustering
 #' The estimated parameters are used to calculate the local and adjusted irreproducibility discovery rates:

@@ -38,7 +38,7 @@ cat("1. ")
 print(citation("GMCM"), style = "text")
 ```
 
-In **R** you can run `citation("GMCM")` to get a copy-friendly bibtex format.
+In **R** you can run `citation("GMCM")` to get a copy-friendly BibTeX format.
 
 ---
 
