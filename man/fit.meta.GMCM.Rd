@@ -11,8 +11,8 @@ fit.meta.GMCM(u, init.par, method = c("NM", "SANN", "L-BFGS", "L-BFGS-B",
 }
 \arguments{
 \item{u}{An \code{n} by \code{d} matrix of test statistics. Rows correspond
-to features and columns to experiments. Large values are assumed to be
-indicative of reproducible genes.}
+to features and columns to experiments. Larger values are assumed to be
+indicative of stronger evidence and reproducibility.}
 
 \item{init.par}{A 4-dimensional vector of the initial parameters where,
 \code{init.par[1]} is the mixture proportion of spurious signals,
@@ -72,6 +72,8 @@ parameters.
 \note{
 Simulated annealing is strongly dependent on the initial values and
   the cooling scheme.
+
+
 
   See \code{\link{optim}} for further details.
 }

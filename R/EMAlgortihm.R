@@ -30,11 +30,19 @@
 #'                 \code{x[i, ]} is realized from the \code{j}'th component.}
 #' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @seealso \code{\link{rtheta}}, \code{\link{PseudoEMAlgorithm}}
+#' @importFrom stats cov
 #' @examples
+#' set.seed(3)
+#' true.theta <- rtheta(d = 2, m = 3, method = "old")
+#' true.theta$sigma <- lapply(true.theta$sigma, cov2cor) # Scale
+#' \dontrun{
+#' plot(true.theta, nlevels = 20, add.ellipses = TRUE)
+#' }
 #'
-#' set.seed(10)
-#' data <- SimulateGMCMData(n = 1000, d = 2, m = 3)
+#' data <- SimulateGMCMData(n = 1000, theta = true.theta)
 #' start.theta <- rtheta(d = 2, m = 3)
+#' start.theta$mu <- t(kmeans(data$z, 3)$centers) # More sensible location estimates
+#' start.theta <- as.theta(start.theta) # Coerce the matrix to a list
 #' res <- GMCM:::EMAlgorithm(data$z, theta = start.theta)
 #'
 #' par(mfrow = c(1,2))
@@ -42,9 +50,9 @@
 #'      col = rainbow(3)[data$K])
 #' plot(data$z, cex = 0.5, pch = 16, main = "GMM clustering",
 #'      col = rainbow(3)[apply(res$kappa,1,which.max)])
-#'
-EMAlgorithm <- function (x, theta, m, eps = 1e-6, max.ite = 1e5,
-                         trace.theta = FALSE, verbose = FALSE) {
+#'@export
+EMAlgorithm <- function(x, theta, m, eps = 1e-6, max.ite = 1e5,
+                        trace.theta = FALSE, verbose = FALSE) {
   if (missing(m) && missing(theta)) {
     stop("Either m or theta should be provided.")
   }

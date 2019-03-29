@@ -50,7 +50,8 @@ added as an attribute called "extra".
 \description{
 Estimates the parameters of general Gaussian mixture copula models (GMCM).
 The function finds the maximum likelihood estimate of a general
-GMCM with various user-specified optimization procedures.
+GMCM with various optimization procedures. Note, all but the PEM methods
+provides the maximum likelihood estimate.
 }
 \details{
 The \code{"L-BFGS-B"} method does not perform a transformation of the

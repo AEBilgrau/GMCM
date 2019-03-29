@@ -1,11 +1,6 @@
 // We only include RcppArmadillo.h which pulls Rcpp.h in for us
 #include <RcppArmadillo.h>
 
-// These are not needed:
-//using namespace Rcpp;
-//using namespace RcppArmadillo;
-//// [[Rcpp::depends(RcppArmadillo)]]
-
 
 // Auxiliary functions as pow(x, n) is somewhat slow. We make the radical
 // assumption that a*b equals b*a, which does not hold in general for

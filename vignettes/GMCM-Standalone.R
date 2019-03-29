@@ -894,20 +894,12 @@ n.cols <- 10
 
 fig7.file <- "./Figure7.jpg"
 
-
+# Download the STS-27 atlantis take off (public domain)
+# https://commons.wikimedia.org/wiki/File:Atlantis_taking_off_on_STS-27.jpg
 if (!file.exists(fig7.file)) {
-  # The image was originally downloaded from:
-  # http://totallyfreeimages.com/3167/STS-27,-Orbiter-Atlantis,-Liftoff
-  # download.file(paste0("http://tfi.s3.amazonaws.com/previews/standard/d/6/",
-  #                      "5fecf808486b157ea6971048bb29d6f4e58bd1d6.jpg"),
-  #               destfile = file)
-  #http://upload.wikimedia.org/wikipedia/commons/d/d3/Atlantis_taking_off_on_STS-27.jpg
-  url <- paste0("http://i.space.com/images/i/000/010/634/original/",
-                "shuttle-atlantis-lifts-off.jpg?1309297321")
-  # url <- "http://people.math.aau.dk/~abilgrau/GMCM/STS-27.jpg"
-  download.file(url, destfile = fig7.file, method = "internal", mode = "wb")
+  url <- "https://user-images.githubusercontent.com/6087024/52737968-e5b29d00-2fcd-11e9-8fc5-90bda78e9ff5.jpg"
+  download.file(url, destfile = fig7.file, mode = "wb")
 }
-
 
 # Read the image
 pic <- readJPEG(fig7.file)
