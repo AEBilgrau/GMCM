@@ -19,7 +19,7 @@
 #' @author Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
 #' @examples
 #' set.seed(5)
-#' theta <- rtheta(d = 3, m = 4)
+#' theta <- rtheta(d = 3, m = 2)
 #' \dontrun{
 #' plot(theta)
 #' plot(theta, col = "blue", asp = 1, add.means = FALSE)
@@ -31,21 +31,22 @@
 #'      xlab = "Dimension 1", ylab = "Dimension 2")
 #' @importFrom ellipse ellipse
 #' @importFrom graphics points lines contour
+#' @importFrom stats qnorm
 #' @export
-plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
+plot.theta <- function(x, which.dims = c(1L,2L), n.sd = qnorm(0.99),
                        add.means = TRUE, ..., add.ellipses = FALSE) {
 
   # plot(xx$mu$comp1)
   stopifnot(is.theta(x))
   stopifnot(is.integer(which.dims))
-  stopifnot(length(which.dims)==2)
+  stopifnot(length(which.dims) == 2)
   stopifnot(all(which.dims <= x$d))
 
   # Subset theta to relevant dimensions
   new_theta <- x
   new_theta$d <- 2
   new_theta$mu <- lapply(x$mu, "[", which.dims)
-  new_theta$sigma <- lapply(x$sigma, function(m) m[which.dims,which.dims])
+  new_theta$sigma <- lapply(x$sigma, function(m) m[which.dims, which.dims])
 
   # Wrapper for GMM log-likelihood
   l <- 1000
@@ -72,10 +73,10 @@ plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
     additional.args$col <- "#FF000080"
   }
   if (!("xlab" %in% names(additional.args))) {
-    additional.args$xlab <- paste("Comp", which.dims[1])
+    additional.args$xlab <- paste("Dim", which.dims[1])
   }
   if (!("ylab" %in% names(additional.args))) {
-    additional.args$ylab <- paste("Comp", which.dims[2])
+    additional.args$ylab <- paste("Dim", which.dims[2])
   }
 
   # Perform the plotting operations
@@ -89,8 +90,8 @@ plot.theta <- function(x, which.dims = c(1L,2L), n.sd = 2,
   if (add.ellipses) {
 
     for (comp in seq_len(new_theta$m)) {
-      ell <- ellipse::ellipse(new_theta$sigma[[comp]],
-                              which = which.dims,
+      ell <- ellipse::ellipse(x = new_theta$sigma[[comp]],
+                              which = 1:2, # new_theta is already subsetted
                               centre = new_theta$mu[[comp]])
       graphics::lines(ell, lwd = 2, col = "red")
     }

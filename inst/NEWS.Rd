@@ -8,6 +8,22 @@
     \item Added a shiny application for the package. Available at \href{https://gmcm.shinyapps.io/GMCM/}{online} or via \code{GMCM::runGMCM()} for a local instance.
   }
 }
+                         
+\section{Changes in version 1.3.2 (2018-03-12)}{
+  \itemize{
+    \item Hotfix due to new default RNG after R version 3.5.3.
+  }
+}
+
+\section{Changes in version 1.3.1 (2018-02-14)}{
+  \itemize{
+    \item By request, \code{EMAlgorithm} is now exported to the user interface with slight tweaks.
+      Better docs and examples are also provided.
+    \item Expanded capability of `as.theta()` and fixed issue incorrect default axis labels in `plot.theta`.
+    \item Fixed broken link in vignette.
+    \item Minor improvements to documentation.
+  }
+}
 
 \section{Changes in version 1.3 (2018-12-05)}{
   \itemize{

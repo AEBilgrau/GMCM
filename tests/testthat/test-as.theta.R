@@ -24,6 +24,10 @@ x2 <- unname(list( # Unnamed
                               comp2 = diag(d)))  # array, not a list
 ))
 
-test_that("Check that as.theta works for 'matrix means'", {
-  expect_true(is.theta(as.theta(x2)))
+test_that("Check that as.theta works for 'matrix means', 'array sigma', and
+          mixture proportions that do not sum to1 ", {
+  expect_warning(
+    expect_true(is.theta(as.theta(x2))),
+    'rescaled'
+  )
 })
