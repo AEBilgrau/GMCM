@@ -14,7 +14,7 @@
 #' # Open browser and enter URL http://127.0.0.1:1111/
 #' }
 #' @export
-runGMCM <- function(...) {
+runGMCM <- function(...) { # nocov start
   # Ensure suggested shiny package
   if (!requireNamespace("shiny", quietly = TRUE)) {
     stop("The 'shiny' package is needed for this function to work.",
@@ -23,4 +23,4 @@ runGMCM <- function(...) {
   # Run app
   shiny::runApp(appDir = system.file("shiny", package = "GMCM"),
                 ...)
-}
+} # nocov end
