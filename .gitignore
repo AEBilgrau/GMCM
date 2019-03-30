@@ -1,13 +1,16 @@
 .Rproj.user
 .Rhistory
 .RData
+
 src/*.o
 src/*.so
 src/*.dll
 src-i386/
 src-x64/
+
 *.DS_Store
 inst/doc
+
 vignettes/*.out
 vignettes/*.bbl
 vignettes/*.blg
@@ -20,3 +23,20 @@ vignettes/*.png
 vignettes/*.tex
 vignettes/*.gz
 vignettes/*.RData
+
+# Shiny aux files
+**/about.md
+**/bug_reports.md
+**/about.html
+**/bug_reports.html
+
+# rsconnect library
+inst/shiny/rsconnect
+
+# inst/shiny/www/..
+inst/shiny/www/report_full.Rmd
+inst/shiny/www/report_full.html
+inst/shiny/www/report_full_purl.R
+inst/shiny/www/report_meta.Rmd
+inst/shiny/www/report_meta.html
+inst/shiny/www/report_meta_purl.R

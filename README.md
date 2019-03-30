@@ -21,7 +21,7 @@ Alternatively, a special-case of the GMCMs can be used for a novel meta-analysis
 In this context, the model tries to cluster results which agree and do not agree on statistical evidence into a reproducible and irreproducible group.
 
 The optimization of the complicated likelihood function is difficult, however. 
-The **GMCM** package utilizes 
+**GMCM** utilizes 
 [**Rcpp**](https://github.com/RcppCore/Rcpp) 
 and 
 [**RcppArmadillo**](https://github.com/RcppCore/RcppArmadillo) 
@@ -54,7 +54,9 @@ As such, it may be unstable. Be sure that you have the
 [package development prerequisites](https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites) 
 if you wish to install the package from the source.
 
-When installed, run `news(package = "GMCM")` to view the latest notable changes of GMCM.
+
+When installed, run `GMCM::runGMCM()` to launch a local instance of the GMCM shiny application also available online [shinyapps.io](https://gmcm.shinyapps.io/GMCM/)).
+Run `news(package = "GMCM")` to view the latest changes of GMCM.
 
 For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](https://cran.r-project.org/src/contrib/Archive/GMCM/)
 
@@ -66,6 +68,14 @@ For previous versions of **GMCM**, visit the old [releases at GitHub](https://gi
      Journal of Statistical Software, 70(2), 1-23. [doi:10.18637/jss.v070.i02](https://www.jstatsoft.org/article/view/v070i02)
 
 ## Usage
+### Shiny application 
+A [**shiny**](https://shiny.rstudio.com) application is available online [shinyapps.io](https://gmcm.shinyapps.io/GMCM/). 
+To start local instance of the application, make sure **GMCM** is installed and run
+
+```{r, eval=FALSE}
+GMCM::runGMCM()
+```
+
 ### Meta Analysis example
 This is a very short tutorial for using the special GMCM for meta analysis. 
 To illustrate we load the `u133VsExon` dataset within the package.

@@ -1,0 +1,49 @@
+
+.skin-blue .sidebar .myDownloadButton {
+    color: #333;
+}
+
+.tooltip-inner {
+    min-width: 200px;
+}
+
+.content {
+    overflow: auto;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding-top: 15px;
+    padding-right: 25px;
+    padding-bottom: 15px;
+    padding-left: 35px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.left-side, .main-sidebar {
+    padding-top: 20px;
+}
+
+.more-pages {
+    width: 50%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
