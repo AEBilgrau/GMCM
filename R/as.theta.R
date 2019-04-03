@@ -14,7 +14,7 @@
 #' Means on matrix form are as assumed to be \code{d} by \code{m}. I.e.
 #' rows correspond to the dimensions and columns to components, or the mean vectors
 #' as column vectors.
-#' Finally, the sum constriant of 1 for the mixture proportions is enforced.
+#' Finally, the sum constraint of 1 for the mixture proportions is enforced.
 #'
 #' @param x A theta-like object that can be coerced.
 #' @return A theta object. See \code{\link{rtheta}}.

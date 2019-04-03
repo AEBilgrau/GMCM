@@ -27,7 +27,7 @@ Covariances on array form are assumed to be \code{d} by \code{d} by \code{m}.
 Means on matrix form are as assumed to be \code{d} by \code{m}. I.e.
 rows correspond to the dimensions and columns to components, or the mean vectors
 as column vectors.
-Finally, the sum constriant of 1 for the mixture proportions is enforced.
+Finally, the sum constraint of 1 for the mixture proportions is enforced.
 }
 \examples{
 m <- 2
