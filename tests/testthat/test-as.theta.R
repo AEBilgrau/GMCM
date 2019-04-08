@@ -14,6 +14,7 @@ test_that("Check that as.theta works as intended", {
 })
 
 # Coercion tests
+# Various
 d <- 3
 x2 <- unname(list( # Unnamed
   # missing m and d
@@ -24,10 +25,21 @@ x2 <- unname(list( # Unnamed
                               comp2 = diag(d)))  # array, not a list
 ))
 
-test_that("Check that as.theta works for 'matrix means', 'array sigma', and
-          mixture proportions that do not sum to1 ", {
+test_that("Check that as.theta works for 'matrix means', 'array sigma',
+          mixture proportions that do not sum to 1, and missing m and d", {
   expect_warning(
     expect_true(is.theta(as.theta(x2))),
     'rescaled'
   )
 })
+
+
+# m and d entries as null (but not missing)
+x3 <- x
+x3["m"] <- list(NULL)
+x3["d"] <- list(NULL)
+test_that("Check that as.theta works if m and d are NULL", {
+  expect_true(is.theta(as.theta(x3)))
+})
+
+
