@@ -40,6 +40,9 @@
 #' print(theta2)
 #' @export
 as.theta <- function(x) {
+  # Discard if any entries are null
+  x <- x[!sapply(x, is.null)]
+
   # Reconstruct length to 5
   if (length(x) == 3) {
       m <- length(x[[1]]) # x[[1]] assumed to be "pie"
