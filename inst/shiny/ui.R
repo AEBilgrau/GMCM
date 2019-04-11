@@ -333,7 +333,7 @@ shinyUI(
                              class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "meta_dl_rmd",
-                             label = "Download source (.rmd)",
+                             label = "Download source (.Rmd)",
                              class = "myDownloadButton"),
               br(),br(),
               downloadButton(outputId = "meta_dl_r",

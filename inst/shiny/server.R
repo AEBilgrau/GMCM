@@ -1376,7 +1376,7 @@ shinyServer(function(input, output, session) {
     div(class = "more-pages",
         HTML(
           markdown::markdownToHTML(
-            file = knit('www/about.rmd', quiet = TRUE),
+            file = knit('www/about.Rmd', quiet = TRUE),
             stylesheet = 'www/bootstrap.css'
           )
         )
@@ -1388,7 +1388,7 @@ shinyServer(function(input, output, session) {
     div(class = "more-pages",
         HTML(
           markdown::markdownToHTML(
-            file = knit('www/bug_reports.rmd', quiet = TRUE),
+            file = knit('www/bug_reports.Rmd', quiet = TRUE),
             stylesheet = 'www/bootstrap.css',
             fragment.only = TRUE
           )
