@@ -36,6 +36,9 @@ prereq:
 	Rscript -e 'stopifnot(Sys.getenv("R_GSCMD") != "")' \
 	Rscript -e 'stopifnot(rmarkdown::pandoc_available())'
 
+shinydeploy:
+	Rscript -e 'setwd("inst/shiny"); rsconnect::deployApp(appName = "GMCM")'
+
 clean:
 	cd ..;\
 	rm -r $(PKGNAME).Rcheck
