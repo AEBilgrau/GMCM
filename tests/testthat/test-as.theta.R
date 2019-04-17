@@ -42,6 +42,7 @@ test_that("as.theta works if m and d are NULL", {
 
 
 # Covariance rownames missing wile colnames are not
+d <- 2
 x4 <- list(pie = c(1, 1, 1)/3,
            mu = list(comp1 = rep(0,d), comp2 = rep(1,d), comp3 = rep(1,d)),
            sigma = list(comp1 = diag(d), comp2 = diag(d), comp3 = diag(d)))
