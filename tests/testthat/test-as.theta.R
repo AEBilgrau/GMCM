@@ -42,8 +42,12 @@ test_that("as.theta works if m and d are NULL", {
 
 
 # Covariance rownames missing wile colnames are not
-x4 <- x
+x4 <- list(pie = c(1, 1, 1)/3,
+           mu = list(comp1 = rep(0,d), comp2 = rep(1,d), comp3 = rep(1,d)),
+           sigma = list(comp1 = diag(d), comp2 = diag(d), comp3 = diag(d)))
 colnames(x4$sigma$comp1) <- c("dim1", "dim2")
+rownames(x4$sigma$comp2) <- c("dim1", "dim2")
+dimnames(x4$sigma$comp3) <- list(c("dim1", "dim2"), c("d1", "d2"))
 
 test_that("as.theta works with missing covaraince colnames/rownames (#33)", {
   expect_silent(as.theta(x4))
