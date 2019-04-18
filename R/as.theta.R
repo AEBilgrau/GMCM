@@ -91,6 +91,30 @@ as.theta <- function(x) {
     warning("x$pie rescaled to enforce sum constraint of 1")
   }
 
+  # Handle sigma names
+  for (k in seq_len(x$m)) {
+    sigma_k <- x$sigma[[k]]
+
+    # Rownames present colnames missing
+    if (is.null(rownames(sigma_k)) && !is.null(colnames(sigma_k))) {
+      rownames(sigma_k) <- colnames(sigma_k)
+    }
+
+    # Colnames present rownames missing
+    if (!is.null(rownames(sigma_k)) && is.null(colnames(sigma_k))) {
+      colnames(sigma_k) <- rownames(sigma_k)
+    }
+
+    # If both are present, but unequal
+    if (!is.null(rownames(sigma_k)) && !is.null(colnames(sigma_k)) &&
+        !identical(rownames(sigma_k), colnames(sigma_k))) {
+      rownames(sigma_k) <- colnames(sigma_k)
+    }
+
+    x$sigma[[k]] <- sigma_k
+  }
+
+  # Test if coercion is complete
   if (is.theta(x)) {
     return(x)
   } else {
