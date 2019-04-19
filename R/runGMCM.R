@@ -1,7 +1,7 @@
 #' Run the GMCM shiny application
 #'
 #' Function for starting a local instance of the GMCM shiny application.
-#' The online application is found at \link{https://gmcm.shinyapps.ui/GMCM/}.
+#' The online application is found at \url{https://gmcm.shinyapps.io/GMCM/}.
 #'
 #' @param ... Arguments passed to \code{\link[shiny]{runApp}}.
 #' @return Retuns nothing (usually). See \code{\link[shiny]{runApp}}.

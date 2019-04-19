@@ -15,7 +15,7 @@ Retuns nothing (usually). See \code{\link[shiny]{runApp}}.
 }
 \description{
 Function for starting a local instance of the GMCM shiny application.
-The online application is found at \link{https://gmcm.shinyapps.ui/GMCM/}.
+The online application is found at \url{https://gmcm.shinyapps.io/GMCM/}.
 }
 \examples{
 \dontrun{
