@@ -76,6 +76,9 @@ To start local instance of the application, make sure **GMCM** is installed and 
 GMCM::runGMCM()
 ```
 
+The application suppots both the general GMCM for unsupervised clustering as
+well as the special GMCM for meta analysis.
+
 ### Meta Analysis example
 This is a very short tutorial for using the special GMCM for meta analysis. 
 To illustrate we load the `u133VsExon` dataset within the package.
