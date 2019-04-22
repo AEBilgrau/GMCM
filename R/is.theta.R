@@ -78,7 +78,7 @@ is.theta <- function(theta, check.class = TRUE) {
             theta[[2]], " times ", theta[[2]], " as given by theta[[2]].")
     return(FALSE)
   }
-  if (!all(sapply(theta[[5]], isSymmetric))) {
+  if (!all(sapply(theta[[5]], isSymmetric, check.attributes = FALSE))) {
     warning("Not all covariance matrices are symmetric.")
     return(FALSE)
   }
