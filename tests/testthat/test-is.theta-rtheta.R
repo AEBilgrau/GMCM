@@ -35,6 +35,13 @@ theta11[[5]] <- theta11[[5]][-1] # Improper number of sigmas
 theta12 <- rtheta(d = 4, m = 3)
 theta12[[5]] <- lapply(theta12[[5]], function(x) x[-1,-1]) # Improper dimension of sigmas
 
+# Construct theta with sigma rownames only, colnames only, both, and no dimnames
+theta13 <- rtheta(d = 5, m = 4)
+dnames <- paste("dim", 1:5)
+rownames(theta13$sigma$comp1) <- dnames
+colnames(theta13$sigma$comp2) <- dnames
+rownames(theta13$sigma$comp3) <- colnames(theta13$sigma$comp3)  <- dnames
+
 test_that("rtheta returns proper formatted output (old method)", {
   expect_that(is.logical(is.theta(theta1)), is_true())
   expect_that(length(is.theta(theta1)), equals(1))
@@ -52,6 +59,8 @@ test_that("rtheta returns proper formatted output (old method)", {
     expect_false(is.theta(theta10))
     expect_false(is.theta(theta11))
     expect_false(is.theta(theta12))
+
+    expect_true(is.theta(theta13))
   })
 })
 
@@ -82,4 +91,5 @@ test_that('Test is.theta check.class arugment', {
   expect_false(suppressWarnings(is.theta(theta1)))
   expect_true( suppressWarnings(is.theta(theta1, check.class = FALSE)))
 })
+
 # Test degenerate input
