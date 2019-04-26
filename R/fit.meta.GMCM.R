@@ -6,10 +6,12 @@
 #' It features various optimization routines to identify the maximum likelihood
 #' estimate of the special GMCMs.
 #'
-#' The \code{"L-BFGS-B"} method does not perform a transformation of the
-#' parameters.
+#' @details The \code{"L-BFGS-B"} method does not perform a transformation of
+#'   the parameters.
 #'
-#' @aliases fit.meta.gmcm
+#'   \code{fit.special.GMCM} is simply an alias of \code{fit.meta.gmcm}.
+#'
+#' @aliases fit.meta.gmcm fit.special.GMCM fit.special.gmcm
 #' @param u An \code{n} by \code{d} matrix of test statistics. Rows correspond
 #'   to features and columns to experiments. Larger values are assumed to be
 #'   indicative of stronger evidence and reproducibility.
@@ -161,3 +163,7 @@ fit.meta.GMCM <- function(u,
     fitted.par <- list(fitted.par, fit)
   return(fitted.par)
 }
+
+#' @rdname fit.meta.GMCM
+#' @export
+fit.special.GMCM <- fit.meta.GMCM

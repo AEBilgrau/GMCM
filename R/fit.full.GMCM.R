@@ -5,12 +5,14 @@
 #' GMCM with various optimization procedures. Note, all but the PEM methods
 #' provides the maximum likelihood estimate.
 #'
-#' The \code{"L-BFGS-B"} method does not perform a transformation of the
-#' parameters and uses box constraints as implemented in \code{optim}. \cr
-#' Note that the many parameter configurations are poorly estimable or directly
-#' unidentifiable.
+#' @details The \code{"L-BFGS-B"} method does not perform a transformation of
+#'   the parameters and uses box constraints as implemented in \code{optim}. \cr
+#'   Note that the many parameter configurations are poorly estimable or
+#'   directly unidentifiable.
 #'
-#' @aliases fit.full.gmcm
+#'   \code{fit.general.GMCM} is simply an alias of \code{fit.full.gmcm}.
+#'
+#' @aliases fit.full.gmcm fit.general.GMCM fit.general.gmcm
 #' @param u An \code{n} by \code{d} matrix of marginally uniform observations.
 #'   Rows corresponds to observations and columns to the dimensions of the
 #'   variables. I.e. these are often ranked and scaled test statistics or other
@@ -144,3 +146,7 @@ fit.full.GMCM <- function (u,
   class(theta) <- "theta"
   return(theta)
 }
+
+#' @rdname fit.full.GMCM
+#' @export
+fit.general.GMCM <- fit.full.GMCM

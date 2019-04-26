@@ -3,11 +3,17 @@
 \name{fit.meta.GMCM}
 \alias{fit.meta.GMCM}
 \alias{fit.meta.gmcm}
+\alias{fit.special.GMCM}
+\alias{fit.special.gmcm}
 \title{Estimate GMCM parameters of the special model}
 \usage{
 fit.meta.GMCM(u, init.par, method = c("NM", "SANN", "L-BFGS", "L-BFGS-B",
   "PEM"), max.ite = 1000, verbose = TRUE, positive.rho = TRUE,
   trace.theta = FALSE, ...)
+
+fit.special.GMCM(u, init.par, method = c("NM", "SANN", "L-BFGS",
+  "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE,
+  positive.rho = TRUE, trace.theta = FALSE, ...)
 }
 \arguments{
 \item{u}{An \code{n} by \code{d} matrix of test statistics. Rows correspond
@@ -66,8 +72,10 @@ It features various optimization routines to identify the maximum likelihood
 estimate of the special GMCMs.
 }
 \details{
-The \code{"L-BFGS-B"} method does not perform a transformation of the
-parameters.
+The \code{"L-BFGS-B"} method does not perform a transformation of
+  the parameters.
+
+  \code{fit.special.GMCM} is simply an alias of \code{fit.meta.gmcm}.
 }
 \note{
 Simulated annealing is strongly dependent on the initial values and

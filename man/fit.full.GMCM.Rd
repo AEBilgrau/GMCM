@@ -3,9 +3,15 @@
 \name{fit.full.GMCM}
 \alias{fit.full.GMCM}
 \alias{fit.full.gmcm}
+\alias{fit.general.GMCM}
+\alias{fit.general.gmcm}
 \title{Estimate GMCM parameters of the general model}
 \usage{
 fit.full.GMCM(u, m, theta = choose.theta(u, m), method = c("NM",
+  "SANN", "L-BFGS", "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE,
+  ...)
+
+fit.general.GMCM(u, m, theta = choose.theta(u, m), method = c("NM",
   "SANN", "L-BFGS", "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE,
   ...)
 }
@@ -54,10 +60,12 @@ GMCM with various optimization procedures. Note, all but the PEM methods
 provides the maximum likelihood estimate.
 }
 \details{
-The \code{"L-BFGS-B"} method does not perform a transformation of the
-parameters and uses box constraints as implemented in \code{optim}. \cr
-Note that the many parameter configurations are poorly estimable or directly
-unidentifiable.
+The \code{"L-BFGS-B"} method does not perform a transformation of
+  the parameters and uses box constraints as implemented in \code{optim}. \cr
+  Note that the many parameter configurations are poorly estimable or
+  directly unidentifiable.
+
+  \code{fit.general.GMCM} is simply an alias of \code{fit.full.gmcm}.
 }
 \note{
 All the optimization procedures are strongly dependent on the initial
