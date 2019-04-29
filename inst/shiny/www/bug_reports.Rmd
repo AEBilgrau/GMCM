@@ -12,14 +12,16 @@ library("htmltools")
 
 ## Bug reports
 
-If you encounter a bug or issue with the web-application or package itself, please submit an issue at [the GitHub issues page](https://github.com/AEBilgrau/GMCM/issues). 
-Requests for features are also warmly welcome here.
-If possible try to describe the issue so it can be reproduced.
+If you encounter a bug or issue with the web-application or package itself,
+please submit an issue at [the GitHub issues
+page](https://github.com/AEBilgrau/GMCM/issues). Requests for features are also
+warmly welcome. If possible try to describe the issue so it can be reproduced.
+You can for example also include the source generated via the report button.
 
-Alternatively, if you do not have a GitHub account, feel free to email me at anders.ellern.bilgrau (at) gmail.com with your problems or suggestions.
-
-
-Please refer to **GMCM version `r packageVersion("GMCM")`** when filing a report.
+If you do not have a GitHub account, feel free to email me at
+anders.ellern.bilgrau (at) gmail.com with your problems or suggestions.
+Please refer to **GMCM version `r packageVersion("GMCM")`** when filing a
+report.
 
 ---
 
