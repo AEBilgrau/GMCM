@@ -6,9 +6,10 @@
 \section{Changes in version 1.4}{
   \itemize{
     \item Added a shiny application for the package. Available at \href{https://gmcm.shinyapps.io/GMCM/}{online} or via \code{GMCM::runGMCM()} for a local instance.
+    \item Added \code{classify()} function to ease classification after fitting a general GMCM.
   }
 }
-                         
+
 \section{Changes in version 1.3.2 (2018-03-12)}{
   \itemize{
     \item Hotfix due to new default RNG after R version 3.5.3.
