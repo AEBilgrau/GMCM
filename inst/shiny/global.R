@@ -1,3 +1,45 @@
+# Function for overwriting the param key of the report YAML
+overwrite_params <- function(file, params) {
+  # Load file into memory
+  .r <- readLines(file)
+  params_lines_start <- which(.r == "#' params:") # Assumes a line on its own
+  params_lines_end <- max(which(.r == "#' ---")) # Assumes 'params:' block is the last element
+
+  #Create YAML
+  tmpfile <- tempfile() # Temp file to hold dput output
+  params_yaml <- character()
+
+  for (i in seq_along(params)) {
+    dput(params[[i]], tmpfile)
+    params_yaml <-
+      c(params_yaml,
+        sprintf("#'   %s: !r %s", names(params)[i],
+                paste0(readLines(tmpfile), collapse = "")))
+  }
+
+  # Insert into character vector
+  new_file <- c(.r[seq_len(params_lines_start - 1)],
+                params_yaml,
+                .r[params_lines_end:length(.r)])
+
+  writeLines(text = new_file, con = file)
+}
+
+# Testing function
+# params <- list(file = "../../../data/freshVsFrozen.csv",
+#                header = TRUE, sep = ";",
+#                quote = "\"",
+#                model_cols = c("PreVsPost.Fresh.pval", "PreVsPost.Frozen.pval"),
+#                meta_large_vals = FALSE,
+#                init_par = c(pie1 = 0.7, mu = 1, sigma = 1, rho = 0.5),
+#                meta_method = "NM",
+#                meta_max_ite = 50L,
+#                meta_positive_rho = TRUE,
+#                meta_IDR_thres_type = "IDR",
+#                meta_IDR_thres = 0.05,
+#                theta = GMCM::rtheta())
+# overwrite_params(file = "inst/shiny/www/CopyOfreport_meta.R", params)
+
 
 # Function for plotting meta results
 meta_plot <- function(fit, # A fitted object data
