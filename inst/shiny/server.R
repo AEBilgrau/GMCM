@@ -1336,7 +1336,6 @@ shinyServer(function(input, output, session) {
                      meta_positive_rho = input$meta_positive_rho,
                      meta_IDR_thres_type = input$meta_IDR_thres_type,
                      meta_IDR_thres = input$meta_IDR_thres)
-      print(str(params))
 
       # Spin and knit the document, passing in the `params` list, and eval it in a
       # child of the global environment (this isolates the code in the document
