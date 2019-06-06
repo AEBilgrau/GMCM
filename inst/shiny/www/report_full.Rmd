@@ -33,12 +33,14 @@ ds <- read.table(file   = "{{gsub("\\", "/", data_file, fixed = TRUE)}}",
 head(ds, n = 4)
 ```
 
+**Please correct the path stated for file to compile the report locally.*
 
-Next, the data is subset to the columns of interest.
+Next, the data is subset to the columns of interest and copula values estimated (ranked).
 
 ```{r select-data, include=TRUE, echo=TRUE}
 x <- ds[, {{cput(model_cols)}}]
-head(x, n = 2)
+u <- Uhat(x)
+head(cbind(x, u), n = 2)
 ```
 
 
@@ -46,8 +48,8 @@ head(x, n = 2)
 The initial parameters, as chosen in the application, are given by
 
 ```{r show-initial-params, include=TRUE, echo=TRUE}
-theta <- as.theta({{cput(theta)}})
-print(theta)
+init_theta <- as.theta({{cput(theta)}})
+print(init_theta)
 ```
 
 
@@ -55,8 +57,8 @@ print(theta)
 With the data loaded and defined initial parameters, the model is now fitted.
 
 ```{r fit_model, error=TRUE}
-theta <- fit.full.GMCM(u = x,  # Ranking function is applied automatically
-                       theta = theta,
+theta <- fit.full.GMCM(u = u,  # Ranking function is applied automatically
+                       theta = init_theta,
                        method = "{{fit_method}}",
                        max.ite = {{max_ite}},
                        verbose = FALSE)
@@ -70,15 +72,11 @@ The fitting method is set to `"{{fit_method}}"` with a maximum number of iterati
 The estimated parameters are used to calculated posterior component probabilities on which the classification is based:
 
 ```{r compute_probs}
-kappa <- get.prob(x, theta) # Compute component probabilities
+kappa <- get.prob(u, theta) # Compute component probabilities
 colnames(kappa) <- paste0("comp", seq_len(ncol(kappa))) # Add names
-
 comps <- apply(kappa, 1, which.max) # Find index of maximum entry for each row
 
-{{ifelse(full_class_type == "thres_prob", "# Set to NA if probability is not sufficently large", "")}}
-{{ifelse(full_class_type == "thres_prob", sprintf("ok_max <- apply(kappa, 1, max) > %.3f", full_thres_prob), "")}}
-{{ifelse(full_class_type == "thres_prob", "comps[!ok_max] <- NA", "")}}
-
+{{ifelse(full_class_type == "thres_prob", c("# Set to NA if probability is not sufficently large\n", sprintf("ok_max <- apply(kappa, 1, max) > %.3f\n", full_thres_prob), "comps[!ok_max] <- NA\n"), "")}}
 cols <- topo.colors(ncol(kappa))[comps]
 cols[is.na(comps)] <- "gray"
 res <- data.frame(kappa, comp = comps, col = cols,
@@ -99,7 +97,7 @@ The results are also displayed by plotting
 
 ```{r plot_results}
 plot(x, col = res$col, asp = 1) # Plot of raw values
-plot(Uhat(x), col = res$col, asp = 1) # Plot of copula values
+plot(u, col = res$col, asp = 1) # Plot of copula values
 z <- GMCM:::qgmm.marginal(Uhat(x), theta = theta) # Estimate latent process
 plot(z, col = res$col, asp = 1) # Plot of estimated latent process
 ```

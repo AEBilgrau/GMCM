@@ -583,12 +583,14 @@ shinyServer(function(input, output, session) {
     x <- user_data()[, input$model_cols]
     u <- Uhat(x)
 
-    # Fit model
+    # Starting parameters
+    init_theta <- as.theta(full_start_theta())
+
+    # Fit the general model
     fit_time <- system.time(
       fit_log <- capture.output({
         theta <- fit.full.GMCM(u = u,
-                               m = rv$m,
-                               theta = as.theta(full_start_theta()),
+                               theta = init_theta,
                                method = input$full_method,
                                max.ite = input$full_max_ite,
                                verbose = TRUE)
