@@ -583,12 +583,14 @@ shinyServer(function(input, output, session) {
     x <- user_data()[, input$model_cols]
     u <- Uhat(x)
 
-    # Fit model
+    # Starting parameters
+    init_theta <- as.theta(full_start_theta())
+
+    # Fit the general model
     fit_time <- system.time(
       fit_log <- capture.output({
         theta <- fit.full.GMCM(u = u,
-                               m = rv$m,
-                               theta = as.theta(full_start_theta()),
+                               theta = init_theta,
                                method = input$full_method,
                                max.ite = input$full_max_ite,
                                verbose = TRUE)
@@ -966,63 +968,75 @@ shinyServer(function(input, output, session) {
   # Output reports --------
   # https://shiny.rstudio.com/articles/generating-reports.html
 
+  full_expand_rmd <- reactive({
+    # Copy the report file to a temporary directory before processing it, in
+    # case we don't have write permissions to the current working dir (which
+    # can happen when deployed).
+    temp_file <- file.path(tempdir(),  "report_full.Rmd")
+    file.copy("www/report_full.Rmd", temp_file, overwrite = TRUE)
+    message("Copied 'www/report_full.Rmd' into ", temp_file)
+
+
+    # Set up parameters to pass to Rmd document
+    params <- list(data_file = input$in_file$datapath,
+                   header = input$header,
+                   sep = input$sep,
+                   quote = input$quote,
+                   model_cols = input$model_cols,
+                   theta = as.theta(full_start_theta()),
+                   fit_method = input$full_method,
+                   max_ite = input$full_max_ite,
+                   full_class_type = input$full_class_type,
+                   full_thres_prob = input$full_thres_prob)
+
+    # Expand the args in params
+    knit_expand_args <- c(list(file = temp_file), params)
+    report_expanded <- do.call(knitr::knit_expand, knit_expand_args)
+    message(temp_file, " expanded with parameters.")
+
+    # Write the R file and path to it
+    temp_file_out <- gsub("report_", "report_expanded_", temp_file)
+    cat(report_expanded, file = temp_file_out)
+    message("Expanded .Rmd written to ", temp_file_out)
+
+    return(temp_file_out)
+
+  })
+
   output$full_dl_r <- downloadHandler(
     filename = "report_full.R",
     content = function(file) {
-      file.copy("www/report_full.R", file, overwrite = TRUE)
+      expanded_rmd <- full_expand_rmd()
+      outfile <- gsub(".Rmd$", ".R", expanded_rmd)
+      message("purl ", expanded_rmd, " to ", outfile)
+      knitr::purl(expanded_rmd,
+                  output = outfile,
+                  documentation = 0)
+
+      file.copy(outfile, file, overwrite = TRUE)
     }
   )
 
   output$full_dl_rmd <- downloadHandler(
     filename = "report_full.Rmd",
     content = function(file) {
-      temp_file <- file.path(tempdir(), "report_full.R")
-      file.copy("www/report_full.R", temp_file, overwrite = TRUE)
-      out <- spin(hair = temp_file,
-                  knit = FALSE,
-                  format = "Rmd")
-      writeLines(text = readLines(out), con = file)
+      file.copy(full_expand_rmd(), file, overwrite = TRUE)
     }
   )
 
   output$full_dl_html <- downloadHandler(
     filename = "report_full.html",
     content = function(file) {
-      # Copy the report file to a temporary directory before processing it, in
-      # case we don't have write permissions to the current working dir (which
-      # can happen when deployed).
-      temp_file <- file.path(tempdir(), "report_full.R")
-      file.copy("www/report_full.R", temp_file, overwrite = TRUE)
-
-      # Set up parameters to pass to Rmd document
-      params <- list(file = input$in_file$datapath,
-                     header = input$header,
-                     sep = input$sep,
-                     quote = input$quote,
-                     model_cols = input$model_cols,
-                     theta = as.theta(full_start_theta()),
-                     fit_method = input$full_method,
-                     max_ite = input$full_max_ite,
-                     full_class_type = input$full_class_type,
-                     full_thres_prob = input$full_thres_prob)
-      print(str(params))
-
-      # Spin and knit the document, passing in the `params` list, and eval it in a
-      # child of the global environment (this isolates the code in the document
-      # from the code in this app).
+      # Render the expanded Rmd document
       rmarkdown::render(
-        input = temp_file,
+        input = full_expand_rmd(),
         output_file = file,
         output_options = list(self_contained = TRUE),
-        params = params,
         envir = new.env(parent = globalenv())
       )
+      message("Expanded .Rmd rendered.")
     }
   )
-
-
-
-
 
 
 
@@ -1292,62 +1306,78 @@ shinyServer(function(input, output, session) {
   # Output reports --------
   # https://shiny.rstudio.com/articles/generating-reports.html
 
+
+  meta_expand_rmd <- reactive({
+    # Copy the report file to a temporary directory before processing it, in
+    # case we don't have write permissions to the current working dir (which
+    # can happen when deployed).
+
+    temp_file <- file.path(tempdir(),  "report_meta.Rmd")
+    file.copy("www/report_meta.Rmd", temp_file, overwrite = TRUE)
+    message("Copied 'www/report_meta.Rmd' into ", temp_file)
+
+    # Set up parameters to pass to Rmd document
+    params <- list(data_file = input$in_file$datapath,
+                   header = input$header,
+                   sep = input$sep,
+                   quote = input$quote,
+                   model_cols = input$model_cols,
+                   meta_large_vals = input$meta_large_vals,
+                   init_par = c(pie1  = input$par1,
+                                mu    = input$par2,
+                                sigma = input$par3,
+                                rho   = input$par4),
+                   meta_method = input$meta_method,
+                   meta_max_ite = input$meta_max_ite,
+                   meta_positive_rho = input$meta_positive_rho,
+                   meta_IDR_thres_type = input$meta_IDR_thres_type,
+                   meta_IDR_thres = input$meta_IDR_thres)
+
+    # Expand the args in params
+    knit_expand_args <- c(list(file = temp_file), params)
+    report_expanded <- do.call(knitr::knit_expand, knit_expand_args)
+    message(temp_file, " expanded with parameters.")
+
+    # Write the R file and path to it
+    temp_file_out <- gsub("report_", "report_expanded_", temp_file)
+    cat(report_expanded, file = temp_file_out)
+    message("Expanded .Rmd written to ", temp_file_out)
+
+    return(temp_file_out)
+  })
+
   output$meta_dl_r <- downloadHandler(
     filename = "report_meta.R",
     content = function(file) {
-      file.copy("www/report_meta.R", file, overwrite = TRUE)
+      expanded_rmd <- meta_expand_rmd()
+      outfile <- gsub(".Rmd$", ".R", expanded_rmd)
+      message("purl ", expanded_rmd, " to ", outfile)
+      knitr::purl(expanded_rmd,
+                  output = outfile,
+                  documentation = 0)
+
+      file.copy(outfile, file, overwrite = TRUE)
     }
   )
 
   output$meta_dl_rmd <- downloadHandler(
     filename = "report_meta.Rmd",
     content = function(file) {
-      temp_file <- file.path(tempdir(), "report_meta.R")
-      file.copy("www/report_meta.R", temp_file, overwrite = TRUE)
-      out <- spin(hair = temp_file,
-                  knit = FALSE,
-                  format = "Rmd")
-      writeLines(text = readLines(out), con = file)
+      file.copy(meta_expand_rmd(), file, overwrite = TRUE)
     }
   )
 
   output$meta_dl_html <- downloadHandler(
     filename = "report_meta.html",
     content = function(file) {
-      # Copy the report file to a temporary directory before processing it, in
-      # case we don't have write permissions to the current working dir (which
-      # can happen when deployed).
-      temp_file <- file.path(tempdir(), "report_meta.R")
-      file.copy("www/report_meta.R", temp_file, overwrite = TRUE)
-
-      # Set up parameters to pass to Rmd document
-      params <- list(file = input$in_file$datapath,
-                     header = input$header,
-                     sep = input$sep,
-                     quote = input$quote,
-                     model_cols = input$model_cols,
-                     meta_large_vals = input$meta_large_vals,
-                     init_par = c(pie1  = input$par1,
-                                  mu    = input$par2,
-                                  sigma = input$par3,
-                                  rho   = input$par4),
-                     meta_method = input$meta_method,
-                     meta_max_ite = input$meta_max_ite,
-                     meta_positive_rho = input$meta_positive_rho,
-                     meta_IDR_thres_type = input$meta_IDR_thres_type,
-                     meta_IDR_thres = input$meta_IDR_thres)
-      print(str(params))
-
-      # Spin and knit the document, passing in the `params` list, and eval it in a
-      # child of the global environment (this isolates the code in the document
-      # from the code in this app).
+      # Render the expanded Rmd document
       rmarkdown::render(
-        input = temp_file,
+        input = meta_expand_rmd(),
         output_file = file,
         output_options = list(self_contained = TRUE),
-        params = params,
         envir = new.env(parent = globalenv())
       )
+      message("Expanded .Rmd rendered.")
     }
   )
 

@@ -1,3 +1,9 @@
+# Function for dput'ting objects into a character string
+cput <- function(x) {
+  f <- tempfile()
+  dput(x, file = f)
+  return(readLines(f))
+}
 
 # Function for plotting meta results
 meta_plot <- function(fit, # A fitted object data
