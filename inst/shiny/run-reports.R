@@ -41,17 +41,18 @@ report_expanded_path <- gsub("/report_", "/report_expanded_", report_path)
 cat(report_expanded, file = report_expanded_path)
 
 # We can also purl
-res1 <- knitr::purl(report_expanded_path, output = gsub(".Rmd$", ".R", report_expanded_path),
-            documentation = 0)
+res1 <- knitr::purl(report_expanded_path,
+                    output = gsub(".Rmd$", ".R", report_expanded_path),
+                    documentation = 0)
 
 # Render the expanded document
 res2 <- rmarkdown::render(
   input = report_expanded_path,
   output_options = list(self_contained = TRUE),
-  params = params,
   envir = new.env(parent = globalenv())
 )
 
+print(res2)
 
 
 # GENERAL GMCM ----
@@ -84,6 +85,7 @@ res3 <- knitr::purl(report_expanded_path,
 res4 <- rmarkdown::render(
   input = report_expanded_path,
   output_options = list(self_contained = TRUE),
-  params = params,
   envir = new.env(parent = globalenv())
 )
+
+print(res4)

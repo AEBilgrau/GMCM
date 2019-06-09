@@ -21,7 +21,7 @@ Suggests:
     jpeg,
     testthat (>= 0.3),
     knitr,
-    covr,
+    rmarkdown,
     shiny,
     shinydashboard,
     rhandsontable,

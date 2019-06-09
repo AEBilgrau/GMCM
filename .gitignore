@@ -34,4 +34,5 @@ vignettes/*.RData
 inst/shiny/rsconnect
 
 # inst/shiny/www/..
-inst/shiny/www/report_expanded*
+#
+*report_expanded*
