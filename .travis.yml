@@ -16,6 +16,7 @@ after_success:
 
 after_failure:
   - Rscript -e 'sessionInfo()'
+  - Rscript -e 'installed.packages()'
 
 notifications:
   email:
