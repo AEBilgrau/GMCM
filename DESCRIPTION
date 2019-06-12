@@ -24,6 +24,7 @@ Suggests:
     rmarkdown,
     shiny,
     shinydashboard,
+    shinyBS,
     rhandsontable,
     DT
 VignetteBuilder: knitr
