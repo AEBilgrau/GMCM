@@ -2,6 +2,8 @@ library("knitr")
 library("rmarkdown")
 library("GMCM")
 
+set.seed(7652438)
+
 # dput object to character string
 cput <- function(x) {
   f <- tempfile()
@@ -17,7 +19,8 @@ write.csv2(sim_data, file = data_file)
 
 
 # SPECIAL GMCM ----
-report_path <- system.file("shiny/www/report_meta.Rmd", package = "GMCM")
+report_path_meta <- system.file("shiny/www/report_meta.Rmd", package = "GMCM",
+                                mustWork = TRUE)
 
 # Parameters to expand
 params <- list(data_file = data_file,
@@ -33,9 +36,9 @@ params <- list(data_file = data_file,
                meta_IDR_thres_type = "IDR",
                meta_IDR_thres = 0.01)
 
-expand_args <- c(list(file = report_path), params)
+expand_args <- c(list(file = report_path_meta), params)
 report_expanded <- do.call(knitr::knit_expand, expand_args)
-report_expanded_path <- gsub("/report_", "/report_expanded_", report_path)
+report_expanded_path <- gsub("/report_", "/report_expanded_", report_path_meta)
 
 # Write to file
 cat(report_expanded, file = report_expanded_path)
@@ -52,11 +55,11 @@ res2 <- rmarkdown::render(
   envir = new.env(parent = globalenv())
 )
 
-print(res2)
 
 
 # GENERAL GMCM ----
-report_path <- system.file("shiny/www/report_full.Rmd", package = "GMCM")
+report_path_full <- system.file("shiny/www/report_full.Rmd", package = "GMCM",
+                                mustWork = TRUE)
 
 # Parameters to expand
 params <- list(data_file = data_file,
@@ -70,9 +73,9 @@ params <- list(data_file = data_file,
                full_class_type = "thres_prob",
                full_thres_prob = 0.9)
 
-expand_args <- c(list(file = report_path), params)
+expand_args <- c(list(file = report_path_full), params)
 report_expanded <- do.call(knitr::knit_expand, expand_args)
-report_expanded_path <- gsub("/report_", "/report_expanded_", report_path)
+report_expanded_path <- gsub("/report_", "/report_expanded_", report_path_full)
 
 cat(report_expanded, file = report_expanded_path)
 
@@ -87,5 +90,3 @@ res4 <- rmarkdown::render(
   output_options = list(self_contained = TRUE),
   envir = new.env(parent = globalenv())
 )
-
-print(res4)
