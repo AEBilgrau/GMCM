@@ -28,13 +28,14 @@ run_meta_report <- function(...) {
 
   expand_args <- c(list(file = report_path_full), params)
   report_expanded <- do.call(knitr::knit_expand, expand_args)
-  report_expanded_path <- gsub("/report_", "/report_expanded_", report_path_full)
 
+  # Write to temp file
+  report_expanded_path <- tempfile()
   cat(report_expanded, file = report_expanded_path)
 
   # We can purl
   res3 <- knitr::purl(report_expanded_path,
-                      output = gsub(".Rmd$", ".R", report_expanded_path),
+                      output = paste0(report_expanded_path, ".R"),
                       documentation = 0)
 
   # Render the expanded document

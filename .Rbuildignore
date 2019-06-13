@@ -15,12 +15,6 @@ Makefile
 inst/shiny/rsconnect
 
 # Generated files in inst/shiny/www/..
-inst/shiny/*
-inst/shiny/www/report_full.Rmd
-inst/shiny/www/report_full.html
-inst/shiny/www/report_full_purl.R
-inst/shiny/www/report_meta.Rmd
-inst/shiny/www/report_meta.html
-inst/shiny/www/report_meta_purl.R
+inst/shiny/www/report_expanded.*
 data/freshVsFrozen.csv
 data/u133VsExon.csv
