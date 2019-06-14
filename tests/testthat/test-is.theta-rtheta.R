@@ -43,9 +43,9 @@ colnames(theta13$sigma$comp2) <- dnames
 rownames(theta13$sigma$comp3) <- colnames(theta13$sigma$comp3)  <- dnames
 
 test_that("rtheta returns proper formatted output (old method)", {
-  expect_that(is.logical(is.theta(theta1)), is_true())
+  expect_true(is.logical(is.theta(theta1)))
   expect_that(length(is.theta(theta1)), equals(1))
-  expect_that(is.theta(theta1), is_true())
+  expect_true(is.theta(theta1))
 
   suppressWarnings({
     expect_false(is.theta(theta2))
@@ -76,7 +76,7 @@ for (d in 2:10) {
       theta.tmp <- rtheta(m = m, d = d, method = method)
       test_that(paste("rtheta returns proper formatted output, ",
                       "m=", m, ", d=", d, ", method=", method, sep = ""), {
-         expect_that(is.theta(theta.tmp), is_true())
+         expect_true(is.theta(theta.tmp))
       })
     }
   }

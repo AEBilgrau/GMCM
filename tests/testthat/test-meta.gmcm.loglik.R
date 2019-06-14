@@ -13,7 +13,7 @@ ans2 <-
                           u = u, rescale = FALSE)
 
 test_that("Check meta.gmcm.loglik returns proper formatted output", {
-  expect_that(is.numeric(ans),  is_true())
+  expect_true(is.numeric(ans))
   expect_that(length(ans), equals(1))
   expect_that(ans, equals(ans2))
 })

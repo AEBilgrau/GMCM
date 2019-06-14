@@ -7,18 +7,18 @@ for (d in 2:4) {
     })
 
     test_that("SimulateGMMData returns proper format", {
-      expect_that(is.list(gmm), is_true())
+      expect_true(is.list(gmm))
       expect_that(length(gmm), equals(3))
       expect_that(names(gmm), equals(c("z", "K", "theta")))
       # Check z
-      expect_that(is.matrix(gmm$z), is_true())
-      expect_that(is.numeric(gmm$z), is_true())
+      expect_true(is.matrix(gmm$z))
+      expect_true(is.numeric(gmm$z))
       expect_that(dim(gmm$z), equals(c(n, d)))
       # Check K
-      expect_that(is.numeric(gmm$K), is_true())
+      expect_true(is.numeric(gmm$K))
       expect_that(length(gmm$K), equals(n))
       # Check theta
-      expect_that(is.theta(gmm$theta), is_true())
+      expect_true(is.theta(gmm$theta))
     })
 
     suppressWarnings({
@@ -26,22 +26,22 @@ for (d in 2:4) {
     })
 
     test_that("SimulateGMCMData returns proper format", {
-      expect_that(is.list(gmcm), is_true())
+      expect_true(is.list(gmcm))
       expect_that(length(gmcm), equals(4))
       expect_that(names(gmcm), equals(c("u", "z", "K", "theta")))
       # Check u
-      expect_that(is.matrix(gmcm$u), is_true())
-      expect_that(is.numeric(gmcm$u), is_true())
+      expect_true(is.matrix(gmcm$u))
+      expect_true(is.numeric(gmcm$u))
       expect_that(dim(gmcm$u), equals(c(n, d)))
       # Check z
-      expect_that(is.matrix(gmcm$z), is_true())
-      expect_that(is.numeric(gmcm$z), is_true())
+      expect_true(is.matrix(gmcm$z))
+      expect_true(is.numeric(gmcm$z))
       expect_that(dim(gmcm$z), equals(c(n, d)))
       # Check K
-      expect_that(is.numeric(gmcm$K), is_true())
+      expect_true(is.numeric(gmcm$K))
       expect_that(length(gmcm$K), equals(n))
       # Check theta
-      expect_that(is.theta(gmcm$theta), is_true())
+      expect_true(is.theta(gmcm$theta))
     })
 
   }

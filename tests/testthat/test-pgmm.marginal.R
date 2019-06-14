@@ -13,7 +13,7 @@ for (d in seq_len(3) + 1) {
         GMCM:::pgmm.marginal(z = sim$z,
                              theta = rtheta(d = d, method = "EqualEllipsoidal"))
 
-      expect_that(is.numeric(ans), is_true())
+      expect_true(is.numeric(ans))
       expect_that(dim(ans), equals(c(n, d)))
       expect_gte(min(ans), 0)
       expect_lte(max(ans), 1)
