@@ -8,9 +8,9 @@ test_that("tt and inv.tt returns proper formatted output", {
   tpar <- GMCM:::inv.tt(par, d = 3, positive.rho = FALSE)
   par2 <- GMCM:::tt(tpar, d = 3, positive.rho = FALSE)
 
-  expect_that(is.numeric(tpar),  is_true())
+  expect_true(is.numeric(tpar))
   expect_that(length(tpar), equals(length(par)))
-  expect_that(is.numeric(par2),  is_true())
+  expect_true(is.numeric(par2))
   expect_that(length(par2),  equals(length(par)))
   expect_that(par - par2,
     equals(structure(c(0,0,0,0), names = c("pie1","mu","sigma","rho"))))

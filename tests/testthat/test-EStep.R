@@ -9,8 +9,8 @@ for (n in c(100, 200, 300, 400)) {
     es <- GMCM:::EStep(sim$z, init.theta)
 
     test_that("EStep returns proper formatted output", {
-      expect_that(is.matrix(es),  is_true())
-      expect_that(is.numeric(es), is_true())
+      expect_true(is.matrix(es))
+      expect_true(is.numeric(es))
       expect_that(nrow(es), equals(n))
       expect_that(ncol(es), equals(m))
     })

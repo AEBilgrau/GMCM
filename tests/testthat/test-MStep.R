@@ -11,7 +11,7 @@ for (n in trunc(seq(10, 1000, by = 100))) {
     theta <- GMCM:::MStep(x, kappa, meta.special.case = FALSE)
 
     test_that("MStep returns proper format", {
-      expect_that(is.theta(theta), is_true())
+      expect_true(is.theta(theta))
     })
 
   }

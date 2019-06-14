@@ -18,7 +18,7 @@ PKGSRC  := $(shell basename `pwd`)
 all: prereq build install check
 
 docs:
-	Rscript -e 'devtools::document(roclets=c('rd', 'namespace'))'
+	Rscript -e "devtools::document(roclets=c('rd', 'namespace'))"
 
 build: prereq
 	cd ..;\

@@ -20,14 +20,14 @@ suppressWarnings({
 })
 
 test_that("PseudoEMAlgorithm returns proper format", {
-  expect_that(is.list(res), is_true())
+  expect_true(is.list(res))
   expect_that(length(res), equals(3))
-  expect_that(is.theta(res$theta), is_true())
+  expect_true(is.theta(res$theta))
 
-  expect_that(is.matrix(res$loglik.tr), is_true())
+  expect_true(is.matrix(res$loglik.tr))
   expect_that(nrow(res$loglik.tr), equals(3))
 
-  expect_that(is.matrix(res$kappa), is_true())
+  expect_true(is.matrix(res$kappa))
   expect_that(dim(res$kappa), equals(c(n, m)))
 })
 

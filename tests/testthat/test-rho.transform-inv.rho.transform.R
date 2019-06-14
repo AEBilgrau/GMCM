@@ -7,9 +7,9 @@ a    <- GMCM:::rho.transform(rho, d)
 rho2 <- GMCM:::inv.rho.transform(a, d)
 
 test_that("rho.transform and inv.rho.transform returns proper formatted output", {
-  expect_that(is.numeric(a),  is_true())
+  expect_true(is.numeric(a))
   expect_that(length(a),  equals(n))
-  expect_that(is.numeric(rho2),  is_true())
+  expect_true(is.numeric(rho2))
   expect_that(length(rho2),  equals(n))
   expect_that(rho - rho2,  equals(rep(0, n)))
 })

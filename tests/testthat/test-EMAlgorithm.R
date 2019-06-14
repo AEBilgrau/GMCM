@@ -17,16 +17,16 @@ test_that("EMAlgorithm returns properly formatted output", {
                                      trace.theta = trace_theta)
         })
         expect_that(length(res), equals(ifelse(trace_theta, 4L, 3L)))
-        expect_that(is.theta(res$theta), is_true())  # theta
-        expect_that(is.numeric(res$loglik.tr), is_true())
+        expect_true(is.theta(res$theta))  # theta
+        expect_true(is.numeric(res$loglik.tr))
         expect_that(length(res$loglik.tr), is_less_than(101))
-        expect_that(is.matrix(res$kappa), is_true())
+        expect_true(is.matrix(res$kappa))
         expect_that(max(res$kappa), is_less_than(1 + 1e-10))
         expect_that(min(res$kappa), is_more_than(0 - 1e-10))
         expect_that(dim(res$kappa), equals(c(n, res$theta$m)))
         expect_that(length(res$theta$mu), equals(m))
         expect_that(length(res$theta$sigma), equals(m))
-        expect_that(all(sapply(res$theta.tr, is.theta)), is_true())
+        expect_true(all(sapply(res$theta.tr, is.theta)))
 
       }
     }
