@@ -16,7 +16,13 @@ r_github_packages:
 after_success:
   - Rscript -e 'covr::coveralls()'
 
+after_failure:
+  - Rscript -e 'sessionInfo()'
+  - Rscript -e 'installed.packages()'
+
 notifications:
   email:
     on_success: change
     on_failure: change
+
+
