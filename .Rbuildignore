@@ -18,3 +18,6 @@ inst/shiny/rsconnect
 inst/shiny/www/report_expanded.*
 data/freshVsFrozen.csv
 data/u133VsExon.csv
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
