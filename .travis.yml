@@ -2,6 +2,11 @@
 
 language: r
 
+r:
+  - oldrel
+  - release
+  - devel
+
 cache: packages
 
 r_build_args: --no-build-vignettes --no-manual --no-resave-data
@@ -12,6 +17,7 @@ warnings_are_errors: false
 
 r_github_packages:
   - r-lib/covr
+  - r-lib/pkgdown
 
 after_success:
   - Rscript -e 'covr::coveralls()'
@@ -20,10 +26,9 @@ after_failure:
   - Rscript -e 'sessionInfo()'
   - Rscript -e 'installed.packages()'
 
-before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
+  script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
   skip_cleanup: true
 
 notifications:
