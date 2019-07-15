@@ -16,13 +16,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -50,6 +52,7 @@ provides the maximum likelihood estimate." />
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -74,7 +77,7 @@ provides the maximum likelihood estimate." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -86,7 +89,7 @@ provides the maximum likelihood estimate." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/AEBilgrau/GMCM">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -97,6 +100,7 @@ provides the maximum likelihood estimate." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -116,11 +120,11 @@ provides the maximum likelihood estimate.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>fit.full.GMCM</span>(<span class='no'>u</span>, <span class='no'>m</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='no'>u</span>, <span class='no'>m</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"NM"</span>,
+    <pre class="usage"><span class='fu'>fit.full.GMCM</span>(<span class='no'>u</span>, <span class='no'>m</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='no'>u</span>, <span class='no'>m</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>,
   <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"PEM"</span>), <span class='kw'>max.ite</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
-<span class='fu'>fit.general.GMCM</span>(<span class='no'>u</span>, <span class='no'>m</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='no'>u</span>, <span class='no'>m</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"NM"</span>,
+<span class='fu'>fit.general.GMCM</span>(<span class='no'>u</span>, <span class='no'>m</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='no'>u</span>, <span class='no'>m</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>,
   <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"PEM"</span>), <span class='kw'>max.ite</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)</pre>
     
@@ -151,13 +155,13 @@ method used. Should be either <code>"NM"</code>, <code>"SANN"</code>, <code>"L-B
 <code>"L-BFGS-B"</code>, or <code>"PEM"</code> which are the Nelder-Mead, Simulated
 Annealing, limited-memory quasi-Newton method, limited-memory quasi-Newton
 method with box constraints, and the pseudo EM algorithm, respectively.
-Default is <code>"NM"</code>. See <code><a href='https://www.rdocumentation.org/packages/stats/topics/optim'>optim</a></code> for further details.</p></td>
+Default is <code>"NM"</code>. See <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> for further details.</p></td>
     </tr>
     <tr>
       <th>max.ite</th>
       <td><p>The maximum number of iterations. If the <code>method</code> is
 <code>"SANN"</code> this is the number of iterations as there is no other
-stopping criterion. (See <code><a href='https://www.rdocumentation.org/packages/stats/topics/optim'>optim</a></code>)</p></td>
+stopping criterion. (See <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>)</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -167,7 +171,7 @@ is made.</p></td>
     <tr>
       <th>&#8230;</th>
       <td><p>Arguments passed to the <code>control</code>-list in
-<code><a href='https://www.rdocumentation.org/packages/stats/topics/optim'>optim</a></code> when <code>method</code> is not equal to <code>"PEM"</code>.
+<code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> when <code>method</code> is not equal to <code>"PEM"</code>.
 If <code>method</code> equals <code>"PEM"</code>, the arguments are passed to
  <code><a href='PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></code> if the <code>method</code>.</p></td>
     </tr>
@@ -197,7 +201,7 @@ added as an attribute called "extra".</p>
   best fit.</p>
 <p>The <code><a href='choose.theta.html'>choose.theta</a></code> itself chooses random a initialization.
   Hence, the output when <code>theta</code> is not directly supplied can vary.</p>
-<p>See <code><a href='https://www.rdocumentation.org/packages/stats/topics/optim'>optim</a></code> for further details.</p>
+<p>See <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> for further details.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -211,17 +215,17 @@ doi:10.1109/ICDMW.2011.135</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/stats/topics/optim'>optim</a></code>, <code><a href='get.IDR.html'>get.prob</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>, <code><a href='get.IDR.html'>get.prob</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>17</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>17</span>)
 <span class='no'>sim</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'># Plotting simulated data</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>sim</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/palettes'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='no'>sim</span>$<span class='no'>K</span>], <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Latent process"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>sim</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/palettes'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='no'>sim</span>$<span class='no'>K</span>], <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"GMCM process"</span>)</div><div class='img'><img src='fit.full.GMCM-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>sim</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='no'>sim</span>$<span class='no'>K</span>], <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Latent process"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>sim</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='no'>sim</span>$<span class='no'>K</span>], <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"GMCM process"</span>)</div><div class='img'><img src='fit.full.GMCM-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Observed data</span>
 <span class='no'>uhat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='no'>sim</span>$<span class='no'>u</span>)
 
@@ -372,8 +376,8 @@ doi:10.1109/ICDMW.2011.135</p>
 #&gt; Exiting from Nelder Mead minimizer
 #&gt;     287 function evaluations used</div><div class='input'>
 <span class='co'># Confusion matrix</span>
-<span class='no'>Khat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/apply'>apply</a></span>(<span class='fu'><a href='get.IDR.html'>get.prob</a></span>(<span class='no'>uhat</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='no'>res</span>), <span class='fl'>1</span>, <span class='no'>which.max</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/table'>table</a></span>(<span class='st'>"Khat"</span> <span class='kw'>=</span> <span class='no'>Khat</span>, <span class='st'>"K"</span> <span class='kw'>=</span> <span class='no'>sim</span>$<span class='no'>K</span>)  <span class='co'># Note, some components have been swapped</span></div><div class='output co'>#&gt;     K
+<span class='no'>Khat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='get.IDR.html'>get.prob</a></span>(<span class='no'>uhat</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='no'>res</span>), <span class='fl'>1</span>, <span class='no'>which.max</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='st'>"Khat"</span> <span class='kw'>=</span> <span class='no'>Khat</span>, <span class='st'>"K"</span> <span class='kw'>=</span> <span class='no'>sim</span>$<span class='no'>K</span>)  <span class='co'># Note, some components have been swapped</span></div><div class='output co'>#&gt;     K
 #&gt; Khat   1   2   3
 #&gt;    1  97 121   0
 #&gt;    2   0 489   0
@@ -383,10 +387,10 @@ doi:10.1109/ICDMW.2011.135</p>
 
 <span class='co'># As seen, the underlying latent process is hard to estimate.</span>
 <span class='co'># The clustering, however, is very good.</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>simfit</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>simfit</span>$<span class='no'>K</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Model check 1\nSimulated GMM"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>simfit</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>simfit</span>$<span class='no'>K</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Model check 2\nSimulated GMCM"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>sim</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>Khat</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"MAP clustering"</span>)</div><div class='img'><img src='fit.full.GMCM-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>simfit</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>simfit</span>$<span class='no'>K</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Model check 1\nSimulated GMM"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>simfit</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>simfit</span>$<span class='no'>K</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Model check 2\nSimulated GMCM"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>sim</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>Khat</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"MAP clustering"</span>)</div><div class='img'><img src='fit.full.GMCM-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -411,19 +415,23 @@ doi:10.1109/ICDMW.2011.135</p>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Anders Ellern Bilgrau.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
