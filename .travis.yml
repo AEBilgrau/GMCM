@@ -28,11 +28,8 @@ after_failure:
 
 deploy:
   provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
+  script: Rscript -e 'if (Sys.getenv("TRAVIS_BUILD_NUMBER") == "2") {print(Sys.getenv("TRAVIS_BUILD_NUMBER")); pkgdown::deploy_site_github(verbose = TRUE)}'
   skip_cleanup: true
-  on:
-    condition: $TRAVIS_JOB_NUMBER =~ ^[0-9]*\.2$
-    condition: $TRAVIS_BRANCH =~ ^master$
 
 notifications:
   email:
