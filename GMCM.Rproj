@@ -17,7 +17,7 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
 BuildType: Package
-PackageInstallArgs: --resave-data
+PackageInstallArgs: --resave-data --with-keep.source
 PackageBuildArgs: --resave-data --compact-vignettes=both --with-keep.source
 PackageBuildBinaryArgs: --resave-data
 PackageCheckArgs: --as-cran
