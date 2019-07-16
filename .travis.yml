@@ -28,8 +28,10 @@ after_failure:
 
 deploy:
   provider: script
-  script: Rscript -e 'if (Sys.getenv("TRAVIS_BUILD_NUMBER") == "2") {print(Sys.getenv("TRAVIS_BUILD_NUMBER")); pkgdown::deploy_site_github(verbose = TRUE)}'
+  script: Rscript -e 'Sys.getenv(); pkgdown::deploy_site_github(verbose = TRUE)'
   skip_cleanup: true
+  on:
+    condition: "$TRAVIS_R_VERSION_STRING = release"
 
 notifications:
   email:
