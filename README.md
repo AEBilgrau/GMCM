@@ -36,7 +36,7 @@ The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 The released and tested version of **GMCM** is available at
 [CRAN](https://cran.r-project.org/package=GMCM) 
 (Comprehensive R Archive Network).
-It can be easily be installed from within R by running 
+It can be installed from within R by running 
 
 ```R
 install.packages("GMCM")
@@ -45,8 +45,8 @@ install.packages("GMCM")
 If you wish to install the latest version of **GMCM** directly from the master branch at GitHub, run 
 
 ```R
-#install.packages("devtools")
-devtools::install_github("AEBilgrau/GMCM")
+#install.packages("remotes")  # Install remotes if needed
+remotes::install_github("AEBilgrau/GMCM")
 ```
 
 Note, that this version is in development and is likely different from the version at CRAN. 
