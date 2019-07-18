@@ -5,6 +5,20 @@ Description: Unsupervised Clustering and Meta-analysis using Gaussian Mixture
     Copula Models.
 Version: 1.4
 Author: Anders Ellern Bilgrau, Martin Boegsted, Poul Svante Eriksen
+Authors@R: c(
+    person(given = c("Anders", "Ellern"),
+           family = "Bilgrau",
+           role = c("aut", "cre", "cph"),
+           email = "anders.ellern.bilgrau@gmail.com", 
+           comment = c(ORCID = "0000-0001-9875-2902")),
+    person(given = c("Poul", "Svante"),
+           family = "Eriksen",
+           role = c("ths", "ctb"),
+           comment = c(ORCID = "0000-0001-9192-1814")),
+    person(given = "Martin",
+           family = "Boegsted",
+           role = c("ths", "ctb"))
+    )
 Maintainer: Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 URL: https://github.com/AEBilgrau/GMCM
 BugReports: https://github.com/AEBilgrau/GMCM/issues
