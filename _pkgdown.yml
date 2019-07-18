@@ -1,1 +1,30 @@
 destination: docs
+
+# Reference page
+reference:
+- title: Core functions
+  desc: 'The core functions of GMCM are:'
+  contents:
+  - matches("fit\\.")
+  - classify
+  - matches("get\\.")
+  - SimulateGMCMData
+- title: Theta manipulation
+  desc: 'All exported functions:'
+  contents:
+  - matches("theta")
+  - meta2full
+  - full2meta
+- title: Datasets
+  desc: 'Built-in datasets:'
+  contents:
+  - freshVsFrozen
+  - u133VsExon
+- title: Shiny app
+  desc: 'Initiate the shiny application:'
+  contents:
+  - runGMCM
+- title: All
+  desc: 'All exported functions and datasets:'
+  contents:
+  - matches(".")
