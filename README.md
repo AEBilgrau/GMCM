@@ -68,16 +68,6 @@ For previous versions of **GMCM**, visit the old [releases at GitHub](https://gi
      Journal of Statistical Software, 70(2), 1-23. [doi:10.18637/jss.v070.i02](https://www.jstatsoft.org/article/view/v070i02)
 
 ## Usage
-### Shiny application 
-A [**shiny**](https://shiny.rstudio.com) application is available online [shinyapps.io](https://gmcm.shinyapps.io/GMCM/). 
-To start local instance of the application, make sure **GMCM** is installed and run
-
-```{r, eval=FALSE}
-GMCM::runGMCM()
-```
-
-The application suppots both the general GMCM for unsupervised clustering as
-well as the special GMCM for meta analysis.
 
 ### Meta Analysis example
 This is a very short tutorial for using the special GMCM for meta analysis. 
