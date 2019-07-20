@@ -18,7 +18,7 @@ PKGSRC  := $(shell basename `pwd`)
 all: prereq build install check site
 
 site:
-  Rscript -e "pkgdown::build_site()"
+	Rscript -e "pkgdown::build_site()"
 
 docs:
 	Rscript -e "devtools::document(roclets=c('rd', 'namespace'))"
