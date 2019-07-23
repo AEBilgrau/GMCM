@@ -1,8 +1,6 @@
 ---
 title: "Meta analysis with special GMCMs"
 output: html_document
-date: '2019-07-21'
-author: "Anders Ellern Bilgrau"
 ---
 
 ```{r knit-int, echo=FALSE, include=FALSE}
