@@ -28,7 +28,7 @@ after_failure:
 
 deploy:
   provider: script
-  script: Rscript -e 'Sys.getenv(); pkgdown::deploy_site_github(verbose = TRUE)'
+  script: Rscript -e 'x <- file.remove(list.files("docs/reference/", pattern = "Rplots[0-9]*\\.pdf", full.names = TRUE)); stopifnot(all(x)); Sys.getenv(); pkgdown::deploy_site_github(verbose = TRUE)'
   skip_cleanup: true
   on:
     condition: "$TRAVIS_R_VERSION_STRING = release"
