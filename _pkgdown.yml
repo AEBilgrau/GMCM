@@ -28,3 +28,20 @@ reference:
   desc: 'All exported functions and datasets:'
   contents:
   - matches(".")
+
+# Articles
+articles:
+- title: All vignettes
+  desc:
+  contents:
+  - '`usage-example-general-model`'
+  - '`usage-example-special-model`'
+  - '`usage-shiny-graphical-interface`'
+
+# Docsearch
+url: https://pkgdown.r-lib.org
+template:
+  params:
+    docsearch:
+      api_key: API_KEY
+      index_name: INDEX_NAME
