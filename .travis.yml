@@ -28,19 +28,7 @@ after_failure:
 
 deploy:
   provider: script
-  script: Rscript -e '
-    message("Clean RplotsXXX.pdf");
-    print(list.files(pattern = "Rplots[0-9]*\\.pdf", full.names = TRUE, recursive = TRUE));
-    clean_rplots <- function() {
-      file.remove(list.files("docs/reference/", pattern = "Rplots[0-9]*\\.pdf", full.names = TRUE))
-    };
-    stopifnot(clean_rplots());
-    Sys.getenv();
-    message("Deploy site");
-    pkgdown::deploy_site_github(verbose = TRUE);
-    message("Clean RplotsXXX.pdf again");
-    stopifnot(clean_rplots());
-    '
+  script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
   skip_cleanup: true
   on:
     condition: "$TRAVIS_R_VERSION_STRING = release"
