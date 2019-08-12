@@ -30,6 +30,7 @@ deploy:
   provider: script
   script: Rscript -e '
     message("Clean RplotsXXX.pdf");
+    print(list.files(pattern = "Rplots[0-9]*\\.pdf", full.names = TRUE, recursive = TRUE));
     clean_rplots <- function() {
       file.remove(list.files("docs/reference/", pattern = "Rplots[0-9]*\\.pdf", full.names = TRUE))
     };
