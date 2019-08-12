@@ -29,15 +29,15 @@ after_failure:
 deploy:
   provider: script
   script: Rscript -e '
-    message("Clean RplotsXXX.pdf")
+    message("Clean RplotsXXX.pdf");
     clean_rplots <- function() {
       file.remove(list.files("docs/reference/", pattern = "Rplots[0-9]*\\.pdf", full.names = TRUE))
     };
     stopifnot(clean_rplots());
     Sys.getenv();
-    message("Deploy site")
+    message("Deploy site");
     pkgdown::deploy_site_github(verbose = TRUE);
-    message("Clean RplotsXXX.pdf again")
+    message("Clean RplotsXXX.pdf again");
     stopifnot(clean_rplots());
     '
   skip_cleanup: true
