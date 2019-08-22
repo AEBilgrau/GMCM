@@ -215,9 +215,8 @@ correlations between each dimension are taken to be zero.</p>
      <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Observed GMCM\nColoured by k-means clustering"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>data2</span>$<span class='no'>z</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"initial GMM"</span>)</div><div class='img'><img src='choose.theta-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Alteratively, theta can simply be plotted to illustrate the GMM density</span>
-<span class='fu'><a href='https://rdrr.io/r/grDevices/dev.html'>dev.off</a></span>()</div><div class='output co'>#&gt; null device 
-#&gt;           1 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>theta</span>, <span class='kw'>add.ellipses</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='no'>data2</span>$<span class='no'>z</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>16</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>theta</span>, <span class='kw'>add.ellipses</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='no'>data2</span>$<span class='no'>z</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>16</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)</div><div class='img'><img src='choose.theta-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
