@@ -44,7 +44,7 @@
 #' plot(data2$z, main = "initial GMM")
 #'
 #' # Alteratively, theta can simply be plotted to illustrate the GMM density
-#' dev.off()
+#' par(mfrow = c(1,1))
 #' plot(theta, add.ellipses = TRUE)
 #' points(data2$z, pch = 16, cex = 0.4)
 #' @export
