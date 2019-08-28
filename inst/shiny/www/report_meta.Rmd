@@ -36,7 +36,7 @@ ds <- read.table(file   = "{{gsub("\\", "/", data_file, fixed = TRUE)}}",
 head(ds, n = 4)
 ```
 
-The reproduce the output, change the file path above to the data file of interest.
+To reproduce the output, change the file path above to the data file of interest.
 
 Next, the data is subset to the columns of interest.
 

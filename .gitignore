@@ -37,3 +37,5 @@ inst/shiny/rsconnect
 #
 *report_expanded*
 docs/
+
+*Rplots*.pdf

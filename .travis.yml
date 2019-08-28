@@ -28,7 +28,7 @@ after_failure:
 
 deploy:
   provider: script
-  script: Rscript -e 'Sys.getenv(); pkgdown::deploy_site_github(verbose = TRUE)'
+  script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE, new_process = FALSE)'
   skip_cleanup: true
   on:
     condition: "$TRAVIS_R_VERSION_STRING = release"
