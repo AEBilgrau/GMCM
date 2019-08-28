@@ -35,10 +35,10 @@ head(x, n = 4)
 
 See `help("u133VsExon")` for more information.
 
-Next, we subset the data, rank it, and visualize it:
+Next, we subset the data to simply reduce computation time.
+After that, we will rankk it, and visualize it.
 
 ```{r}
-# Subsetting data to simply reduce computation time
 x <- x[1:5000, ]
 ```
 

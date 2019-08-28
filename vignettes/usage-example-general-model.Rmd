@@ -1,30 +1,127 @@
 ---
-title: "Using the general model for unsupervised clustering"
+title: "Unsupervised clustering woth general GMCMs"
 author: "Anders Ellern Bilgrau"
-date: "2019-07-18"
+date: "2019-08-28"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r knit-int, echo=FALSE, include=FALSE}
+set.seed(7869670)
+knitr::opts_knit$set(self.contained = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Initalisation
+The **GMCM**^[1][1]^ package is loaded.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r load-packages, include=TRUE}
+#install.packages("GMCM")  # Uncomment to install the GMCM package
+library("GMCM")
 ```
 
-## Including Plots
+If **GMCM** is *not* installed, please uncomment the above line and rerun the script to install from CRAN.
+The development version can be installed from [GitHub following the instructions there](https://github.com/AEBilgrau/GMCM).
 
-You can also embed plots, for example:
+## Simulate some toy data
+First, we simulate some toy data. We simulate 1000 observations which stems from one of 3 components. Each observations 2-dimensional.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r sim-data, include=TRUE, echo=TRUE}
+true_theta <- rtheta(m = 3, d = 2)
+plot(true_theta)
+ds <- SimulateGMCMData(n = 1000, theta = true_theta)
+str(ds)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+As can be seen, the `SimulateGMCMData` function returns a `list` containing the copula observations `u`, the unobserved process `z`, the latent groups `K`, and the `theta` used for simulation.
+
+A ranking of `u` (or `z`) corresponds to what would be the data in a real application.
+
+```{r select-data, include=TRUE, echo=TRUE}
+uhat <- Uhat(ds$u)
+plot(uhat)
+```
+
+
+## Initial parameters
+To fit a general GMCM, we must choose some initial parameters. The `choose.theta` is a (sometimes) helpful default we here invoke explicitly:
+
+```{r show-initial-params, include=TRUE, echo=TRUE}
+init_theta <- choose.theta(uhat, m = 3)
+print(init_theta)
+```
+
+The function needs to know how many components we want to estimate though this number may very well be unknown in practice.
+
+
+## Model fitting
+With the data loaded and defined initial parameters, the model is now fitted.
+
+```{r fit_model, error=TRUE}
+est_theta <- fit.full.GMCM(u = uhat,  # Ranking function is applied automatically
+                           theta = init_theta,
+                           method = "NM",
+                           max.ite = 5000,
+                           verbose = FALSE)
+print(est_theta)
+```
+
+The fitting method is set to `"NM"` with a maximum number of iterations of `100`.
+
+
+## Unsupervised clustering
+The estimated parameters are used to calculated posterior component probabilities on which the classification is based:
+
+```{r compute_probs}
+membership <- classify(uhat, est_theta)
+str(membership)
+```
+
+If it is of interest, the posterior probability can be computed directly using
+
+```{r post_prob}
+post_prob <- get.prob(uhat, est_theta)  # Compute component probabilities
+```
+
+## Results
+The number of observations in each class can be e.g. counted by
+
+```{r classes_table}
+table(membership)
+```
+
+The results are also displayed by plotting
+
+```{r plot_results}
+par(mfrow = c(1,2))
+plot(u, col = membership, asp = 1) # Plot of copula values
+z <- GMCM:::qgmm.marginal(Uhat(x), theta = est_theta) # Estimate latent process
+plot(z, col = membership, asp = 1) # Plot of estimated latent process
+```
+
+The fitted `theta` object can also be plotted directly:
+
+```{r plot_theta}
+plot(est_theta)
+```
+
+
+### Session information
+This report was generated using **rmarkdown**^[2][2]^ and **knitr**^[3][3]^ under the session
+given below.
+
+```{r session-info}
+sessionInfo()
+```
+
+### References
+Please cite the **GMCM** paper^[1][1]^ if you use the package or shiny app.
+
+```{r citation, echo=FALSE, results='asis'}
+cites <- lapply(c("GMCM", "knitr", "rmarkdown"), citation)
+fmt_cites <- unlist(lapply(cites, format, style = "text"))
+cat(paste0("  ", seq_along(fmt_cites), ". ", fmt_cites, "\n"))
+```
+
+[1]: http://doi.org/10.18637/jss.v070.i02
+[2]: https://bookdown.org/yihui/rmarkdown/parameterized-reports.html
+[3]: https://yihui.name/knitr/demo/stitch/
