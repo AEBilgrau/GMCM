@@ -9,11 +9,13 @@
 <title>Probability, density, and likelihood functions of the Gaussian mixture
 (copula) model — dgmcm.loglik • GMCM</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -33,14 +35,15 @@
 
 
 
+
 <meta property="og:title" content="Probability, density, and likelihood functions of the Gaussian mixture
 (copula) model — dgmcm.loglik" />
-
 <meta property="og:description" content="Marginal and simultaneous cumulative distribution, log probability density,
 and log-likelihood functions of the Gaussian mixture model (GMM) and
 Gaussian mixture copula model (GMCM) and the relevant inverse marginal
 quantile functions." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -87,7 +90,6 @@ quantile functions." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/AEBilgrau/GMCM">
@@ -115,12 +117,10 @@ quantile functions." />
     </div>
 
     <div class="ref-description">
-    
     <p>Marginal and simultaneous cumulative distribution, log probability density,
 and log-likelihood functions of the Gaussian mixture model (GMM) and
 Gaussian mixture copula model (GMCM) and the relevant inverse marginal
 quantile functions.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>dgmcm.loglik</span>(<span class='no'>theta</span>, <span class='no'>u</span>, <span class='kw'>marginal.loglik</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
@@ -132,7 +132,7 @@ quantile functions.</p>
 <span class='fu'>pgmm.marginal</span>(<span class='no'>z</span>, <span class='no'>theta</span>)
 
 <span class='fu'>qgmm.marginal</span>(<span class='no'>u</span>, <span class='no'>theta</span>, <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>spread</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>rule</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -180,7 +180,7 @@ means the <code>pgmm.marginal</code> is to be evaluated on.</p></td>
       <td><p>The extrapolation rule used in <code><a href='https://rdrr.io/r/stats/approxfun.html'>approxfun</a></code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The returned value depends on the value of <code>marginal.loglik</code>.
@@ -194,7 +194,6 @@ means the <code>pgmm.marginal</code> is to be evaluated on.</p></td>
   entry of <code>z</code> evaluated in the jth marginal GMM density.</p>
 <p><code>qgmm.marginal</code>: A matrix where the (i,j)'th entry is the (i,j)'th
   entry of <code>u</code> evaluated in the inverse jth marginal GMM density.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>qgmm.marginal</code> distributes approximately <code>res</code> points around the
@@ -202,7 +201,6 @@ cluster centers according to the mixture proportions in <code>theta$pie</code> a
 evaluates <code>pgmm.marginal</code> on these points. An approximate inverse of
 <code>pgmm.marginal</code> function is constructed by linear interpolation of the
 flipped evaluated coordinates.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
@@ -304,11 +302,8 @@ flipped evaluated coordinates.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

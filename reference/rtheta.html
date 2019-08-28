@@ -8,11 +8,13 @@
 
 <title>Get random parameters for the Gaussian mixture (copula) model — rtheta • GMCM</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,12 +34,13 @@
 
 
 
-<meta property="og:title" content="Get random parameters for the Gaussian mixture (copula) model — rtheta" />
 
+<meta property="og:title" content="Get random parameters for the Gaussian mixture (copula) model — rtheta" />
 <meta property="og:description" content="Generate a random set parameters for the Gaussian mixture
 model (GMM) and Gaussian mixture copula model (GMCM). Primarily, it provides
 an easy prototype of the theta-format used in GMCM." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -84,7 +87,6 @@ an easy prototype of the theta-format used in GMCM." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/AEBilgrau/GMCM">
@@ -111,16 +113,14 @@ an easy prototype of the theta-format used in GMCM." />
     </div>
 
     <div class="ref-description">
-    
     <p>Generate a random set parameters for the Gaussian mixture
 model (GMM) and Gaussian mixture copula model (GMCM). Primarily, it provides
 an easy prototype of the <code>theta</code>-format used in <span class="pkg">GMCM</span>.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>rtheta</span>(<span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"old"</span>, <span class='st'>"EqualSpherical"</span>,
   <span class='st'>"UnequalSpherical"</span>, <span class='st'>"EqualEllipsoidal"</span>, <span class='st'>"UnequalEllipsoidal"</span>))</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -138,7 +138,7 @@ an easy prototype of the <code>theta</code>-format used in <span class="pkg">GMC
 See details. Defaults to <code>"old"</code> which is the regular "old" behavior.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A named list of parameters with the 4 elements:</p>
@@ -154,7 +154,6 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
                       matrices (of size <code>d</code> times <code>d</code>) for each
                       component.</p></dd>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Depending on the <code>method</code> argument the parameters are generated as
@@ -198,21 +197,17 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
   In all cases, the orientation is selected uniformly.</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The function <code><a href='is.theta.html'>is.theta</a></code> checks whether or not <code>theta</code>
   is in the correct format.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Friedman, Jerome H. "Regularized discriminant analysis." Journal of the
   American statistical association 84.405 (1989): 165-175.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='is.theta.html'>is.theta</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>rtheta</span>()</div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
@@ -360,17 +355,11 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#note">Note</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

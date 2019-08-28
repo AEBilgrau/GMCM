@@ -8,11 +8,13 @@
 
 <title>Convert between parameter formats — full2meta • GMCM</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,13 +34,14 @@
 
 
 
-<meta property="og:title" content="Convert between parameter formats — full2meta" />
 
+<meta property="og:title" content="Convert between parameter formats — full2meta" />
 <meta property="og:description" content="These functions converts/coerces the parameters between the general Gaussian
 mixture (copula) model and the special GMCM.
 Most functions of the GMCM packages use the theta
 format described in rtheta." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -85,7 +88,6 @@ format described in rtheta." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/AEBilgrau/GMCM">
@@ -112,18 +114,16 @@ format described in rtheta." />
     </div>
 
     <div class="ref-description">
-    
     <p>These functions converts/coerces the parameters between the general Gaussian
 mixture (copula) model and the special GMCM.
 Most functions of the GMCM packages use the <code>theta</code>
 format described in <code><a href='rtheta.html'>rtheta</a></code>.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>full2meta</span>(<span class='no'>theta</span>)
 
 <span class='fu'>meta2full</span>(<span class='no'>par</span>, <span class='no'>d</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -144,14 +144,13 @@ correlation of the reproducible component.</p></td>
       <td><p>An integer giving the dimension of the mixture distribution.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>full2meta</code> returns a numeric vector of length 4 formatted as
   <code>par</code>.</p>
 <p>meta2full returns a formatted 'theta' list of parameters as described
   by <code><a href='rtheta.html'>rtheta</a></code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If a <code>theta</code> is supplied which is not on the form of Li et. al. (2011)
@@ -160,7 +159,6 @@ component mean vector as mean,
 the square roof of the first diagonal entry of the second component
 covariance matrix as standard deviation, and first off-diagonal entry as
 correlation (properly scaled).</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Li, Q., Brown, J. B. J. B., Huang, H., &amp; Bickel, P. J. (2011).
@@ -170,11 +168,9 @@ correlation (properly scaled).</p>
   Characterization of Multimodal Distributions with Non-gaussian Modes. IEEE
   11th International Conference on Data Mining Workshops, 2011, 286-292.
   doi:10.1109/ICDMW.2011.135</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='rtheta.html'>rtheta</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>theta</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GMCM</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/rtheta.html'>rtheta</a></span>(<span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>)
@@ -211,15 +207,10 @@ correlation (properly scaled).</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -8,11 +8,13 @@
 
 <title>Simulation from Gaussian mixture (copula) models — SimulateGMCMData • GMCM</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Simulation from Gaussian mixture (copula) models — SimulateGMCMData" />
 
+<meta property="og:title" content="Simulation from Gaussian mixture (copula) models — SimulateGMCMData" />
 <meta property="og:description" content="Easy and fast simulation of data from Gaussian mixture copula models (GMCM)
 and Gaussian mixture models (GMM)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -83,7 +86,6 @@ and Gaussian mixture models (GMM)." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/AEBilgrau/GMCM">
@@ -110,16 +112,14 @@ and Gaussian mixture models (GMM)." />
     </div>
 
     <div class="ref-description">
-    
     <p>Easy and fast simulation of data from Gaussian mixture copula models (GMCM)
 and Gaussian mixture models (GMM).</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>SimulateGMCMData</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='no'>par</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>theta</span>, <span class='no'>...</span>)
 
 <span class='fu'>SimulateGMMData</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='rtheta.html'>rtheta</a></span>(<span class='no'>...</span>), <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -151,7 +151,7 @@ mixture distribution.</p></td>
 to <code><a href='rtheta.html'>rtheta</a></code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>SimulateGMCMData</code> returns a list of length 4 with elements:</p>
@@ -168,7 +168,6 @@ SimulateGMMData returns a list of length 3 with elements:
     realization comes.</p></dd>
   <dt>theta</dt><dd><p>As above and in <code><a href='rtheta.html'>rtheta</a></code>.</p></dd>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The functions provide simulation of \(n\) observations and
@@ -177,7 +176,6 @@ The <code>par</code> argument specifies the parameters of the Li et. al. (2011)
 GMCM. The <code>theta</code> argument specifies an arbitrary GMCM of
 Tewari et. al. (2011). Either one can be supplied. If both are missing,
 random parameters are chosen for the general model.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Li, Q., Brown, J. B. J. B., Huang, H., &amp; Bickel, P. J. (2011).
@@ -187,11 +185,9 @@ random parameters are chosen for the general model.</p>
   Characterization of Multimodal Distributions with Non-gaussian Modes.
   2011 IEEE 11th International Conference on Data Mining Workshops,
   286-292. doi:10.1109/ICDMW.2011.135</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='rtheta.html'>rtheta</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2</span>)
@@ -271,15 +267,10 @@ random parameters are chosen for the general model.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

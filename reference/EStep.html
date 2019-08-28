@@ -8,11 +8,13 @@
 
 <title>Steps of the EM algorithm for a Gaussian Mixture model — EStep • GMCM</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,11 +34,12 @@
 
 
 
-<meta property="og:title" content="Steps of the EM algorithm for a Gaussian Mixture model — EStep" />
 
+<meta property="og:title" content="Steps of the EM algorithm for a Gaussian Mixture model — EStep" />
 <meta property="og:description" content="Functions to perform the expectation and maximization steps of the EM
 algorithm for an multivariate Gaussian mixture model." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -83,7 +86,6 @@ algorithm for an multivariate Gaussian mixture model." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/AEBilgrau/GMCM">
@@ -110,16 +112,14 @@ algorithm for an multivariate Gaussian mixture model." />
     </div>
 
     <div class="ref-description">
-    
     <p>Functions to perform the expectation and maximization steps of the EM
 algorithm for an multivariate Gaussian mixture model.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>EStep</span>(<span class='no'>x</span>, <span class='no'>theta</span>)
 
 <span class='fu'>MStep</span>(<span class='no'>x</span>, <span class='no'>kappa</span>, <span class='kw'>meta.special.case</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -146,24 +146,21 @@ value of <code>EStep</code>.</p></td>
 <code>FALSE</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>EStep</code> returns a matrix of probabilities as <code>kappa</code>
   above.</p>
 <p><code>MStep</code> returns a list of parameters formatted as described in
   <code><a href='rtheta.html'>rtheta</a></code>.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Li, Q., Brown, J. B. J. B., Huang, H., &amp; Bickel, P. J. (2011).
   Measuring reproducibility of high-throughput experiments. The Annals of
   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='rtheta.html'>rtheta</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
@@ -248,13 +245,9 @@ value of <code>EStep</code>.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
