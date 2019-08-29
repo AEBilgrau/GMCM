@@ -34,6 +34,12 @@ str(ds)
 
 As can be seen, the `SimulateGMCMData` function returns a `list` containing the copula observations `u`, the unobserved process `z`, the latent groups `K`, and the `theta` used for simulation.
 
+Plotting the true copula realisations and colouring by the true classes shows what we intend to estimate:
+
+```{r data-plot}
+plot(ds$u, col = ds$K)
+```
+
 A ranking of `u` (or `z`) corresponds to what would be the data in a real application.
 
 ```{r select-data, include=TRUE, echo=TRUE}
@@ -93,8 +99,8 @@ The results are also displayed by plotting
 
 ```{r plot_results}
 par(mfrow = c(1,2))
-plot(u, col = membership, asp = 1) # Plot of copula values
-z <- GMCM:::qgmm.marginal(Uhat(x), theta = est_theta) # Estimate latent process
+plot(uhat, col = membership, asp = 1) # Plot of estimated copula values
+z <- GMCM:::qgmm.marginal(uhat, theta = est_theta) # Estimate latent process
 plot(z, col = membership, asp = 1) # Plot of estimated latent process
 ```
 
