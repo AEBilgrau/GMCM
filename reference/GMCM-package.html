@@ -178,13 +178,15 @@ extension of the features available in the <code>idr</code> package.</p>
 <span class='co'># Remember large values should be critical to the null!</span>
 <span class='no'>uhat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='fl'>1</span> - <span class='no'>u133VsExon</span>)
 
-<span class='co'># Visualizing P-values and the ranked and scaled P-values</span></div><span class='co'># NOT RUN {</span>
+<span class='co'># Visualizing P-values and the ranked and scaled P-values</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>u133VsExon</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"tomato"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"P-values"</span>,
      <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"P   (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"P   (Exon)"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>uhat</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"tomato"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Ranked P-values"</span>,
      <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P)   (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P)   (Exon)"</span>)
-<span class='co'># }</span><div class='input'>
+}
+
 <span class='co'># Fitting using BFGS</span>
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='no'>uhat</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>), <span class='kw'>pgtol</span> <span class='kw'>=</span> <span class='fl'>1e-2</span>,
                      <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"L-BFGS"</span>, <span class='kw'>positive.rho</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; iter   10 value -1213.470575
@@ -196,7 +198,7 @@ extension of the features available in the <code>idr</code> package.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>idr</span>$<span class='no'>K</span>) <span class='co'># 1 = irreproducible, 2 = reproducible</span></div><div class='output co'>#&gt; 
 #&gt;    1    2 
 #&gt; 4136  864 </div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># See clustering results</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>u133VsExon</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Classified genes"</span>,
@@ -205,7 +207,7 @@ extension of the features available in the <code>idr</code> package.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>uhat</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Classified genes"</span>,
      <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tomato"</span>, <span class='st'>"steelblue"</span>)[<span class='no'>idr</span>$<span class='no'>K</span>],
      <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P) (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P) (Exon)"</span>)
-<span class='co'># }</span></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

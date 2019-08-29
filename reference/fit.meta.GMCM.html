@@ -414,7 +414,7 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 #&gt; HI-REDUCTION     357 -122.832362 -122.832365
 #&gt; Exiting from Nelder Mead minimizer
 #&gt;     359 function evaluations used</div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Comparison with other optimization methods</span>
 <span class='co'># Optimization with simulated annealing</span>
 <span class='no'>sann.par</span> <span class='kw'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='no'>uhat</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"SANN"</span>,
@@ -425,7 +425,8 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 <span class='co'># The estimates agree nicely</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='st'>"True"</span> <span class='kw'>=</span> <span class='no'>true.par</span>, <span class='st'>"Start"</span> <span class='kw'>=</span> <span class='no'>init.par</span>,
       <span class='st'>"NM"</span> <span class='kw'>=</span> <span class='no'>nm.par</span>, <span class='st'>"SANN"</span> <span class='kw'>=</span> <span class='no'>sann.par</span>, <span class='st'>"PEM"</span> <span class='kw'>=</span> <span class='no'>pem.par</span>)
-<span class='co'># }</span><div class='input'>
+}
+
 <span class='co'># Get estimated cluster</span>
 <span class='no'>Khat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>uhat</span>, <span class='kw'>par</span> <span class='kw'>=</span> <span class='no'>nm.par</span>)$<span class='no'>Khat</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>uhat</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>Khat</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Clustering\nIDR &lt; 0.05"</span>)</div><div class='img'><img src='fit.meta.GMCM-1.png' alt='' width='700' height='433' /></div></pre>
