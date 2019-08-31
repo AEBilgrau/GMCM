@@ -1,8 +1,12 @@
 ---
-title: "Unsupervised clustering woth general GMCMs"
+title: "Unsupervised clustering with general GMCMs"
 author: "Anders Ellern Bilgrau"
 date: "2019-08-28"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Unsupervised clustering with general GMCMs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r knit-int, echo=FALSE, include=FALSE}

@@ -1,6 +1,12 @@
 ---
 title: "Meta analysis with special GMCMs"
+author: "Anders Ellern Bilgrau"
+date: "2019-08-31"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Meta analysis with special GMCMs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r knit-int, echo=FALSE, include=FALSE}
