@@ -2,6 +2,9 @@
 .Rhistory
 .RData
 
+data/freshVsFrozen.csv
+data/u133VsExon.csv
+
 src/*.o
 src/*.so
 src/*.dll
