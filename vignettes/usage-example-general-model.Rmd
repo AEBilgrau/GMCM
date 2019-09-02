@@ -26,8 +26,10 @@ library("GMCM")
 If **GMCM** is *not* installed, please uncomment the above line and rerun the script to install from CRAN.
 The development version can be installed from [GitHub following the instructions there](https://github.com/AEBilgrau/GMCM).
 
-## Simulate some toy data
-First, we simulate some toy data. We simulate 1000 observations which stems from one of 3 components. Each observations 2-dimensional.
+
+## Simulation of data
+First, we simulate some toy data. We wish to simulate, say, 1000 observations of 2-dimensiones each of which stems from one of 3 components.
+In order to do so, we construct a parameter object `theta` and simulate from the GMCM.
 
 ```{r sim-data, include=TRUE, echo=TRUE}
 true_theta <- rtheta(m = 3, d = 2)
@@ -38,7 +40,7 @@ str(ds)
 
 As can be seen, the `SimulateGMCMData` function returns a `list` containing the copula observations `u`, the unobserved process `z`, the latent groups `K`, and the `theta` used for simulation.
 
-Plotting the true copula realisations and colouring by the true classes shows what we intend to estimate:
+Plotting the true copula realisations and colouring by the true classes shows what we intend to estimate and recover:
 
 ```{r data-plot}
 plot(ds$u, col = ds$K)
