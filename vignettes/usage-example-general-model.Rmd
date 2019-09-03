@@ -14,6 +14,7 @@ set.seed(7869670)
 knitr::opts_knit$set(self.contained = TRUE)
 ```
 
+This is a quick tutorial for using the general GMCM for unsupervised clustering. 
 
 ## Initalisation
 The **GMCM**^[1][1]^ package is loaded.
