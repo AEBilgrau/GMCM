@@ -1,5 +1,11 @@
 pandoc: '2.2'
 pkgdown: 1.4.0.9000
 pkgdown_sha: 6b7b6357b84a387bfc7e46e9e7825335b9caa5b3
-articles: {}
+articles:
+  usage-example-general-model: usage-example-general-model.html
+  usage-example-special-model: usage-example-special-model.html
+  usage-shiny-graphical-interface: usage-shiny-graphical-interface.html
+urls:
+  reference: https://pkgdown.r-lib.org/reference
+  article: https://pkgdown.r-lib.org/articles
 

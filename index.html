@@ -10,7 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Fast Estimation of Gaussian Mixture Copula Models">
+<script src="pkgdown.js"></script><!-- docsearch --><script src="docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+<link href="docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Fast Estimation of Gaussian Mixture Copula Models">
 <meta property="og:description" content="Unsupervised Clustering and Meta-analysis using Gaussian Mixture
     Copula Models.">
 <meta name="twitter:card" content="summary">
@@ -47,6 +49,24 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/usage-example-general-model.html">Unsupervised clustering with general GMCMs</a>
+    </li>
+    <li>
+      <a href="articles/usage-example-special-model.html">Meta analysis with special GMCMs</a>
+    </li>
+    <li>
+      <a href="articles/usage-shiny-graphical-interface.html">GMCM shiny application}</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -56,7 +76,13 @@
   </a>
 </li>
       </ul>
+<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
+      </form>
+      
+    </div>
 <!--/.nav-collapse -->
   </div>
 <!--/.container -->
@@ -100,59 +126,7 @@
 <li>Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen, Hans Erik Johnsen, Karen Dybkaer, Martin Boegsted (2016). <strong>GMCM: Unsupervised Clustering and Meta-Analysis Using Gaussian Mixture Copula Models.</strong> Journal of Statistical Software, 70(2), 1-23. <a href="https://www.jstatsoft.org/article/view/v070i02">doi:10.18637/jss.v070.i02</a>
 </li>
 </ol>
-</div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="shiny-application" class="section level3">
-<h3 class="hasAnchor">
-<a href="#shiny-application" class="anchor"></a>Shiny application</h3>
-<p>A <a href="https://shiny.rstudio.com"><strong>shiny</strong></a> application is available online <a href="https://gmcm.shinyapps.io/GMCM/">shinyapps.io</a>. To start local instance of the application, make sure <strong>GMCM</strong> is installed and run</p>
-<p><code>{r, eval=FALSE} GMCM::runGMCM()</code></p>
-<p>The application suppots both the general GMCM for unsupervised clustering as well as the special GMCM for meta analysis.</p>
-</div>
-<div id="meta-analysis-example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#meta-analysis-example" class="anchor"></a>Meta Analysis example</h3>
-<p>This is a very short tutorial for using the special GMCM for meta analysis. To illustrate we load the <code>u133VsExon</code> dataset within the package. The dataset contains 19,577 <em>p</em>-values for the null hypothesis of no differential gene expression between two cell types for each of two different experiments called <code>u133</code> and <code>exon</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Load and show data</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(u133VsExon)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(u133VsExon, <span class="dt">n =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#                        u133         exon</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#ENSG00000265096 1.756104e-01 1.072572e-01</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#ENSG00000152495 1.779757e-03 6.741108e-10</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#ENSG00000198040 5.370574e-03 1.505019e-03</span></a></code></pre></div>
-<p>See e.g. <code><a href="reference/u133VsExon.html">?u133VsExon</a></code> for more information. Next, we subset the data, rank it, and visualize it:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Subsetting data to reduce computation time</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">u133VsExon &lt;-<span class="st"> </span>u133VsExon[<span class="dv">1</span><span class="op">:</span><span class="dv">5000</span>, ]</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Ranking and scaling, remember large values should be critical to the null!</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">uhat &lt;-<span class="st"> </span><span class="kw"><a href="reference/Uhat.html">Uhat</a></span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>u133VsExon)</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>))  <span class="co"># Visualizing P-values and the ranked P-values</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(u133VsExon, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">"tomato"</span>, <span class="dt">main =</span> <span class="st">"P-values"</span>,</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">     <span class="dt">xlab =</span> <span class="st">"P-value (U133)"</span>, <span class="dt">ylab =</span> <span class="st">"P-value (Exon)"</span>)</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(uhat, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">"tomato"</span>, <span class="dt">main =</span> <span class="st">"Ranked P-values"</span>,</a>
-<a class="sourceLine" id="cb4-11" data-line-number="11">     <span class="dt">xlab =</span> <span class="st">"rank(1-P) (U133)"</span>, <span class="dt">ylab =</span> <span class="st">"rank(1-P) (Exon)"</span>)</a></code></pre></div>
-<p>Here each point represent a gene. The genes in the lower left of the first panel and correspondingly in the upper right of the second panel are the seemingly reproducible genes. They have a low <em>p</em>-value and thus a high rank and <em>both</em> experiments. Next, we do the actual fit using the core user function <code>fit.meta.GMCM</code> with a L-BFGS-like procedure and subsequently compute the IDR values:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fit &lt;-<span class="st"> </span><span class="kw"><a href="reference/fit.meta.GMCM.html">fit.meta.GMCM</a></span>(uhat, <span class="dt">init.par =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">                     <span class="dt">method =</span> <span class="st">"L-BFGS"</span>, <span class="dt">pgtol =</span> <span class="fl">1e-2</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">                     </a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">idr &lt;-<span class="st"> </span><span class="kw"><a href="reference/get.IDR.html">get.IDR</a></span>(uhat, <span class="dt">par =</span> fit)  <span class="co"># Compute IDR values and classify</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(idr<span class="op">$</span>K)  <span class="co"># Show results, 1 = irreproducible, 2 = reproducible</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#   1    2 </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#4136  864 </span></a></code></pre></div>
-<p>Where we see that 864 of the 5000 genes are deemed reproducible by the model at the default 0.05 threshold. The clustering results and the reproducible genes can be visualized in the following manner:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(u133VsExon, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">main =</span> <span class="st">"Classified genes"</span>,</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">     <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"tomato"</span>, <span class="st">"steelblue"</span>)[idr<span class="op">$</span>K],</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">     <span class="dt">xlab =</span> <span class="st">"P-value (U133)"</span>, <span class="dt">ylab =</span> <span class="st">"P-value (Exon)"</span>)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(uhat, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">main =</span> <span class="st">"Classified genes"</span>,</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">     <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"tomato"</span>, <span class="st">"steelblue"</span>)[idr<span class="op">$</span>K],</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">     <span class="dt">xlab =</span> <span class="st">"rank(1-P) (U133)"</span>, <span class="dt">ylab =</span> <span class="st">"rank(1-P) (Exon)"</span>)</a></code></pre></div>
-<p>The model indeed capture genes in the upper right (of the second panel) and classify them as reproducible.</p>
 <hr>
-</div>
 </div>
 
   </div>
@@ -184,7 +158,8 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Anders Ellern Bilgrau <br><small class="roles"> Maintainer </small>  </li>
+<li>Anders Ellern Bilgrau <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0001-9875-2902" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
@@ -214,7 +189,20 @@
 </div>
 
   
-
-
-  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script><script>
+  docsearch({
+    
+    
+    apiKey: 'API_KEY',
+    indexName: 'INDEX_NAME',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+</body>
 </html>
