@@ -1,0 +1,34 @@
+---
+title: "GMCM shiny application}"
+author: "Anders Ellern Bilgrau"
+date: "2019-07-20"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{GMCM shiny application}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+A graphical user interface to the **GMCM** package is available both on- and
+offline through the [**shiny**](https://shiny.rstudio.com) package.
+The application supports both general GMCMs for unsupervised clustering as
+well as the special GMCMs for reproduciblity analysis.
+The online
+**shiny** application is available at
+[gmcm.shinyapps.io/GMCM/](https://gmcm.shinyapps.io/GMCM/). 
+Alternatively, if you do an local offline instance of the
+application, make sure **GMCM** is installed and run
+
+```{r, eval=FALSE}
+GMCM::runGMCM()
+```
+
+The local version is handy if data cannot be submitted to the online website.
+
+
+

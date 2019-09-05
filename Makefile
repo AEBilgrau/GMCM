@@ -15,7 +15,10 @@ PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGSRC  := $(shell basename `pwd`)
 
-all: prereq build install check
+all: prereq build install check site
+
+site:
+	Rscript -e "pkgdown::build_site()"
 
 docs:
 	Rscript -e "devtools::document(roclets=c('rd', 'namespace'))"
