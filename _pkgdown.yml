@@ -39,7 +39,7 @@ articles:
   - '`usage-shiny-graphical-interface`'
 
 # Docsearch
-url: https://pkgdown.r-lib.org
+url: https://bilgrau.com
 template:
   params:
     docsearch:
