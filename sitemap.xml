@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pkgdown.r-lib.org/index.html</loc>
+    <loc>https://bilgrau.com/index.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/EMAlgorithm.html</loc>
+    <loc>https://bilgrau.com/reference/EMAlgorithm.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/EStep.html</loc>
+    <loc>https://bilgrau.com/reference/EStep.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/GMCM-package.html</loc>
+    <loc>https://bilgrau.com/reference/GMCM-package.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/PseudoEMAlgorithm.html</loc>
+    <loc>https://bilgrau.com/reference/PseudoEMAlgorithm.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/SimulateGMCMData.html</loc>
+    <loc>https://bilgrau.com/reference/SimulateGMCMData.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/Uhat.html</loc>
+    <loc>https://bilgrau.com/reference/Uhat.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/as.theta.html</loc>
+    <loc>https://bilgrau.com/reference/as.theta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/choose.theta.html</loc>
+    <loc>https://bilgrau.com/reference/choose.theta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/classify.html</loc>
+    <loc>https://bilgrau.com/reference/classify.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/colSds.html</loc>
+    <loc>https://bilgrau.com/reference/colSds.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/cummean.html</loc>
+    <loc>https://bilgrau.com/reference/cummean.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/dgmcm.loglik.html</loc>
+    <loc>https://bilgrau.com/reference/dgmcm.loglik.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/dmvnormal.html</loc>
+    <loc>https://bilgrau.com/reference/dmvnormal.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/fit.full.GMCM.html</loc>
+    <loc>https://bilgrau.com/reference/fit.full.GMCM.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/fit.meta.GMCM.html</loc>
+    <loc>https://bilgrau.com/reference/fit.meta.GMCM.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/freshVsFrozen.html</loc>
+    <loc>https://bilgrau.com/reference/freshVsFrozen.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/full2meta.html</loc>
+    <loc>https://bilgrau.com/reference/full2meta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/get.IDR.html</loc>
+    <loc>https://bilgrau.com/reference/get.IDR.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/is.theta.html</loc>
+    <loc>https://bilgrau.com/reference/is.theta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/logit.html</loc>
+    <loc>https://bilgrau.com/reference/logit.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/plot.theta.html</loc>
+    <loc>https://bilgrau.com/reference/plot.theta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/print.theta.html</loc>
+    <loc>https://bilgrau.com/reference/print.theta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/rho.transform.html</loc>
+    <loc>https://bilgrau.com/reference/rho.transform.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/rtheta.html</loc>
+    <loc>https://bilgrau.com/reference/rtheta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/runGMCM.html</loc>
+    <loc>https://bilgrau.com/reference/runGMCM.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/summary.theta.html</loc>
+    <loc>https://bilgrau.com/reference/summary.theta.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/tt.html</loc>
+    <loc>https://bilgrau.com/reference/tt.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/reference/u133VsExon.html</loc>
+    <loc>https://bilgrau.com/reference/u133VsExon.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/articles/usage-example-general-model.html</loc>
+    <loc>https://bilgrau.com/articles/usage-example-general-model.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/articles/usage-example-special-model.html</loc>
+    <loc>https://bilgrau.com/articles/usage-example-special-model.html</loc>
   </url>
   <url>
-    <loc>https://pkgdown.r-lib.org/articles/usage-shiny-graphical-interface.html</loc>
+    <loc>https://bilgrau.com/articles/usage-shiny-graphical-interface.html</loc>
   </url>
 </urlset>

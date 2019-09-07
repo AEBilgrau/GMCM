@@ -6,6 +6,6 @@ articles:
   usage-example-special-model: usage-example-special-model.html
   usage-shiny-graphical-interface: usage-shiny-graphical-interface.html
 urls:
-  reference: https://pkgdown.r-lib.org/reference
-  article: https://pkgdown.r-lib.org/articles
+  reference: https://bilgrau.com/reference
+  article: https://bilgrau.com/articles
 

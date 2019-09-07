@@ -2,21 +2,21 @@
   "index_name": "INDEX_NAME",
   "start_urls": [
     {
-      "url": "https://pkgdown.r-lib.org/index.html",
+      "url": "https://bilgrau.com/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "https://pkgdown.r-lib.org/reference",
+      "url": "https://bilgrau.com/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "https://pkgdown.r-lib.org/articles",
+      "url": "https://bilgrau.com/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "https://pkgdown.r-lib.org/sitemap.xml"
+    "https://bilgrau.com/sitemap.xml"
   ],
   "selectors": {
     "homepage": {
