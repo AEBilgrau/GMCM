@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bilgrau.com/index.html</loc>
+    <loc>https://bilgrau.com/GMCM//index.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/EMAlgorithm.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/EMAlgorithm.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/EStep.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/EStep.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/GMCM-package.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/GMCM-package.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/PseudoEMAlgorithm.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/PseudoEMAlgorithm.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/SimulateGMCMData.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/SimulateGMCMData.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/Uhat.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/Uhat.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/as.theta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/as.theta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/choose.theta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/choose.theta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/classify.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/classify.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/colSds.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/colSds.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/cummean.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/cummean.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/dgmcm.loglik.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/dgmcm.loglik.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/dmvnormal.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/dmvnormal.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/fit.full.GMCM.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/fit.full.GMCM.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/fit.meta.GMCM.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/fit.meta.GMCM.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/freshVsFrozen.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/freshVsFrozen.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/full2meta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/full2meta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/get.IDR.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/get.IDR.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/is.theta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/is.theta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/logit.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/logit.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/plot.theta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/plot.theta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/print.theta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/print.theta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/rho.transform.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/rho.transform.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/rtheta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/rtheta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/runGMCM.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/runGMCM.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/summary.theta.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/summary.theta.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/tt.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/tt.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/reference/u133VsExon.html</loc>
+    <loc>https://bilgrau.com/GMCM//reference/u133VsExon.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/articles/usage-example-general-model.html</loc>
+    <loc>https://bilgrau.com/GMCM//articles/usage-example-general-model.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/articles/usage-example-special-model.html</loc>
+    <loc>https://bilgrau.com/GMCM//articles/usage-example-special-model.html</loc>
   </url>
   <url>
-    <loc>https://bilgrau.com/articles/usage-shiny-graphical-interface.html</loc>
+    <loc>https://bilgrau.com/GMCM//articles/usage-shiny-graphical-interface.html</loc>
   </url>
 </urlset>

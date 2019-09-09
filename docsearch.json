@@ -2,21 +2,21 @@
   "index_name": "INDEX_NAME",
   "start_urls": [
     {
-      "url": "https://bilgrau.com/index.html",
+      "url": "https://bilgrau.com/GMCM//index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "https://bilgrau.com/reference",
+      "url": "https://bilgrau.com/GMCM//reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "https://bilgrau.com/articles",
+      "url": "https://bilgrau.com/GMCM//articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "https://bilgrau.com/sitemap.xml"
+    "https://bilgrau.com/GMCM//sitemap.xml"
   ],
   "selectors": {
     "homepage": {
