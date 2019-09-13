@@ -1,5 +1,5 @@
 ---
-title: "GMCM shiny application}"
+title: "GMCM shiny application"
 author: "Anders Ellern Bilgrau"
 date: "2019-07-20"
 output: html_document
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 A graphical user interface to the **GMCM** package is available both on- and
 offline through the [**shiny**](https://shiny.rstudio.com) package.
 The application supports both general GMCMs for unsupervised clustering as
-well as the special GMCMs for reproduciblity analysis.
+well as the special GMCMs for reproducibility analysis.
 The online
 **shiny** application is available at
 [gmcm.shinyapps.io/GMCM/](https://gmcm.shinyapps.io/GMCM/). 
