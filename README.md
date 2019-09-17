@@ -27,7 +27,8 @@ and
 [**RcppArmadillo**](https://github.com/RcppCore/RcppArmadillo) 
 to evaluate the likelihood function quickly and arrive at a parameter estimate using either standard numerical optimization routines or an pseudo EM algorithm.
 
-Additional information, documentation, help, and examples can be found by running `help(package = "GMCM")`  or `?GMCM` in **R**. 
+Additional information, documentation, help, and examples can be found by [here](https://aebilgrau.github.io/GMCM
+) or by running `?GMCM` in **R**. 
 The paper [1] is also found as a vignette by `vignette("GMCM-JStatSoft")`.
 The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 
