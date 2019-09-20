@@ -5,11 +5,12 @@
 #' general model.
 #'
 #' @inheritParams fit.full.GMCM
-#' @param theta A list of parameters as defined in \code{\link{rtheta}}. For t
-#'   this function, it will usually be the output of
+#' @param theta A \code{list} of parameters as defined in \code{\link{rtheta}}.
+#'   For t this function, it will usually be the output of
 #'   \code{\link{fit.full.GMCM}}.
-#' @param method Which goodness of fit to compute. Default is "AIC".
-#' @param k A integer specifiing the default used constant "k" in AIC. See
+#' @param method A \code{character} of length 1 which specifies the goodness of
+#'   fit to compute. Default is "AIC". "BIC" is also a option.
+#' @param k A integer specifying the default used constant "k" in AIC. See
 #'   \code{\link{AIC}}.
 #'
 #' @return A single number giving the goodness of fit as requested.

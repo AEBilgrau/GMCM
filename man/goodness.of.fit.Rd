@@ -7,8 +7,8 @@
 goodness.of.fit(theta, u, method = c("AIC", "BIC"), k = 2)
 }
 \arguments{
-\item{theta}{A list of parameters as defined in \code{\link{rtheta}}. For t
-this function, it will usually be the output of
+\item{theta}{A \code{list} of parameters as defined in \code{\link{rtheta}}.
+For t this function, it will usually be the output of
 \code{\link{fit.full.GMCM}}.}
 
 \item{u}{An \code{n} by \code{d} matrix of marginally uniform observations.
@@ -16,9 +16,10 @@ Rows corresponds to observations and columns to the dimensions of the
 variables. I.e. these are often ranked and scaled test statistics or other
 observations.}
 
-\item{method}{Which goodness of fit to compute. Default is "AIC".}
+\item{method}{A \code{character} of length 1 which specifies the goodness of
+fit to compute. Default is "AIC". "BIC" is also a option.}
 
-\item{k}{A integer specifiing the default used constant "k" in AIC. See
+\item{k}{A integer specifying the default used constant "k" in AIC. See
 \code{\link{AIC}}.}
 }
 \value{
