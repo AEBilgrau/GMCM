@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Logit and inverse logit transforms — inv.logit • GMCM</title>
+<title>Goodness of fit for the general GMCM — goodness.of.fit • GMCM</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,10 @@
 
 
 
-<meta property="og:title" content="Logit and inverse logit transforms — inv.logit" />
-<meta property="og:description" content="The logit transformation (i.e. the log of the odds) and its inverse (also
-called expit)." />
+<meta property="og:title" content="Goodness of fit for the general GMCM — goodness.of.fit" />
+<meta property="og:description" content="Compute goodness of fit as described in AIC. The number of
+parameters used correspond to the number of variables free to vary in the
+general model." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,94 +125,86 @@ called expit)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Logit and inverse logit transforms</h1>
-    <small class="dont-index">Source: <a href='https://github.com/AEBilgrau/GMCM/blob/master/R/inv.logit.R'><code>R/inv.logit.R</code></a>, <a href='https://github.com/AEBilgrau/GMCM/blob/master/R/logit.R'><code>R/logit.R</code></a></small>
-    <div class="hidden name"><code>logit.Rd</code></div>
+    <h1>Goodness of fit for the general GMCM</h1>
+    <small class="dont-index">Source: <a href='https://github.com/AEBilgrau/GMCM/blob/master/R/goodness.of.fit.R'><code>R/goodness.of.fit.R</code></a></small>
+    <div class="hidden name"><code>goodness.of.fit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The logit transformation (i.e. the log of the odds) and its inverse (also
-called expit).</p>
+    <p>Compute goodness of fit as described in <code><a href='https://rdrr.io/r/stats/AIC.html'>AIC</a></code>. The number of
+parameters used correspond to the number of variables free to vary in the
+general model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>inv.logit</span>(<span class='no'>a</span>)
-
-<span class='fu'>logit</span>(<span class='no'>p</span>)</pre>
+    <pre class="usage"><span class='fu'>goodness.of.fit</span>(<span class='no'>theta</span>, <span class='no'>u</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AIC"</span>, <span class='st'>"BIC"</span>), <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>a</th>
-      <td><p>A vector of real values.</p></td>
+      <th>theta</th>
+      <td><p>A <code>list</code> of parameters as defined in <code><a href='rtheta.html'>rtheta</a></code>.
+For t this function, it will usually be the output of
+<code><a href='fit.full.GMCM.html'>fit.full.GMCM</a></code>.</p></td>
     </tr>
     <tr>
-      <th>p</th>
-      <td><p>A vector of probabilities.</p></td>
+      <th>u</th>
+      <td><p>An <code>n</code> by <code>d</code> matrix of marginally uniform observations.
+Rows corresponds to observations and columns to the dimensions of the
+variables. I.e. these are often ranked and scaled test statistics or other
+observations.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>A <code>character</code> of length 1 which specifies the goodness of
+fit to compute. Default is "AIC". "BIC" is also a option.</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p>A integer specifying the default used constant "k" in AIC. See
+<code><a href='https://rdrr.io/r/stats/AIC.html'>AIC</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>inv.logit</code> returns a vector of the same length as <code>a</code> of the
-  inverse logit transformed values. This function is also known as the
-  expit-function.</p>
-<p><code>logit</code> returns a vector of the same length as <code>p</code> with
-  the log odds of <code>p</code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Used in <code><a href='tt.html'>tt</a></code> and <code><a href='tt.html'>inv.tt</a></code>.</p></div>
+    <p>A single number giving the goodness of fit as requested.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>100</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GMCM</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/logit.html'>logit</a></span>(<span class='no'>p</span>))</div><div class='output co'>#&gt;   [1]  1.17124004 -2.73307596  0.13589128  0.22656430  1.73226516 -0.52895520
-#&gt;   [7] -3.39776953 -0.92333308  0.53148654  0.31963554  1.70903332  2.89205423
-#&gt;  [13]  0.89173935  3.56262043  2.51504408  1.28588764 -0.11846614  2.70628791
-#&gt;  [19] -0.18067360  1.84397139  1.41233384 -1.13523080 -0.29661387  2.38224288
-#&gt;  [25]  2.48892173 -4.71837983  3.96134363 -0.36109652 -0.91885810  0.23026889
-#&gt;  [31] -1.82905135  0.39944136  2.27459479 -0.36245971  1.17291355 -0.84549689
-#&gt;  [37]  1.17520691  0.20845762 -1.60525954  0.42354994  0.26596496  0.55775771
-#&gt;  [43]  1.77845340  0.48369242 -0.58797794  1.98873009  0.54505126 -1.85354961
-#&gt;  [49] -4.56834790  0.05953090  2.01778537 -0.72098594 -2.41264624  3.71719947
-#&gt;  [55] -2.81819807  1.05452860  2.23904432 -0.88386826  1.20483362 -0.47596303
-#&gt;  [61] -0.92488928 -1.27201961 -0.67622820 -1.64434775  1.48185158  2.99505022
-#&gt;  [67]  1.83451335  1.81598767 -0.08303569 -1.76620162 -1.09114118 -0.68235429
-#&gt;  [73] -0.64222593 -1.18857857  0.69832310 -0.74342810 -0.29970802 -0.92944502
-#&gt;  [79] -1.65686514  2.38471191 -1.52888197 -0.40650082 -0.03604368  1.65464709
-#&gt;  [85] -0.01713842 -0.59370940 -0.80735636 -0.81797730 -0.29034178  0.92755510
-#&gt;  [91]  0.30295922  2.46049503  0.81189883  0.26063944  3.00783397 -2.26731363
-#&gt;  [97]  5.21053374  1.02812470  0.84357037  2.07038493</div><div class='input'><span class='no'>p</span> - <span class='kw pkg'>GMCM</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/logit.html'>inv.logit</a></span>(<span class='no'>a</span>)</div><div class='output co'>#&gt;   [1]  0.000000e+00 -6.938894e-18  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;   [6]  0.000000e+00  6.938894e-18  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [11]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [16]  0.000000e+00  0.000000e+00  0.000000e+00 -5.551115e-17  0.000000e+00
-#&gt;  [21]  0.000000e+00  0.000000e+00 -5.551115e-17  0.000000e+00  0.000000e+00
-#&gt;  [26] -1.734723e-18  0.000000e+00  5.551115e-17  0.000000e+00  0.000000e+00
-#&gt;  [31] -2.775558e-17  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [36]  0.000000e+00  1.110223e-16  1.110223e-16  0.000000e+00  0.000000e+00
-#&gt;  [41]  0.000000e+00 -1.110223e-16  0.000000e+00 -1.110223e-16 -5.551115e-17
-#&gt;  [46]  0.000000e+00  0.000000e+00  0.000000e+00 -1.734723e-18  0.000000e+00
-#&gt;  [51]  1.110223e-16  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [56]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [61]  0.000000e+00  0.000000e+00  0.000000e+00  2.775558e-17  0.000000e+00
-#&gt;  [66]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [71]  0.000000e+00  0.000000e+00  5.551115e-17 -2.775558e-17  0.000000e+00
-#&gt;  [76]  0.000000e+00  0.000000e+00  0.000000e+00  2.775558e-17  0.000000e+00
-#&gt;  [81]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  5.551115e-17
-#&gt;  [86] -5.551115e-17  0.000000e+00  0.000000e+00  5.551115e-17  0.000000e+00
-#&gt;  [91]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-#&gt;  [96]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00 -1.110223e-16</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>u133VsExon</span>)
+<span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='no'>u133VsExon</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>19577</span>, <span class='fl'>2000</span>), ])  <span class='co'># Subset for faster fitting</span>
+<span class='no'>theta1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='no'>u</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"L-BFGS"</span>)</div><div class='output co'>#&gt; iter   10 value -516.933962
+#&gt; iter   20 value -517.631433
+#&gt; iter   30 value -517.648687
+#&gt; final  value -517.648688 
+#&gt; converged</div><div class='input'><span class='no'>theta2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='no'>u</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"L-BFGS"</span>)</div><div class='output co'>#&gt; iter   10 value -517.850361
+#&gt; iter   20 value -519.842937
+#&gt; iter   30 value -521.666691
+#&gt; iter   40 value -524.466780
+#&gt; iter   50 value -524.973285
+#&gt; iter   60 value -525.118018
+#&gt; iter   70 value -525.150249
+#&gt; iter   80 value -525.187378
+#&gt; iter   90 value -525.247141
+#&gt; iter  100 value -525.330933
+#&gt; iter  110 value -525.368686
+#&gt; iter  120 value -525.371502
+#&gt; final  value -525.372367 
+#&gt; converged</div><div class='input'>
+<span class='co'># AIC</span>
+<span class='fu'>goodness.of.fit</span>(<span class='no'>theta1</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; [1] -1019.297</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='no'>theta2</span>, <span class='no'>u</span>)</div><div class='output co'>#&gt; [1] -1022.745</div><div class='input'>
+<span class='co'># BIC</span>
+<span class='fu'>goodness.of.fit</span>(<span class='no'>theta1</span>, <span class='no'>u</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"BIC"</span>)</div><div class='output co'>#&gt; [1] -974.4902</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='no'>theta2</span>, <span class='no'>u</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"BIC"</span>)</div><div class='output co'>#&gt; [1] -944.3321</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
   </div>
 </div>
 
