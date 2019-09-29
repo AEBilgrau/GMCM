@@ -5,7 +5,9 @@
 
 \section{Changes in version 1.4}{
   \itemize{
-    \item Added a shiny application for the package. Available at \href{https://gmcm.shinyapps.io/GMCM/}{online} or via \code{GMCM::runGMCM()} for a local instance.
+    \item AIC and BIC goodness of fit estimation is now available via the function
+      \code{goodness.of.fit}.
+    \item Added a graphical interface  for the package via a shiny application. Available at \href{https://gmcm.shinyapps.io/GMCM/}{online} or via \code{GMCM::runGMCM()} for a local instance.
     \item Added \code{classify()} function to ease classification after fitting a general GMCM.
     \item Added vignettes and \href{https://AEBilgrau.github.io/GMCM/}{documentation website} via \href{https://cran.r-project.org/package=pkgdown}{the pkgdown package}.
   }
