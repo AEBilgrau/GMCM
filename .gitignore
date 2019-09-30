@@ -13,6 +13,7 @@ src-x64/
 
 *.DS_Store
 inst/doc
+inst/NEWS.html
 
 vignettes/*.out
 vignettes/*.bbl
@@ -42,3 +43,5 @@ inst/shiny/rsconnect
 docs/
 
 *Rplots*.pdf
+
+

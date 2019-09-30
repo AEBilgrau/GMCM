@@ -11,6 +11,7 @@ debug.R
 
 Makefile
 
+
 # rsconnect library
 inst/shiny/rsconnect
 
@@ -21,3 +22,4 @@ data/u133VsExon.csv
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+inst/NEWS.html
