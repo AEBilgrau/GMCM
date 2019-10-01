@@ -37,3 +37,6 @@ articles:
   - '`usage-example-general-model`'
   - '`usage-example-special-model`'
   - '`usage-shiny-graphical-interface`'
+
+news:
+  - one_page: true

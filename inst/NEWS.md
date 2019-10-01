@@ -1,6 +1,6 @@
-#  News for **GMCM**
-
 # Version 1.4 (development)
+
+## Major changes
 
  * AIC and BIC goodness of fit estimation is now available via the function
      `goodness.of.fit`.
@@ -16,10 +16,14 @@
 
 # Version 1.3.2 (2018-03-12)
 
+## Minor changes
+
  *  Hotfix due to new default RNG after R version 3.5.3.
 
 
 # Version 1.3.1 (2018-02-14)
+
+## Minor changes
 
  *  By request, `EMAlgorithm` is now exported to the user interface with slight 
       tweaks. Better docs and examples are also provided.
@@ -29,6 +33,8 @@
  *  Minor improvements to documentation.
 
 # Version 1.3 (2018-12-05)
+
+## Major changes
 
  *  Fixed issue with optim wrappers for the likelihood (`vector2theta` and 
       `theta2vector`) causing the first anchored component to be scaled 
@@ -48,6 +54,8 @@
 
 # Version 1.2.4 (2017-01-13 )
 
+## Minor changes
+
  *  Added vignette.
  *  Minor tweaks to documentation.
  *  Updated affiliations.
@@ -56,6 +64,8 @@
 
 # Version 1.2.3 (2016-03-30)
 
+## Minor changes
+
  *  Updated citation information and manuscript.
  *  Minor updates to documentation.
  *  Patch due to changes in \pkg{testthat} and published manuscript.
@@ -63,16 +73,22 @@
 
 # Version 1.2.2 (2015-08-05)
 
+## Minor changes
+
  *  Patch due to changes in \pkg{RcppArmadillo}. No visible user changes.
 
 
 # Version 1.2.1 (2015-04-20)
+
+## Minor changes
 
  *  Hotfix due to failure of unit tests on sparc solaris. No visible user
       changes.
 
 
 # Version 1.2 (2015-04-14)
+
+## Major changes
 
  *  Added the GMCM package vignette. The article is to appear in the
       Journal of Statistical Software.
@@ -83,11 +99,15 @@
 
 # Version 1.1.1 (2014-10-07)
 
+## Minor changes
+
  *  Fixed a small testing issue on CRAN for old R versions.
       (Used `anyNA` on R versions older than 3.1.0).
 
 
 # Version 1.1 (2014-10-01)
+
+## Major changes
 
  *  This NEWS.Rd file have been added!
  *  The \cpkg{GMCM}-package is now using the in-source documentation
@@ -117,11 +137,15 @@
 
 # Version 1.0.1 (2014-05-30)
 
+## Minor changes
+
  *  `pgmm_marginal` and other functions in `src/GMCM.cpp` have
       been rewritten to address memory issues. \cpkg{GMCM} should now be more
       stable and faster.
 
 
 # Version 1.0 (2014-02-07)
+
+## Hurray!
 
  *  First version on CRAN.
