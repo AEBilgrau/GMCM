@@ -13,7 +13,7 @@ src-x64/
 
 *.DS_Store
 inst/doc
-inst/NEWS.html
+*NEWS.html
 
 vignettes/*.out
 vignettes/*.bbl
