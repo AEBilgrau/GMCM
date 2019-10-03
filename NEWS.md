@@ -32,7 +32,7 @@
  *  Fixed broken link in vignette.
  *  Minor improvements to documentation.
 
-# Version 1.3 (2018-12-05)
+# Version 1.3.0 (2018-12-05)
 
 ## Major changes
 
