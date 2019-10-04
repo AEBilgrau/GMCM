@@ -56,8 +56,8 @@ As such, it may be unstable. Be sure that you have the
 if you wish to install the package from the source.
 
 
-When installed, run `GMCM::runGMCM()` to launch a local instance of the GMCM shiny application also available online [shinyapps.io](https://gmcm.shinyapps.io/GMCM/)).
-Run `news(package = "GMCM")` to view the latest changes of GMCM.
+When installed, run `GMCM::runGMCM()` to launch a local instance of the GMCM shiny application also available [online at shinyapps.io](https://gmcm.shinyapps.io/GMCM/).
+Run `news(package = "GMCM")` to view the latest changes of GMCM or visit [here](http://AEBilgrau.github.io/GMCM/news).
 
 For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](https://cran.r-project.org/src/contrib/Archive/GMCM/)
 
