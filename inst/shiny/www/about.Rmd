@@ -21,6 +21,10 @@ underlying methods employed for unsupervised clustering
 [here](https://github.com/AEBilgrau/GMCM#GMCM) and the references therein.
 
 ### Availability 
+Online documentation for the package can be found at
+
+> http://aebilgrau.github.io/GMCM
+
 The application is available online at 
 
 > https://gmcm.shinyapps.io 

@@ -13,7 +13,8 @@ offers R functions that perform high-dimensional meta-analysis
 [(Li et. al., 2011)](http://arxiv.org/pdf/1110.4705.pdf) 
 and general unsupervised cluster analysis 
 [(Tewari et. al., 2011)](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6137392) 
-using Gaussian Copula Mixture Models in a very fast manner [[1](https://www.jstatsoft.org/article/view/v070i02)].
+using Gaussian Copula Mixture Models in a very fast manner [[1](https://www.jstatsoft.org/article/view/v070i02)]. 
+Online documentation is available [here.](http://AEBilgrau.github.io/GMCM)
 
 Gaussian copula mixture models (GMCMs) are a very flexible alternative to Gaussian mixture models in unsupervised cluster analysis for continuous data where non-Gaussian clusters are present. 
 GMCMs model the ranks of the observed data and are thus invariant to monotone increasing transformations of the data, i.e. they are semi-parametric and only the ordering of the data is important. 
@@ -54,7 +55,6 @@ Note, that this version is in development and is likely different from the versi
 As such, it may be unstable. Be sure that you have the 
 [package development prerequisites](https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites) 
 if you wish to install the package from the source.
-
 
 When installed, run `GMCM::runGMCM()` to launch a local instance of the GMCM shiny application also available [online at shinyapps.io](https://gmcm.shinyapps.io/GMCM/).
 Run `news(package = "GMCM")` to view the latest changes of GMCM or visit [here](http://AEBilgrau.github.io/GMCM/news).
