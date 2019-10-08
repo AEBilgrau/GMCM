@@ -31,12 +31,12 @@ reference:
 
 # Articles
 articles:
-- title: All vignettes
-  desc:
+- title: Articles and vignettes
+  desc: 'Introductions, examples, and help'
   contents:
-  - '`usage-example-general-model`'
-  - '`usage-example-special-model`'
-  - '`usage-shiny-graphical-interface`'
+  - usage-example-general-model
+  - usage-example-special-model
+  - usage-shiny-graphical-interface
 
 news:
   - one_page: true
