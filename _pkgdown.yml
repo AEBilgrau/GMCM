@@ -34,6 +34,7 @@ articles:
 - title: Articles and vignettes
   desc: 'Introductions, examples, and help'
   contents:
+  - pkgdown/jss
   - usage-example-general-model
   - usage-example-special-model
   - usage-shiny-graphical-interface
