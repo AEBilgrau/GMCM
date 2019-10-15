@@ -104,9 +104,9 @@
     
     
 <p>This is a quick tutorial for using the general GMCM for unsupervised clustering.</p>
-<div id="initalisation" class="section level2">
+<div id="initialization" class="section level2">
 <h2 class="hasAnchor">
-<a href="#initalisation" class="anchor"></a>Initalisation</h2>
+<a href="#initialization" class="anchor"></a>Initialization</h2>
 <p>The <strong>GMCM</strong><sup><a href="http://doi.org/10.18637/jss.v070.i02">1</a></sup> package is loaded.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#install.packages("GMCM")  # Uncomment to install the GMCM package</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"GMCM"</span>)</a></code></pre></div>
@@ -115,7 +115,7 @@
 <div id="simulation-of-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#simulation-of-data" class="anchor"></a>Simulation of data</h2>
-<p>First, we simulate some toy data. We wish to simulate, say, 1000 observations of 2-dimensiones each of which stems from one of 3 components. In order to do so, we construct a parameter object <code>theta</code> and simulate from the GMCM.</p>
+<p>First, we simulate some toy data. We wish to simulate, say, 1000 observations of 2-dimensions each of which stems from one of 3 components. In order to do so, we construct a parameter object <code>theta</code> and simulate from the GMCM.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">true_theta &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rtheta.html">rtheta</a></span>(<span class="dt">m =</span> <span class="dv">3</span>, <span class="dt">d =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(true_theta)</a></code></pre></div>
 <p><img src="usage-example-general-model_files/figure-html/sim-data-1.png" width="700"></p>
@@ -140,7 +140,7 @@
 ##   .. ..$ comp3: num [1:2, 1:2] 11.2561 -0.0595 -0.0595 10.2816
 ##   ..- attr(*, "class")= chr "theta"</code></pre>
 <p>As can be seen, the <code>SimulateGMCMData</code> function returns a <code>list</code> containing the copula observations <code>u</code>, the unobserved process <code>z</code>, the latent groups <code>K</code>, and the <code>theta</code> used for simulation.</p>
-<p>Plotting the true copula realisations and colouring by the true classes shows what we intend to estimate and recover:</p>
+<p>Plotting the true copula realizations and coloring by the true classes shows what we intend to estimate and recover:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(ds<span class="op">$</span>u, <span class="dt">col =</span> ds<span class="op">$</span>K)</a></code></pre></div>
 <p><img src="usage-example-general-model_files/figure-html/data-plot-1.png" width="700"></p>
 <p>A ranking of <code>u</code> (or <code>z</code>) corresponds to what would be the data in a real application.</p>
@@ -319,7 +319,7 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#initalisation">Initalisation</a></li>
+<li><a href="#initialization">Initialization</a></li>
       <li><a href="#simulation-of-data">Simulation of data</a></li>
       <li><a href="#initial-parameters">Initial parameters</a></li>
       <li><a href="#model-fitting">Model fitting</a></li>
