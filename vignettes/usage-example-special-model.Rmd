@@ -17,7 +17,7 @@ opts_knit$set(self.contained = TRUE)
 
 This is a quick tutorial for using the special GMCM for meta analysis. 
 
-## Initalisation
+## Initialization
 The **GMCM**^[1][1]^ package is loaded.
 
 ```{r load-packages, include=TRUE}
@@ -42,7 +42,7 @@ head(x, n = 4)
 See `help("u133VsExon")` for more information.
 
 Next, we subset the data to simply reduce computation time.
-After that, we will rankk it, and visualize it.
+After that, we will rank it, and visualize it.
 
 ```{r}
 x <- x[1:5000, ]
