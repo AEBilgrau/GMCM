@@ -104,9 +104,9 @@
     
     
 <p>This is a quick tutorial for using the special GMCM for meta analysis.</p>
-<div id="initalisation" class="section level2">
+<div id="initialization" class="section level2">
 <h2 class="hasAnchor">
-<a href="#initalisation" class="anchor"></a>Initalisation</h2>
+<a href="#initialization" class="anchor"></a>Initialization</h2>
 <p>The <strong>GMCM</strong><sup><a href="http://doi.org/10.18637/jss.v070.i02">1</a></sup> package is loaded.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#install.packages("GMCM")  # Uncomment to install the GMCM package</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"GMCM"</span>)</a></code></pre></div>
@@ -124,7 +124,7 @@
 ## ENSG00000198040 0.0053705738 1.505019e-03
 ## ENSG00000229092 0.0006693361 6.755118e-05</code></pre>
 <p>See <code><a href="https://rdrr.io/r/utils/help.html">help("u133VsExon")</a></code> for more information.</p>
-<p>Next, we subset the data to simply reduce computation time. After that, we will rankk it, and visualize it.</p>
+<p>Next, we subset the data to simply reduce computation time. After that, we will rank it, and visualize it.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">x &lt;-<span class="st"> </span>x[<span class="dv">1</span><span class="op">:</span><span class="dv">5000</span>, ]</a></code></pre></div>
 <p>The values above are p-values where <em>small</em> values indicate strong evidence—contrary to what is expected by the special model. In the special model, <em>large</em> values should be critical to the null hypothesis.</p>
 <p>Therefore we ranks and scale 1 - p:</p>
@@ -258,7 +258,7 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#initalisation">Initalisation</a></li>
+<li><a href="#initialization">Initialization</a></li>
       <li><a href="#loading-data">Loading data</a></li>
       <li><a href="#initial-parameters">Initial parameters</a></li>
       <li><a href="#model-fitting">Model fitting</a></li>
