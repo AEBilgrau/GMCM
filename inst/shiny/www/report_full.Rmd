@@ -13,7 +13,7 @@ opts_knit$set(self.contained = TRUE)
 ```
 
 
-## Initalisation
+## Initialization
 The **GMCM**^[1][1]^ package is loaded.
 
 ```{r load-packages, include=TRUE}
@@ -79,7 +79,7 @@ kappa <- get.prob(u, theta) # Compute component probabilities
 colnames(kappa) <- paste0("comp", seq_len(ncol(kappa))) # Add names
 comps <- apply(kappa, 1, which.max) # Find index of maximum entry for each row
 
-{{ifelse(full_class_type == "thres_prob", c("# Set to NA if probability is not sufficently large\n", sprintf("ok_max <- apply(kappa, 1, max) > %.3f\n", full_thres_prob), "comps[!ok_max] <- NA\n"), "")}}
+{{ifelse(full_class_type == "thres_prob", c("# Set to NA if probability is not sufficiently large\n", sprintf("ok_max <- apply(kappa, 1, max) > %.3f\n", full_thres_prob), "comps[!ok_max] <- NA\n"), "")}}
 cols <- topo.colors(ncol(kappa))[comps]
 cols[is.na(comps)] <- "gray"
 res <- data.frame(kappa, comp = comps, col = cols,

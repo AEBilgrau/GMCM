@@ -13,7 +13,7 @@ opts_knit$set(self.contained = TRUE)
 ```
 
 
-## Initalisation
+## Initialization
 The **GMCM**^[1][1]^ package is loaded.
 
 ```{r load-packages, include=TRUE}
@@ -45,8 +45,8 @@ x <- ds[, {{cput(model_cols)}}]
 head(x, n = 2)
 ```
 
-The rescaling is modified if the 'large values indicate strong evidence' checkbox was checked or not.
-The checkbox was `{{ ifelse(meta_large_vals, "checked.", "unchecked, so we reverse ranking.") }}`
+The rescaling is modified if the 'large values indicate strong evidence' check box was checked or not.
+The check box was `{{ ifelse(meta_large_vals, "checked.", "unchecked, so we reverse ranking.") }}`
 
 ```{r preprocess-data}
 {{ ifelse(meta_large_vals, "u <- Uhat(x)", "u <- Uhat(-x)") }}
