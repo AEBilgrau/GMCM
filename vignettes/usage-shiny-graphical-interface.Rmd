@@ -2,7 +2,7 @@
 title: "GMCM shiny application"
 author: "Anders Ellern Bilgrau"
 date: "2019-07-20"
-output: html_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{GMCM shiny application}
   %\VignetteEngine{knitr::rmarkdown}
