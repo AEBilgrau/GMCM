@@ -108,7 +108,7 @@ Aalborg University Hospital\\
 
 \begin{document}
 
-<<initalization, echo = FALSE, results = 'hide', message = FALSE>>=
+<<initialization, echo = FALSE, results = 'hide', message = FALSE>>=
 library("knitr")
 opts_chunk$set(concordance = TRUE, tidy = FALSE,
                strip.white = TRUE, dev = 'pdf',

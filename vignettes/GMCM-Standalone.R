@@ -307,7 +307,7 @@ if (!exists("speed.res") | recompute) {
 ################################################################################
 
 # The structure of this section is as follows:
-# 1. Some initalization of parameters and aux. functions
+# 1. Some initialization of parameters and aux. functions
 # 2. Simulate the "n.sims" datasets and starting parameters
 # 3. Fit the special model using NM to the generated datasets
 # 4. Fit the special model using SANN ...

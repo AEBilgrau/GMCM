@@ -237,7 +237,7 @@ shinyServer(function(input, output, session) {
 
   # __GENERAL GMCM_________________________________________________________ ----
 
-  # Initalise reactive values ----
+  # Initialise reactive values ----
   full_start_theta <- reactiveVal(list(pie = NULL, mu = NULL, sigma = NULL))
   in_pie <- reactiveVal()
   in_mu <- reactiveVal()
@@ -1044,7 +1044,7 @@ shinyServer(function(input, output, session) {
 
   # __SPECIAL GMCM ________________________________________________________ ----
 
-  # Initalise reactive values ----
+  # Initialise reactive values ----
   meta_fit <- reactiveVal() # Holds fitted values
   meta_output_dataset <- reactiveVal()
   meta_rv <- reactiveValues(fit_time = 0,
