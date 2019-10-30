@@ -15,19 +15,17 @@
 #'
 #' @return A single number giving the goodness of fit as requested.
 #' @examples
-#' set.seed(1)
+#' set.seed(2)
 #' data(u133VsExon)
-#' u <- Uhat(u133VsExon[sample(19577, 2000), ])  # Subset for faster fitting
+#' u <- Uhat(u133VsExon[sample(19577, 500), ])  # Subset for faster fitting
 #' theta1 <- fit.full.GMCM(u, m = 2, method = "L-BFGS")
-#' theta2 <- fit.full.GMCM(u, m = 3, method = "L-BFGS")
-#'
-#' # AIC
-#' goodness.of.fit(theta1, u)
-#' goodness.of.fit(theta2, u)
-#'
-#' # BIC
+#' goodness.of.fit(theta1, u)  # AIC
 #' goodness.of.fit(theta1, u, method = "BIC")
+#' \dontrun{
+#' theta2 <- fit.full.GMCM(u, m = 3, method = "L-BFGS")
+#' goodness.of.fit(theta2, u)
 #' goodness.of.fit(theta2, u, method = "BIC")
+#' }
 #' @export
 goodness.of.fit <- function(theta, u, method = c("AIC", "BIC"), k = 2) {
   method <- match.arg(method)
