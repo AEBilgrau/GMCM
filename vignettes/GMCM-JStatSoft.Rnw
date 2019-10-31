@@ -674,8 +674,8 @@ The package \pkg{jpeg} was used to read, manipulate, and write the JPEG image fr
 \centering
 \begin{tabular}[b]{c}
 \includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7}.jpg}\\
-\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7.gmcm}.jpg}\\
-\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7.km}.jpg}\\
+\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7_gmcm}.jpg}\\
+\includegraphics[keepaspectratio=true,height=0.27\textheight]{{Figure7_km}.jpg}\\
 \end{tabular}
 \caption{\label{FigImgSeg}Top: The original $\Sexpr{round(mm*nn*10^-6,1)}$ Mpx JPEG image of the space shuttle Atlantis' climb to orbit during mission STS-27 in December 1988. Middle: The image segmented into $\Sexpr{n.cols}$ colours by the GMCM. Bottom: The image segmented into $\Sexpr{n.cols}$ colours by $k$-means clustering. Image credit: NASA.}
 \end{figure}

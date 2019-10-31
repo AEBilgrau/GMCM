@@ -918,7 +918,7 @@ pic.rgbmat <- cbind(red   = c(pic[,,1]),
 # Segmentation using GMCM
 #
 
-gmcm.file <- gsub(".jpg$", ".gmcm.RData", fig7.file)
+gmcm.file <- gsub(".jpg$", "_gmcm.RData", fig7.file)
 # Approximate runtime: 50 minutes
 if (!exists("seg.res.gmcm") | recompute) {
   best.loglik <- -Inf
@@ -983,7 +983,7 @@ seg.gmcm[,,3] <- matrix(gmcm.rgbmat[,3], nn, mm)
 # Segmentation using K-means clustering
 #
 
-km.file <- gsub(".jpg$", ".km.RData", fig7.file)
+km.file <- gsub(".jpg$", "_km.RData", fig7.file)
 if (!exists("seg.res.km") | recompute) {
   system.time(
     seg.res.km <-
