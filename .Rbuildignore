@@ -7,11 +7,9 @@ vignettes/GMCM-JStatSoft.blg
 vignettes/GMCM-JStatSoft-concordance.tex
 vignettes/STS-27.jpg
 vignettes/pkgdown/jss.Rmd
-fix.R
-debug.R
+vignettes/pkgdown*
 
 Makefile
-
 
 # rsconnect library
 inst/shiny/rsconnect
@@ -24,3 +22,4 @@ data/u133VsExon.csv
 ^docs$
 ^pkgdown$
 inst/NEWS.html
+

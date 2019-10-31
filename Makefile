@@ -1,7 +1,7 @@
 ################################################################################
-# Makefile for building GMCM package
+# Makefile for building the GMCM package
 #
-# Use for preparing package
+# Used for preparing package for CRAN submission
 ################################################################################
 
 # Inspried by
@@ -36,6 +36,7 @@ check:
 	R CMD check --as-cran $(PKGNAME)_$(PKGVERS).tar.gz
 
 prereq:
+	Rscript -e 'Sys.setenv(R_GSCMD = "C:\\Program Files\\gs\\gs9.26\\bin\\gswin64c.exe")' \
 	Rscript -e 'stopifnot(Sys.getenv("R_GSCMD") != "")' \
 	Rscript -e 'stopifnot(rmarkdown::pandoc_available())'
 
