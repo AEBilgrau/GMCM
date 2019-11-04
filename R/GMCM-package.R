@@ -134,7 +134,7 @@ NULL
 #' Boegsted M, Johnsen HE (2015). "Stable Phenotype Of B-Cell Subsets Following
 #' Cryopreservation and Thawing of Normal Human Lymphocytes Stored in a Tissue
 #' Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.
-#' @keywords datasets, data
+#' @keywords data
 #' @examples
 #' data(u133VsExon)
 #' str(u133VsExon)
@@ -183,7 +183,7 @@ NULL
 #' Boegsted M, Johnsen HE (2015). "Stable Phenotype Of B-Cell Subsets Following
 #' Cryopreservation and Thawing of Normal Human Lymphocytes Stored in a Tissue
 #' Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.
-#' @keywords datasets, data
+#' @keywords data
 #' @examples
 #' data(freshVsFrozen)
 #' str(freshVsFrozen)
