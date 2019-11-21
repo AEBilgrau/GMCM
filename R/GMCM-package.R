@@ -150,17 +150,17 @@ NULL
 #' Reproducibility between Fresh and Frozen B-cell subtypes
 #'
 #' This dataset contains a \code{data.frame} of \eqn{t}-scores (from a Linear
-#' mixed effects model) and \eqn{p}-values for
+#' mixed effects model) and \eqn{p}-values for the
 #' differential expression between pre (Im, N) and post germinal (M, PB) centre
 #' cells within peripheral blood.
 #' The first and second column contain the the test for the hypothesis of no
-#' differentially expression between pre and post germinal cells for the
+#' differential expression between pre and post germinal cells for the
 #' freshly sorted and gene profiled cells.
 #' The third and fourth column contain the the test for the hypothesis of no
-#' differentially expression between pre and post germinal cells for the
+#' differential expression between pre and post germinal cells for the
 #' cryopreserved (frozen), thawed, sorted, and gene profiled cells.
 #' The fifth and sixth column contain the the test for the hypothesis of no
-#' differentially expression between fresh and frozen cells.
+#' differential expression between fresh and frozen cells.
 #' The used array type was Affymetrix Human Exon 1.0 ST microarray.
 #'
 #' @docType data
