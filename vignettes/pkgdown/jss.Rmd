@@ -10,7 +10,7 @@ pkgdown:
   as_is: true
 ---
 
-The PDF can be downloaded at https://www.jstatsoft.org/index.php/jss/article/view/v070i02/v70i02.pdf
+If the PDF download does not start automatically, it can also be downloaded at https://www.jstatsoft.org/index.php/jss/article/view/v070i02/v70i02.pdf
 
 <object data="https://www.jstatsoft.org/index.php/jss/article/view/v070i02/v70i02.pdf" type="application/pdf" width="800px" height="1000px">
     <embed src="https://www.jstatsoft.org/index.php/jss/article/view/v070i02/v70i02.pdf">
