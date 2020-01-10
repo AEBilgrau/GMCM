@@ -1,5 +1,9 @@
 destination: docs
 
+template:
+  params:
+    ganalytics: UA-155943904-1
+
 # Reference page
 reference:
 - title: Core functions
