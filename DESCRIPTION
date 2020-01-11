@@ -19,7 +19,7 @@ Authors@R: c(
            role = c("ths", "ctb"))
     )
 Maintainer: Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
-URL: https://github.com/AEBilgrau/GMCM
+URL: http://AEBilgrau.github.io/GMCM, https://github.com/AEBilgrau/GMCM
 BugReports: https://github.com/AEBilgrau/GMCM/issues
 License: GPL (>=2)
 KeepSource: yes
