@@ -1,4 +1,10 @@
-# Version 1.4 (development)
+# Version 1.4.1 (development)
+
+## Minor changes
+
+ * Minor improvements to docs
+ 
+# Version 1.4 (2019-11-05)
 
 ## Major changes
 
