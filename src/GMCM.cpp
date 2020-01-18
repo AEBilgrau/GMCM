@@ -204,70 +204,7 @@ arma::colvec approx_pnorm(arma::colvec& z, const double mu, const double sd) {
   return ans;
 }
 
-// Approximate univariate Gaussian CDF, applied marginally
-// // [[Rcpp::export]]
-// Rcpp::NumericVector approx_pnorm2(Rcpp::NumericVector& z,
-//                                  const double mu,
-//                                  const double sd) {
-//   const int n = z.size();
-//   const double a1 =  0.3480242;
-//   const double a2 = -0.0958798;
-//   const double a3 =  0.7478556;
-//   const double p  =  0.47047;
-//   const double sqrt2 = 1.4142136;
 
-//   Rcpp::NumericVector ans = Rcpp::no_init(n);
-//   for (int i = 0; i < n; ++i) {
-//     double zi = (z(i) - mu)/(sd*sqrt2);
-//     if (zi < 0.0) {
-//       zi = -1.0*zi;
-//       const double t = 1.0/(1.0 + p*zi);
-//       ans(i) = 0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
-//     } else {
-//       const double t = 1.0/(1.0 + p*zi);
-//       ans(i) = 1.0-0.5*(a1*t + a2*square(t) + a3*cube(t))*exp(-square(zi));
-//     }
-//   }
-//   return ans;
-// }
-
-// Approximate univariate Gaussian CDF, applied marginally
-//// [[Rcpp::export]]
-//Rcpp::NumericVector approx_pnorm3(Rcpp::NumericVector& z,
-//                                 double mu,
-//                                 double sd) {
-//  int n = z.size();
-//  double exp_y;
-//  double a1 = 1.5976;
-//  double a2 = 0.070565992;
-//  double zi;
-//
-//  NumericVector ans = no_init(n);
-//  for (int i=0; i<n; ++i) {
-//    zi = (z(i) - mu)/sd;
-//    exp_y = exp(a1*zi + a2*pow(zi, 3));
-//    ans(i) = 1 - pow(1 + exp_y, -1);
-//  }
-//  return ans;
-//}
-
-// Approximate univariate Gaussian CDF, applied marginally
-//Rcpp::NumericVector approx_pnorm4(Rcpp::NumericVector& z,
-//                                 double mu,
-//                                 double sd) {
-//  int n = z.size();
-//  double exp_minusy;
-//  double fac = 1.5976;
-//  double zi;
-//
-//  NumericVector ans = no_init(n);
-//  for (int i=0; i<n; i++) {
-//    zi = (z(i) - mu)/sd;
-//    exp_minusy = exp(-fac*zi*(1 + 0.04417*pow(zi,2)));
-//    ans(i) = 1/(exp_minusy + 1);
-//  }
-//  return ans;
-//}
 
 // Approximate marginals of Gaussian mixture model CDF
 // [[Rcpp::export]]
