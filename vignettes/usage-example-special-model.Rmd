@@ -1,7 +1,5 @@
 ---
 title: "Meta analysis with special GMCMs"
-author: "Anders Ellern Bilgrau"
-date: "2019-08-31"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Meta analysis with special GMCMs}

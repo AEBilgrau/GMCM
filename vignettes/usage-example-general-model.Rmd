@@ -1,7 +1,5 @@
 ---
 title: "Unsupervised clustering with general GMCMs"
-author: "Anders Ellern Bilgrau"
-date: "2019-08-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Unsupervised clustering with general GMCMs}
