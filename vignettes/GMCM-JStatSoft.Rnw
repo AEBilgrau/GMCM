@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{An Introduction to GMCM}
+%\VignetteIndexEntry{GMCM: Gaussian Mixture Copula Models}
 %\VignetteKeywords{GMCM, clustering, meta analysis}
 %\VignetteEngine{knitr::knitr}
 %\VignettePackage{GMCM}

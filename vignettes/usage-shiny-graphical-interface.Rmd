@@ -1,7 +1,5 @@
 ---
 title: "GMCM shiny application"
-author: "Anders Ellern Bilgrau"
-date: "2019-07-20"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{GMCM shiny application}

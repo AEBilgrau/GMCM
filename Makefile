@@ -17,7 +17,7 @@ PKGSRC  := $(shell basename `pwd`)
 
 all: prereq build install check site
 
-site:
+site: clean_rplots
 	Rscript -e "pkgdown::build_site()"
 
 docs:
@@ -46,3 +46,6 @@ shinydeploy:
 clean:
 	cd ..;\
 	rm -r $(PKGNAME).Rcheck
+
+clean_rplots:
+	Rscript -e 'file.remove(list.files(pattern = "Rplots[0-9]+\\.pdf", full.names = TRUE, recursive = TRUE))'

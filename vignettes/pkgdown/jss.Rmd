@@ -1,10 +1,8 @@
 ---
-title: An Introduction to GMCM
-author: 
-date:
+title: "GMCM: Gaussian Mixture Copula Models"
 output: html_document
 vignette: >
-  %\VignetteIndexEntry{An Introduction to GMCM}
+  %\VignetteIndexEntry{GMCM: Gaussian Mixture Copula Models}
   %\VignettePackage{GMCM}
 pkgdown:
   as_is: true
