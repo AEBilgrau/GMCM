@@ -23,10 +23,11 @@ Alternatively, if you do an local offline instance of the
 application, make sure **GMCM** is installed and run
 
 ```{r, eval=FALSE}
-GMCM::runGMCM()
+library("GMCM")
+runGMCM()
 ```
 
-The local version is handy if data cannot be submitted to the online website.
+The local version is handy if data cannot be submitted to the online website or faster responses is wanted.
 
 
 
