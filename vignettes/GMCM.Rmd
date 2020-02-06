@@ -1,0 +1,24 @@
+---
+title: "An introduction to GMCM"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{An introduction to GMCM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+GMCMs are 
+
+
+
+
+## Installation 
+
+
+## Usage
+
+
