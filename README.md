@@ -12,17 +12,17 @@ GMCM
 
 The [**GMCM** package](https://cran.r-project.org/package=GMCM) 
 ([Bilgrau et. al., 2016](https://www.jstatsoft.org/article/view/v070i02))
-offers R functions that perform high-dimensional meta-analysis 
+offers R functions that very fast perform high-dimensional meta-analysis 
 [(Li et. al., 2011)](http://arxiv.org/pdf/1110.4705.pdf) 
 and general unsupervised cluster analysis 
 [(Tewari et. al., 2011)](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6137392) 
-using Gaussian Copula Mixture Models in a very fast manner. 
+using Gaussian Copula Mixture Models. 
 Online documentation is available [here.](http://AEBilgrau.github.io/GMCM)
 
-Gaussian copula mixture models (GMCMs) are a very flexible alternative to Gaussian mixture models in unsupervised cluster analysis for continuous data where non-Gaussian clusters are present. 
-GMCMs model the ranks of the observed data and are thus invariant to monotone increasing transformations of the data, i.e. they are semi-parametric and only the ordering of the data is important. 
-Alternatively, a special-case of the GMCMs can be used for a novel meta-analysis approach in high-dimensional settings. 
-In this context, the model tries to cluster results which agree and do not agree on statistical evidence into a reproducible and irreproducible group.
+Gaussian copula mixture models (GMCMs) are a very flexible alternative to regular Gaussian mixture models (GMMs) in unsupervised cluster analysis of continuous data where non-normal clusters are present. 
+GMCMs models the *ranks* of the observed data and are thus invariant to monotone increasing transformations of the data, i.e. they are semi-parametric and only the ordering of the data is important providing needed flexibility. 
+A special-case of GMCMs can be used for a novel meta-analysis approach in high-dimensional settings. 
+In this context, the model tries to cluster results into two groups which agree and do not agree on statistical evidence. These two groups corresponds to a reproducible and irreproducible group.
 
 The optimization of the complicated likelihood function is difficult, however. 
 **GMCM** utilizes 
@@ -33,7 +33,7 @@ to evaluate the likelihood function quickly and arrive at a parameter estimate u
 
 Additional information, documentation, help, and examples can be found by [here](https://aebilgrau.github.io/GMCM
 ) or by running `?GMCM` in **R**. 
-The paper [1] is also found as a vignette by `vignette("GMCM-JStatSoft")`.
+The paper[1] is also found as a vignette by `vignette("GMCM-JStatSoft")`  or [the official website online.](https://www.jstatsoft.org/article/view/v070i02).
 The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 
 ## Installation
@@ -63,6 +63,21 @@ When installed, run `GMCM::runGMCM()` to launch a local instance of the GMCM shi
 Run `news(package = "GMCM")` to view the latest changes of GMCM or visit [here](http://AEBilgrau.github.io/GMCM/news).
 
 For previous versions of **GMCM**, visit the old [releases at GitHub](https://github.com/AEBilgrau/GMCM/releases) or the [archive at CRAN.](https://cran.r-project.org/src/contrib/Archive/GMCM/)
+
+
+## Usage
+As noted above, the usage of GMCM comes in two different applications; one general and one special.
+
+#### Special GMCMs
+An example of using the package to fit special GMCMs for meta analysis of is described here `vignette("usage-example-special-model")`. This model is a specific special case of the general GMCMs. 
+
+#### General GMCMs
+An example of unsupervised clustering using the package is found with `vignette("usage-example-general-model")` for general purposes. 
+
+#### Shiny
+The package also provides a graphical user interface via Shiny for both its uses. See
+`vignette("usage-shiny-graphical-interface")`.
+
 
 ## References
 
