@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -63,7 +67,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -92,26 +96,8 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/pkgdown/jss.html">GMCM: Gaussian Mixture Copula Models</a>
-    </li>
-    <li>
-      <a href="../articles/usage-example-general-model.html">Unsupervised clustering with general GMCMs</a>
-    </li>
-    <li>
-      <a href="../articles/usage-example-special-model.html">Meta analysis with special GMCMs</a>
-    </li>
-    <li>
-      <a href="../articles/usage-shiny-graphical-interface.html">GMCM shiny application</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -119,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/AEBilgrau/GMCM">
+  <a href="https://github.com/AEBilgrau/GMCM/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -137,12 +123,12 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/AEBilgrau/GMCM/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="version-1-4-1-development" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.4.1">
 <a href="#version-1-4-1-development" class="anchor"></a>Version 1.4.1 (development)<small> Unreleased </small>
 </h1>
 <div id="minor-changes" class="section level2">
@@ -154,7 +140,7 @@
 </div>
 </div>
     <div id="version-1-4-2019-11-05" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.4">
 <a href="#version-1-4-2019-11-05" class="anchor"></a>Version 1.4 (2019-11-05)<small> 2019-11-05 </small>
 </h1>
 <div id="major-changes" class="section level2">
@@ -169,7 +155,7 @@
 </div>
 </div>
     <div id="version-1-3-2-2018-03-12" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.3.2">
 <a href="#version-1-3-2-2018-03-12" class="anchor"></a>Version 1.3.2 (2018-03-12)<small> 2019-03-12 </small>
 </h1>
 <div id="minor-changes-1" class="section level2">
@@ -181,7 +167,7 @@
 </div>
 </div>
     <div id="version-1-3-1-2018-02-14" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.3.1">
 <a href="#version-1-3-1-2018-02-14" class="anchor"></a>Version 1.3.1 (2018-02-14)<small> 2019-02-14 </small>
 </h1>
 <div id="minor-changes-2" class="section level2">
@@ -196,7 +182,7 @@
 </div>
 </div>
     <div id="version-1-3-0-2018-12-05" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.3.0">
 <a href="#version-1-3-0-2018-12-05" class="anchor"></a>Version 1.3.0 (2018-12-05)<small> 2018-12-15 </small>
 </h1>
 <div id="major-changes-1" class="section level2">
@@ -217,7 +203,7 @@
 </div>
 </div>
     <div id="version-1-2-4-2017-01-13" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.4">
 <a href="#version-1-2-4-2017-01-13" class="anchor"></a>Version 1.2.4 (2017-01-13 )<small> 2017-01-13 </small>
 </h1>
 <div id="minor-changes-3" class="section level2">
@@ -232,7 +218,7 @@
 </div>
 </div>
     <div id="version-1-2-3-2016-03-30" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.3">
 <a href="#version-1-2-3-2016-03-30" class="anchor"></a>Version 1.2.3 (2016-03-30)<small> 2016-03-30 </small>
 </h1>
 <div id="minor-changes-4" class="section level2">
@@ -246,7 +232,7 @@
 </div>
 </div>
     <div id="version-1-2-2-2015-08-05" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.2">
 <a href="#version-1-2-2-2015-08-05" class="anchor"></a>Version 1.2.2 (2015-08-05)<small> 2015-08-05 </small>
 </h1>
 <div id="minor-changes-5" class="section level2">
@@ -258,7 +244,7 @@
 </div>
 </div>
     <div id="version-1-2-1-2015-04-20" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.1">
 <a href="#version-1-2-1-2015-04-20" class="anchor"></a>Version 1.2.1 (2015-04-20)<small> 2015-04-20 </small>
 </h1>
 <div id="minor-changes-6" class="section level2">
@@ -270,7 +256,7 @@
 </div>
 </div>
     <div id="version-1-2-2015-04-14" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2">
 <a href="#version-1-2-2015-04-14" class="anchor"></a>Version 1.2 (2015-04-14)<small> 2015-04-13 </small>
 </h1>
 <div id="major-changes-2" class="section level2">
@@ -285,7 +271,7 @@
 </div>
 </div>
     <div id="version-1-1-1-2014-10-07" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.1.1">
 <a href="#version-1-1-1-2014-10-07" class="anchor"></a>Version 1.1.1 (2014-10-07)<small> 2014-10-06 </small>
 </h1>
 <div id="minor-changes-7" class="section level2">
@@ -297,7 +283,7 @@
 </div>
 </div>
     <div id="version-1-1-2014-10-01" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.1">
 <a href="#version-1-1-2014-10-01" class="anchor"></a>Version 1.1 (2014-10-01)<small> 2014-10-01 </small>
 </h1>
 <div id="major-changes-3" class="section level2">
@@ -319,7 +305,7 @@
 </div>
 </div>
     <div id="version-1-0-1-2014-05-30" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.0.1">
 <a href="#version-1-0-1-2014-05-30" class="anchor"></a>Version 1.0.1 (2014-05-30)<small> 2014-05-29 </small>
 </h1>
 <div id="minor-changes-8" class="section level2">
@@ -332,7 +318,7 @@
 </div>
 </div>
     <div id="version-1-0-2014-02-07" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.0">
 <a href="#version-1-0-2014-02-07" class="anchor"></a>Version 1.0 (2014-02-07)<small> 2014-01-31 </small>
 </h1>
 <div id="hurray" class="section level2">
@@ -346,25 +332,9 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-1-4-1-development">1.4.1</a></li>
-        <li><a href="#version-1-4-2019-11-05">1.4</a></li>
-        <li><a href="#version-1-3-2-2018-03-12">1.3.2</a></li>
-        <li><a href="#version-1-3-1-2018-02-14">1.3.1</a></li>
-        <li><a href="#version-1-3-0-2018-12-05">1.3.0</a></li>
-        <li><a href="#version-1-2-4-2017-01-13">1.2.4</a></li>
-        <li><a href="#version-1-2-3-2016-03-30">1.2.3</a></li>
-        <li><a href="#version-1-2-2-2015-08-05">1.2.2</a></li>
-        <li><a href="#version-1-2-1-2015-04-20">1.2.1</a></li>
-        <li><a href="#version-1-2-2015-04-14">1.2</a></li>
-        <li><a href="#version-1-1-1-2014-10-07">1.1.1</a></li>
-        <li><a href="#version-1-1-2014-10-01">1.1</a></li>
-        <li><a href="#version-1-0-1-2014-05-30">1.0.1</a></li>
-        <li><a href="#version-1-0-2014-02-07">1.0</a></li>
-      </ul>
-    </div>
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -376,7 +346,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
 </div>
 
       </footer>
