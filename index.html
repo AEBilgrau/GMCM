@@ -88,7 +88,7 @@
 <h3 class="hasAnchor">
 <a href="#fast-estimation-of-gaussian-mixture-copula-models" class="anchor"></a>Fast estimation of Gaussian Mixture Copula Models</h3>
 <p>The <a href="https://cran.r-project.org/package=GMCM"><strong>GMCM</strong> package</a> (<a href="https://www.jstatsoft.org/article/view/v070i02">Bilgrau et. al., 2016</a>) offers R functions that perform high-dimensional meta-analysis <a href="http://arxiv.org/pdf/1110.4705.pdf">(Li et. al., 2011)</a> and general unsupervised cluster analysis <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6137392">(Tewari et. al., 2011)</a> using Gaussian Copula Mixture Models in a very fast manner. Online documentation is available <a href="http://AEBilgrau.github.io/GMCM">here.</a></p>
-<p>Gaussian copula mixture models (GMCMs) are a very flexible alternative to Gaussian mixture models in unsupervised cluster analysis for continuous data where non-Gaussian clusters are present. GMCMs model the ranks of the observed data and are thus invariant to monotone increasing transformations of the data, i.e.Â they are semi-parametric and only the ordering of the data is important. Alternatively, a special-case of the GMCMs can be used for a novel meta-analysis approach in high-dimensional settings. In this context, the model tries to cluster results which agree and do not agree on statistical evidence into a reproducible and irreproducible group.</p>
+<p>Gaussian copula mixture models (GMCMs) are a very flexible alternative to Gaussian mixture models in unsupervised cluster analysis for continuous data where non-Gaussian clusters are present. GMCMs model the ranks of the observed data and are thus invariant to monotone increasing transformations of the data, i.e. they are semi-parametric and only the ordering of the data is important. Alternatively, a special-case of the GMCMs can be used for a novel meta-analysis approach in high-dimensional settings. In this context, the model tries to cluster results which agree and do not agree on statistical evidence into a reproducible and irreproducible group.</p>
 <p>The optimization of the complicated likelihood function is difficult, however. <strong>GMCM</strong> utilizes <a href="https://github.com/RcppCore/Rcpp"><strong>Rcpp</strong></a> and <a href="https://github.com/RcppCore/RcppArmadillo"><strong>RcppArmadillo</strong></a> to evaluate the likelihood function quickly and arrive at a parameter estimate using either standard numerical optimization routines or an pseudo EM algorithm.</p>
 <p>Additional information, documentation, help, and examples can be found by <a href="https://aebilgrau.github.io/GMCM">here</a> or by running <code><a href="reference/GMCM-package.html">?GMCM</a></code> in <strong>R</strong>. The paper [1] is also found as a vignette by <code>vignette("GMCM-JStatSoft")</code>. The core user functions of <strong>GMCM</strong> are <code>fit.full.GMCM</code> and <code>fit.meta.GMCM</code>.</p>
 </div>
@@ -169,7 +169,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
