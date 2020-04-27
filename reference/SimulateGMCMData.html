@@ -231,7 +231,7 @@ random parameters are chosen for the general model.</p>
 #&gt;   .. ..$ comp3: num [1:2, 1:2] 7.73 1.37 1.37 4.81
 #&gt;   ..- attr(*, "class")= chr "theta"</div><div class='input'>
 <span class='co'># Plotting the simulated data</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>gmm.data1</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmm.data1</span>$<span class='no'>K</span>)</div><div class='img'><img src='SimulateGMCMData-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gmm.data1</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmm.data1</span>$<span class='no'>K</span>)</div><div class='img'><img src='SimulateGMCMData-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Simulation from the GMCM</span>
 <span class='no'>gmcm.data1</span> <span class='kw'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>gmcm.data1</span>)</div><div class='output co'>#&gt; List of 4
@@ -256,8 +256,8 @@ random parameters are chosen for the general model.</p>
 #&gt;   ..- attr(*, "class")= chr "theta"</div><div class='input'>
 <span class='co'># Plotthe 2nd simulation</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>gmcm.data1</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data1</span>$<span class='no'>K</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>gmcm.data1</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data1</span>$<span class='no'>K</span>)</div><div class='img'><img src='SimulateGMCMData-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gmcm.data1</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data1</span>$<span class='no'>K</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gmcm.data1</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data1</span>$<span class='no'>K</span>)</div><div class='img'><img src='SimulateGMCMData-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Simulation from the special case of GMCM</span>
 <span class='no'>theta</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='full2meta.html'>meta2full</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.7</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>0.7</span>), <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>3</span>)
 <span class='no'>gmcm.data2</span> <span class='kw'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='no'>theta</span>)
@@ -279,8 +279,8 @@ random parameters are chosen for the general model.</p>
 #&gt;   ..- attr(*, "class")= chr "theta"</div><div class='input'>
 <span class='co'># Plotting the 3rd simulation</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>gmcm.data2</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data2</span>$<span class='no'>K</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>gmcm.data2</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data2</span>$<span class='no'>K</span>)</div><div class='img'><img src='SimulateGMCMData-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gmcm.data2</span>$<span class='no'>z</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data2</span>$<span class='no'>K</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>gmcm.data2</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>gmcm.data2</span>$<span class='no'>K</span>)</div><div class='img'><img src='SimulateGMCMData-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

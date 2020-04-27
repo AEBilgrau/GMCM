@@ -103,7 +103,7 @@
 <a href="#simulation-of-data" class="anchor"></a>Simulation of data</h2>
 <p>First, we simulate some toy data. We wish to simulate, say, 1000 observations of 2-dimensions each of which stems from one of 3 components. In order to do so, we construct a parameter object <code>theta</code> and simulate from the GMCM.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">true_theta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/rtheta.html">rtheta</a></span>(<span class="kw">m</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">d</span> <span class="kw">=</span> <span class="fl">2</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">true_theta</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">true_theta</span>)</pre></body></html></div>
 <p><img src="usage-example-general-model_files/figure-html/sim-data-1.png" width="700"></p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">ds</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/SimulateGMCMData.html">SimulateGMCMData</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="no">true_theta</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">ds</span>)</pre></body></html></div>
@@ -127,11 +127,11 @@
 ##   ..- attr(*, "class")= chr "theta"</code></pre>
 <p>As can be seen, the <code>SimulateGMCMData</code> function returns a <code>list</code> containing the copula observations <code>u</code>, the unobserved process <code>z</code>, the latent groups <code>K</code>, and the <code>theta</code> used for simulation.</p>
 <p>Plotting the true copula realizations and coloring by the true classes shows what we intend to estimate and recover:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ds</span>$<span class="no">u</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">ds</span>$<span class="no">K</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ds</span>$<span class="no">u</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">ds</span>$<span class="no">K</span>)</pre></body></html></div>
 <p><img src="usage-example-general-model_files/figure-html/data-plot-1.png" width="700"></p>
 <p>A ranking of <code>u</code> (or <code>z</code>) corresponds to what would be the data in a real application.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">uhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/Uhat.html">Uhat</a></span>(<span class="no">ds</span>$<span class="no">u</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">uhat</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">uhat</span>)</pre></body></html></div>
 <p><img src="usage-example-general-model_files/figure-html/select-data-1.png" width="700"></p>
 </div>
 <div id="initial-parameters" class="section level2">
@@ -238,19 +238,19 @@
 ## 200 272 528</code></pre>
 <p>The results are also displayed by plotting</p>
 <div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>))
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">uhat</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">membership</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of estimated copula values</span>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">uhat</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">membership</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of estimated copula values</span>
 <span class="no">z</span> <span class="kw">&lt;-</span> <span class="kw pkg">GMCM</span><span class="kw ns">:::</span><span class="fu"><a href="../reference/dgmcm.loglik.html">qgmm.marginal</a></span>(<span class="no">uhat</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="no">est_theta</span>) <span class="co"># Estimate latent process</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">z</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">membership</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of estimated latent process</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">z</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">membership</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of estimated latent process</span></pre></body></html></div>
 <p><img src="usage-example-general-model_files/figure-html/plot_results-1.png" width="700"></p>
 <p>The fitted <code>theta</code> object can also be plotted directly:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">est_theta</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">est_theta</span>)</pre></body></html></div>
 <p><img src="usage-example-general-model_files/figure-html/plot_theta-1.png" width="700"></p>
 <div id="session-information" class="section level3">
 <h3 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h3>
 <p>This report was generated using <strong>rmarkdown</strong><sup><a href="https://bookdown.org/yihui/rmarkdown/parameterized-reports.html">2</a></sup> and <strong>knitr</strong><sup><a href="https://yihui.name/knitr/demo/stitch/">3</a></sup> under the session given below.</p>
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
-<pre><code>## R version 3.6.2 (2017-01-27)
+<pre><code>## R version 4.0.0 (2020-04-24)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 16.04.6 LTS
 ## 
@@ -274,11 +274,11 @@
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_1.0.4.6       rprojroot_1.3-2    crayon_1.3.4       digest_0.6.25     
-##  [5] assertthat_0.2.1   MASS_7.3-51.4      R6_2.4.1           backports_1.1.6   
+##  [5] assertthat_0.2.1   MASS_7.3-51.5      R6_2.4.1           backports_1.1.6   
 ##  [9] magrittr_1.5       ellipse_0.4.1      evaluate_0.14      stringi_1.4.6     
 ## [13] rlang_0.4.5        fs_1.4.1           rmarkdown_2.1      pkgdown_1.5.1.9000
-## [17] desc_1.2.0         tools_3.6.2        stringr_1.4.0      yaml_2.2.1        
-## [21] xfun_0.13          compiler_3.6.2     memoise_1.1.0      htmltools_0.4.0   
+## [17] desc_1.2.0         tools_4.0.0        stringr_1.4.0      yaml_2.2.1        
+## [21] xfun_0.13          compiler_4.0.0     memoise_1.1.0      htmltools_0.4.0   
 ## [25] knitr_1.28</code></pre>
 </div>
 <div id="references" class="section level3">
