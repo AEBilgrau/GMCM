@@ -97,10 +97,14 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The released and tested version of <strong>GMCM</strong> is available at <a href="https://cran.r-project.org/package=GMCM">CRAN</a> (Comprehensive R Archive Network). It can be installed from within R by running</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"GMCM"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"GMCM"</span>)
+</pre></div>
 <p>If you wish to install the latest version of <strong>GMCM</strong> directly from the master branch at GitHub, run</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co">#install.packages("remotes")  # Install remotes if needed</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"AEBilgrau/GMCM"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co">#install.packages("remotes")  # Install remotes if needed</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"AEBilgrau/GMCM"</span>)
+</pre></div>
 <p>Note, that this version is in development and is likely different from the version at CRAN. As such, it may be unstable. Be sure that you have the <a href="https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites">package development prerequisites</a> if you wish to install the package from the source.</p>
 <p>When installed, run <code><a href="reference/runGMCM.html">GMCM::runGMCM()</a></code> to launch a local instance of the GMCM shiny application also available <a href="https://gmcm.shinyapps.io/GMCM/">online at shinyapps.io</a>. Run <code><a href="https://rdrr.io/r/utils/news.html">news(package = "GMCM")</a></code> to view the latest changes of GMCM or visit <a href="http://AEBilgrau.github.io/GMCM/news">here</a>.</p>
 <p>For previous versions of <strong>GMCM</strong>, visit the old <a href="https://github.com/AEBilgrau/GMCM/releases">releases at GitHub</a> or the <a href="https://cran.r-project.org/src/contrib/Archive/GMCM/">archive at CRAN.</a></p>

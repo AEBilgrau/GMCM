@@ -150,18 +150,18 @@ extension of the features available in the <code>idr</code> package.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If the meta analysis of Li et al. (2011) is to be performed, the
-  function <code><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></code> is used to identify the maximum
+  function <code>fit.meta.GMCM</code> is used to identify the maximum
   likelihood estimate of the special Gaussian mixture copula model (GMCM)
-  defined by Li et al. (2011). The function <code><a href='get.IDR.html'>get.IDR</a></code>
+  defined by Li et al. (2011). The function <code>get.IDR</code>
   computes the local and adjusted Irreproducible Discovery Rates defined
   by Li et al. (2011) to determine the level of reproducibility.</p>
 <p>Tewari et. al. (2011) proposed using GMCMs as an general unsupervised
   clustering tool. If such a general unsupervised clustering is needed, like
-  above, the function <code><a href='fit.full.GMCM.html'>fit.full.GMCM</a></code> computes the maximum
+  above, the function <code>fit.full.GMCM</code> computes the maximum
   likelihood estimate of the general GMCM. The function
-  <code><a href='get.IDR.html'>get.prob</a></code> is used to estimate the class membership
+  <code>get.prob</code> is used to estimate the class membership
   probabilities of each observation.</p>
-<p><code><a href='SimulateGMCMData.html'>SimulateGMCMData</a></code> provide easy simulation from the GMCMs.</p>
+<p><code>SimulateGMCMData</code> provide easy simulation from the GMCMs.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen,
@@ -178,12 +178,12 @@ extension of the features available in the <code>idr</code> package.</p>
   286-292. doi:10.1109/ICDMW.2011.135</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Core user functions: <code><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></code>,
-  <code><a href='fit.full.GMCM.html'>fit.full.GMCM</a></code>, <code><a href='get.IDR.html'>get.IDR</a></code>,
-  <code><a href='get.IDR.html'>get.prob</a></code>, <code><a href='SimulateGMCMData.html'>SimulateGMCMData</a></code>,
-  <code><a href='SimulateGMCMData.html'>SimulateGMMData</a></code>, <code><a href='rtheta.html'>rtheta</a></code>,
-  <code><a href='Uhat.html'>Uhat</a></code>, <code><a href='choose.theta.html'>choose.theta</a></code>,
-  <code><a href='full2meta.html'>full2meta</a></code>, <code><a href='full2meta.html'>meta2full</a></code></p>
+    <div class='dont-index'><p>Core user functions: <code>fit.meta.GMCM</code>,
+  <code>fit.full.GMCM</code>, <code>get.IDR</code>,
+  <code>get.prob</code>, <code>SimulateGMCMData</code>,
+  <code>SimulateGMMData</code>, <code>rtheta</code>,
+  <code>Uhat</code>, <code>choose.theta</code>,
+  <code>full2meta</code>, <code>meta2full</code></p>
 <p>Package by Li et. al. (2011): <code><a href='https://rdrr.io/pkg/idr/man/idr-package.html'>idr</a></code>.</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
@@ -194,44 +194,44 @@ extension of the features available in the <code>idr</code> package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Loading data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>u133VsExon</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>u133VsExon</span>)
 
 <span class='co'># Subsetting data to reduce computation time</span>
-<span class='no'>u133VsExon</span> <span class='kw'>&lt;-</span> <span class='no'>u133VsExon</span>[<span class='fl'>1</span>:<span class='fl'>5000</span>, ]
+<span class='kw'>u133VsExon</span> <span class='op'>&lt;-</span> <span class='kw'>u133VsExon</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5000</span>, ]
 
 <span class='co'># Ranking and scaling,</span>
 <span class='co'># Remember large values should be critical to the null!</span>
-<span class='no'>uhat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='fl'>1</span> - <span class='no'>u133VsExon</span>)
+<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='fl'>1</span> <span class='op'>-</span> <span class='kw'>u133VsExon</span>)
 
 <span class='co'># Visualizing P-values and the ranked and scaled P-values</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>u133VsExon</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"tomato"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"P-values"</span>,
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"P   (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"P   (Exon)"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>uhat</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"tomato"</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Ranked P-values"</span>,
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P)   (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P)   (Exon)"</span>)
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>u133VsExon</span>, cex = <span class='fl'>0.5</span>, pch = <span class='fl'>4</span>, col = <span class='st'>"tomato"</span>, main = <span class='st'>"P-values"</span>,
+     xlab = <span class='st'>"P   (U133)"</span>, ylab = <span class='st'>"P   (Exon)"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, cex = <span class='fl'>0.5</span>, pch = <span class='fl'>4</span>, col = <span class='st'>"tomato"</span>, main = <span class='st'>"Ranked P-values"</span>,
+     xlab = <span class='st'>"rank(1-P)   (U133)"</span>, ylab = <span class='st'>"rank(1-P)   (Exon)"</span>)
 }
 
 <span class='co'># Fitting using BFGS</span>
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='no'>uhat</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>), <span class='kw'>pgtol</span> <span class='kw'>=</span> <span class='fl'>1e-2</span>,
-                     <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"L-BFGS"</span>, <span class='kw'>positive.rho</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; iter   10 value -1213.470575
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>uhat</span>, init.par = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>), pgtol = <span class='fl'>1e-2</span>,
+                     method = <span class='st'>"L-BFGS"</span>, positive.rho = <span class='fl'>TRUE</span>, verbose = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; iter   10 value -1213.470575
 #&gt; iter   20 value -1213.524390
 #&gt; final  value -1213.524559 
 #&gt; converged</div><div class='input'>
 <span class='co'># Compute IDR values and classify</span>
-<span class='no'>idr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(<span class='no'>uhat</span>, <span class='kw'>par</span> <span class='kw'>=</span> <span class='no'>fit</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>idr</span>$<span class='no'>K</span>) <span class='co'># 1 = irreproducible, 2 = reproducible</span></div><div class='output co'>#&gt; 
+<span class='kw'>idr</span> <span class='op'>&lt;-</span> <span class='fu'>get.IDR</span>(<span class='kw'>uhat</span>, par = <span class='kw'>fit</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>idr</span><span class='op'>$</span><span class='kw'>K</span>) <span class='co'># 1 = irreproducible, 2 = reproducible</span></div><div class='output co'>#&gt; 
 #&gt;    1    2 
 #&gt; 4136  864 </div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># See clustering results</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>u133VsExon</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Classified genes"</span>,
-     <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tomato"</span>, <span class='st'>"steelblue"</span>)[<span class='no'>idr</span>$<span class='no'>K</span>],
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"P-value (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"P-value (Exon)"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>uhat</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Classified genes"</span>,
-     <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tomato"</span>, <span class='st'>"steelblue"</span>)[<span class='no'>idr</span>$<span class='no'>K</span>],
-     <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P) (U133)"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"rank(1-P) (Exon)"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>u133VsExon</span>, cex = <span class='fl'>0.5</span>, pch = <span class='fl'>4</span>, main = <span class='st'>"Classified genes"</span>,
+     col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tomato"</span>, <span class='st'>"steelblue"</span>)[<span class='kw'>idr</span><span class='op'>$</span><span class='kw'>K</span>],
+     xlab = <span class='st'>"P-value (U133)"</span>, ylab = <span class='st'>"P-value (Exon)"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, cex = <span class='fl'>0.5</span>, pch = <span class='fl'>4</span>, main = <span class='st'>"Classified genes"</span>,
+     col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tomato"</span>, <span class='st'>"steelblue"</span>)[<span class='kw'>idr</span><span class='op'>$</span><span class='kw'>K</span>],
+     xlab = <span class='st'>"rank(1-P) (U133)"</span>, ylab = <span class='st'>"rank(1-P) (Exon)"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

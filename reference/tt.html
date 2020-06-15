@@ -138,12 +138,12 @@ and logit transformed by rho.transform." />
 (2011) and Tewari et. al. (2011) onto the real line and back. The mixture
 proportion is logit transformed. The mean and standard deviation are log
 transformed. The correlation is translated and scaled to the interval (0,1)
-and logit transformed by <code><a href='rho.transform.html'>rho.transform</a></code>.</p>
+and logit transformed by <code>rho.transform</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>inv.tt</span>(<span class='no'>par</span>, <span class='no'>d</span>, <span class='no'>positive.rho</span>)
+    <pre class="usage"><span class='fu'>inv.tt</span>(<span class='kw'>par</span>, <span class='kw'>d</span>, <span class='kw'>positive.rho</span>)
 
-<span class='fu'>tt</span>(<span class='no'>tpar</span>, <span class='no'>d</span>, <span class='no'>positive.rho</span>)</pre>
+<span class='fu'>tt</span>(<span class='kw'>tpar</span>, <span class='kw'>d</span>, <span class='kw'>positive.rho</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,9 +161,9 @@ and <code>tpar[4]</code> the correlation.</p></td>
     <tr>
       <th>positive.rho</th>
       <td><p>is logical. If <code>TRUE</code>, the correlation is
-  transformed by a simple <code><a href='logit.html'>logit</a></code> transformation. If
+  transformed by a simple <code>logit</code> transformation. If
   <code>FALSE</code> the
-<code><a href='rho.transform.html'>rho.transform</a></code> is used.</p></td>
+<code>rho.transform</code> is used.</p></td>
     </tr>
     <tr>
       <th>tpar</th>
@@ -202,9 +202,9 @@ should be non-negative. If <code>positive.rho</code> is <code>FALSE</code>,
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>pie1</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>mu</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>rho</span> <span class='kw'>=</span> <span class='fl'>0.8</span>)
-<span class='no'>tpar</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GMCM</span><span class='kw ns'>:::</span><span class='fu'>inv.tt</span>(<span class='no'>par</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>positive.rho</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='kw pkg'>GMCM</span><span class='kw ns'>:::</span><span class='fu'>tt</span>(<span class='no'>tpar</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>positive.rho</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 0.3 2.0 0.5 0.8</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(pie1 = <span class='fl'>0.3</span>, mu = <span class='fl'>2</span>, sigma = <span class='fl'>0.5</span>, rho = <span class='fl'>0.8</span>)
+<span class='kw'>tpar</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/tt.html'>inv.tt</a></span>(<span class='kw'>par</span>, d = <span class='fl'>3</span>, positive.rho = <span class='fl'>FALSE</span>)
+<span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/tt.html'>tt</a></span>(<span class='kw'>tpar</span>, d = <span class='fl'>3</span>, positive.rho = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 0.3 2.0 0.5 0.8</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

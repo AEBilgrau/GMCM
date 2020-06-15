@@ -94,16 +94,20 @@
 <h2 class="hasAnchor">
 <a href="#initialization" class="anchor"></a>Initialization</h2>
 <p>The <strong>GMCM</strong><sup><a href="http://doi.org/10.18637/jss.v070.i02">1</a></sup> package is loaded.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#install.packages("GMCM")  # Uncomment to install the GMCM package</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"GMCM"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co">#install.packages("GMCM")  # Uncomment to install the GMCM package</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://AEBilgrau.github.io/GMCM">"GMCM"</a></span>)
+</pre></div>
 <p>If <strong>GMCM</strong> is <em>not</em> installed, please uncomment the above line and rerun the script.</p>
 </div>
 <div id="loading-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#loading-data" class="anchor"></a>Loading data</h2>
 <p>The data is loaded and the first rows are printed. To illustrate we load the <code>u133VsExon</code> dataset within the package. The dataset contains 19,577 <em>p</em>-values for the null hypothesis of no differential gene expression between two cell types for each of two different experiments called <code>u133</code> and <code>exon</code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"u133VsExon"</span>))
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">x</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">4</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"u133VsExon"</span>))
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">x</span>, n = <span class="fl">4</span>)
+</pre></div>
 <pre><code>##                         u133         exon
 ## ENSG00000265096 0.1756103672 1.072572e-01
 ## ENSG00000152495 0.0017797571 6.741108e-10
@@ -111,16 +115,22 @@
 ## ENSG00000229092 0.0006693361 6.755118e-05</code></pre>
 <p>See <code><a href="../reference/u133VsExon.html">help("u133VsExon")</a></code> for more information.</p>
 <p>Next, we subset the data to simply reduce computation time. After that, we will rank it, and visualize it.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="no">x</span>[<span class="fl">1</span>:<span class="fl">5000</span>, ]</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">x</span> <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">5000</span>, ]
+</pre></div>
 <p>The values above are p-values where <em>small</em> values indicate strong evidence—contrary to what is expected by the special model. In the special model, <em>large</em> values should be critical to the null hypothesis.</p>
 <p>Therefore we ranks and scale 1 - p:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">u</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/Uhat.html">Uhat</a></span>(<span class="fl">1</span> - <span class="no">x</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">u</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Uhat.html">Uhat</a></span>(<span class="fl">1</span> <span class="op">-</span> <span class="kw">x</span>)
+</pre></div>
 <p>The original and ranked data is plotted:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>))  <span class="co"># Visualizing P-values and the ranked P-values</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">x</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">pch</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"tomato"</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"P-values"</span>,
-     <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"P-value (U133)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"P-value (Exon)"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">u</span>, <span class="kw">cex</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">pch</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="st">"tomato"</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Ranked P-values"</span>,
-     <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"rank(1-P) (U133)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"rank(1-P) (Exon)"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>))  <span class="co"># Visualizing P-values and the ranked P-values</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">x</span>, cex = <span class="fl">0.5</span>, pch = <span class="fl">4</span>, col = <span class="st">"tomato"</span>, main = <span class="st">"P-values"</span>,
+     xlab = <span class="st">"P-value (U133)"</span>, ylab = <span class="st">"P-value (Exon)"</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">u</span>, cex = <span class="fl">0.5</span>, pch = <span class="fl">4</span>, col = <span class="st">"tomato"</span>, main = <span class="st">"Ranked P-values"</span>,
+     xlab = <span class="st">"rank(1-P) (U133)"</span>, ylab = <span class="st">"rank(1-P) (Exon)"</span>)
+</pre></div>
 <p><img src="usage-example-special-model_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>Here each point represent a gene. The genes in the lower left of the first panel and correspondingly in the upper right of the second panel are the seemingly <em>reproducible</em> genes. They have a low <em>p</em>-value and thus a high rank in <em>both</em> experiments. The genes in the upper left and lower right are the ones that are apparently spurious results; they have a low <em>p</em>-value in only one experiment.</p>
 </div>
@@ -128,18 +138,22 @@
 <h2 class="hasAnchor">
 <a href="#initial-parameters" class="anchor"></a>Initial parameters</h2>
 <p>The initial parameters are set to</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">init_par</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">pie1</span> <span class="kw">=</span> <span class="fl">0.6</span>, <span class="kw">mu</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">sigma</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">rho</span> <span class="kw">=</span> <span class="fl">0.2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">init_par</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(pie1 = <span class="fl">0.6</span>, mu = <span class="fl">1</span>, sigma = <span class="fl">1</span>, rho = <span class="fl">0.2</span>)
+</pre></div>
 </div>
 <div id="model-fitting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#model-fitting" class="anchor"></a>Model fitting</h2>
 <p>With the data loaded and prepared, the model is can be fitted with the defined initial parameters.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">par</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/fit.meta.GMCM.html">fit.meta.GMCM</a></span>(<span class="kw">u</span> <span class="kw">=</span> <span class="no">u</span>,
-                     <span class="kw">init.par</span> <span class="kw">=</span> <span class="no">init_par</span>,
-                     <span class="kw">method</span> <span class="kw">=</span> <span class="st">"NM"</span>,
-                     <span class="kw">max.ite</span> <span class="kw">=</span> <span class="fl">1000</span>,
-                     <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">par</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit.meta.GMCM.html">fit.meta.GMCM</a></span>(u = <span class="kw">u</span>,
+                     init.par = <span class="kw">init_par</span>,
+                     method = <span class="st">"NM"</span>,
+                     max.ite = <span class="fl">1000</span>,
+                     verbose = <span class="fl">FALSE</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">par</span>)
+</pre></div>
 <pre><code>##      pie1        mu     sigma       rho 
 ## 0.7489036 1.9494403 1.1066673 0.7360319</code></pre>
 <p>We here use the Nelder-Mead fitting method with with a maximum number of iterations of <code>1000</code>.</p>
@@ -148,48 +162,64 @@
 <h2 class="hasAnchor">
 <a href="#meta-analysis-with-unsupervised-clustering" class="anchor"></a>Meta analysis with unsupervised clustering</h2>
 <p>The estimated parameters are used to calculate the local and adjusted irreproducibility discovery rates:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">meta_IDR_thres</span> <span class="kw">&lt;-</span> <span class="fl">0.05</span>
-<span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get.IDR.html">get.IDR</a></span>(<span class="no">x</span>, <span class="kw">par</span> <span class="kw">=</span> <span class="no">par</span>,
-               <span class="kw">threshold</span> <span class="kw">=</span> <span class="no">meta_IDR_thres</span>) <span class="co"># Compute IDR</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">out</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">meta_IDR_thres</span> <span class="op">&lt;-</span> <span class="fl">0.05</span>
+<span class="kw">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.IDR.html">get.IDR</a></span>(<span class="kw">x</span>, par = <span class="kw">par</span>,
+               threshold = <span class="kw">meta_IDR_thres</span>) <span class="co"># Compute IDR</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">out</span>)
+</pre></div>
 <pre><code>## List of 5
 ##  $ idr      : num [1:5000] 0.872 0.99 0.976 0.981 0.203 ...
 ##  $ IDR      : num [1:5000] 0.4894 0.769 0.7032 0.7252 0.0645 ...
 ##  $ l        : int 431
 ##  $ threshold: num 0.05
 ##  $ Khat     : num [1:5000] 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get.IDR.html">get.IDR</a></span>(<span class="no">u</span>, <span class="kw">par</span> <span class="kw">=</span> <span class="no">par</span>, <span class="kw">threshold</span> <span class="kw">=</span> <span class="no">meta_IDR_thres</span>)
-<span class="no">below</span> <span class="kw">&lt;-</span> <span class="no">out</span><span class="kw">[[</span><span class="st">"IDR"</span>]] <span class="kw">&lt;</span> <span class="no">meta_IDR_thres</span>
-<span class="no">out</span>$<span class="no">l</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">below</span>)
-<span class="no">out</span>$<span class="no">Khat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">below</span>, <span class="fl">2</span>, <span class="fl">1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.IDR.html">get.IDR</a></span>(<span class="kw">u</span>, par = <span class="kw">par</span>, threshold = <span class="kw">meta_IDR_thres</span>)
+<span class="kw">below</span> <span class="op">&lt;-</span> <span class="kw">out</span>[[<span class="st">"IDR"</span>]] <span class="op">&lt;</span> <span class="kw">meta_IDR_thres</span>
+<span class="kw">out</span><span class="op">$</span><span class="kw">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">below</span>)
+<span class="kw">out</span><span class="op">$</span><span class="kw">Khat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">below</span>, <span class="fl">2</span>, <span class="fl">1</span>)
+</pre></div>
 <p>By default, <code>get.IDR</code> computes thresholds on the adjusted IDR. The local irreproducibility discovery rate correspond to the posterior probability of the point originating from the irreproducible component.</p>
 </div>
 <div id="results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#results" class="anchor"></a>Results</h2>
 <p>The classes are counted by</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">out</span>$<span class="no">Khat</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">out</span><span class="op">$</span><span class="kw">Khat</span>)
+</pre></div>
 <pre><code>## 
 ##    1    2 
 ## 4136  864</code></pre>
 <p>Where we see how many of the 5000 genes are deemed reproducible and irreproducible.</p>
 <p>The results are also displayed by plotting</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">x</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">out</span>$<span class="no">Khat</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of raw values</span></pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">x</span>, col = <span class="kw">out</span><span class="op">$</span><span class="kw">Khat</span>, asp = <span class="fl">1</span>) <span class="co"># Plot of raw values</span>
+</pre></div>
 <p><img src="usage-example-special-model_files/figure-html/plot_results-1.png" width="700"></p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">u</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">out</span>$<span class="no">Khat</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of copula values</span></pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">u</span>, col = <span class="kw">out</span><span class="op">$</span><span class="kw">Khat</span>, asp = <span class="fl">1</span>) <span class="co"># Plot of copula values</span>
+</pre></div>
 <p><img src="usage-example-special-model_files/figure-html/plot_results-2.png" width="700"></p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">z</span> <span class="kw">&lt;-</span> <span class="kw pkg">GMCM</span><span class="kw ns">:::</span><span class="fu"><a href="../reference/dgmcm.loglik.html">qgmm.marginal</a></span>(<span class="no">u</span>, <span class="kw">theta</span> <span class="kw">=</span> <span class="fu"><a href="../reference/full2meta.html">meta2full</a></span>(<span class="no">par</span>, <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">u</span>))) <span class="co"># Estimate latent process</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">z</span>, <span class="kw">col</span> <span class="kw">=</span> <span class="no">out</span>$<span class="no">Khat</span>, <span class="kw">asp</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="co"># Plot of estimated latent process</span></pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="kw">z</span> <span class="op">&lt;-</span> <span class="kw">GMCM</span>:::<span class="fu"><a href="../reference/dgmcm.loglik.html">qgmm.marginal</a></span>(<span class="kw">u</span>, theta = <span class="fu"><a href="../reference/full2meta.html">meta2full</a></span>(<span class="kw">par</span>, d = <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="kw">u</span>))) <span class="co"># Estimate latent process</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">z</span>, col = <span class="kw">out</span><span class="op">$</span><span class="kw">Khat</span>, asp = <span class="fl">1</span>) <span class="co"># Plot of estimated latent process</span>
+</pre></div>
 <p><img src="usage-example-special-model_files/figure-html/plot_results-3.png" width="700"></p>
 <p>The model indeed capture genes in the upper right and classify them as reproducible.</p>
 <p>The fitted <code>par</code> object can be converted to a <code>theta</code> object which can be plotted directly:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="fu"><a href="../reference/full2meta.html">meta2full</a></span>(<span class="no">par</span>, <span class="kw">d</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">u</span>)))</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="fu"><a href="../reference/full2meta.html">meta2full</a></span>(<span class="kw">par</span>, d = <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="kw">u</span>)))
+</pre></div>
 <p><img src="usage-example-special-model_files/figure-html/plot_theta-1.png" width="700"></p>
 <div id="session-information" class="section level3">
 <h3 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h3>
-<p>This report was generated using <strong>rmarkdown</strong><sup><a href="https://bookdown.org/yihui/rmarkdown/parameterized-reports.html">2</a></sup> and <strong>knitr</strong><sup><a href="https://yihui.name/knitr/demo/stitch/">3</a></sup> under the session given below. The report utilizes <a href="https://bookdown.org/yihui/rmarkdown/parameterized-reports.html">parameterized reports</a> and <a href="https://yihui.name/knitr/demo/stitch/"><code><a href="https://rdrr.io/pkg/knitr/man/spin.html">knitr::spin</a></code></a>.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
+<p>This report was generated using <strong>rmarkdown</strong><sup><a href="https://bookdown.org/yihui/rmarkdown/parameterized-reports.html">2</a></sup> and <strong>knitr</strong><sup><a href="https://yihui.name/knitr/demo/stitch/">3</a></sup> under the session given below. The report utilizes <a href="https://bookdown.org/yihui/rmarkdown/parameterized-reports.html">parameterized reports</a> and <a href="https://yihui.name/knitr/demo/stitch/"><code>knitr::spin</code></a>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
+</pre></div>
 <pre><code>## R version 4.0.0 (2020-04-24)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 16.04.6 LTS
@@ -213,12 +243,12 @@
 ## [1] GMCM_1.4.1 knitr_1.28
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.4.6       rprojroot_1.3-2    crayon_1.3.4       digest_0.6.25     
-##  [5] assertthat_0.2.1   MASS_7.3-51.5      R6_2.4.1           backports_1.1.7   
-##  [9] magrittr_1.5       ellipse_0.4.2      evaluate_0.14      stringi_1.4.6     
-## [13] rlang_0.4.6        fs_1.4.1           rmarkdown_2.2      pkgdown_1.5.1.9000
-## [17] desc_1.2.0         tools_4.0.0        stringr_1.4.0      yaml_2.2.1        
-## [21] xfun_0.14          compiler_4.0.0     memoise_1.1.0      htmltools_0.4.0</code></pre>
+##  [1] Rcpp_1.0.4.6       rprojroot_1.3-2    digest_0.6.25      crayon_1.3.4      
+##  [5] assertthat_0.2.1   R6_2.4.1           backports_1.1.7    magrittr_1.5      
+##  [9] ellipse_0.4.2      evaluate_0.14      stringi_1.4.6      rlang_0.4.6       
+## [13] fs_1.4.1           rmarkdown_2.2.5    pkgdown_1.5.1.9000 desc_1.2.0        
+## [17] tools_4.0.0        stringr_1.4.0      yaml_2.2.1         xfun_0.14         
+## [21] compiler_4.0.0     memoise_1.1.0      htmltools_0.4.0</code></pre>
 </div>
 <div id="references" class="section level3">
 <h3 class="hasAnchor">
@@ -229,7 +259,7 @@
 <li>Xie Y (2020). <em>knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. R package version 1.28, &lt;URL: <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</li>
 <li>Xie Y (2015). <em>Dynamic Documents with R and knitr</em>, 2nd edition. Chapman and Hall/CRC, Boca Raton, Florida. ISBN 978-1498716963, &lt;URL: <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</li>
 <li>Xie Y (2014). “knitr: A Comprehensive Tool for Reproducible Research in R.” In Stodden V, Leisch F, Peng RD (eds.), <em>Implementing Reproducible Computational Research</em>. Chapman and Hall/CRC. ISBN 978-1466561595, &lt;URL: <a href="http://www.crcpress.com/product/isbn/9781466561595" class="uri">http://www.crcpress.com/product/isbn/9781466561595</a>&gt;.</li>
-<li>Allaire J, Xie Y, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H, Cheng J, Chang W, Iannone R (2020). <em>rmarkdown: Dynamic Documents for R</em>. R package version 2.2, &lt;URL: <a href="https://github.com/rstudio/rmarkdown" class="uri">https://github.com/rstudio/rmarkdown</a>&gt;.</li>
+<li>Allaire J, Xie Y, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H, Cheng J, Chang W, Iannone R (2020). <em>rmarkdown: Dynamic Documents for R</em>. R package version 2.2.5, &lt;URL: <a href="https://github.com/rstudio/rmarkdown" class="uri">https://github.com/rstudio/rmarkdown</a>&gt;.</li>
 <li>Xie Y, Allaire J, Grolemund G (2018). <em>R Markdown: The Definitive Guide</em>. Chapman and Hall/CRC, Boca Raton, Florida. ISBN 9781138359338, &lt;URL: <a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</li>
 </ol>
 </div>

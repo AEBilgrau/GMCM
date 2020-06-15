@@ -141,13 +141,13 @@ It features various optimization routines to identify the maximum likelihood
 estimate of the special GMCMs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit.meta.GMCM</span>(<span class='no'>u</span>, <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>, <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>, <span class='st'>"L-BFGS-B"</span>,
-  <span class='st'>"PEM"</span>), <span class='kw'>max.ite</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>positive.rho</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>trace.theta</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>fit.meta.GMCM</span>(<span class='kw'>u</span>, <span class='kw'>init.par</span>, method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>, <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>, <span class='st'>"L-BFGS-B"</span>,
+  <span class='st'>"PEM"</span>), max.ite = <span class='fl'>1000</span>, verbose = <span class='fl'>TRUE</span>, positive.rho = <span class='fl'>TRUE</span>,
+  trace.theta = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)
 
-<span class='fu'>fit.special.GMCM</span>(<span class='no'>u</span>, <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>, <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>,
-  <span class='st'>"L-BFGS-B"</span>, <span class='st'>"PEM"</span>), <span class='kw'>max.ite</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>positive.rho</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>trace.theta</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>fit.special.GMCM</span>(<span class='kw'>u</span>, <span class='kw'>init.par</span>, method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>, <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>,
+  <span class='st'>"L-BFGS-B"</span>, <span class='st'>"PEM"</span>), max.ite = <span class='fl'>1000</span>, verbose = <span class='fl'>TRUE</span>,
+  positive.rho = <span class='fl'>TRUE</span>, trace.theta = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,13 +197,13 @@ is restricted to be positive.</p></td>
 as a list to the output returned if <code>TRUE</code>. The exact behavior is
 dependent on the value of <code>method</code>. If <code>method</code> equals
 <code>"PEM"</code>, the argument is passed to <code>trace.theta</code> in
-<code><a href='PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></code>. Otherwise it is passed to the control
+<code>PseudoEMAlgorithm</code>. Otherwise it is passed to the control
 argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Arguments passed to the <code>control</code>-list in
-<code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> or <code><a href='PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></code> if <code>method</code> is
+<code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> or <code>PseudoEMAlgorithm</code> if <code>method</code> is
 <code>"PEM"</code>.</p></td>
     </tr>
     </table>
@@ -245,15 +245,15 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
 
 <span class='co'># True parameters</span>
-<span class='no'>true.par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9</span>, <span class='fl'>2</span>, <span class='fl'>0.7</span>, <span class='fl'>0.6</span>)
+<span class='kw'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9</span>, <span class='fl'>2</span>, <span class='fl'>0.7</span>, <span class='fl'>0.6</span>)
 <span class='co'># Simulation of data from the GMCM model</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>par</span> <span class='kw'>=</span> <span class='no'>true.par</span>)
-<span class='no'>uhat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='no'>data</span>$<span class='no'>u</span>) <span class='co'># Ranked observed data</span>
+<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>)
+<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>) <span class='co'># Ranked observed data</span>
 
-<span class='no'>init.par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)  <span class='co'># Initial parameters</span>
+<span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)  <span class='co'># Initial parameters</span>
 
 <span class='co'># Optimization with Nelder-Mead</span>
-<span class='no'>nm.par</span>   <span class='kw'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='no'>uhat</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
+<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>uhat</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
 #&gt; function value for initial parameters = 176.343401
 #&gt;   Scaled convergence tolerance is 2.62772e-06
 #&gt; Stepsize computed as 0.219722
@@ -436,22 +436,22 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 #&gt; HI-REDUCTION     357 -122.832362 -122.832365
 #&gt; Exiting from Nelder Mead minimizer
 #&gt;     359 function evaluations used</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Comparison with other optimization methods</span>
 <span class='co'># Optimization with simulated annealing</span>
-<span class='no'>sann.par</span> <span class='kw'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='no'>uhat</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"SANN"</span>,
-                          <span class='kw'>max.ite</span> <span class='kw'>=</span> <span class='fl'>3000</span>, <span class='kw'>temp</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='kw'>sann.par</span> <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>uhat</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"SANN"</span>,
+                          max.ite = <span class='fl'>3000</span>, temp = <span class='fl'>1</span>)
 <span class='co'># Optimization with the Pseudo EM algorithm</span>
-<span class='no'>pem.par</span>  <span class='kw'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='no'>uhat</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"PEM"</span>)
+<span class='kw'>pem.par</span>  <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>uhat</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"PEM"</span>)
 
 <span class='co'># The estimates agree nicely</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='st'>"True"</span> <span class='kw'>=</span> <span class='no'>true.par</span>, <span class='st'>"Start"</span> <span class='kw'>=</span> <span class='no'>init.par</span>,
-      <span class='st'>"NM"</span> <span class='kw'>=</span> <span class='no'>nm.par</span>, <span class='st'>"SANN"</span> <span class='kw'>=</span> <span class='no'>sann.par</span>, <span class='st'>"PEM"</span> <span class='kw'>=</span> <span class='no'>pem.par</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='st'>"True"</span> = <span class='kw'>true.par</span>, <span class='st'>"Start"</span> = <span class='kw'>init.par</span>,
+      <span class='st'>"NM"</span> = <span class='kw'>nm.par</span>, <span class='st'>"SANN"</span> = <span class='kw'>sann.par</span>, <span class='st'>"PEM"</span> = <span class='kw'>pem.par</span>)
 }
 
 <span class='co'># Get estimated cluster</span>
-<span class='no'>Khat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>uhat</span>, <span class='kw'>par</span> <span class='kw'>=</span> <span class='no'>nm.par</span>)$<span class='no'>Khat</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>uhat</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>Khat</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Clustering\nIDR &lt; 0.05"</span>)</div><div class='img'><img src='fit.meta.GMCM-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'>get.IDR</span>(x = <span class='kw'>uhat</span>, par = <span class='kw'>nm.par</span>)<span class='op'>$</span><span class='kw'>Khat</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, col = <span class='kw'>Khat</span>, main = <span class='st'>"Clustering\nIDR &lt; 0.05"</span>)</div><div class='img'><img src='fit.meta.GMCM-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

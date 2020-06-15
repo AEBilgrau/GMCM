@@ -139,9 +139,9 @@ adjusted irreproducibility discovery rates (<code>get.IDR</code>) in the
 special GMCM.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get.IDR</span>(<span class='no'>x</span>, <span class='no'>par</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>get.IDR</span>(<span class='kw'>x</span>, <span class='kw'>par</span>, threshold = <span class='fl'>0.05</span>, <span class='kw'>...</span>)
 
-<span class='fu'>get.prob</span>(<span class='no'>x</span>, <span class='no'>theta</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>get.prob</span>(<span class='kw'>x</span>, <span class='kw'>theta</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,12 +164,12 @@ correlation of the reproducible component.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to <code><a href='dgmcm.loglik.html'>qgmm.marginal</a></code>.</p></td>
+      <td><p>Arguments passed to <code>qgmm.marginal</code>.</p></td>
     </tr>
     <tr>
       <th>theta</th>
       <td><p>A list of parameters for the full model as described in
-<code><a href='rtheta.html'>rtheta</a></code>.</p></td>
+<code>rtheta</code>.</p></td>
     </tr>
     </table>
 
@@ -214,16 +214,16 @@ get.prob returns a matrix where entry (i,j) is the
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1123</span>)
 
 <span class='co'># True parameters</span>
-<span class='no'>true.par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9</span>, <span class='fl'>2</span>, <span class='fl'>0.7</span>, <span class='fl'>0.6</span>)
+<span class='kw'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9</span>, <span class='fl'>2</span>, <span class='fl'>0.7</span>, <span class='fl'>0.6</span>)
 
 <span class='co'># Simulation of data from the GMCM model</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>par</span> <span class='kw'>=</span> <span class='no'>true.par</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='kw'>data</span> <span class='op'>&lt;-</span>  <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>, d = <span class='fl'>2</span>)
 
 <span class='co'># Initial parameters</span>
-<span class='no'>init.par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)
+<span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)
 
 <span class='co'># Nelder-Mead optimization</span>
-<span class='no'>nm.par</span>   <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='no'>data</span>$<span class='no'>u</span>, <span class='kw'>init.par</span> <span class='kw'>=</span> <span class='no'>init.par</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
+<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
 #&gt; function value for initial parameters = 171.783273
 #&gt;   Scaled convergence tolerance is 2.55977e-06
 #&gt; Stepsize computed as 0.219722
@@ -330,10 +330,10 @@ get.prob returns a matrix where entry (i,j) is the
 #&gt; Exiting from Nelder Mead minimizer
 #&gt;     205 function evaluations used</div><div class='input'>
 <span class='co'># Get IDR values</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>get.IDR</span>(<span class='no'>data</span>$<span class='no'>u</span>, <span class='no'>nm.par</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)
+<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>get.IDR</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, <span class='kw'>nm.par</span>, threshold = <span class='fl'>0.05</span>)
 
 <span class='co'># Plot results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>data</span>$<span class='no'>u</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>res</span>$<span class='no'>Khat</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>16</span>)[<span class='no'>data</span>$<span class='no'>K</span>])</div><div class='img'><img src='get.IDR-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='kw'>res</span><span class='op'>$</span><span class='kw'>Khat</span>, pch = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>16</span>)[<span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>])</div><div class='img'><img src='get.IDR-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

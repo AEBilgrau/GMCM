@@ -137,16 +137,16 @@ parameters used correspond to the number of variables free to vary in the
 general model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>goodness.of.fit</span>(<span class='no'>theta</span>, <span class='no'>u</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AIC"</span>, <span class='st'>"BIC"</span>), <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta</span>, <span class='kw'>u</span>, method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AIC"</span>, <span class='st'>"BIC"</span>), k = <span class='fl'>2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>theta</th>
-      <td><p>A <code>list</code> of parameters as defined in <code><a href='rtheta.html'>rtheta</a></code>.
+      <td><p>A <code>list</code> of parameters as defined in <code>rtheta</code>.
 For t this function, it will usually be the output of
-<code><a href='fit.full.GMCM.html'>fit.full.GMCM</a></code>.</p></td>
+<code>fit.full.GMCM</code>.</p></td>
     </tr>
     <tr>
       <th>u</th>
@@ -173,15 +173,15 @@ fit to compute. Default is "AIC". "BIC" is also a option.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>u133VsExon</span>)
-<span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='no'>u133VsExon</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>19577</span>, <span class='fl'>500</span>), ])  <span class='co'># Subset for faster fitting</span>
-<span class='no'>theta1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='no'>u</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"L-BFGS"</span>)</div><div class='output co'>#&gt; iter   10 value -110.257470
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>u133VsExon</span>)
+<span class='kw'>u</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='kw'>u133VsExon</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>19577</span>, <span class='fl'>500</span>), ])  <span class='co'># Subset for faster fitting</span>
+<span class='kw'>theta1</span> <span class='op'>&lt;-</span> <span class='fu'>fit.full.GMCM</span>(<span class='kw'>u</span>, m = <span class='fl'>2</span>, method = <span class='st'>"L-BFGS"</span>)</div><div class='output co'>#&gt; iter   10 value -110.257470
 #&gt; iter   20 value -110.738197
 #&gt; final  value -110.874374 
-#&gt; converged</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='no'>theta1</span>, <span class='no'>u</span>)  <span class='co'># AIC</span></div><div class='output co'>#&gt; [1] -205.7487</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='no'>theta1</span>, <span class='no'>u</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"BIC"</span>)</div><div class='output co'>#&gt; [1] -172.0319</div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>theta2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='no'>u</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"L-BFGS"</span>)
-<span class='fu'>goodness.of.fit</span>(<span class='no'>theta2</span>, <span class='no'>u</span>)
-<span class='fu'>goodness.of.fit</span>(<span class='no'>theta2</span>, <span class='no'>u</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"BIC"</span>)
+#&gt; converged</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta1</span>, <span class='kw'>u</span>)  <span class='co'># AIC</span></div><div class='output co'>#&gt; [1] -205.7487</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta1</span>, <span class='kw'>u</span>, method = <span class='st'>"BIC"</span>)</div><div class='output co'>#&gt; [1] -172.0319</div><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>theta2</span> <span class='op'>&lt;-</span> <span class='fu'>fit.full.GMCM</span>(<span class='kw'>u</span>, m = <span class='fl'>3</span>, method = <span class='st'>"L-BFGS"</span>)
+<span class='fu'>goodness.of.fit</span>(<span class='kw'>theta2</span>, <span class='kw'>u</span>)
+<span class='fu'>goodness.of.fit</span>(<span class='kw'>theta2</span>, <span class='kw'>u</span>, method = <span class='st'>"BIC"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -135,7 +135,7 @@ suitable starting values for the general model." />
 suitable starting values for the general model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>choose.theta</span>(<span class='no'>u</span>, <span class='no'>m</span>, <span class='kw'>no.scaling</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>choose.theta</span>(<span class='kw'>u</span>, <span class='kw'>m</span>, no.scaling = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +162,7 @@ variance-covariance matrices is done.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list of parameters for the GMCM model on the form described in
-  <code><a href='rtheta.html'>rtheta</a></code>.</p>
+  <code>rtheta</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The function selects the centers from the k-means algorithm as an initial
@@ -183,12 +183,12 @@ correlations between each dimension are taken to be zero.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2</span>)
 
 <span class='co'># Simulating data</span>
-<span class='no'>data1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='no'>obs.data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='no'>data1</span>$<span class='no'>u</span>)  <span class='co'># The ranked observed data</span>
+<span class='kw'>data1</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>10000</span>, m = <span class='fl'>3</span>, d = <span class='fl'>2</span>)
+<span class='kw'>obs.data</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='kw'>data1</span><span class='op'>$</span><span class='kw'>u</span>)  <span class='co'># The ranked observed data</span>
 
 <span class='co'># Using choose.theta to get starting estimates</span>
-<span class='no'>theta</span> <span class='kw'>&lt;-</span> <span class='fu'>choose.theta</span>(<span class='kw'>u</span> <span class='kw'>=</span> <span class='no'>obs.data</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>theta</span>)</div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
+<span class='kw'>theta</span> <span class='op'>&lt;-</span> <span class='fu'>choose.theta</span>(u = <span class='kw'>obs.data</span>, m = <span class='fl'>3</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta</span>)</div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
 #&gt; 
 #&gt; $pie
 #&gt;   pie1   pie2   pie3 
@@ -223,19 +223,19 @@ correlations between each dimension are taken to be zero.</p>
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'># To illustrate theta, we can simulate from the model</span>
-<span class='no'>data2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10000</span>, <span class='kw'>theta</span> <span class='kw'>=</span> <span class='no'>theta</span>)
+<span class='kw'>data2</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMMData</span>(n = <span class='fl'>10000</span>, theta = <span class='kw'>theta</span>)
 
-<span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='get.IDR.html'>get.prob</a></span>(<span class='no'>obs.data</span>,<span class='no'>theta</span>),<span class='fl'>1</span>,<span class='no'>which.max</span>)
+<span class='kw'>cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'>get.prob</span>(<span class='kw'>obs.data</span>,<span class='kw'>theta</span>),<span class='fl'>1</span>,<span class='kw'>which.max</span>)
 
 <span class='co'># Plotting</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>data1</span>$<span class='no'>z</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"True latent GMM"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='no'>data1</span>$<span class='no'>u</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>cols</span>,
-     <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Observed GMCM\nColoured by k-means clustering"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>data2</span>$<span class='no'>z</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"initial GMM"</span>)</div><div class='img'><img src='choose.theta-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>data1</span><span class='op'>$</span><span class='kw'>z</span>, main = <span class='st'>"True latent GMM"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='fu'>Uhat</span>(<span class='kw'>data1</span><span class='op'>$</span><span class='kw'>u</span>), col = <span class='kw'>cols</span>,
+     main = <span class='st'>"Observed GMCM\nColoured by k-means clustering"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>data2</span><span class='op'>$</span><span class='kw'>z</span>, main = <span class='st'>"initial GMM"</span>)</div><div class='img'><img src='choose.theta-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Alteratively, theta can simply be plotted to illustrate the GMM density</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>theta</span>, <span class='kw'>add.ellipses</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='no'>data2</span>$<span class='no'>z</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>16</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)</div><div class='img'><img src='choose.theta-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>theta</span>, add.ellipses = <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='kw'>data2</span><span class='op'>$</span><span class='kw'>z</span>, pch = <span class='fl'>16</span>, cex = <span class='fl'>0.4</span>)</div><div class='img'><img src='choose.theta-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
