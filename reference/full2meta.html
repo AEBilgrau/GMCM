@@ -136,7 +136,7 @@ format described in rtheta." />
     <p>These functions converts/coerces the parameters between the general Gaussian
 mixture (copula) model and the special GMCM.
 Most functions of the GMCM packages use the <code>theta</code>
-format described in <code>rtheta</code>.</p>
+format described in <code><a href='rtheta.html'>rtheta</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>full2meta</span>(<span class='kw'>theta</span>)
@@ -149,7 +149,7 @@ format described in <code>rtheta</code>.</p>
     <tr>
       <th>theta</th>
       <td><p>A list of parameters for the full model. Formatted as described
-in <code>rtheta</code>.</p></td>
+in <code><a href='rtheta.html'>rtheta</a></code>.</p></td>
     </tr>
     <tr>
       <th>par</th>
@@ -169,7 +169,7 @@ correlation of the reproducible component.</p></td>
     <p><code>full2meta</code> returns a numeric vector of length 4 formatted as
   <code>par</code>.</p>
 <p>meta2full returns a formatted 'theta' list of parameters as described
-  by <code>rtheta</code>.</p>
+  by <code><a href='rtheta.html'>rtheta</a></code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If a <code>theta</code> is supplied which is not on the form of Li et. al. (2011)
@@ -189,13 +189,13 @@ correlation (properly scaled).</p>
   doi:10.1109/ICDMW.2011.135</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>rtheta</code></p></div>
+    <div class='dont-index'><p><code><a href='rtheta.html'>rtheta</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/rtheta.html'>rtheta</a></span>(m = <span class='fl'>2</span>, d = <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='kw'>theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='rtheta.html'>rtheta</a></span>(m = <span class='fl'>2</span>, d = <span class='fl'>2</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>par</span> <span class='op'>&lt;-</span> <span class='fu'>full2meta</span>(<span class='kw'>theta</span>))</div><div class='output co'>#&gt;        pie1          mu       sigma         rho 
 #&gt;  0.09074447 10.27417079  2.40060596 -0.00726274 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta.special.case</span> <span class='op'>&lt;-</span> <span class='fu'>meta2full</span>(<span class='kw'>par</span>, d = <span class='fl'>2</span>))</div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 2 components:
 #&gt; 

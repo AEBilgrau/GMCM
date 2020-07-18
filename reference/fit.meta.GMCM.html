@@ -197,13 +197,13 @@ is restricted to be positive.</p></td>
 as a list to the output returned if <code>TRUE</code>. The exact behavior is
 dependent on the value of <code>method</code>. If <code>method</code> equals
 <code>"PEM"</code>, the argument is passed to <code>trace.theta</code> in
-<code>PseudoEMAlgorithm</code>. Otherwise it is passed to the control
+<code><a href='PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></code>. Otherwise it is passed to the control
 argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Arguments passed to the <code>control</code>-list in
-<code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> or <code>PseudoEMAlgorithm</code> if <code>method</code> is
+<code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> or <code><a href='PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></code> if <code>method</code> is
 <code>"PEM"</code>.</p></td>
     </tr>
     </table>
@@ -247,8 +247,8 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 <span class='co'># True parameters</span>
 <span class='kw'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9</span>, <span class='fl'>2</span>, <span class='fl'>0.7</span>, <span class='fl'>0.6</span>)
 <span class='co'># Simulation of data from the GMCM model</span>
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>)
-<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>) <span class='co'># Ranked observed data</span>
+<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>)
+<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>) <span class='co'># Ranked observed data</span>
 
 <span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)  <span class='co'># Initial parameters</span>
 
@@ -450,7 +450,7 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 }
 
 <span class='co'># Get estimated cluster</span>
-<span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'>get.IDR</span>(x = <span class='kw'>uhat</span>, par = <span class='kw'>nm.par</span>)<span class='op'>$</span><span class='kw'>Khat</span>
+<span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(x = <span class='kw'>uhat</span>, par = <span class='kw'>nm.par</span>)<span class='op'>$</span><span class='kw'>Khat</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, col = <span class='kw'>Khat</span>, main = <span class='st'>"Clustering\nIDR &lt; 0.05"</span>)</div><div class='img'><img src='fit.meta.GMCM-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -139,11 +139,11 @@ GMCM with various optimization procedures. Note, all but the PEM methods
 provides the maximum likelihood estimate.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit.full.GMCM</span>(<span class='kw'>u</span>, <span class='kw'>m</span>, theta = <span class='fu'>choose.theta</span>(<span class='kw'>u</span>, <span class='kw'>m</span>), method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>,
+    <pre class="usage"><span class='fu'>fit.full.GMCM</span>(<span class='kw'>u</span>, <span class='kw'>m</span>, theta = <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='kw'>u</span>, <span class='kw'>m</span>), method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>,
   <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"PEM"</span>), max.ite = <span class='fl'>1000</span>, verbose = <span class='fl'>TRUE</span>,
   <span class='kw'>...</span>)
 
-<span class='fu'>fit.general.GMCM</span>(<span class='kw'>u</span>, <span class='kw'>m</span>, theta = <span class='fu'>choose.theta</span>(<span class='kw'>u</span>, <span class='kw'>m</span>), method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>,
+<span class='fu'>fit.general.GMCM</span>(<span class='kw'>u</span>, <span class='kw'>m</span>, theta = <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='kw'>u</span>, <span class='kw'>m</span>), method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"NM"</span>,
   <span class='st'>"SANN"</span>, <span class='st'>"L-BFGS"</span>, <span class='st'>"L-BFGS-B"</span>, <span class='st'>"PEM"</span>), max.ite = <span class='fl'>1000</span>, verbose = <span class='fl'>TRUE</span>,
   <span class='kw'>...</span>)</pre>
 
@@ -163,7 +163,7 @@ observations.</p></td>
     </tr>
     <tr>
       <th>theta</th>
-      <td><p>A list of parameters as defined in <code>rtheta</code>. If
+      <td><p>A list of parameters as defined in <code><a href='rtheta.html'>rtheta</a></code>. If
 <code>theta</code> is not provided, then heuristic starting values are chosen
 using the k-means algorithm.</p></td>
     </tr>
@@ -192,13 +192,13 @@ is made.</p></td>
       <td><p>Arguments passed to the <code>control</code>-list in
 <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> when <code>method</code> is not equal to <code>"PEM"</code>.
 If <code>method</code> equals <code>"PEM"</code>, the arguments are passed to
- <code>PseudoEMAlgorithm</code> if the <code>method</code>.</p></td>
+ <code><a href='PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></code> if the <code>method</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of parameters formatted as described in <code>rtheta</code>.</p>
+    <p>A list of parameters formatted as described in <code><a href='rtheta.html'>rtheta</a></code>.</p>
 <p>When <code>method</code> equals <code>"PEM"</code>, a list of extra information
 (log-likelihood trace, the matrix of group probabilities, theta trace) is
 added as an attribute called "extra".</p>
@@ -216,7 +216,7 @@ added as an attribute called "extra".</p>
   Therefore it is advisable to apply multiple
   different initial parameters (and optimization routines) and select the
   best fit.</p>
-<p>The <code>choose.theta</code> itself chooses random a initialization.
+<p>The <code><a href='choose.theta.html'>choose.theta</a></code> itself chooses random a initialization.
   Hence, the output when <code>theta</code> is not directly supplied can vary.</p>
 <p>See <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code> for further details.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -230,24 +230,24 @@ added as an attribute called "extra".</p>
 doi:10.1109/ICDMW.2011.135</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>, <code>get.prob</code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>, <code><a href='get.IDR.html'>get.prob</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>17</span>)
-<span class='kw'>sim</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, m = <span class='fl'>3</span>, d = <span class='fl'>2</span>)
+<span class='kw'>sim</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(n = <span class='fl'>1000</span>, m = <span class='fl'>3</span>, d = <span class='fl'>2</span>)
 
 <span class='co'># Plotting simulated data</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>], main = <span class='st'>"Latent process"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>], main = <span class='st'>"GMCM process"</span>)</div><div class='img'><img src='fit.full.GMCM-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Observed data</span>
-<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>)
+<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>)
 
 <span class='co'># The model should be fitted multiple times using different starting estimates</span>
-<span class='kw'>start.theta</span> <span class='op'>&lt;-</span> <span class='fu'>choose.theta</span>(<span class='kw'>uhat</span>, m = <span class='fl'>3</span>)  <span class='co'># Random starting estimate</span>
+<span class='kw'>start.theta</span> <span class='op'>&lt;-</span> <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='kw'>uhat</span>, m = <span class='fl'>3</span>)  <span class='co'># Random starting estimate</span>
 <span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>fit.full.GMCM</span>(u = <span class='kw'>uhat</span>, theta = <span class='kw'>start.theta</span>,
                      method = <span class='st'>"NM"</span>, max.ite = <span class='fl'>3000</span>,
                      reltol = <span class='fl'>1e-2</span>, trace = <span class='fl'>TRUE</span>)  <span class='co'># Note, 1e-2 is too big</span></div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
@@ -393,14 +393,14 @@ doi:10.1109/ICDMW.2011.135</p>
 #&gt; Exiting from Nelder Mead minimizer
 #&gt;     287 function evaluations used</div><div class='input'>
 <span class='co'># Confusion matrix</span>
-<span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'>get.prob</span>(<span class='kw'>uhat</span>, theta = <span class='kw'>res</span>), <span class='fl'>1</span>, <span class='kw'>which.max</span>)
+<span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='get.IDR.html'>get.prob</a></span>(<span class='kw'>uhat</span>, theta = <span class='kw'>res</span>), <span class='fl'>1</span>, <span class='kw'>which.max</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='st'>"Khat"</span> = <span class='kw'>Khat</span>, <span class='st'>"K"</span> = <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>)  <span class='co'># Note, some components have been swapped</span></div><div class='output co'>#&gt;     K
 #&gt; Khat   1   2   3
 #&gt;    1  97 121   0
 #&gt;    2   0 489   0
 #&gt;    3   0   0 293</div><div class='input'>
 <span class='co'># Simulation from GMCM with the fitted parameters</span>
-<span class='kw'>simfit</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, theta = <span class='kw'>res</span>)
+<span class='kw'>simfit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(n = <span class='fl'>1000</span>, theta = <span class='kw'>res</span>)
 
 <span class='co'># As seen, the underlying latent process is hard to estimate.</span>
 <span class='co'># The clustering, however, is very good.</span>

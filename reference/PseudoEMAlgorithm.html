@@ -152,7 +152,7 @@ columns to experiments.</p></td>
     <tr>
       <th>theta</th>
       <td><p>A list of parameters formatted as described in
-<code>rtheta</code>.</p></td>
+<code><a href='rtheta.html'>rtheta</a></code>.</p></td>
     </tr>
     <tr>
       <th>eps</th>
@@ -193,12 +193,12 @@ et. al. criterion.</p></td>
     <p>A list of 3 or 4 is returned depending on the value of
 <code>trace.theta</code></p>
 <dt>theta</dt><dd><p>A list containing the final parameter
-estimate in the format of <code>rtheta</code></p></dd> <dt>loglik.tr</dt><dd><p>A matrix
+estimate in the format of <code><a href='rtheta.html'>rtheta</a></code></p></dd> <dt>loglik.tr</dt><dd><p>A matrix
 with different log-likelihood traces in each row.</p></dd> <dt>kappa</dt><dd><p>A matrix
 where the (i,j)'th entry is the probability that <code>x[i, ]</code> belongs to
 the j'th component. Usually the returned value of <code>EStep</code>.</p></dd>
 <dt>theta.tr</dt><dd><p>A list of each obtained parameter estimates in the format of
-<code>rtheta</code></p></dd>
+<code><a href='rtheta.html'>rtheta</a></code></p></dd>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -216,7 +216,7 @@ therefore should be carefully chosen.</p>
   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>rtheta</code>, <code>EMAlgorithm</code></p></div>
+    <div class='dont-index'><p><code><a href='rtheta.html'>rtheta</a></code>, <code><a href='EMAlgorithm.html'>EMAlgorithm</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
@@ -226,8 +226,8 @@ therefore should be carefully chosen.</p>
 
 <span class='co'># Choosing the true parameters and simulating data</span>
 <span class='kw'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>3</span>, <span class='fl'>1.5</span>, <span class='fl'>0.4</span>)
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>, d = <span class='fl'>2</span>)
-<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'>Uhat</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>)  <span class='co'># Observed ranks</span>
+<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>, d = <span class='fl'>2</span>)
+<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>)  <span class='co'># Observed ranks</span>
 
 <span class='co'># Plot of latent and observed data colour coded by the true component</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
@@ -239,7 +239,7 @@ therefore should be carefully chosen.</p>
      col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>,<span class='st'>"blue"</span>)[<span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>])</div><div class='img'><img src='PseudoEMAlgorithm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Fit the model using the Pseudo EM algorithm</span>
 <span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>)
-<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/PseudoEMAlgorithm.html'>PseudoEMAlgorithm</a></span>(<span class='kw'>uhat</span>, <span class='fu'>meta2full</span>(<span class='kw'>init.par</span>, d = <span class='fl'>2</span>),
+<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>PseudoEMAlgorithm</span>(<span class='kw'>uhat</span>, <span class='fu'><a href='full2meta.html'>meta2full</a></span>(<span class='kw'>init.par</span>, d = <span class='fl'>2</span>),
                                 verbose = <span class='fl'>TRUE</span>,
                                 convergence.criterion = <span class='st'>"absGMCM"</span>,
                                 eps = <span class='fl'>1e-4</span>,
@@ -478,7 +478,7 @@ therefore should be carefully chosen.</p>
 #&gt; 233 | delta = 0.000103 | gmm = -3075.46 | gmcm =  237.15 
 #&gt; 234 | delta = 0.000099 | gmm = -3075.46 | gmcm =  237.15 </div><div class='input'>
 <span class='co'># Compute posterior cluster probabilities</span>
-<span class='kw'>IDRs</span> <span class='op'>&lt;-</span> <span class='fu'>get.IDR</span>(<span class='kw'>uhat</span>, par = <span class='fu'>full2meta</span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>theta</span>))
+<span class='kw'>IDRs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(<span class='kw'>uhat</span>, par = <span class='fu'><a href='full2meta.html'>full2meta</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>theta</span>))
 
 <span class='co'># Plot of observed data colour coded by the MAP estimate</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>loglik</span>[<span class='fl'>3</span>,], main = <span class='st'>"Loglikelihood trace"</span>, type = <span class='st'>"l"</span>,
@@ -487,7 +487,7 @@ therefore should be carefully chosen.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, main = <span class='st'>"Clustering\nIDR &lt; 0.05"</span>, xlab = <span class='st'>""</span>, ylab = <span class='st'>""</span>, cex = <span class='fl'>0.6</span>,
      col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Red"</span>,<span class='st'>"Blue"</span>)[<span class='kw'>IDRs</span><span class='op'>$</span><span class='kw'>Khat</span>])</div><div class='img'><img src='PseudoEMAlgorithm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># View parameters</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='kw'>init.par</span>, <span class='kw'>true.par</span>, estimate = <span class='fu'>full2meta</span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>theta</span>))</div><div class='output co'>#&gt;               pie1    mu.mu     sigma       rho
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='kw'>init.par</span>, <span class='kw'>true.par</span>, estimate = <span class='fu'><a href='full2meta.html'>full2meta</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>theta</span>))</div><div class='output co'>#&gt;               pie1    mu.mu     sigma       rho
 #&gt; init.par 0.5000000 1.000000 1.0000000 0.5000000
 #&gt; true.par 0.8000000 3.000000 1.5000000 0.4000000
 #&gt; estimate 0.8224538 2.521749 0.8548858 0.4069159</div><div class='input'>

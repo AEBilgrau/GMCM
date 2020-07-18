@@ -150,7 +150,7 @@ columns to experiments.</p></td>
     <tr>
       <th>theta</th>
       <td><p>A list of parameters formatted as described in
-<code>rtheta</code>.</p></td>
+<code><a href='rtheta.html'>rtheta</a></code>.</p></td>
     </tr>
     <tr>
       <th>kappa</th>
@@ -171,7 +171,7 @@ value of <code>EStep</code>.</p></td>
     <p><code>EStep</code> returns a matrix of probabilities as <code>kappa</code>
   above.</p>
 <p><code>MStep</code> returns a list of parameters formatted as described in
-  <code>rtheta</code>.</p>
+  <code><a href='rtheta.html'>rtheta</a></code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Li, Q., Brown, J. B. J. B., Huang, H., &amp; Bickel, P. J. (2011).
@@ -179,21 +179,21 @@ value of <code>EStep</code>.</p></td>
   Applied Statistics, 5(3), 1752-1779. doi:10.1214/11-AOAS466</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>rtheta</code></p></div>
+    <div class='dont-index'><p><code><a href='rtheta.html'>rtheta</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='kw'>sim</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>)
+<span class='kw'>sim</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>)
 <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>z</span>
 <span class='kw'>true.theta</span> <span class='op'>&lt;-</span> <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>theta</span>
-<span class='kw'>init.theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/rtheta.html'>rtheta</a></span>()  <span class='co'># Generate starting parameters</span>
+<span class='kw'>init.theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='rtheta.html'>rtheta</a></span>()  <span class='co'># Generate starting parameters</span>
 
 <span class='co'># Do one EM interation</span>
-<span class='kw'>es</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/EStep.html'>EStep</a></span>(<span class='kw'>x</span>, <span class='kw'>init.theta</span>)
-<span class='kw'>new.theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='https://rdrr.io/pkg/GMCM/man/EStep.html'>MStep</a></span>(<span class='kw'>x</span>, <span class='kw'>es</span>)
+<span class='kw'>es</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>EStep</span>(<span class='kw'>x</span>, <span class='kw'>init.theta</span>)
+<span class='kw'>new.theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>MStep</span>(<span class='kw'>x</span>, <span class='kw'>es</span>)
 
 <span class='co'># Compare current estimate with the true</span>
 <span class='kw'>new.theta</span></div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:

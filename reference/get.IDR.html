@@ -164,12 +164,12 @@ correlation of the reproducible component.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to <code>qgmm.marginal</code>.</p></td>
+      <td><p>Arguments passed to <code><a href='dgmcm.loglik.html'>qgmm.marginal</a></code>.</p></td>
     </tr>
     <tr>
       <th>theta</th>
       <td><p>A list of parameters for the full model as described in
-<code>rtheta</code>.</p></td>
+<code><a href='rtheta.html'>rtheta</a></code>.</p></td>
     </tr>
     </table>
 
@@ -217,13 +217,13 @@ get.prob returns a matrix where entry (i,j) is the
 <span class='kw'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.9</span>, <span class='fl'>2</span>, <span class='fl'>0.7</span>, <span class='fl'>0.6</span>)
 
 <span class='co'># Simulation of data from the GMCM model</span>
-<span class='kw'>data</span> <span class='op'>&lt;-</span>  <span class='fu'>SimulateGMCMData</span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>, d = <span class='fl'>2</span>)
+<span class='kw'>data</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>, d = <span class='fl'>2</span>)
 
 <span class='co'># Initial parameters</span>
 <span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)
 
 <span class='co'># Nelder-Mead optimization</span>
-<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
+<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
 #&gt; function value for initial parameters = 171.783273
 #&gt;   Scaled convergence tolerance is 2.55977e-06
 #&gt; Stepsize computed as 0.219722
