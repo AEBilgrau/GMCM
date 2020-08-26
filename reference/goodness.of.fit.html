@@ -175,14 +175,18 @@ fit to compute. Default is "AIC". "BIC" is also a option.</p></td>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>2</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>u133VsExon</span>)
 <span class='kw'>u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='kw'>u133VsExon</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>19577</span>, <span class='fl'>500</span>), ])  <span class='co'># Subset for faster fitting</span>
-<span class='kw'>theta1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='kw'>u</span>, m = <span class='fl'>2</span>, method = <span class='st'>"L-BFGS"</span>)</div><div class='output co'>#&gt; iter   10 value -110.257470
+<span class='kw'>theta1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='kw'>u</span>, m = <span class='fl'>2</span>, method = <span class='st'>"L-BFGS"</span>)
+</div><div class='output co'>#&gt; iter   10 value -110.257470
 #&gt; iter   20 value -110.738197
 #&gt; final  value -110.874374 
-#&gt; converged</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta1</span>, <span class='kw'>u</span>)  <span class='co'># AIC</span></div><div class='output co'>#&gt; [1] -205.7487</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta1</span>, <span class='kw'>u</span>, method = <span class='st'>"BIC"</span>)</div><div class='output co'>#&gt; [1] -172.0319</div><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+#&gt; converged</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta1</span>, <span class='kw'>u</span>)  <span class='co'># AIC</span>
+</div><div class='output co'>#&gt; [1] -205.7487</div><div class='input'><span class='fu'>goodness.of.fit</span>(<span class='kw'>theta1</span>, <span class='kw'>u</span>, method = <span class='st'>"BIC"</span>)
+</div><div class='output co'>#&gt; [1] -172.0319</div><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='kw'>theta2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit.full.GMCM.html'>fit.full.GMCM</a></span>(<span class='kw'>u</span>, m = <span class='fl'>3</span>, method = <span class='st'>"L-BFGS"</span>)
 <span class='fu'>goodness.of.fit</span>(<span class='kw'>theta2</span>, <span class='kw'>u</span>)
 <span class='fu'>goodness.of.fit</span>(<span class='kw'>theta2</span>, <span class='kw'>u</span>, method = <span class='st'>"BIC"</span>)
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

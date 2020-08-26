@@ -253,7 +253,8 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 <span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)  <span class='co'># Initial parameters</span>
 
 <span class='co'># Optimization with Nelder-Mead</span>
-<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>uhat</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
+<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'>fit.meta.GMCM</span>(<span class='kw'>uhat</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)
+</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
 #&gt; function value for initial parameters = 176.343401
 #&gt;   Scaled convergence tolerance is 2.62772e-06
 #&gt; Stepsize computed as 0.219722
@@ -451,7 +452,8 @@ argument <code>trace</code> in <code><a href='https://rdrr.io/r/stats/optim.html
 
 <span class='co'># Get estimated cluster</span>
 <span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(x = <span class='kw'>uhat</span>, par = <span class='kw'>nm.par</span>)<span class='op'>$</span><span class='kw'>Khat</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, col = <span class='kw'>Khat</span>, main = <span class='st'>"Clustering\nIDR &lt; 0.05"</span>)</div><div class='img'><img src='fit.meta.GMCM-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, col = <span class='kw'>Khat</span>, main = <span class='st'>"Clustering\nIDR &lt; 0.05"</span>)
+</div><div class='img'><img src='fit.meta.GMCM-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

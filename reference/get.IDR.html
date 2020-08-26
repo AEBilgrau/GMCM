@@ -223,7 +223,8 @@ get.prob returns a matrix where entry (i,j) is the
 <span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span>)
 
 <span class='co'># Nelder-Mead optimization</span>
-<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
+<span class='kw'>nm.par</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, init.par = <span class='kw'>init.par</span>, method = <span class='st'>"NM"</span>)
+</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
 #&gt; function value for initial parameters = 171.783273
 #&gt;   Scaled convergence tolerance is 2.55977e-06
 #&gt; Stepsize computed as 0.219722
@@ -333,7 +334,8 @@ get.prob returns a matrix where entry (i,j) is the
 <span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>get.IDR</span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, <span class='kw'>nm.par</span>, threshold = <span class='fl'>0.05</span>)
 
 <span class='co'># Plot results</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='kw'>res</span><span class='op'>$</span><span class='kw'>Khat</span>, pch = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>16</span>)[<span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>])</div><div class='img'><img src='get.IDR-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='kw'>res</span><span class='op'>$</span><span class='kw'>Khat</span>, pch = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>16</span>)[<span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>])
+</div><div class='img'><img src='get.IDR-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

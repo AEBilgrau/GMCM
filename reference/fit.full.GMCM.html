@@ -242,7 +242,8 @@ doi:10.1109/ICDMW.2011.135</p>
 <span class='co'># Plotting simulated data</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>], main = <span class='st'>"Latent process"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>], main = <span class='st'>"GMCM process"</span>)</div><div class='img'><img src='fit.full.GMCM-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span>(<span class='fl'>3</span>)[<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>], main = <span class='st'>"GMCM process"</span>)
+</div><div class='img'><img src='fit.full.GMCM-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Observed data</span>
 <span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>)
 
@@ -250,7 +251,8 @@ doi:10.1109/ICDMW.2011.135</p>
 <span class='kw'>start.theta</span> <span class='op'>&lt;-</span> <span class='fu'><a href='choose.theta.html'>choose.theta</a></span>(<span class='kw'>uhat</span>, m = <span class='fl'>3</span>)  <span class='co'># Random starting estimate</span>
 <span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>fit.full.GMCM</span>(u = <span class='kw'>uhat</span>, theta = <span class='kw'>start.theta</span>,
                      method = <span class='st'>"NM"</span>, max.ite = <span class='fl'>3000</span>,
-                     reltol = <span class='fl'>1e-2</span>, trace = <span class='fl'>TRUE</span>)  <span class='co'># Note, 1e-2 is too big</span></div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
+                     reltol = <span class='fl'>1e-2</span>, trace = <span class='fl'>TRUE</span>)  <span class='co'># Note, 1e-2 is too big</span>
+</div><div class='output co'>#&gt;   Nelder-Mead direct search function minimizer
 #&gt; function value for initial parameters = -545.989357
 #&gt;   Scaled convergence tolerance is 5.45999
 #&gt; Stepsize computed as 0.622874
@@ -394,7 +396,8 @@ doi:10.1109/ICDMW.2011.135</p>
 #&gt;     287 function evaluations used</div><div class='input'>
 <span class='co'># Confusion matrix</span>
 <span class='kw'>Khat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='get.IDR.html'>get.prob</a></span>(<span class='kw'>uhat</span>, theta = <span class='kw'>res</span>), <span class='fl'>1</span>, <span class='kw'>which.max</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='st'>"Khat"</span> = <span class='kw'>Khat</span>, <span class='st'>"K"</span> = <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>)  <span class='co'># Note, some components have been swapped</span></div><div class='output co'>#&gt;     K
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='st'>"Khat"</span> = <span class='kw'>Khat</span>, <span class='st'>"K"</span> = <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>K</span>)  <span class='co'># Note, some components have been swapped</span>
+</div><div class='output co'>#&gt;     K
 #&gt; Khat   1   2   3
 #&gt;    1  97 121   0
 #&gt;    2   0 489   0
@@ -407,7 +410,8 @@ doi:10.1109/ICDMW.2011.135</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>simfit</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='kw'>simfit</span><span class='op'>$</span><span class='kw'>K</span>, main = <span class='st'>"Model check 1\nSimulated GMM"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>simfit</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='kw'>simfit</span><span class='op'>$</span><span class='kw'>K</span>, main = <span class='st'>"Model check 2\nSimulated GMCM"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='kw'>Khat</span>, main = <span class='st'>"MAP clustering"</span>)</div><div class='img'><img src='fit.full.GMCM-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>sim</span><span class='op'>$</span><span class='kw'>u</span>, col = <span class='kw'>Khat</span>, main = <span class='st'>"MAP clustering"</span>)
+</div><div class='img'><img src='fit.full.GMCM-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

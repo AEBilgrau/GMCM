@@ -165,19 +165,24 @@ format.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>theta1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rtheta.html'>rtheta</a></span>()  <span class='co'># Create a random correctly formatted theta</span>
-<span class='fu'>is.theta</span>(<span class='kw'>theta1</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>is.theta</span>(<span class='kw'>theta1</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='kw'>theta2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rtheta.html'>rtheta</a></span>(d = <span class='fl'>3</span>, m = <span class='fl'>5</span>)
 <span class='kw'>theta2</span><span class='op'>$</span><span class='kw'>m</span> <span class='op'>&lt;-</span> <span class='fl'>6</span>  <span class='co'># m is now incoherent with the number of components</span>
-<span class='fu'>is.theta</span>(<span class='kw'>theta2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: theta[[3]] is not a vector of length 6 as defined by theta[[1]]</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'>is.theta</span>(<span class='kw'>theta2</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: theta[[3]] is not a vector of length 6 as defined by theta[[1]]</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='kw'>theta3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rtheta.html'>rtheta</a></span>(d = <span class='fl'>4</span>, m = <span class='fl'>2</span>)
 <span class='kw'>theta3</span><span class='op'>$</span><span class='kw'>sigma</span><span class='op'>$</span><span class='kw'>comp1</span>[<span class='fl'>1</span>, <span class='fl'>2</span>] <span class='op'>&lt;-</span> <span class='fl'>0</span>  <span class='co'># Making the covariance matrix non-symmetric</span>
-<span class='fu'>is.theta</span>(<span class='kw'>theta3</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Not all covariance matrices are symmetric.</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'>is.theta</span>(<span class='kw'>theta3</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Not all covariance matrices are symmetric.</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='kw'>theta4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rtheta.html'>rtheta</a></span>(d = <span class='fl'>10</span>, m = <span class='fl'>10</span>)
 <span class='kw'>theta4</span><span class='op'>$</span><span class='kw'>sigma</span><span class='op'>$</span><span class='kw'>comp1</span>[<span class='fl'>1</span>, <span class='fl'>1</span>] <span class='op'>&lt;-</span> <span class='fl'>0</span>  <span class='co'># Destroy positive semi-definiteness</span>
-<span class='fu'>is.theta</span>(<span class='kw'>theta4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Not all covariance matrices are postive semi-definite.</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'>is.theta</span>(<span class='kw'>theta4</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Not all covariance matrices are postive semi-definite.</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='kw'>theta5</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rtheta.html'>rtheta</a></span>()
 <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='kw'>theta5</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"m"</span>, <span class='st'>"d"</span>, <span class='st'>"prop"</span>, <span class='st'>"mu"</span>, <span class='st'>"sigmas"</span>) <span class='co'># Incorrect names</span>
-<span class='fu'>is.theta</span>(<span class='kw'>theta5</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: names(theta) does not equal c("m", "d", "pie", "mu", "sigma")</span></div><div class='output co'>#&gt; [1] FALSE</div></pre>
+<span class='fu'>is.theta</span>(<span class='kw'>theta5</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: names(theta) does not equal c("m", "d", "pie", "mu", "sigma")</span></div><div class='output co'>#&gt; [1] FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

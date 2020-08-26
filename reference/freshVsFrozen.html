@@ -185,7 +185,8 @@ Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>freshVsFrozen</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>freshVsFrozen</span>)</div><div class='output co'>#&gt; 'data.frame':	18708 obs. of  6 variables:
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>freshVsFrozen</span>)
+</div><div class='output co'>#&gt; 'data.frame':	18708 obs. of  6 variables:
 #&gt;  $ PreVsPost.Fresh.tstat : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...
 #&gt;  $ PreVsPost.Fresh.pval  : num  0.283 0.703 0.269 0.576 0.292 ...
 #&gt;  $ PreVsPost.Frozen.tstat: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...
@@ -193,9 +194,11 @@ Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.</p>
 #&gt;  $ FreshVsFrozen.tstat   : num  0.836 1.135 -0.221 0.191 -0.783 ...
 #&gt;  $ FreshVsFrozen.pval    : num  0.403 0.256 0.825 0.849 0.434 ...</div><div class='input'>
 <span class='co'># Plot P-values</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>freshVsFrozen</span>[,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>4</span>)], cex = <span class='fl'>0.5</span>)</div><div class='img'><img src='freshVsFrozen-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>freshVsFrozen</span>[,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>4</span>)], cex = <span class='fl'>0.5</span>)
+</div><div class='img'><img src='freshVsFrozen-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot ranked and scaled P-values</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='kw'>freshVsFrozen</span>[,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>)])), cex = <span class='fl'>0.5</span>)</div><div class='img'><img src='freshVsFrozen-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>abs</a></span>(<span class='kw'>freshVsFrozen</span>[,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>)])), cex = <span class='fl'>0.5</span>)
+</div><div class='img'><img src='freshVsFrozen-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

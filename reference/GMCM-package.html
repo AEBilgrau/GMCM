@@ -214,13 +214,15 @@ extension of the features available in the <code>idr</code> package.</p>
 
 <span class='co'># Fitting using BFGS</span>
 <span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit.meta.GMCM.html'>fit.meta.GMCM</a></span>(<span class='kw'>uhat</span>, init.par = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>), pgtol = <span class='fl'>1e-2</span>,
-                     method = <span class='st'>"L-BFGS"</span>, positive.rho = <span class='fl'>TRUE</span>, verbose = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; iter   10 value -1213.470575
+                     method = <span class='st'>"L-BFGS"</span>, positive.rho = <span class='fl'>TRUE</span>, verbose = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; iter   10 value -1213.470575
 #&gt; iter   20 value -1213.524390
 #&gt; final  value -1213.524559 
 #&gt; converged</div><div class='input'>
 <span class='co'># Compute IDR values and classify</span>
 <span class='kw'>idr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(<span class='kw'>uhat</span>, par = <span class='kw'>fit</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>idr</span><span class='op'>$</span><span class='kw'>K</span>) <span class='co'># 1 = irreproducible, 2 = reproducible</span></div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>idr</span><span class='op'>$</span><span class='kw'>K</span>) <span class='co'># 1 = irreproducible, 2 = reproducible</span>
+</div><div class='output co'>#&gt; 
 #&gt;    1    2 
 #&gt; 4136  864 </div><div class='input'>
 <span class='co'>if</span> (<span class='fl'>FALSE</span>) {
@@ -232,7 +234,8 @@ extension of the features available in the <code>idr</code> package.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, cex = <span class='fl'>0.5</span>, pch = <span class='fl'>4</span>, main = <span class='st'>"Classified genes"</span>,
      col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"tomato"</span>, <span class='st'>"steelblue"</span>)[<span class='kw'>idr</span><span class='op'>$</span><span class='kw'>K</span>],
      xlab = <span class='st'>"rank(1-P) (U133)"</span>, ylab = <span class='st'>"rank(1-P) (Exon)"</span>)
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

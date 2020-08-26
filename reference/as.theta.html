@@ -171,7 +171,8 @@ Finally, the sum constraint of 1 for the mixture proportions is enforced.</p>
           pie = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>),
           mu = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(comp1=<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='kw'>d</span>), comp2=<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='kw'>d</span>)),
           sigma = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(comp1=<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='kw'>d</span>), comp2=<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='kw'>d</span>)))
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>)</div><div class='output co'>#&gt; $m
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; $m
 #&gt; [1] 2
 #&gt; 
 #&gt; $d
@@ -202,7 +203,8 @@ Finally, the sum constraint of 1 for the mixture proportions is enforced.</p>
 #&gt; [3,]    0    0    1
 #&gt; 
 #&gt; </div><div class='input'><span class='kw'>theta</span> <span class='op'>&lt;-</span> <span class='fu'>as.theta</span>(<span class='kw'>x</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta</span>)</div><div class='output co'>#&gt; theta object with d = 3 dimensions and m = 2 components:
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta</span>)
+</div><div class='output co'>#&gt; theta object with d = 3 dimensions and m = 2 components:
 #&gt; 
 #&gt; $pie
 #&gt; [1] 0.5 0.5
@@ -235,7 +237,9 @@ Finally, the sum constraint of 1 for the mixture proportions is enforced.</p>
   mu = <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>simplify2array</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(comp1=<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='kw'>d</span>), comp2=<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='kw'>d</span>))), <span class='co'># matrix, not a list</span>
   sigma = <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>simplify2array</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(comp1=<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='kw'>d</span>), comp2=<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='kw'>d</span>)))  <span class='co'># array, not a list</span>
 ))
-<span class='kw'>theta2</span> <span class='op'>&lt;-</span> <span class='fu'>as.theta</span>(<span class='kw'>x2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: x$pie rescaled to enforce sum constraint of 1</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta2</span>)</div><div class='output co'>#&gt; theta object with d = 3 dimensions and m = 2 components:
+<span class='kw'>theta2</span> <span class='op'>&lt;-</span> <span class='fu'>as.theta</span>(<span class='kw'>x2</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: x$pie rescaled to enforce sum constraint of 1</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta2</span>)
+</div><div class='output co'>#&gt; theta object with d = 3 dimensions and m = 2 components:
 #&gt; 
 #&gt; $pie
 #&gt; [1] 0.5 0.5
