@@ -91,12 +91,6 @@ an easy prototype of the theta-format used in GMCM." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -137,8 +131,8 @@ model (GMM) and Gaussian mixture copula model (GMCM). Primarily, it provides
 an easy prototype of the <code>theta</code>-format used in <span class="pkg">GMCM</span>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rtheta</span>(m = <span class='fl'>3</span>, d = <span class='fl'>2</span>, method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"old"</span>, <span class='st'>"EqualSpherical"</span>,
-  <span class='st'>"UnequalSpherical"</span>, <span class='st'>"EqualEllipsoidal"</span>, <span class='st'>"UnequalEllipsoidal"</span>))</pre>
+    <pre class="usage"><span class='fu'>rtheta</span><span class='op'>(</span>m <span class='op'>=</span> <span class='fl'>3</span>, d <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"old"</span>, <span class='st'>"EqualSpherical"</span>,
+  <span class='st'>"UnequalSpherical"</span>, <span class='st'>"EqualEllipsoidal"</span>, <span class='st'>"UnequalEllipsoidal"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -232,7 +226,7 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>rtheta</span>()
+    <pre class="examples"><div class='input'><span class='fu'>rtheta</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
 #&gt; 
 #&gt; $pie
@@ -267,7 +261,7 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
 #&gt; [2,] 3.371957 6.616887
 #&gt; 
 #&gt; </div><div class='input'>
-<span class='fu'>rtheta</span>(d = <span class='fl'>5</span>, m = <span class='fl'>2</span>)
+<span class='fu'>rtheta</span><span class='op'>(</span>d <span class='op'>=</span> <span class='fl'>5</span>, m <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; theta object with d = 5 dimensions and m = 2 components:
 #&gt; 
 #&gt; $pie
@@ -300,7 +294,7 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
 #&gt; [5,]  2.0860880  1.4889221 -2.540656 -1.9285615  7.046797
 #&gt; 
 #&gt; </div><div class='input'>
-<span class='fu'>rtheta</span>(d = <span class='fl'>3</span>, m = <span class='fl'>2</span>, method = <span class='st'>"EqualEllipsoidal"</span>)
+<span class='fu'>rtheta</span><span class='op'>(</span>d <span class='op'>=</span> <span class='fl'>3</span>, m <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='st'>"EqualEllipsoidal"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; theta object with d = 3 dimensions and m = 2 components:
 #&gt; 
 #&gt; $pie
@@ -329,11 +323,11 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
 #&gt; [3,] -5.569435 -23.38221  30.814336
 #&gt; 
 #&gt; </div><div class='input'>
-<span class='kw'>test</span> <span class='op'>&lt;-</span> <span class='fu'>rtheta</span>()
-<span class='fu'><a href='is.theta.html'>is.theta</a></span>(<span class='kw'>test</span>)
+<span class='va'>test</span> <span class='op'>&lt;-</span> <span class='fu'>rtheta</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='is.theta.html'>is.theta</a></span><span class='op'>(</span><span class='va'>test</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>test</span>)
-</div><div class='output co'>#&gt; A theta object with d = 2 dimensions and m = 3 components.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>test</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>test</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; A theta object with d = 2 dimensions and m = 3 components.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>test</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
 #&gt; 
 #&gt; $pie
@@ -367,17 +361,17 @@ See details. Defaults to <code>"old"</code> which is the regular "old" behavior.
 #&gt; [1,] 15.089421 -6.048641
 #&gt; [2,] -6.048641 16.302684
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>test</span>)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>test</span><span class='op'>)</span>
 </div><div class='img'><img src='rtheta-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>, <span class='fu'>rtheta</span>(d = <span class='fl'>2</span>, method = <span class='st'>"EqualSpherical"</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>A</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='kw'>A</span><span class='op'>$</span><span class='kw'>K</span>, pch = <span class='kw'>A</span><span class='op'>$</span><span class='kw'>K</span>, asp = <span class='fl'>1</span>)
-<span class='kw'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>, <span class='fu'>rtheta</span>(d = <span class='fl'>2</span>, method = <span class='st'>"UnequalSpherical"</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>B</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='kw'>B</span><span class='op'>$</span><span class='kw'>K</span>, pch = <span class='kw'>B</span><span class='op'>$</span><span class='kw'>K</span>, asp = <span class='fl'>1</span>)
-<span class='kw'>C</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>, <span class='fu'>rtheta</span>(d = <span class='fl'>2</span>, method = <span class='st'>"EqualEllipsoidal"</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>C</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='kw'>C</span><span class='op'>$</span><span class='kw'>K</span>, pch = <span class='kw'>C</span><span class='op'>$</span><span class='kw'>K</span>, asp = <span class='fl'>1</span>)
-<span class='kw'>D</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>, <span class='fu'>rtheta</span>(d = <span class='fl'>2</span>, method = <span class='st'>"UnequalEllipsoidal"</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>D</span><span class='op'>$</span><span class='kw'>z</span>, col = <span class='kw'>D</span><span class='op'>$</span><span class='kw'>K</span>, pch = <span class='kw'>D</span><span class='op'>$</span><span class='kw'>K</span>, asp = <span class='fl'>1</span>)}
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>100</span>, <span class='fu'>rtheta</span><span class='op'>(</span>d <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='st'>"EqualSpherical"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>$</span><span class='va'>z</span>, col <span class='op'>=</span> <span class='va'>A</span><span class='op'>$</span><span class='va'>K</span>, pch <span class='op'>=</span> <span class='va'>A</span><span class='op'>$</span><span class='va'>K</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>100</span>, <span class='fu'>rtheta</span><span class='op'>(</span>d <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='st'>"UnequalSpherical"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>B</span><span class='op'>$</span><span class='va'>z</span>, col <span class='op'>=</span> <span class='va'>B</span><span class='op'>$</span><span class='va'>K</span>, pch <span class='op'>=</span> <span class='va'>B</span><span class='op'>$</span><span class='va'>K</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>C</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>100</span>, <span class='fu'>rtheta</span><span class='op'>(</span>d <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='st'>"EqualEllipsoidal"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>C</span><span class='op'>$</span><span class='va'>z</span>, col <span class='op'>=</span> <span class='va'>C</span><span class='op'>$</span><span class='va'>K</span>, pch <span class='op'>=</span> <span class='va'>C</span><span class='op'>$</span><span class='va'>K</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>D</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>100</span>, <span class='fu'>rtheta</span><span class='op'>(</span>d <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='st'>"UnequalEllipsoidal"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>D</span><span class='op'>$</span><span class='va'>z</span>, col <span class='op'>=</span> <span class='va'>D</span><span class='op'>$</span><span class='va'>K</span>, pch <span class='op'>=</span> <span class='va'>D</span><span class='op'>$</span><span class='va'>K</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

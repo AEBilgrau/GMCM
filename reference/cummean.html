@@ -90,12 +90,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -135,7 +129,7 @@
 (arithmetic mean) of the <code>i</code>'th first elements of the argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cummean</span>(<span class='kw'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>cummean</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,8 +152,8 @@
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>))
-<span class='kw'>GMCM</span>:::<span class='fu'>cummean</span>(<span class='kw'>x</span>)
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'>cummean</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   [1] -1.9452480760 -1.9269696480 -1.8922440238 -1.8565383966 -1.8056367363
 #&gt;   [6] -1.7701717254 -1.6967865240 -1.6407083360 -1.5882731519 -1.5359563081
 #&gt;  [11] -1.4921348835 -1.4416631970 -1.3968107083 -1.3572459394 -1.3219003980

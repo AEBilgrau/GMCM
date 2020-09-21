@@ -92,12 +92,6 @@ format described in rtheta." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -139,9 +133,9 @@ Most functions of the GMCM packages use the <code>theta</code>
 format described in <code><a href='rtheta.html'>rtheta</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>full2meta</span>(<span class='kw'>theta</span>)
+    <pre class="usage"><span class='fu'>full2meta</span><span class='op'>(</span><span class='va'>theta</span><span class='op'>)</span>
 
-<span class='fu'>meta2full</span>(<span class='kw'>par</span>, <span class='kw'>d</span>)</pre>
+<span class='fu'>meta2full</span><span class='op'>(</span><span class='va'>par</span>, <span class='va'>d</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,10 +189,10 @@ correlation (properly scaled).</p>
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='rtheta.html'>rtheta</a></span>(m = <span class='fl'>2</span>, d = <span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>par</span> <span class='op'>&lt;-</span> <span class='fu'>full2meta</span>(<span class='kw'>theta</span>))
+    <pre class="examples"><div class='input'><span class='va'>theta</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'><a href='rtheta.html'>rtheta</a></span><span class='op'>(</span>m <span class='op'>=</span> <span class='fl'>2</span>, d <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>par</span> <span class='op'>&lt;-</span> <span class='fu'>full2meta</span><span class='op'>(</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;        pie1          mu       sigma         rho 
-#&gt;  0.09074447 10.27417079  2.40060596 -0.00726274 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>theta.special.case</span> <span class='op'>&lt;-</span> <span class='fu'>meta2full</span>(<span class='kw'>par</span>, d = <span class='fl'>2</span>))
+#&gt;  0.09074447 10.27417079  2.40060596 -0.00726274 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>theta.special.case</span> <span class='op'>&lt;-</span> <span class='fu'>meta2full</span><span class='op'>(</span><span class='va'>par</span>, d <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 2 components:
 #&gt; 
 #&gt; $pie

@@ -95,12 +95,6 @@ Array." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -174,16 +168,16 @@ Biobank." Cytometry Part B: Clinical Cytometry, 88(1), 40-49.</p>
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>u133VsExon</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>u133VsExon</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>u133VsExon</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>u133VsExon</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 'data.frame':	19577 obs. of  2 variables:
 #&gt;  $ u133: num  0.17561 0.00178 0.005371 0.000669 0.655261 ...
 #&gt;  $ exon: num  1.07e-01 6.74e-10 1.51e-03 6.76e-05 3.36e-01 ...</div><div class='input'>
 <span class='co'># Plot P-values</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>u133VsExon</span>, cex = <span class='fl'>0.5</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>u133VsExon</span>, cex <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
 </div><div class='img'><img src='u133VsExon-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot ranked and scaled P-values</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='fl'>1</span><span class='op'>-</span><span class='kw'>u133VsExon</span>), cex = <span class='fl'>0.5</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='Uhat.html'>Uhat</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>-</span><span class='va'>u133VsExon</span><span class='op'>)</span>, cex <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
 </div><div class='img'><img src='u133VsExon-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

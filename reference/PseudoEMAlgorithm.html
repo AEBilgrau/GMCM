@@ -91,12 +91,6 @@ function." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -137,9 +131,9 @@ algorithm for estimating the maximizing parameters of the GMCM-likelihood
 function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>PseudoEMAlgorithm</span>(<span class='kw'>x</span>, <span class='kw'>theta</span>, eps = <span class='fl'>1e-04</span>, max.ite = <span class='fl'>1000</span>,
-  verbose = <span class='fl'>FALSE</span>, trace.theta = <span class='fl'>FALSE</span>, meta.special.case = <span class='fl'>FALSE</span>,
-  convergence.criterion = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"absGMCM"</span>, <span class='st'>"GMCM"</span>, <span class='st'>"GMM"</span>, <span class='st'>"Li"</span>, <span class='st'>"absLi"</span>))</pre>
+    <pre class="usage"><span class='fu'>PseudoEMAlgorithm</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>theta</span>, eps <span class='op'>=</span> <span class='fl'>1e-04</span>, max.ite <span class='op'>=</span> <span class='fl'>1000</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>, trace.theta <span class='op'>=</span> <span class='cn'>FALSE</span>, meta.special.case <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  convergence.criterion <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"absGMCM"</span>, <span class='st'>"GMCM"</span>, <span class='st'>"GMM"</span>, <span class='st'>"Li"</span>, <span class='st'>"absLi"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,30 +216,30 @@ therefore should be carefully chosen.</p>
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># Choosing the true parameters and simulating data</span>
-<span class='kw'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>3</span>, <span class='fl'>1.5</span>, <span class='fl'>0.4</span>)
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span>(n = <span class='fl'>1000</span>, par = <span class='kw'>true.par</span>, d = <span class='fl'>2</span>)
-<span class='kw'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>u</span>)  <span class='co'># Observed ranks</span>
+<span class='va'>true.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.8</span>, <span class='fl'>3</span>, <span class='fl'>1.5</span>, <span class='fl'>0.4</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='SimulateGMCMData.html'>SimulateGMCMData</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1000</span>, par <span class='op'>=</span> <span class='va'>true.par</span>, d <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>uhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Uhat.html'>Uhat</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>$</span><span class='va'>u</span><span class='op'>)</span>  <span class='co'># Observed ranks</span>
 
 <span class='co'># Plot of latent and observed data colour coded by the true component</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>data</span><span class='op'>$</span><span class='kw'>z</span>, main = <span class='st'>"Latent data"</span>, cex = <span class='fl'>0.6</span>,
-     xlab = <span class='st'>"z (Experiment 1)"</span>, ylab = <span class='st'>"z (Experiment 2)"</span>,
-     col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>,<span class='st'>"blue"</span>)[<span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>])
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, main = <span class='st'>"Observed data"</span>, cex = <span class='fl'>0.6</span>,
-     xlab = <span class='st'>"u (Experiment 1)"</span>, ylab = <span class='st'>"u (Experiment 2)"</span>,
-     col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"red"</span>,<span class='st'>"blue"</span>)[<span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>])
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>$</span><span class='va'>z</span>, main <span class='op'>=</span> <span class='st'>"Latent data"</span>, cex <span class='op'>=</span> <span class='fl'>0.6</span>,
+     xlab <span class='op'>=</span> <span class='st'>"z (Experiment 1)"</span>, ylab <span class='op'>=</span> <span class='st'>"z (Experiment 2)"</span>,
+     col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"red"</span>,<span class='st'>"blue"</span><span class='op'>)</span><span class='op'>[</span><span class='va'>data</span><span class='op'>$</span><span class='va'>K</span><span class='op'>]</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>uhat</span>, main <span class='op'>=</span> <span class='st'>"Observed data"</span>, cex <span class='op'>=</span> <span class='fl'>0.6</span>,
+     xlab <span class='op'>=</span> <span class='st'>"u (Experiment 1)"</span>, ylab <span class='op'>=</span> <span class='st'>"u (Experiment 2)"</span>,
+     col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"red"</span>,<span class='st'>"blue"</span><span class='op'>)</span><span class='op'>[</span><span class='va'>data</span><span class='op'>$</span><span class='va'>K</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='img'><img src='PseudoEMAlgorithm-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Fit the model using the Pseudo EM algorithm</span>
-<span class='kw'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>)
-<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>PseudoEMAlgorithm</span>(<span class='kw'>uhat</span>, <span class='fu'><a href='full2meta.html'>meta2full</a></span>(<span class='kw'>init.par</span>, d = <span class='fl'>2</span>),
-                                verbose = <span class='fl'>TRUE</span>,
-                                convergence.criterion = <span class='st'>"absGMCM"</span>,
-                                eps = <span class='fl'>1e-4</span>,
-                                trace.theta = <span class='fl'>FALSE</span>,
-                                meta.special.case = <span class='fl'>TRUE</span>)
+<span class='va'>init.par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span><span class='op'>)</span>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'>PseudoEMAlgorithm</span><span class='op'>(</span><span class='va'>uhat</span>, <span class='fu'><a href='full2meta.html'>meta2full</a></span><span class='op'>(</span><span class='va'>init.par</span>, d <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,
+                                verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                                convergence.criterion <span class='op'>=</span> <span class='st'>"absGMCM"</span>,
+                                eps <span class='op'>=</span> <span class='fl'>1e-4</span>,
+                                trace.theta <span class='op'>=</span> <span class='cn'>FALSE</span>,
+                                meta.special.case <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 2 | delta = 17.868577 | gmm = -2885.75 | gmcm =  167.34 
 #&gt; 3 | delta = 8.082063 | gmm = -2907.74 | gmcm =  175.42 
 #&gt; 4 | delta = 6.050655 | gmm = -2927.31 | gmcm =  181.47 
@@ -480,23 +474,23 @@ therefore should be carefully chosen.</p>
 #&gt; 233 | delta = 0.000103 | gmm = -3075.46 | gmcm =  237.15 
 #&gt; 234 | delta = 0.000099 | gmm = -3075.46 | gmcm =  237.15 </div><div class='input'>
 <span class='co'># Compute posterior cluster probabilities</span>
-<span class='kw'>IDRs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span>(<span class='kw'>uhat</span>, par = <span class='fu'><a href='full2meta.html'>full2meta</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>theta</span>))
+<span class='va'>IDRs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get.IDR.html'>get.IDR</a></span><span class='op'>(</span><span class='va'>uhat</span>, par <span class='op'>=</span> <span class='fu'><a href='full2meta.html'>full2meta</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>$</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Plot of observed data colour coded by the MAP estimate</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>loglik</span>[<span class='fl'>3</span>,], main = <span class='st'>"Loglikelihood trace"</span>, type = <span class='st'>"l"</span>,
-     ylab = <span class='st'>"log GMCM likelihood"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(v = <span class='fu'><a href='https://rdrr.io/r/base/which.min.html'>which.max</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>loglik</span>[<span class='fl'>3</span>,])) <span class='co'># Chosen MLE</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>uhat</span>, main = <span class='st'>"Clustering\nIDR &lt; 0.05"</span>, xlab = <span class='st'>""</span>, ylab = <span class='st'>""</span>, cex = <span class='fl'>0.6</span>,
-     col = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Red"</span>,<span class='st'>"Blue"</span>)[<span class='kw'>IDRs</span><span class='op'>$</span><span class='kw'>Khat</span>])
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>$</span><span class='va'>loglik</span><span class='op'>[</span><span class='fl'>3</span>,<span class='op'>]</span>, main <span class='op'>=</span> <span class='st'>"Loglikelihood trace"</span>, type <span class='op'>=</span> <span class='st'>"l"</span>,
+     ylab <span class='op'>=</span> <span class='st'>"log GMCM likelihood"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span><span class='op'>(</span>v <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/which.min.html'>which.max</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>$</span><span class='va'>loglik</span><span class='op'>[</span><span class='fl'>3</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Chosen MLE</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>uhat</span>, main <span class='op'>=</span> <span class='st'>"Clustering\nIDR &lt; 0.05"</span>, xlab <span class='op'>=</span> <span class='st'>""</span>, ylab <span class='op'>=</span> <span class='st'>""</span>, cex <span class='op'>=</span> <span class='fl'>0.6</span>,
+     col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Red"</span>,<span class='st'>"Blue"</span><span class='op'>)</span><span class='op'>[</span><span class='va'>IDRs</span><span class='op'>$</span><span class='va'>Khat</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='img'><img src='PseudoEMAlgorithm-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># View parameters</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='kw'>init.par</span>, <span class='kw'>true.par</span>, estimate = <span class='fu'><a href='full2meta.html'>full2meta</a></span>(<span class='kw'>res</span><span class='op'>$</span><span class='kw'>theta</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>init.par</span>, <span class='va'>true.par</span>, estimate <span class='op'>=</span> <span class='fu'><a href='full2meta.html'>full2meta</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>$</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;               pie1    mu.mu     sigma       rho
 #&gt; init.par 0.5000000 1.000000 1.0000000 0.5000000
 #&gt; true.par 0.8000000 3.000000 1.5000000 0.4000000
 #&gt; estimate 0.8224538 2.521749 0.8548858 0.4069159</div><div class='input'>
 <span class='co'># Confusion matrix</span>
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='st'>"Khat"</span> = <span class='kw'>IDRs</span><span class='op'>$</span><span class='kw'>Khat</span>, <span class='st'>"K"</span> = <span class='kw'>data</span><span class='op'>$</span><span class='kw'>K</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='st'>"Khat"</span> <span class='op'>=</span> <span class='va'>IDRs</span><span class='op'>$</span><span class='va'>Khat</span>, <span class='st'>"K"</span> <span class='op'>=</span> <span class='va'>data</span><span class='op'>$</span><span class='va'>K</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;     K
 #&gt; Khat   1   2
 #&gt;    1 797  37

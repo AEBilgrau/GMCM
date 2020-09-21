@@ -93,12 +93,6 @@ and logit transformed by rho.transform." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -141,9 +135,9 @@ transformed. The correlation is translated and scaled to the interval (0,1)
 and logit transformed by <code><a href='inv.rho.transform.html'>rho.transform</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>inv.tt</span>(<span class='kw'>par</span>, <span class='kw'>d</span>, <span class='kw'>positive.rho</span>)
+    <pre class="usage"><span class='fu'>inv.tt</span><span class='op'>(</span><span class='va'>par</span>, <span class='va'>d</span>, <span class='va'>positive.rho</span><span class='op'>)</span>
 
-<span class='fu'>tt</span>(<span class='kw'>tpar</span>, <span class='kw'>d</span>, <span class='kw'>positive.rho</span>)</pre>
+<span class='fu'>tt</span><span class='op'>(</span><span class='va'>tpar</span>, <span class='va'>d</span>, <span class='va'>positive.rho</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,9 +196,9 @@ should be non-negative. If <code>positive.rho</code> is <code>FALSE</code>,
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(pie1 = <span class='fl'>0.3</span>, mu = <span class='fl'>2</span>, sigma = <span class='fl'>0.5</span>, rho = <span class='fl'>0.8</span>)
-<span class='kw'>tpar</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>inv.tt</span>(<span class='kw'>par</span>, d = <span class='fl'>3</span>, positive.rho = <span class='fl'>FALSE</span>)
-<span class='kw'>GMCM</span>:::<span class='fu'>tt</span>(<span class='kw'>tpar</span>, d = <span class='fl'>3</span>, positive.rho = <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='va'>par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>pie1 <span class='op'>=</span> <span class='fl'>0.3</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, sigma <span class='op'>=</span> <span class='fl'>0.5</span>, rho <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
+<span class='va'>tpar</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'>inv.tt</span><span class='op'>(</span><span class='va'>par</span>, d <span class='op'>=</span> <span class='fl'>3</span>, positive.rho <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'>tt</span><span class='op'>(</span><span class='va'>tpar</span>, d <span class='op'>=</span> <span class='fl'>3</span>, positive.rho <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 0.3 2.0 0.5 0.8</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -90,12 +90,6 @@ algorithm for an multivariate Gaussian mixture model." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -135,9 +129,9 @@ algorithm for an multivariate Gaussian mixture model." />
 algorithm for an multivariate Gaussian mixture model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>EStep</span>(<span class='kw'>x</span>, <span class='kw'>theta</span>)
+    <pre class="usage"><span class='fu'>EStep</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>theta</span><span class='op'>)</span>
 
-<span class='fu'>MStep</span>(<span class='kw'>x</span>, <span class='kw'>kappa</span>, meta.special.case = <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>MStep</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>kappa</span>, meta.special.case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,18 +179,18 @@ value of <code>EStep</code>.</p></td>
     <p>Anders Ellern Bilgrau &lt;anders.ellern.bilgrau@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='kw'>sim</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span>(n = <span class='fl'>100</span>)
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>z</span>
-<span class='kw'>true.theta</span> <span class='op'>&lt;-</span> <span class='kw'>sim</span><span class='op'>$</span><span class='kw'>theta</span>
-<span class='kw'>init.theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'><a href='rtheta.html'>rtheta</a></span>()  <span class='co'># Generate starting parameters</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>sim</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'><a href='SimulateGMCMData.html'>SimulateGMMData</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>sim</span><span class='op'>$</span><span class='va'>z</span>
+<span class='va'>true.theta</span> <span class='op'>&lt;-</span> <span class='va'>sim</span><span class='op'>$</span><span class='va'>theta</span>
+<span class='va'>init.theta</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'><a href='rtheta.html'>rtheta</a></span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># Generate starting parameters</span>
 
 <span class='co'># Do one EM interation</span>
-<span class='kw'>es</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>EStep</span>(<span class='kw'>x</span>, <span class='kw'>init.theta</span>)
-<span class='kw'>new.theta</span> <span class='op'>&lt;-</span> <span class='kw'>GMCM</span>:::<span class='fu'>MStep</span>(<span class='kw'>x</span>, <span class='kw'>es</span>)
+<span class='va'>es</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'>EStep</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>init.theta</span><span class='op'>)</span>
+<span class='va'>new.theta</span> <span class='op'>&lt;-</span> <span class='fu'>GMCM</span><span class='fu'>:::</span><span class='fu'>MStep</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>es</span><span class='op'>)</span>
 
 <span class='co'># Compare current estimate with the true</span>
-<span class='kw'>new.theta</span>
+<span class='va'>new.theta</span>
 </div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
 #&gt; 
 #&gt; $pie
@@ -229,7 +223,7 @@ value of <code>EStep</code>.</p></td>
 #&gt; [1,] 1.7401099 0.9229792
 #&gt; [2,] 0.9229792 3.2189655
 #&gt; 
-#&gt; </div><div class='input'><span class='kw'>true.theta</span>
+#&gt; </div><div class='input'><span class='va'>true.theta</span>
 </div><div class='output co'>#&gt; theta object with d = 2 dimensions and m = 3 components:
 #&gt; 
 #&gt; $pie
