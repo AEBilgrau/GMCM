@@ -7,13 +7,27 @@
 \alias{fit.special.gmcm}
 \title{Estimate GMCM parameters of the special model}
 \usage{
-fit.meta.GMCM(u, init.par, method = c("NM", "SANN", "L-BFGS", "L-BFGS-B",
-  "PEM"), max.ite = 1000, verbose = TRUE, positive.rho = TRUE,
-  trace.theta = FALSE, ...)
+fit.meta.GMCM(
+  u,
+  init.par,
+  method = c("NM", "SANN", "L-BFGS", "L-BFGS-B", "PEM"),
+  max.ite = 1000,
+  verbose = TRUE,
+  positive.rho = TRUE,
+  trace.theta = FALSE,
+  ...
+)
 
-fit.special.GMCM(u, init.par, method = c("NM", "SANN", "L-BFGS",
-  "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE,
-  positive.rho = TRUE, trace.theta = FALSE, ...)
+fit.special.GMCM(
+  u,
+  init.par,
+  method = c("NM", "SANN", "L-BFGS", "L-BFGS-B", "PEM"),
+  max.ite = 1000,
+  verbose = TRUE,
+  positive.rho = TRUE,
+  trace.theta = FALSE,
+  ...
+)
 }
 \arguments{
 \item{u}{An \code{n} by \code{d} matrix of test statistics. Rows correspond
@@ -114,7 +128,7 @@ rbind("True" = true.par, "Start" = init.par,
 
 # Get estimated cluster
 Khat <- get.IDR(x = uhat, par = nm.par)$Khat
-plot(uhat, col = Khat, main = "Clustering\\nIDR < 0.05")
+plot(uhat, col = Khat, main = "Clustering\nIDR < 0.05")
 }
 \references{
 Li, Q., Brown, J. B. J. B., Huang, H., & Bickel, P. J. (2011).

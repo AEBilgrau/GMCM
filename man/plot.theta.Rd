@@ -4,8 +4,14 @@
 \alias{plot.theta}
 \title{Plotting method for "theta" objects}
 \usage{
-\method{plot}{theta}(x, which.dims = c(1L, 2L), n.sd = qnorm(0.99),
-  add.means = TRUE, ..., add.ellipses = FALSE)
+\method{plot}{theta}(
+  x,
+  which.dims = c(1L, 2L),
+  n.sd = qnorm(0.99),
+  add.means = TRUE,
+  ...,
+  add.ellipses = FALSE
+)
 }
 \arguments{
 \item{x}{An object of class \code{theta}.}

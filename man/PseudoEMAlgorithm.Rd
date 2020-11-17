@@ -4,9 +4,16 @@
 \alias{PseudoEMAlgorithm}
 \title{EM-like algorithm for the GMCM}
 \usage{
-PseudoEMAlgorithm(x, theta, eps = 1e-04, max.ite = 1000,
-  verbose = FALSE, trace.theta = FALSE, meta.special.case = FALSE,
-  convergence.criterion = c("absGMCM", "GMCM", "GMM", "Li", "absLi"))
+PseudoEMAlgorithm(
+  x,
+  theta,
+  eps = 1e-04,
+  max.ite = 1000,
+  verbose = FALSE,
+  trace.theta = FALSE,
+  meta.special.case = FALSE,
+  convergence.criterion = c("absGMCM", "GMCM", "GMM", "Li", "absLi")
+)
 }
 \arguments{
 \item{x}{A matrix of observations where rows corresponds to features and
@@ -92,7 +99,7 @@ IDRs <- get.IDR(uhat, par = full2meta(res$theta))
 plot(res$loglik[3,], main = "Loglikelihood trace", type = "l",
      ylab = "log GMCM likelihood")
 abline(v = which.max(res$loglik[3,])) # Chosen MLE
-plot(uhat, main = "Clustering\\nIDR < 0.05", xlab = "", ylab = "", cex = 0.6,
+plot(uhat, main = "Clustering\nIDR < 0.05", xlab = "", ylab = "", cex = 0.6,
      col = c("Red","Blue")[IDRs$Khat])
 
 # View parameters

@@ -7,13 +7,25 @@
 \alias{fit.general.gmcm}
 \title{Estimate GMCM parameters of the general model}
 \usage{
-fit.full.GMCM(u, m, theta = choose.theta(u, m), method = c("NM",
-  "SANN", "L-BFGS", "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE,
-  ...)
+fit.full.GMCM(
+  u,
+  m,
+  theta = choose.theta(u, m),
+  method = c("NM", "SANN", "L-BFGS", "L-BFGS-B", "PEM"),
+  max.ite = 1000,
+  verbose = TRUE,
+  ...
+)
 
-fit.general.GMCM(u, m, theta = choose.theta(u, m), method = c("NM",
-  "SANN", "L-BFGS", "L-BFGS-B", "PEM"), max.ite = 1000, verbose = TRUE,
-  ...)
+fit.general.GMCM(
+  u,
+  m,
+  theta = choose.theta(u, m),
+  method = c("NM", "SANN", "L-BFGS", "L-BFGS-B", "PEM"),
+  max.ite = 1000,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{u}{An \code{n} by \code{d} matrix of marginally uniform observations.
@@ -107,8 +119,8 @@ simfit <- SimulateGMCMData(n = 1000, theta = res)
 # As seen, the underlying latent process is hard to estimate.
 # The clustering, however, is very good.
 par(mfrow = c(2,2))
-plot(simfit$z, col = simfit$K, main = "Model check 1\\nSimulated GMM")
-plot(simfit$u, col = simfit$K, main = "Model check 2\\nSimulated GMCM")
+plot(simfit$z, col = simfit$K, main = "Model check 1\nSimulated GMM")
+plot(simfit$u, col = simfit$K, main = "Model check 2\nSimulated GMCM")
 plot(sim$u, col = Khat, main = "MAP clustering")
 }
 \references{

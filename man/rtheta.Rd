@@ -4,8 +4,12 @@
 \alias{rtheta}
 \title{Get random parameters for the Gaussian mixture (copula) model}
 \usage{
-rtheta(m = 3, d = 2, method = c("old", "EqualSpherical",
-  "UnequalSpherical", "EqualEllipsoidal", "UnequalEllipsoidal"))
+rtheta(
+  m = 3,
+  d = 2,
+  method = c("old", "EqualSpherical", "UnequalSpherical", "EqualEllipsoidal",
+    "UnequalEllipsoidal")
+)
 }
 \arguments{
 \item{m}{The number of components in the mixture.}

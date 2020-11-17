@@ -4,7 +4,8 @@
 \name{freshVsFrozen}
 \alias{freshVsFrozen}
 \title{Reproducibility between Fresh and Frozen B-cell subtypes}
-\format{The format of the \code{data.frame} is:
+\format{
+The format of the \code{data.frame} is:
 
  \code{'data.frame':  18708 obs. of  6 variables:}\cr
  \code{$ PreVsPost.Fresh.tstat : num  -1.073 -0.381 -1.105 -0.559 -1.054 ...}\cr
@@ -12,7 +13,8 @@
  \code{$ PreVsPost.Frozen.tstat: num  -0.245 -0.731 -0.828 -0.568 -1.083 ...}\cr
  \code{$ PreVsPost.Frozen.pval : num  0.806 0.465 0.408 0.57 0.279 ...}\cr
  \code{$ FreshVsFrozen.tstat   : num  0.836 1.135 -0.221 0.191 -0.783 ...}\cr
- \code{$ FreshVsFrozen.pval    : num  0.403 0.256 0.825 0.849 0.434 ...}\cr}
+ \code{$ FreshVsFrozen.pval    : num  0.403 0.256 0.825 0.849 0.434 ...}\cr
+}
 \description{
 This dataset contains a \code{data.frame} of \eqn{t}-scores (from a Linear
 mixed effects model) and \eqn{p}-values for the

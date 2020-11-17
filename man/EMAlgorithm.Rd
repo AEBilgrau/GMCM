@@ -4,8 +4,15 @@
 \alias{EMAlgorithm}
 \title{EM algorithm for Gaussian mixture models}
 \usage{
-EMAlgorithm(x, theta, m, eps = 1e-06, max.ite = 1e+05,
-  trace.theta = FALSE, verbose = FALSE)
+EMAlgorithm(
+  x,
+  theta,
+  m,
+  eps = 1e-06,
+  max.ite = 1e+05,
+  trace.theta = FALSE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{x}{A \code{matrix} of observations where each row correspond to an
