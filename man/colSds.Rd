@@ -2,6 +2,8 @@
 % Please edit documentation in R/colSds.R, R/rowSds.R
 \name{colSds}
 \alias{colSds}
+\alias{rowsds}
+\alias{colsds}
 \alias{rowSds}
 \title{Row and column standard deviations}
 \usage{
@@ -23,10 +25,10 @@ The \code{rowSds} and \code{colSds} respectively computes the
 }
 \examples{
 x <- matrix(rnorm(50), 10, 5)
-GMCM:::colSds(x)
+colSds(x)
 apply(x, 2, sd)  # slower equivalent code
 y <- matrix(rnorm(50), 10, 5)
-GMCM:::rowSds(y)
+rowSds(y)
 }
 \seealso{
 \code{\link{rowMeans}}, \code{\link{colMeans}}
@@ -34,4 +36,3 @@ GMCM:::rowSds(y)
 \author{
 Anders Ellern Bilgrau <anders.ellern.bilgrau@gmail.com>
 }
-\keyword{internal}
