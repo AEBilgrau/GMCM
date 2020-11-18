@@ -25,7 +25,7 @@ reference:
   - freshVsFrozen
   - u133VsExon
 - title: Shiny app
-  desc: 'Initiate the shiny application:'
+  desc: 'Initiate the Shiny application:'
   contents:
   - runGMCM
 - title: All
@@ -38,10 +38,10 @@ articles:
 - title: Articles and vignettes
   desc: 'Introductions, examples, and help'
   contents:
-  - pkgdown/jss
-  - usage-example-general-model
-  - usage-example-special-model
-  - usage-shiny-graphical-interface
+  - "pkgdown/jss"
+  - "usage-example-general-model"
+  - "usage-example-special-model"
+  - "usage-shiny-graphical-interface"
 
 news:
   - one_page: true
