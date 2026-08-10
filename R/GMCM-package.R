@@ -32,7 +32,6 @@
 #'   Poul Svante Eriksen
 #'
 #'   Maintainer: Anders Ellern Bilgrau <anders.ellern.bilgrau@@gmail.com>
-#' @docType package
 #' @references
 #'   Anders Ellern Bilgrau, Poul Svante Eriksen, Jakob Gulddahl Rasmussen,
 #'   Hans Erik Johnsen, Karen Dybkaer, Martin Boegsted (2016). GMCM:
@@ -99,7 +98,7 @@
 #'      col = c("tomato", "steelblue")[idr$K],
 #'      xlab = "rank(1-P) (U133)", ylab = "rank(1-P) (Exon)")
 #' }
-NULL
+"_PACKAGE"
 
 
 #' Reproducibility between U133 plus 2 and Exon microarrays

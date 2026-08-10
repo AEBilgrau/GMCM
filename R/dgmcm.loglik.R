@@ -12,8 +12,7 @@
 #' \code{pgmm.marginal} function is constructed by linear interpolation of the
 #' flipped evaluated coordinates.
 #'
-#' @aliases dgmcm.loglik dgmm.loglik dgmm.loglik.marginal pgmm.marginal
-#'   qgmm.marginal
+#' @aliases dgmcm.loglik dgmm.loglik dgmm.loglik.marginal pgmm.marginal qgmm.marginal
 #' @param theta A list parameters as described in \code{\link{rtheta}}.
 #' @param z A matrix of realizations from the latent process where each row
 #'   corresponds to an observation.

@@ -28,19 +28,25 @@ export(rtheta)
 export(runGMCM)
 importFrom(Rcpp,evalCpp)
 importFrom(ellipse,ellipse)
-importFrom(graphics,contour)
-importFrom(graphics,lines)
-importFrom(graphics,points)
-importFrom(stats,approxfun)
-importFrom(stats,cov)
-importFrom(stats,cov.wt)
-importFrom(stats,cov2cor)
-importFrom(stats,kmeans)
-importFrom(stats,optim)
-importFrom(stats,qnorm)
-importFrom(stats,rchisq)
-importFrom(stats,rnorm)
-importFrom(stats,runif)
-importFrom(utils,flush.console)
-importFrom(utils,write.csv2)
+importFrom(graphics,
+  contour,
+  lines,
+  points
+)
+importFrom(stats,
+  approxfun,
+  cov,
+  cov.wt,
+  cov2cor,
+  kmeans,
+  optim,
+  qnorm,
+  rchisq,
+  rnorm,
+  runif
+)
+importFrom(utils,
+  flush.console,
+  write.csv2
+)
 useDynLib(GMCM)

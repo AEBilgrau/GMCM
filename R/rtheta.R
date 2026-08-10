@@ -9,17 +9,19 @@
 #' @param method The method by which the theta should be generated.
 #'   See details. Defaults to \code{"old"} which is the regular "old" behavior.
 #' @return A named list of parameters with the 4 elements:
-#'   \item{\code{m}}{An integer giving the number of components in the mixture.
-#'                   Default is 3.}
-#'   \item{\code{d}}{An integer giving the dimension of the mixture
-#'                   distribution. Default is 2.}
-#'   \item{\code{pie}}{A numeric vector of length \code{m} of mixture
-#'                    proportions between 0 and 1 which sums to one.}
-#'   \item{\code{mu}}{A \code{list} of length \code{m} of numeric vectors of
-#'                    length \code{d} for each component.}
-#'   \item{\code{sigma}}{A \code{list} of length \code{m} of variance-covariance
-#'                       matrices (of size \code{d} times \code{d}) for each
-#'                       component.}
+#'   \describe{
+#'     \item{\code{m}}{An integer giving the number of components in the mixture.
+#'                     Default is 3.}
+#'     \item{\code{d}}{An integer giving the dimension of the mixture
+#'                     distribution. Default is 2.}
+#'     \item{\code{pie}}{A numeric vector of length \code{m} of mixture
+#'                       proportions between 0 and 1 which sums to one.}
+#'     \item{\code{mu}}{A \code{list} of length \code{m} of numeric vectors of
+#'                      length \code{d} for each component.}
+#'     \item{\code{sigma}}{A \code{list} of length \code{m} of variance-covariance
+#'                         matrices (of size \code{d} times \code{d}) for each
+#'                         component.}
+#'   }
 #' @note The function \code{\link{is.theta}} checks whether or not \code{theta}
 #'   is in the correct format.
 #' @details
