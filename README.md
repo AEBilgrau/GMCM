@@ -33,7 +33,7 @@ to evaluate the likelihood function quickly and arrive at a parameter estimate u
 
 Additional information, documentation, help, and examples can be found by [here](https://aebilgrau.github.io/GMCM
 ) or by running `?GMCM` in **R**. 
-The paper[1] is also found as a vignette by `vignette("GMCM-JStatSoft")`  or [the official website online.](https://www.jstatsoft.org/article/view/v070i02).
+The paper[1] is also found as a vignette by `vignette("GMCM-JStatSoft")`  or on [the official website online.](https://www.jstatsoft.org/article/view/v070i02).
 The core user functions of **GMCM** are `fit.full.GMCM` and `fit.meta.GMCM`.
 
 ## Installation

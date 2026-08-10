@@ -3,6 +3,7 @@
 ## Minor changes
 
  * Minor improvements to docs
+ * Fixed CRAN notes.
  
 # Version 1.4 (2019-11-05)
 
