@@ -2,9 +2,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml
-vignettes/GMCM-JStatSoft.bbl
-vignettes/GMCM-JStatSoft.blg
-vignettes/GMCM-JStatSoft-concordance.tex
+vignettes/GMCM-JStatSoft\.bbl
+vignettes/GMCM-JStatSoft\.blg
+vignettes/GMCM-JStatSoft-concordance\.tex
+vignettes/GMCM-JStatSoft\.Rnw
 vignettes/STS-27.jpg
 vignettes/pkgdown/jss.Rmd
 vignettes/pkgdown*

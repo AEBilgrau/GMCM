@@ -12,7 +12,7 @@ library("shiny")
 
 ## About
 
-This is the [**shiny**](https://shiny.rstudio.com/) web-application accompanying
+This is the [**shiny**](https://shiny.posit.co/) web-application accompanying
 the [**GMCM**](https://cran.r-project.com/package=GMCM) package[1] for
 [**R**](https://r-project.com). The application is developed and maintained by
 [Anders Ellern Bilgrau](https://bilgrau.com). You can read more about the
@@ -21,15 +21,12 @@ underlying methods employed for unsupervised clustering
 [here](https://github.com/AEBilgrau/GMCM#GMCM) and the references therein.
 
 ### Availability 
+
 Online documentation for the package can be found at
 
 > http://aebilgrau.github.io/GMCM
 
-The application is available online at 
-
-> https://gmcm.shinyapps.io 
-
-The application can also be available as a local instance on your own machine
+The application is available as a local instance on your own machine
 via the **GMCM** package. To run the application locally, make sure **GMCM** is
 installed and run
 

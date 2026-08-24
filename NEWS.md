@@ -53,7 +53,7 @@
  *  Minor improvements and corrections to documentation.
  *  Technical changes (with no impact on user interface):
     -  Updated package to use latest \cpkg{roxygen2} and \cpkg{Rcpp} packages.
-    -  Updated [Travis-CI](https://travis-ci.org/AEBilgrau/GMCM) yaml file to
+    -  Updated [Travis-CI](https://app.travis-ci.com/AEBilgrau/GMCM) yaml file to
        'newly' supported R-language.
     -  Expanded unit tests and added continuous integration of test coverage with
        [coveralls.io](https://coveralls.io/github/AEBilgrau/GMCM?branch=master) 
@@ -138,7 +138,7 @@
  *  `get.idr` is no longer exported and visible to the user.
       Use `get.IDR` to get the local (posterior class probabilities)
       and adjusted irreproducibility discovery rates (IDR).
- *  Added [Travis Continuous Integration](https://travis-ci.org/AEBilgrau/GMCM) 
+ *  Added [Travis Continuous Integration](https://app.travis-ci.com/AEBilgrau/GMCM) 
       for R building.
 
 

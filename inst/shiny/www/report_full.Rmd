@@ -132,5 +132,5 @@ cat(paste0("  ", seq_along(fmt_cites), ". ", fmt_cites, "\n"))
 ```
 
 [1]: http://doi.org/10.18637/jss.v070.i02
-[2]: https://bookdown.org/yihui/rmarkdown/parameterized-reports.html
-[3]: https://yihui.name/knitr/demo/stitch/
+[2]: https://pkg.yihui.org/rmarkdown-book/parameterized-reports
+[3]: https://pkg.yihui.org/rmarkdown-cookbook/

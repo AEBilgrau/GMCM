@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 A graphical user interface to the **GMCM** package is available both on- and
-offline through the [**shiny**](https://shiny.rstudio.com) package.
+offline through the [**shiny**](https://shiny.posit.co/) package.
 The application supports both general GMCMs for unsupervised clustering as
 well as the special GMCMs for reproducibility analysis.
 The online
